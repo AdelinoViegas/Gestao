@@ -1,0 +1,227 @@
+@media (max-width: 768px){
+	
+  /*Login do usuário*/
+
+#txtlogin{
+  font-size: 19px;
+  font-weight:normal
+}
+
+  #formlog{
+    background-color: #fff;
+    position: static;
+    transform: none;
+    width: 70%;
+    margin: 20px auto;
+    box-shadow: 1px 5px 30px rgb(188,188,195); 
+}
+
+
+
+	.divsuperior h1{
+		font-size: 35px;
+	}
+
+  .divsuperior2{
+   display: none;
+}
+
+.divsuperior2 h5{
+  display: none;
+}
+
+.divsuperior3{
+  display: block;
+  position: relative;
+  top: -20px;
+  left: -20px;
+  background-color: #dee2e6;
+  width: calc(100% + 40px);
+  height: 100%;
+  line-height: 100%;
+  padding: 3px;
+  border-bottom: 1px solid #ccc; 
+}
+
+.divsuperior3 h5{
+  display: block;
+  font-weight: bold;
+  font-size: 20px;
+  font-family:Bahnschrift Light;
+  color: #000;
+}
+
+	.navegacao{
+		display: none;	
+	}
+
+	#divm{
+	 position: static;
+   margin: 0 auto;
+   margin-top: 15%;
+   margin-bottom:35%;
+
+    }
+
+  #editar1,#editar2{
+    width: 100%;
+    color: white;
+  }
+
+  #estado{
+    min-width: 120px; 
+  }
+  
+#margemB{
+    margin-bottom: 20px;
+
+  }
+
+#margemBotao{
+    margin-bottom: 10px;
+}
+
+.alerta{
+  position: static;
+  width: 74%;
+  height: 110px;
+  padding:25px;
+  background-color: #fff;
+  margin: 16% auto;
+}
+
+#imagem{
+    position: static;
+    width: 100%;
+    height: calc(100vh - 21.5%);
+    margin: 0;
+}
+
+
+
+/*Menu navegacao*/
+
+#opcMobile{
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid rgba(255,255,255,0.3);
+}
+
+
+.icon{
+  position:relative;
+  display: block;
+  min-width:40px;
+  height:40px;
+  text-align:center;
+  line-height:70px;
+}
+
+.icon img{
+  position:relative;
+  display: block;
+  font-size:1rem;
+}
+
+.title{
+  position:relative;
+  display:block;
+  padding-left:17px;
+  height:40px;
+  line-height:40px;
+  white-space: nowrap;
+  color: #fff;
+}
+
+/*Menu mobile*/
+#navMenu{
+  background-color: #05212A;
+}
+
+#menuMobile{
+  display: block;
+  margin: auto;
+}
+
+#menu-mobile{
+   transition: 0.4s;
+}
+
+#img-mobile{
+  width: 50px;
+  height: 50px;
+}
+
+#alerta-confirmar{
+  position: absolute;
+  top: 90px;
+  left: 0px;
+  width: 100%;
+  font-size: 17px;
+  font-family:Bahnschrift Light;
+  z-index: 1;
+}
+
+#fonte{
+  display: inline-block;
+  font-size: 18px;
+  margin: 0;
+}
+
+#alinhar{
+  display: inline-block;
+  font-size: 18px;
+}
+
+#footer{
+  clear: none;
+  display: block;
+margin-bottom: -10px;
+}
+
+
+#footer p{
+  margin-bottom: 0px;
+}
+
+}
+
+
+
+@media(min-width: 769px){
+  #navMenu{
+    display: none;
+  }
+}
+
+@media(min-height: 650px) and (max-width: 768px){
+    #footer{
+   clear: none; 
+   /*position: fixed;
+   right: 0;
+   bottom: 0;*/
+  }
+}
+
+@media(max-width: 520px){
+    #divflex{
+      display: block;
+    }
+
+#btn-pesquisar{
+  margin-top: 22px;   
+  display: block;
+}
+
+#btn-pesquisar #btn-p{
+  margin-top: 5px;  
+}
+
+/*Tabelas*/
+
+@media(max-width: 300px) and (max-height: 600px){
+  #tabdados{
+    max-height: 300px;
+  }
+
+}

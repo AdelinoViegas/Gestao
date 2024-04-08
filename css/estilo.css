@@ -1,0 +1,390 @@
+*{
+	margin:0;
+	padding: 0;
+	box-sizing:border-box;
+}
+
+#homeimg{
+	float: right;
+	display: block;
+	width:1100px;
+	height: 500px;
+}
+
+#fonte{
+	display: inline-block;
+	font-size: 20px;
+	margin: 0;
+}
+
+#alinhar{
+	display: inline-block;
+}
+
+img{width:100%;
+ 	height:100%;
+}
+
+#IMG{
+	width:20px;
+ 	height:20px;
+}
+
+body{
+
+	  background-color:rgb(230,230,230);
+	}
+
+
+.divsuperior{
+	background-color: rgb(0,86,128);
+	width: 100%;
+	height: 90px;
+	margin:0;
+}
+
+.divsuperior h1{
+	text-align: center;
+	line-height: 90px;
+	font-size: 45px;
+	font-weight:bold;
+	color: #fff;
+	font-family:Bahnschrift Light;
+}
+
+
+.divsuperior2{
+	position: absolute;
+	top: 90px;
+	left: 76px;
+	background-color: #dee2e6;
+	width: calc(100% - 77px);
+	padding: 5px 0px 5px 5px;
+	border-bottom: 2px solid #bbb;
+}
+
+.divflex{
+	position: relative;
+    display: flex;
+	justify-content: space-between;
+
+}
+
+
+#alerta-confirmar{
+	position: absolute;
+	top: 90px;
+	left: 74px;
+	width: calc(100% - 77px);
+	font-size: 18px;
+    font-family:Bahnschrift Light;
+}
+
+.divsuperior2 h5{
+	font-weight: bold;
+	font-size: 20px;
+	font-family:Bahnschrift Light;
+	color: #000;
+}
+
+#diva{ 
+  display: none;
+  position: absolute;	
+  left: 76px;
+  width: calc(100% - 77px);
+  margin: 0px;
+}
+
+
+
+
+#divprincipal{
+	position: relative;
+	background-color: green;
+}
+
+
+.navegacao{
+    display: block;
+	float: left;
+    height: 800px;
+    position:relative;
+	background-color:#05212A;
+	width: 65px;
+	box-shadow: 10px 0 0 rgb(0,86,128);
+	overflow-x:hidden;
+	transition:0.3s;
+    z-index: 10;
+}
+
+.navegacao:hover{
+	width: 210px;
+}
+
+.navegacao ul{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	margin:0;
+	padding:40px 0px 0px 5px;
+}
+
+.navegacao ul li{
+	position:relative;
+	width:100%;
+	list-style:none;
+	border-radius: 20px 0px 0px 20px;
+	padding: 5px;
+}
+
+
+.navegacao ul li a{
+	display: flex;
+	position:relative;
+	width:100%;
+	text-decoration:none;
+	color:#fff;
+
+}
+
+.navegacao ul li a .icon{
+	position:relative;
+	display: block;
+	min-width:40px;
+	height:40px;
+	text-align:center;
+	line-height:70px;
+}
+
+.navegacao ul li a .icon img{
+	position:relative;
+	display: block;
+    font-size:1rem;
+}
+
+.navegacao ul li a .title{
+	position:relative;
+    display:block;
+	padding-left:17px;
+	height:40px;
+	line-height:40px;
+	white-space: nowrap;
+}
+
+
+.navegacao ul li.list{
+	margin-bottom:10px;
+
+}
+
+.navegacao ul li.active{
+	background-color:rgb(0,86,128);
+
+}
+
+.navegacao ul li.active a::before{
+	content: '';
+	position:absolute;
+	top:-23px;
+	right:-5px;
+	width:23px;
+	height:23px;
+	background-color: #05212a;
+	border-radius:50%;
+	box-shadow: 15px 15px 0px rgb(0,86,128);
+}
+
+.navegacao ul li.active a::after{
+	content: '';
+	position:absolute;
+	bottom:-25px;
+	right:-5px;
+	width:23px;
+	height:23px;
+	background-color: #05212a;
+	border-radius:50%;
+	box-shadow: 15px -15px 0px rgb(0,86,128);
+}
+
+
+		.tit{
+			text-align: center;
+			font-size: 45px;
+			padding-top: 10px;
+			color: white;
+			font-family:Bahnschrift Light;
+			background-color: rgb(0,86,128);
+			width: 100%;
+			height: 90px;
+			margin:0;
+		}
+
+
+/*Tabelas*/
+#num{
+ font-weight: normal;
+}
+
+#table{
+  margin: 0px; 
+}
+
+#divm{
+	position: absolute;
+	top: calc(5% + 100px);
+	left: calc(3% + 65px);
+	padding: 20px;
+	margin:30px 0px;
+	background-color: #dee2e6;
+	width: 88%;
+	border:2px solid #bbb;
+}
+
+
+.divsuperior3{
+  display: none;
+}
+
+.divsuperior3 h5{
+  display: none;
+}
+
+.fontes{
+	color: #aaa;
+	font-family: Bahnschrift Light;
+	font-size:20px;
+	font-weight: bold;
+}
+
+.margB{
+	margin-bottom: 30px;
+}
+
+#theader{
+    position: sticky;
+	top: 0;
+	left: 0;
+}
+
+#theader tr th{
+	background-color: rgb(0,86,128);
+	color: white;
+
+}
+
+#divm tbody{
+	background-color: #fff;
+ }
+
+
+
+
+
+ /*botões da tabela*/
+
+ #editar{
+    display: flex;
+    gap:0px 8px;
+    color: #fff; 
+  }
+
+  #editar1,#editar2{
+  	width: 100px;
+  	color: white;
+  }
+
+  #btn1,#btn2{
+  	width: 100%;
+   	color: #fff; 
+
+  }
+
+  #estado{
+  	width: 25%; 
+  }
+
+  #nome{
+  	width: 40%; 
+  }
+
+  #painel{
+  	width: 35%;
+  }
+
+
+
+/*apresentacão*/
+.alerta{
+    position: absolute;
+    top: 22%;
+    left: 15%;
+	width: 74%;
+	height: 125px;
+	padding:25px;
+	background-color: #fff;
+	margin: 0 auto;
+}
+
+#imagem{
+    position: absolute;
+    top: 21.5%;
+    left: 5%;
+    width: 94.9%;
+    height: 79vh;
+    margin: 0 auto;
+    z-index: -2;
+}
+
+#tabdados{
+	border:2px solid #ccc;
+	max-height: 542px;
+}
+
+
+#divflex{
+	display: flex;
+	justify-content: space-between;
+	margin:15px 0px 24px 0px;
+}
+
+
+#btn-pesquisar label{
+   font-weight: bold;
+   font-size: 22px;
+   font-family:Bahnschrift Light;
+   color: #aaa;
+   margin-right:4px;
+}
+
+#btn-pesquisar{
+  display: flex;
+  align-items: center;
+}
+
+#btn-pesquisar input{
+	height: 30px;
+}
+
+/*margin and padding*/
+#marg{
+   margin-left : 2px;
+   margin-right: 2px;
+   margin-top : 14px;
+}
+
+/*rodapé*/
+#footer{
+	clear: both;
+	display: block;
+	width: 100%;
+	background-color:#05212A;
+}
+
+
+#footer p{
+	text-align: center;
+	color: white;
+	margin: 0;
+	padding: 4px 10px; 
+}
