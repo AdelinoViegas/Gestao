@@ -94,23 +94,10 @@ session_start();
                   header('Location: aluno/homealuno.php');
                 }
               }
-
         }
-
-    }
-
-
-         
-
-
-
+      }
 }
-
-
-
-
-  ?>
-
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -123,7 +110,6 @@ session_start();
   <link rel="stylesheet" type="text/css" href="css/media.css?v=5">
 </head>
 <body>
-
 <div class="card" id="formlog">
     <div id="txtlogin">Login</div>
    <div class="card-body">
@@ -163,9 +149,7 @@ session_start();
    </div>
 </div>
 
-
 <script src="bootstrap5/js/bootstrap.bundle.min.js"></script>
-
 
 </body>
 </html>
