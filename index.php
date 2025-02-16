@@ -30,7 +30,6 @@ session_start();
       if(password_verify($senha,$estado)){
           $senha = $estado;
       }
-
     }
 
       $sql = "SELECT * FROM sg_usuarios WHERE nome_u = '$login' AND senha_u = '$senha' AND estado_u ='activo' AND painel_u = '$painel'";
@@ -41,12 +40,9 @@ session_start();
       if(empty($login) || empty($senha)){
         $erros[] = "<span>O campo login e senha preecisa ser preenchido</span>";
       }else{
-    
        if (empty($dados)) {
             $erros[] = "<span>Usuário enexistente</span>";
         }else {
-                 
-
                if($painel === 'admin'){           
                 if($dados['senha_u'] === $senha && $dados['nome_u'] === $login){                       
                         $_SESSION['logado'] = true;
