@@ -1,7 +1,5 @@
 <?php 
 require_once "conexao.php";
-
-
 session_start();
 
 $sql = "SELECT * FROM teste";
@@ -11,7 +9,6 @@ $result = mysqli_query($conexao,$sql);
 if(!isset($_SESSION['logado'])){
   header("Location: index.php");
 }
-
 
 ?>
 
