@@ -1,6 +1,5 @@
 <?php 
 require_once "conexao.php";
-
 session_start();
 
 if(isset($_POST['cadastramento'])){
@@ -16,7 +15,6 @@ if(isset($_POST['cadastramento'])){
     $sql = "INSERT INTO teste(id,nome,email,sexo,dataNascimento,municipio,bairro,contato,numeroBI) VALUES (default,'$nome','$email','$sexo','$datNasc','$mun','$bairro','$contato','$numeroBI')";
 
    mysqli_query($conexao,$sql);
-
 }
 ?>
 
@@ -103,7 +101,6 @@ if(isset($_POST['cadastramento'])){
 </ul> 
 </div>
 
-
 <!--Menu mobile-->    
 <nav class="navbar navbar-dark" id="navMenu">
     <div class="container-fluid">
@@ -180,15 +177,10 @@ if(isset($_POST['cadastramento'])){
             <span class="title">Sair</span>
                 </a>
             </li>
-
-
         </ul>
     </div>
-
     </div>
  </nav>
-
-
 
 <div class="container fontes" id="divm">
       <form action="professor-cadastro.php" method="post">
@@ -253,9 +245,7 @@ if(isset($_POST['cadastramento'])){
 
           <a href="menu-professores.php" class="btn btn-outline-secondary btn-block col-md-2" 
            name="cadastramento">Voltar</a>
-
         </div>
-
        </form>
 </div>
 
