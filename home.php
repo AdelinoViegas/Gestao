@@ -9,7 +9,6 @@ $result = mysqli_query($conexao,$sql);
 if(!isset($_SESSION['logado'])){
   header("Location: index.php");
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -90,8 +89,7 @@ if(!isset($_SESSION['logado'])){
   </li>
 </ul> 
 </div>
-
-
+	
 <!--Menu mobile-->    
 <nav class="navbar navbar-dark" id="navMenu">
     <div class="container-fluid">
@@ -168,24 +166,18 @@ if(!isset($_SESSION['logado'])){
             <span class="title">Sair</span>
                 </a>
             </li>
-
-
         </ul>
     </div>
-
     </div>
  </nav>
 
-
-
-   <div class="alerta">
-    	<p>Bem Vindo ao sistema Sr.
-    		<?php $nome = $_SESSION['painel'];
-    		   echo "<h1>$nome</h1>";
-    		?>
-    	</p>
-    </div>               
-
+ <div class="alerta">
+		<p>Bem Vindo ao sistema Sr.
+			<?php $nome = $_SESSION['painel'];
+				 echo "<h1>$nome</h1>";
+			?>
+		</p>
+	</div>               
 
 <?php require_once "footer.php";  ?>
 </body>
