@@ -1,7 +1,4 @@
 @media (max-width: 768px){
-	
-  /*Login do usuário*/
-
 #txtlogin{
   font-size: 19px;
   font-weight:normal
@@ -15,8 +12,6 @@
     margin: 20px auto;
     box-shadow: 1px 5px 30px rgb(188,188,195); 
 }
-
-
 
 	.divsuperior h1{
 		font-size: 35px;
@@ -100,7 +95,6 @@
 
 
 /*Menu navegacao*/
-
 #opcMobile{
   display: flex;
   align-items: center;
