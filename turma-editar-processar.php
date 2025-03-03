@@ -1,19 +1,16 @@
-<?php 
+<?php
 require_once "conexao.php";
-
 session_start();
 
 $id = $_SESSION['id'];
 $nome = $_POST['txtnome'];
 
+$sql_turma = "UPDATE sg_turma SET nome_t ='$nome' WHERE id_t ='$id'";
+$actualizar_turma = mysqli_query($conexao, $sql_turma);
 
-$sql_turma = "UPDATE sg_turma SET nome_t ='$nome' WHERE id_t ='$id'"; 
+if ($actualizar_turma == true) {
 
-$actualizar_turma = mysqli_query($conexao,$sql_turma);
-
-if($actualizar_turma == true){
-
- $_SESSION['Turma-actualizado'] = "
+   $_SESSION['Turma-actualizado'] = "
                  <div id='alerta-confirmar'>
    <div class='alerta-confirmar'>
       <div class='alert alert-success alert-dimissible'>
@@ -23,11 +20,11 @@ if($actualizar_turma == true){
    </div>
    </div>";
 
-header('Location: menu-turmas.php');
+   header('Location: menu-turmas.php');
 
-}else{
+} else {
 
-      $_SESSION['Turma-actualizado'] = "
+   $_SESSION['Turma-actualizado'] = "
                  <div id='alerta-confirmar'>
    <div class='alerta-confirmar'>
       <div class='alert alert-danger alert-dimissible'>
@@ -36,6 +33,4 @@ header('Location: menu-turmas.php');
       </div>
    </div>";
 }
-
-
- ?>
+?>
