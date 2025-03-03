@@ -1,6 +1,5 @@
 <?php 
 require_once "conexao.php";
-
 session_start();
 
 $id = $_POST['id_estudante'];
@@ -9,11 +8,7 @@ $_SESSION['id_a'] = $id;
 $sql_aluno = "SELECT * FROM sg_aluno AS a join sg_classe AS c ON c.id_c = a.idClasse join sg_turma AS t ON a.idTurma_a = t.id_t WHERE id_a ='$id' ";
 $res_aluno = mysqli_query($conexao,$sql_aluno);
 $registro = mysqli_fetch_assoc($res_aluno);
-
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -111,7 +106,6 @@ $registro = mysqli_fetch_assoc($res_aluno);
 </ul> 
 </div>
 
-
 <?php require_once "navbarMobile.php" ?>
 
 <div class="fontes rounded-3" id="divm">
@@ -119,9 +113,7 @@ $registro = mysqli_fetch_assoc($res_aluno);
   <div class="divsuperior3">
     <h5>Editar dados do aluno</h5>
   </div>
-
       <form action="aluno-editar-processar.php" method="post">
-
         <div class="row">
          <div class="form-group col-md-6 mb-3">
             <label for="textnome">Nome</label>
@@ -134,15 +126,13 @@ $registro = mysqli_fetch_assoc($res_aluno);
            name="txtclasse" required>
 
             <option value="<?php echo $registro['idClasse'] ?>"><?php echo $registro['nome_c']; ?></option>
-
+            
           <?php
-
             $query2 = mysqli_query($conexao,"SELECT id_c,nome_c FROM sg_classe");
           while ($dados = mysqli_fetch_assoc($query2)) {
               echo"<option value = '".$dados['id_c']."'>".$dados['nome_c']."</option>";
 
           }
-
           ?>    
 
            </select>
@@ -151,9 +141,7 @@ $registro = mysqli_fetch_assoc($res_aluno);
             <label for="textturma">Turma</label>
           <select id="textturma" class="input form-control"
            name="txtturma" required>
-              
             <option value="<?php echo $registro['idTurma_a'] ?>"><?php echo $registro['nome_t']; ?></option>
-
           <?php
 
             $query2 = mysqli_query($conexao,"SELECT id_t,nome_t FROM sg_turma");
@@ -161,7 +149,6 @@ $registro = mysqli_fetch_assoc($res_aluno);
               echo"<option value = '".$dados['id_t']."'>".$dados['nome_t']."</option>";
 
           }
-
           ?>    
            </select>
          </div>
@@ -310,10 +297,8 @@ $registro = mysqli_fetch_assoc($res_aluno);
         <div class="row">
 
           <?php 
-
             $query =mysqli_query($conexao,"SELECT * FROM sg_encarregado AS e INNER JOIN sg_aluno AS a ON e.id_e = a.idEncarregado WHERE id_a = '$id' ");
             $enc = mysqli_fetch_assoc($query);
-        
            ?>
             <div class="form-group col-md-6 mb-3">
             <label for="textencarregado">Encarregado</label>
@@ -332,10 +317,8 @@ $registro = mysqli_fetch_assoc($res_aluno);
            name="cadastramento">Voltar</a>
 
         </div>
-
        </form>
 </div>
-
 
 <?php require_once "footer.php";  ?>
 </body>
