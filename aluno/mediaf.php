@@ -9,16 +9,13 @@ $valor = mysqli_query($conection, "SELECT * FROM sg_notas AS n JOIN sg_aluno AS 
 
 while ($area = mysqli_fetch_assoc($valor)) {
   $v[] = $area['mediaF'];
-
 }
 
 $valor1 = mysqli_query($conection, "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno = '$id_estudante' AND id_trimestre = '2' ");
 
 while ($area1 = mysqli_fetch_assoc($valor1)) {
   $v1[] = $area1['mediaF'];
-
 }
-
 
 $valor2 = mysqli_query($conection, "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno = '$id_estudante' AND id_trimestre = '3' ");
 
