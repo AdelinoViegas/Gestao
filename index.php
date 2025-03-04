@@ -7,24 +7,27 @@ if (isset($_POST['enviar-dados'])) {
   //Filtrando os valores do login e senha para as variaveis $login e $senha
 
   $login = mysqli_escape_string(
-    $conexao,
+    $conection,
     $_POST['txtnome']
   );
   $senha = mysqli_escape_string(
-    $conexao,
+    $conection,
     $_POST['txtsenha']
   );
   $painel = mysqli_escape_string(
-    $conexao,
+    $conection,
     $_POST['selecao']
   );
+  
+  $consult = $conection->prepare("SELECT * FROM sg_usuarios WHERE nome_u = ?");
+  $consult->bind_param("s", $login);
+  $consult->execute();
 
-  $conection = $ligation->prepare("SELECT * FROM sg_usuarios WHERE nome_u = '$login'");
-  $conection->execute();
-  $array_usuario = $conection->fetchall(PDO::FETCH_ASSOC);
-  $array_usuario = $array_usuario[0];
-
-
+  $result = $consult->get_result();
+  $user = $result->fetch_all(MYSQLI_ASSOC);
+  
+  echo $user[0]["nome_u"];
+  die();
   if (count($array_usuario) > 0) {
     //$v = mysqli_fetch_assoc($valo); 
     $estado = $array_usuario['senha_u'];
