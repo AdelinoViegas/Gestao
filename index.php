@@ -1,16 +1,17 @@
 <?php
 require_once "conexao.php";
+require_once "features/getData.php";
 session_start();
 
 if (isset($_POST['enviar-dados'])) {
   $erros = array();
-  //Filtrando os valores do login e senha para as variaveis $login e $senha
+  //Filtrando os valores do login e senha para as variaveis $login e $password
 
   $login = mysqli_escape_string(
     $conection,
     $_POST['txtnome']
   );
-  $senha = mysqli_escape_string(
+  $password = mysqli_escape_string(
     $conection,
     $_POST['txtsenha']
   );
@@ -18,81 +19,56 @@ if (isset($_POST['enviar-dados'])) {
     $conection,
     $_POST['selecao']
   );
-  
-  $consult = $conection->prepare("SELECT * FROM sg_usuarios WHERE nome_u = ?");
-  $consult->bind_param("s", $login);
-  $consult->execute();
 
-  $result = $consult->get_result();
-  $user = $result->fetch_all(MYSQLI_ASSOC);
-  
-  echo $user[0]["nome_u"];
-  die();
-  if (count($array_usuario) > 0) {
-    //$v = mysqli_fetch_assoc($valo); 
-    $estado = $array_usuario['senha_u'];
+  $consult = mysqli_prepare($conection, "SELECT * FROM sg_usuarios WHERE nome_u = ?");
+  mysqli_stmt_bind_param($consult,"s", $login);
+  mysqli_stmt_execute($consult);
+  $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
+ 
+  if (count($user) > 0) {
+    $state = $user['senha_u'];
 
-    if (password_verify($senha, $estado)) {
-      $senha = $estado;
+    if (password_verify($password, $state)) {
+      $password = $state;
     }
   }
 
-  $sql = "SELECT * FROM sg_usuarios WHERE nome_u = '$login' AND senha_u = '$senha' AND estado_u ='activo' AND painel_u = '$painel'";
-  $res = $ligation->prepare($sql);
-  $res->execute();
-  $dados = $res->fetchall(PDO::FETCH_ASSOC);
-  $dados = $dados[0];
-  if (empty($login) || empty($senha)) {
+  $sql = "SELECT * FROM sg_usuarios WHERE nome_u = ? AND senha_u = ? AND estado_u = 'activo' AND painel_u = ?";
+  $consult = mysqli_prepare($conection,$sql);
+  mysqli_stmt_bind_param($consult,"sss", $login, $password, $painel);
+  mysqli_stmt_execute($consult);
+  $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
+
+  if (empty($login) || empty($password)) {
     $erros[] = "<span>O campo login e senha preecisa ser preenchido</span>";
   } else {
-    if (empty($dados)) {
+    if (empty($user)) {
       $erros[] = "<span>Usuário enexistente</span>";
     } else {
       if ($painel === 'admin') {
-        if ($dados['senha_u'] === $senha && $dados['nome_u'] === $login) {
+        if ($user['senha_u'] === $password && $user['nome_u'] === $login) {
           $_SESSION['logado'] = true;
-          $_SESSION['id_adm'] = $dados['id_u'];
-          $_SESSION['nome'] = $dados['painel_u'];
+          $_SESSION['id_adm'] = $user['id_u'];
+          $_SESSION['nome'] = $user['painel_u'];
           header('Location: menu-home.php');
         }
       } elseif ($painel === 'professor') {
-        if ($dados['senha_u'] === $senha && $dados['nome_u'] === $login) {
-          $id = $dados['id_u'];
-          $v1 = $ligation->prepare("SELECT id_p FROM sg_professor WHERE idUsuario = '$id'");
-          $v1->execute();
-          $vect = $v1->fetchAll(PDO::FETCH_ASSOC);
-          $vect = $vect[0];
-          $_SESSION['logado'] = true;
-          $_SESSION['idp'] = $vect['id_p'];
-          $_SESSION['iduser_p'] = $dados['id_u'];
-          $_SESSION['nome_professor'] = $dados['nome_u'];
-          header('Location: professor/homeprof.php');
+        if ($user['senha_u'] === $password && $user['nome_u'] === $login) {
+          $sql = "SELECT id_p FROM sg_professor WHERE idUsuario = ?";
+          $route = 'Location: professor/homeprof.php';
+          authentication($conection,$sql,$route,$user['id_u'],"professor");
         }
       } elseif ($painel === 'encarregado') {
-        if ($dados['senha_u'] === $senha && $dados['nome_u'] === $login) {
-          $id = $dados['id_u'];
-          $v1 = $ligation->prepare("SELECT id_e FROM sg_encarregado WHERE idUsuario = '$id'");
-          $v1->execute();
-          $vect = $v1->fetchAll(PDO::FETCH_ASSOC);
-          $vect = $vect[0];
-
-          $_SESSION['logado'] = true;
-          $_SESSION['ide'] = $vect['id_e'];
-          $_SESSION['iduser_e'] = $dados['id_u'];
-          $_SESSION['nome_encarregado'] = $dados['nome_u'];
-          header('Location: encarregado/homepais.php');
+        if ($user['senha_u'] === $password && $user['nome_u'] === $login) {
+          $sql = "SELECT id_e FROM sg_encarregado WHERE idUsuario = ?";
+          $route = 'Location: encarregado/homepais.php';
+          authentication($conection,$sql,$route,$user['id_u'],"encarregado");
         }
       } elseif ($painel === 'aluno') {
-        if ($dados['senha_u'] === $senha && $dados['nome_u'] === $login) {
-          $id = $dados['id_u'];
-          $v1 = $ligation->prepare("SELECT * FROM sg_aluno WHERE idUsuario = '$id'");
-          $v1->execute();
-          $vect = $v1->fetchAll(PDO::FETCH_ASSOC);
-          $_SESSION['logado'] = true;
-          $_SESSION['ida'] = $vect['id_a'];
-          $_SESSION['iduser_a'] = $dados['id_u'];
-          $_SESSION['nome_aluno'] = $dados['nome_u'];
-          header('Location: aluno/homealuno.php');
+        if ($user['senha_u'] === $password && $user['nome_u'] === $login) {
+          $sql = "SELECT * FROM sg_aluno WHERE idUsuario = ?";
+          $route = 'Location: aluno/homealuno.php';
+          authentication($conection,$sql,$route,$user['id_u'],"aluno");
         }
       }
     }
@@ -110,6 +86,7 @@ if (isset($_POST['enviar-dados'])) {
   <link rel="stylesheet" type="text/css" href="css/login.css?v=2">
   <link rel="stylesheet" type="text/css" href="css/media.css?v=5">
 </head>
+
 <body>
   <div class="card" id="formlog">
     <div id="txtlogin">Login</div>
