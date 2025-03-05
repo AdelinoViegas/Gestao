@@ -102,6 +102,5 @@ if (isset($_POST['search'])) {
   </div>
 
   <?php require_once "../footer2.php"; ?>
-
 </body>
 </html>
