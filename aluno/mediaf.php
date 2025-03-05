@@ -22,7 +22,7 @@ $valor2 = mysqli_query($conection, "SELECT * FROM sg_notas AS n JOIN sg_aluno AS
 while ($area2 = mysqli_fetch_assoc($valor2)) {
   $v2[] = $area2['mediaF'];
   $disc[] = $area2['nome_d'];
-  
+
 }
 ?>
 
@@ -50,48 +50,7 @@ while ($area2 = mysqli_fetch_assoc($valor2)) {
     </div>
   </div>
 
-  <!--Navebar-->
-  <div class="navegacao">
-    <ul>
-      <li class="list">
-        <a href="homealuno.php">
-          <span class="icon"><img src="../img/home_white_24dp.svg"></span>
-          <span class="title">HOME</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="ver-notas.php">
-          <span class="icon"><img src="../img/perm_identity_white_24dp.svg"></span>
-          <span class="title">Notas-Trimestrais</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="#">
-          <span class="icon"><img src="../img/format_list_numbered_white_24dp.svg"></span>
-          <span class="title">Exame</span>
-        </a>
-      </li>
-      <li class="list active">
-        <a href="Mediaf.php">
-          <span class="icon"><img src="../img/format_list_numbered_white_24dp.svg"></span>
-          <span class="title">Resultado-final</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="conf-aluno.php">
-          <span class="icon"><img src="../img/settings.png"></span>
-          <span class="title">Alterar-senha</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="../logoult.php">
-          <span class="icon"><img src="../img/logout_white_24dp.svg"></span>
-          <span class="title">Sair</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-
+  <?php require_once "nav-aluno.php" ?>
   <?php require_once "navMob-aluno.php" ?>
 
   <div class="rounded-3" id="divm">
@@ -154,18 +113,15 @@ while ($area2 = mysqli_fetch_assoc($valor2)) {
 
           </tbody>
         </table>
-
         <?php
-
           } else {
-
             ?>
         </tbody>
         </table>
         <tfooter class='text text-center'>
           <h5>Nenhum dado encontrado</h5>
         </tfooter>
-      <?php
+        <?php
           }
           ?>
     </div>
@@ -173,6 +129,5 @@ while ($area2 = mysqli_fetch_assoc($valor2)) {
   </div>
 
   <?php require_once "../footer2.php"; ?>
-
 </body>
 </html>

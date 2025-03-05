@@ -2,16 +2,16 @@
 require_once "../conexao.php";
 session_start();
 
-$id = $_SESSION['iduser_a'];
+$id = $_SESSION['student_id'];
 
 if (isset($_POST['btn-senha'])) {
-  $senha = mysqli_escape_string($conexao, $_POST['txtsenha']);
-  $senha_nova = mysqli_escape_string($conexao, $_POST['txtnova']);
-  $dt = date('Y/m/d');
+  $password = mysqli_escape_string($conection, $_POST['txtsenha']);
+  $new_password = mysqli_escape_string($conection, $_POST['txtnova']);
+  $date = date('Y/m/d');
 
-  if ($senha === $senha_nova) {
-    $senha = password_hash($senha_nova, PASSWORD_DEFAULT);
-    mysqli_query($conexao, "UPDATE sg_usuarios SET senha_u ='$senha',dataModificacao_u = '$dt' WHERE id_u ='$id'");
+  if ($password === $new_password) {
+    $password = password_hash($new_password, PASSWORD_DEFAULT);
+    mysqli_query($conection, "UPDATE sg_usuarios SET senha_u ='$password',dataModificacao_u = '$date' WHERE id_u ='$id'");
 
     $_SESSION['Configurar-actualizado'] = "
           <div id='alerta-confirmar'>
@@ -67,49 +67,10 @@ if (isset($_POST['btn-senha'])) {
     unset($_SESSION['Configurar-actualizado']);
   }
   ?>
-  <!--Navebar-->
-  <div class="navegacao">
-    <ul>
-      <li class="list">
-        <a href="homealuno.php">
-          <span class="icon"><img src="../img/home_white_24dp.svg"></span>
-          <span class="title">HOME</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="ver-notas.php">
-          <span class="icon"><img src="../img/perm_identity_white_24dp.svg"></span>
-          <span class="title">Notas-Trimestrais</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="#">
-          <span class="icon"><img src="../img/format_list_numbered_white_24dp.svg"></span>
-          <span class="title">Exame</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="#">
-          <span class="icon"><img src="../img/format_list_numbered_white_24dp.svg"></span>
-          <span class="title">Pauta-final</span>
-        </a>
-      </li>
-      <li class="list active">
-        <a href="conf-aluno.php">
-          <span class="icon"><img src="../img/settings.png"></span>
-          <span class="title">Alterar-senha</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="../logoult.php">
-          <span class="icon"><img src="../img/logout_white_24dp.svg"></span>
-          <span class="title">Sair</span>
-        </a>
-      </li>
-    </ul>
-  </div>
 
+	<?php require_once "nav-aluno.php" ?>
   <?php require_once "navMob-aluno.php" ?>
+
   <div class="fontes rounded-3" id="divm">
     <div class="divsuperior3">
       <h5>Formulário de cadastramento de alunos</h5>

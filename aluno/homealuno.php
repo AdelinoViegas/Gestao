@@ -13,7 +13,7 @@ if (!isset($_SESSION['logado'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>principal</title>
+	<title>Home</title>
 	<?php require_once "../head2.php"; ?>
 </head>
 <body>

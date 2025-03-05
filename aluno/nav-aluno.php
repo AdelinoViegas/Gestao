@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>principal</title>
-</head>
 <body>
   <div class="navegacao">
     <ul>
@@ -49,13 +46,13 @@
   let file = window.location.pathname.split("/").pop();
   let lis = document.querySelectorAll("li");
   let links = document.querySelectorAll("a");
+  
+  lis.forEach((li)=>{
+      li.setAttribute("class","list");
+  });
 
   links.forEach((link)=>{
-    lis.forEach((li)=>{
-      li.setAttribute("class","list");
-    });
-
-    if(file == link.getAttribute("href"))
+    if(file === link.getAttribute("href"))
       link.parentElement.setAttribute("class","list active");
   });
 </script>
