@@ -1,6 +1,5 @@
 <?php 
 require_once "conexao.php";
-
 session_start();
 
 $sql = "SELECT * FROM teste";
@@ -16,8 +15,7 @@ $result = mysqli_query($conexao,$sql);
 <body>
   <div class="divsuperior">
     <h1>Colégio Samiga</h1>
-    </div>
-
+  </div>
 
 <!--Navebar-->
 <div class="navegacao">
@@ -164,14 +162,10 @@ $result = mysqli_query($conexao,$sql);
             <span class="title">Sair</span>
                 </a>
             </li>
-
-
         </ul>
     </div>
-
     </div>
  </nav>
-
 
 <div id="divm">
 
@@ -216,11 +210,8 @@ $result = mysqli_query($conexao,$sql);
   <?php }?>
   </tbody>
 </table>
-
 </div>
 </div>
-
-
 
 <?php require_once "footer.php";  ?>
 </body>
