@@ -5,7 +5,6 @@ session_start();
 
 if (isset($_POST['enviar-dados'])) {
   $erros = array();
-  //Filtrando os valores do login e senha para as variaveis $login e $password
 
   $login = mysqli_escape_string(
     $conection,
@@ -77,7 +76,7 @@ if (isset($_POST['enviar-dados'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
   <meta charset="utf-8">
   <title>login</title>
