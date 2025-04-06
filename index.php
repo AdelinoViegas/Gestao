@@ -20,7 +20,7 @@ if (isset($_POST['enviar-dados'])) {
   );
 
   $consult = mysqli_prepare($conection, "SELECT * FROM sg_usuarios WHERE nome_u = ?");
-  mysqli_stmt_bind_param($consult,"s", $login);
+  mysqli_stmt_bind_param($consult, "s", $login);
   mysqli_stmt_execute($consult);
   $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
  
@@ -102,14 +102,14 @@ if (isset($_POST['enviar-dados'])) {
       ?>
       <form id="formulario" action="index.php" method="post">
         <div class="form-group">
-          <input type="texy" id="textnome" class="form-control" name="txtnome" placeholder="Nome do usuário">
+          <input type="texy" id="textnome" class="form-control" name="name" placeholder="Nome do usuário">
         </div>
         <div class="form-group">
-          <input type="password" id="textsenha" class="form-control" name="txtsenha" placeholder="Senha do usuário">
+          <input type="password" id="textsenha" class="form-control" name="password" placeholder="Senha do usuário">
         </div>
         <div class="form-group">
           <label for="textusuario">Painel</label>
-          <select id="textusuario" class="input form-control" name="selecao" required>
+          <select id="textusuario" class="input form-control" name="selection" required>
             <option value="">Selecione o painel</option>
             <option value="aluno">Aluno</option>
             <option value="admin">Administrador</option>
