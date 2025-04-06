@@ -1,10 +1,12 @@
 <?php
-require_once "conexao.php";
+require_once "conection.php";
 session_start();
 
 $sql = "SELECT * FROM teste";
-$result = mysqli_query($conexao, $sql);
+$result = mysqli_query($conection, $sql);
 
+print_r($result);
+die();
 //verficar se está logado
 if (!isset($_SESSION['logado'])) {
   header("Location: index.php");

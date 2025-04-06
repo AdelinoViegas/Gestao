@@ -1,7 +1,5 @@
 <?php 
-require_once "conexao.php";
-
-
+require_once "conection.php";
 session_start();
 
 //verficar se está logado
@@ -106,15 +104,10 @@ if(!isset($_SESSION['logado'])){
 
 <?php require_once "navbarMobile.php";  ?>
 
-
-
-   <div id="imagem">
-     <img src="img/admin.png">
-   </div>
-
-
+<div id="imagem">
+  <img src="img/admin.png">
+</div>
 
 <?php require_once "footer.php";  ?>
-
 </body>
 </html>

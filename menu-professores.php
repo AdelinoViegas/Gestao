@@ -1,25 +1,24 @@
 <?php 
-require_once "conexao.php";
-
+require_once "conection.php";
 session_start();
 //session_unset();
 
 //verficar se está logado
-if(!isset($_SESSION['logado'])){
+if(!isset($_SESSION['logado']))
   header("Location: index.php");
-}
 
-
-      $sql_professor = "SELECT * FROM sg_professor WHERE view = '1' ORDER BY nome_p";
-      $res_professor = mysqli_query($conexao,$sql_professor);
+$sql_professor = "SELECT * FROM sg_professor WHERE view = '1' ORDER BY nome_p";
+$res_professor = mysqli_prepare($conection, $sql_professor);
+mysqli_stmt_execute($res_professor);
+$result = mysqli_stmt_get_result($res_professor);
 
 /* codido que faz a pesquisa do nome do professor */
-      if (isset($_POST['btn-pesquisa'])) {
-          $pesquisar = $_POST['txtpesquisar'];
-          $res_professor = mysqli_query($conexao,"SELECT * FROM sg_professor WHERE nome_p LIKE '$pesquisar%' AND view = '1'");               
-      }
-
-
+if (isset($_POST['btn-pesquisa'])) {
+    $pesquisar = $_POST['search'];
+    $res_professor = mysqli_prepare($conection,"SELECT * FROM sg_professor WHERE nome_p LIKE '$pesquisar%' AND view = '1'");   
+    mysqli_stmt_execute($res_professor);
+    $result = mysqli_stmt_get_result($res_professor);            
+}
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +45,6 @@ if(!isset($_SESSION['logado'])){
     </div>
     </div>
   </div>
-
   <?php
 
   if(isset($_SESSION['Professor-actualizado'])){
@@ -55,7 +53,6 @@ if(!isset($_SESSION['logado'])){
     }  
 ?> 
  
-
 <!--Navebar-->
 <div class="navegacao">
 <ul>
@@ -128,9 +125,7 @@ if(!isset($_SESSION['logado'])){
 </ul> 
 </div>
 
-
 <?php require_once "navbarMobile.php"; ?>
-
 
 <div class="rounded-3" id="divm">
   <div class="divsuperior3">
@@ -143,7 +138,21 @@ if(!isset($_SESSION['logado'])){
 
 <form action="" method="post">
   <div id="btn-pesquisar">
-    <input type="text" class="form-control me-2" name="txtpesquisar" placeholder="Pesquisa por nome"><button id="btn-p" type="submit" class="btn btn-success" name="btn-pesquisa">Pesquisar</button>
+    <input 
+      type="text" 
+      class="form-control me-2" 
+      name="search" 
+      placeholder="Pesquisa por nome"
+    >
+
+    <button 
+      id="btn-p" 
+      type="submit" 
+      class="btn btn-success" 
+      name="btn-pesquisa"
+    >
+      Pesquisar
+    </button>
   </div>
 </form> 
 
@@ -167,24 +176,24 @@ if(!isset($_SESSION['logado'])){
   <tbody>
       <?php 
 
-       if(mysqli_num_rows($res_professor) > 0){
+       if(mysqli_num_rows($result) > 0){
 
-      while($l_professor = mysqli_fetch_assoc($res_professor)) { 
+      while($l_professor = mysqli_fetch_assoc($result)) { 
 
         ?>
      <tr id="tr">
       <td id="editar">
          <form action="professor-editar.php" method="post">
-          <input id="editar1" type="hidden" class="btn btn-warning" value="<?php echo $l_professor['id_p']; ?>" name="id_professor">
+          <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $l_professor['id_p']; ?>" name="id_professor">
           <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
         </form>
 
           <button id="editar2" type="button" 
-          data-bs-target="#apagar<?php echo $l_professor['id_p']; ?>" 
+          data-bs-target="#apagar<?= $l_professor['id_p']; ?>" 
           data-bs-toggle="modal" class="btn btn-danger">Apagar</button>
      
      <!--Modal-->
-<div class="modal fade" id="apagar<?php echo $l_professor['id_p']; ?>">
+<div class="modal fade" id="apagar<?= $l_professor['id_p']; ?>">
   <div class="modal-dialog">
   <div class="modal-content">
      <!--Cabeçalho-->
@@ -199,7 +208,7 @@ if(!isset($_SESSION['logado'])){
     <div class="modal-body">
         <div class="alert alert-danger">
           Deseja excluir
-           <strong><?php echo $l_professor['nome_p'];  ?></strong> ?
+           <strong><?= $l_professor['nome_p'];  ?></strong> ?
          </div>
     </div>
     
@@ -207,37 +216,29 @@ if(!isset($_SESSION['logado'])){
     <div class="modal-footer">
         <form action="professor-apagar.php" method="post">
             <input type="hidden" 
-            name="id_professor" value="<?php echo $l_professor['id_p']; ?>">
+            name="id_professor" value="<?= $l_professor['id_p']; ?>">
             <button type="submit" class="btn btn-success" 
             data-bs-dismiss="modal">Sim</button>
         </form>
 
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
     </div>
-
   </div>  
  </div>
 </div>
-        
       </td>   
-      <td><?php echo $l_professor['nome_p']; ?></td>
-      <td><?php echo $l_professor['email_p']; ?></td>
-      <td><?php echo $l_professor['municipio_p']; ?></td>
-      <td><?php echo $l_professor['bairro_p']; ?></td>
-      <td><?php echo $l_professor['sexo_p']; ?></td>
-      <td><?php echo $l_professor['contato_p']; ?></td>
+      <td><?= $l_professor['nome_p']; ?></td>
+      <td><?= $l_professor['email_p']; ?></td>
+      <td><?= $l_professor['municipio_p']; ?></td>
+      <td><?= $l_professor['bairro_p']; ?></td>
+      <td><?= $l_professor['sexo_p']; ?></td>
+      <td><?= $l_professor['contato_p']; ?></td>
     </tr>
-
-
   <?php } ?>
-
   </tbody>
 </table>
-
 <?php
-
  }else{
-
  ?> 
    </tbody>
 </table> 
@@ -247,7 +248,6 @@ if(!isset($_SESSION['logado'])){
 <?php   
  }
 ?>
-
 </div>
 </div>
 
@@ -277,10 +277,6 @@ if(!isset($_SESSION['logado'])){
   </div>  
  </div>
 </div>
-
-
-
-
 
 <?php require_once "footer.php";  ?>
 </body>

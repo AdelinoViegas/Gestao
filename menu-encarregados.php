@@ -1,22 +1,23 @@
 <?php 
-require_once "conexao.php";
-
+require_once "conection.php";
 session_start();
 
 //verficar se está logado
-if(!isset($_SESSION['logado'])){
+if(!isset($_SESSION['logado']))
   header("Location: index.php");
-}
 
 /* codido que faz a pesquiasa */
-    $sql_encarregado = "SELECT * FROM sg_encarregado WHERE view = '1' ORDER BY nome_e";
-    $res_encarregado = mysqli_query($conexao,$sql_encarregado);
+$sql_encarregado = "SELECT * FROM sg_encarregado WHERE view = '1' ORDER BY nome_e";
+$res_encarregado = mysqli_prepare($conection, $sql_encarregado);
+mysqli_stmt_execute($res_encarregado);
+$result = mysqli_stmt_get_result($res_encarregado);
 
-    if (isset($_POST['btn-pesquisa'])) {
-        $pesquisar = $_POST['txtpesquisar'];
-        $res_encarregado = mysqli_query($conexao,"SELECT * FROM sg_encarregado WHERE nome_e LIKE '$pesquisar%' AND view ='1' ");              
-    }
-
+if (isset($_POST['btn-pesquisa'])) {
+    $pesquisar = $_POST['search'];
+    $res_encarregado = mysqli_prepare($conection,"SELECT * FROM sg_encarregado WHERE nome_e LIKE '$pesquisar%' AND view ='1' ");              
+    mysqli_stmt_execute($res_encarregado);
+    $result = mysqli_stmt_get_result($res_encarregado);
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +48,6 @@ if(!isset($_SESSION['logado'])){
       echo $_SESSION['Encarregado-actualizado'];
       unset($_SESSION['Encarregado-actualizado']);
     }  
-
    ?> 
 
 <!--Navebar-->
@@ -122,31 +122,39 @@ if(!isset($_SESSION['logado'])){
 </ul> 
 </div>
 
-
 <?php require_once "navbarMobile.php" ?>
-
 
 <div class="rounded-3" id="divm">
   <div class="divsuperior3">
     <h5>Encarregados cadastrados</h5>
   </div>
 
-
 <div id="divflex">
     <a href="encarregado-cadastro.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
 
 <form action="" method="post">
   <div id="btn-pesquisar">
-    <input type="text" class="form-control me-2" name="txtpesquisar" placeholder="Pesquisa por nome"><button id="btn-p" type="submit" class="btn btn-success" name="btn-pesquisa">Pesquisar</button>
+    <input 
+      type="text" 
+      class="form-control me-2" 
+      name="search" 
+      placeholder="Pesquisa por nome"
+    >
+    <button 
+      id="btn-p" 
+      type="submit" 
+      class="btn btn-success" 
+      name="btn-pesquisa"
+    >
+      Pesquisar
+    </button>
   </div>
 </form> 
-
 </div>
 
 <div class="table-responsive" id="tabdados">
 
 <table class="table table-hover table-bordered" id="table">
-
   <thead class="table-secondary" id="theader">
     <tr>
       <th scope="col">Ações</th>
@@ -160,22 +168,21 @@ if(!isset($_SESSION['logado'])){
   <tbody>
       <?php
 
-       if(mysqli_num_rows($res_encarregado) > 0){
+       if(mysqli_num_rows($result) > 0){
 
-       while($l_encarregado = mysqli_fetch_assoc($res_encarregado)) { 
-
+       while($l_encarregado = mysqli_fetch_assoc($result)) { 
         ?>
      <tr id="tr">
       <td id="editar">
          <form action="encarregado-editar.php" method="post">
-          <input id="editar1" type="hidden" class="btn btn-warning" value="<?php echo $l_encarregado['id_e']; ?>" name="id_encarregado">
+          <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $l_encarregado['id_e']; ?>" name="id_encarregado">
           <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
         </form>
    
-          <button id="editar2" type="button" data-bs-target="#apagar<?php echo $l_encarregado['id_e']; ?>" data-bs-toggle="modal" class="btn btn-danger">Apagar</button>
+          <button id="editar2" type="button" data-bs-target="#apagar<?= $l_encarregado['id_e']; ?>" data-bs-toggle="modal" class="btn btn-danger">Apagar</button>
  
 <!--Modal-->
-<div class="modal fade" id="apagar<?php echo $l_encarregado['id_e']; ?>">
+<div class="modal fade" id="apagar<?= $l_encarregado['id_e']; ?>">
   <div class="modal-dialog">
   <div class="modal-content">
      <!--Cabeçalho-->
@@ -190,7 +197,7 @@ if(!isset($_SESSION['logado'])){
     <div class="modal-body">
         <div class="alert alert-danger">
           Deseja excluir
-           <strong><?php echo $l_encarregado['nome_e'];  ?></strong> ?
+           <strong><?= $l_encarregado['nome_e'];  ?></strong> ?
          </div>
     </div>
     
@@ -198,7 +205,7 @@ if(!isset($_SESSION['logado'])){
     <div class="modal-footer">
         <form action="encarregado-apagar.php" method="post">
             <input type="hidden" 
-            name="id_encarregado" value="<?php echo $l_encarregado['id_e']; ?>">
+            name="id_encarregado" value="<?= $l_encarregado['id_e']; ?>">
             <button type="submit" class="btn btn-success" 
             data-bs-dismiss="modal">Sim</button>
         </form>
@@ -209,26 +216,18 @@ if(!isset($_SESSION['logado'])){
   </div>  
  </div>
 </div>
-
-
-
-      </td>    
-      <td><?php echo $l_encarregado['nome_e']; ?></td>
-      <td><?php echo $l_encarregado['municipio_e']; ?></td>
-      <td><?php echo $l_encarregado['bairro_e']; ?></td>
-      <td><?php echo $l_encarregado['sexo_e']; ?></td>
-      <td><?php echo $l_encarregado['contato_e']; ?></td>
-    </tr>
-
+  </td>    
+    <td><?= $l_encarregado['nome_e']; ?></td>
+    <td><?= $l_encarregado['municipio_e']; ?></td>
+    <td><?= $l_encarregado['bairro_e']; ?></td>
+    <td><?= $l_encarregado['sexo_e']; ?></td>
+    <td><?= $l_encarregado['contato_e']; ?></td>
+  </tr>
   <?php } ?>
-
   </tbody>
 </table>
-
 <?php
-
  }else{
-
  ?> 
    </tbody>
 </table> 
@@ -238,11 +237,8 @@ if(!isset($_SESSION['logado'])){
 <?php   
  }
 ?>
-
 </div>
 </div>
-
-
 
 <?php require_once "footer.php";  ?>
 </body>
