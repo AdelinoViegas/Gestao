@@ -1,6 +1,6 @@
 <?php
 
-function authentication($conection,$sql,$route,$idUser,$user_painel){
+function authentication($conection, $sql, $route, $idUser, $user_painel){
   $consult = mysqli_prepare($conection,$sql);
   mysqli_stmt_bind_param($consult,"s",$idUser);
   mysqli_stmt_execute($consult);

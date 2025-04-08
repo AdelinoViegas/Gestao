@@ -1,23 +1,19 @@
 <?php 
 require_once "conection.php";
+require_once "features/getResult.php";
 session_start();
-//session_unset();
 
 //verficar se está logado
 if(!isset($_SESSION['logado']))
   header("Location: index.php");
 
-$sql_professor = "SELECT * FROM sg_professor WHERE view = '1' ORDER BY nome_p";
-$res_professor = mysqli_prepare($conection, $sql_professor);
-mysqli_stmt_execute($res_professor);
-$result = mysqli_stmt_get_result($res_professor);
-
+$result = getResult($conection, "SELECT * FROM sg_professor WHERE view = '1' ORDER BY nome_p");
+print_r($result);
+die();
 /* codido que faz a pesquisa do nome do professor */
 if (isset($_POST['btn-pesquisa'])) {
     $pesquisar = $_POST['search'];
-    $res_professor = mysqli_prepare($conection,"SELECT * FROM sg_professor WHERE nome_p LIKE '$pesquisar%' AND view = '1'");   
-    mysqli_stmt_execute($res_professor);
-    $result = mysqli_stmt_get_result($res_professor);            
+    $result = getResult($conection, "SELECT * FROM sg_professor WHERE nome_p LIKE '$pesquisar%' AND view = '1'");              
 }
 ?>
 
