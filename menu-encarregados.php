@@ -1,22 +1,18 @@
 <?php 
 require_once "conection.php";
+require_once "features/getData.php";
 session_start();
 
 //verficar se está logado
 if(!isset($_SESSION['logado']))
   header("Location: index.php");
 
-/* codido que faz a pesquiasa */
-$sql_encarregado = "SELECT * FROM sg_encarregado WHERE view = '1' ORDER BY nome_e";
-$res_encarregado = mysqli_prepare($conection, $sql_encarregado);
-mysqli_stmt_execute($res_encarregado);
-$result = mysqli_stmt_get_result($res_encarregado);
+/* codido que faz a pesquiasa */ 
+$data = getData($conection, "SELECT * FROM sg_encarregado WHERE view = '1' ORDER BY nome_e");
 
 if (isset($_POST['btn-pesquisa'])) {
     $pesquisar = $_POST['search'];
-    $res_encarregado = mysqli_prepare($conection,"SELECT * FROM sg_encarregado WHERE nome_e LIKE '$pesquisar%' AND view ='1' ");              
-    mysqli_stmt_execute($res_encarregado);
-    $result = mysqli_stmt_get_result($res_encarregado);
+    $data = getData($conection, "SELECT * FROM sg_encarregado WHERE nome_e LIKE '$pesquisar%' AND view ='1'");              
 }
 ?>
 
@@ -168,21 +164,21 @@ if (isset($_POST['btn-pesquisa'])) {
   <tbody>
       <?php
 
-       if(mysqli_num_rows($result) > 0){
+       if(count($data) > 0){
 
-       while($l_encarregado = mysqli_fetch_assoc($result)) { 
+       foreach($data as $data_encarregado) { 
         ?>
      <tr id="tr">
       <td id="editar">
          <form action="encarregado-editar.php" method="post">
-          <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $l_encarregado['id_e']; ?>" name="id_encarregado">
+          <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $data_encarregado['id_e']; ?>" name="id_encarregado">
           <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
         </form>
    
-          <button id="editar2" type="button" data-bs-target="#apagar<?= $l_encarregado['id_e']; ?>" data-bs-toggle="modal" class="btn btn-danger">Apagar</button>
+          <button id="editar2" type="button" data-bs-target="#apagar<?= $data_encarregado['id_e']; ?>" data-bs-toggle="modal" class="btn btn-danger">Apagar</button>
  
 <!--Modal-->
-<div class="modal fade" id="apagar<?= $l_encarregado['id_e']; ?>">
+<div class="modal fade" id="apagar<?= $data_encarregado['id_e']; ?>">
   <div class="modal-dialog">
   <div class="modal-content">
      <!--Cabeçalho-->
@@ -197,7 +193,7 @@ if (isset($_POST['btn-pesquisa'])) {
     <div class="modal-body">
         <div class="alert alert-danger">
           Deseja excluir
-           <strong><?= $l_encarregado['nome_e'];  ?></strong> ?
+           <strong><?= $data_encarregado['nome_e'];  ?></strong> ?
          </div>
     </div>
     
@@ -205,7 +201,7 @@ if (isset($_POST['btn-pesquisa'])) {
     <div class="modal-footer">
         <form action="encarregado-apagar.php" method="post">
             <input type="hidden" 
-            name="id_encarregado" value="<?= $l_encarregado['id_e']; ?>">
+            name="id_encarregado" value="<?= $data_encarregado['id_e']; ?>">
             <button type="submit" class="btn btn-success" 
             data-bs-dismiss="modal">Sim</button>
         </form>
@@ -217,11 +213,11 @@ if (isset($_POST['btn-pesquisa'])) {
  </div>
 </div>
   </td>    
-    <td><?= $l_encarregado['nome_e']; ?></td>
-    <td><?= $l_encarregado['municipio_e']; ?></td>
-    <td><?= $l_encarregado['bairro_e']; ?></td>
-    <td><?= $l_encarregado['sexo_e']; ?></td>
-    <td><?= $l_encarregado['contato_e']; ?></td>
+    <td><?= $data_encarregado['nome_e']; ?></td>
+    <td><?= $data_encarregado['municipio_e']; ?></td>
+    <td><?= $data_encarregado['bairro_e']; ?></td>
+    <td><?= $data_encarregado['sexo_e']; ?></td>
+    <td><?= $data_encarregado['contato_e']; ?></td>
   </tr>
   <?php } ?>
   </tbody>

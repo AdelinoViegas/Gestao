@@ -1,19 +1,18 @@
 <?php 
 require_once "conection.php";
-require_once "features/getResult.php";
+require_once "features/getData.php";
 session_start();
 
 //verficar se está logado
 if(!isset($_SESSION['logado']))
   header("Location: index.php");
 
-$result = getResult($conection, "SELECT * FROM sg_professor WHERE view = '1' ORDER BY nome_p");
-print_r($result);
-die();
+$data = getData($conection, "SELECT * FROM sg_professor WHERE view = '1' ORDER BY nome_p");
+
 /* codido que faz a pesquisa do nome do professor */
 if (isset($_POST['btn-pesquisa'])) {
     $pesquisar = $_POST['search'];
-    $result = getResult($conection, "SELECT * FROM sg_professor WHERE nome_p LIKE '$pesquisar%' AND view = '1'");              
+    $data = getData($conection, "SELECT * FROM sg_professor WHERE nome_p LIKE '$pesquisar%' AND view = '1'");              
 }
 ?>
 
@@ -172,24 +171,24 @@ if (isset($_POST['btn-pesquisa'])) {
   <tbody>
       <?php 
 
-       if(mysqli_num_rows($result) > 0){
+       if(count($data) > 0){
 
-      while($l_professor = mysqli_fetch_assoc($result)) { 
+      foreach($data as $data_professor) { 
 
         ?>
      <tr id="tr">
       <td id="editar">
          <form action="professor-editar.php" method="post">
-          <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $l_professor['id_p']; ?>" name="id_professor">
+          <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $data_professor['id_p']; ?>" name="id_professor">
           <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
         </form>
 
           <button id="editar2" type="button" 
-          data-bs-target="#apagar<?= $l_professor['id_p']; ?>" 
+          data-bs-target="#apagar<?= $data_professor['id_p']; ?>" 
           data-bs-toggle="modal" class="btn btn-danger">Apagar</button>
      
      <!--Modal-->
-<div class="modal fade" id="apagar<?= $l_professor['id_p']; ?>">
+<div class="modal fade" id="apagar<?= $data_professor['id_p']; ?>">
   <div class="modal-dialog">
   <div class="modal-content">
      <!--Cabeçalho-->
@@ -204,7 +203,7 @@ if (isset($_POST['btn-pesquisa'])) {
     <div class="modal-body">
         <div class="alert alert-danger">
           Deseja excluir
-           <strong><?= $l_professor['nome_p'];  ?></strong> ?
+           <strong><?= $data_professor['nome_p'];  ?></strong> ?
          </div>
     </div>
     
@@ -212,7 +211,7 @@ if (isset($_POST['btn-pesquisa'])) {
     <div class="modal-footer">
         <form action="professor-apagar.php" method="post">
             <input type="hidden" 
-            name="id_professor" value="<?= $l_professor['id_p']; ?>">
+            name="id_professor" value="<?= $data_professor['id_p']; ?>">
             <button type="submit" class="btn btn-success" 
             data-bs-dismiss="modal">Sim</button>
         </form>
@@ -223,12 +222,12 @@ if (isset($_POST['btn-pesquisa'])) {
  </div>
 </div>
       </td>   
-      <td><?= $l_professor['nome_p']; ?></td>
-      <td><?= $l_professor['email_p']; ?></td>
-      <td><?= $l_professor['municipio_p']; ?></td>
-      <td><?= $l_professor['bairro_p']; ?></td>
-      <td><?= $l_professor['sexo_p']; ?></td>
-      <td><?= $l_professor['contato_p']; ?></td>
+      <td><?= $data_professor['nome_p']; ?></td>
+      <td><?= $data_professor['email_p']; ?></td>
+      <td><?= $data_professor['municipio_p']; ?></td>
+      <td><?= $data_professor['bairro_p']; ?></td>
+      <td><?= $data_professor['sexo_p']; ?></td>
+      <td><?= $data_professor['contato_p']; ?></td>
     </tr>
   <?php } ?>
   </tbody>
