@@ -1,6 +1,6 @@
 <?php
 require_once "conection.php";
-require_once "features/getData.php";
+require_once "features/authentication.php";
 session_start();
 
 if (isset($_POST['enviar-dados'])) {
