@@ -1,21 +1,17 @@
 <?php 
 require_once "conexao.php";
-
+require_once "features/getData.php";
 session_start();
 
-//verficar se está logado
-if(!isset($_SESSION['logado'])){
+if(!isset($_SESSION['logado']))
   header("Location: index.php");
+
+$data= getData($conexao, "SELECT * FROM sg_aluno WHERE view = '1' ORDER BY nome_a");
+
+if (isset($_POST['btn-pesquisa'])) {  
+  $pesquisar = $_POST['txtpesquisar'];
+  $res_aluno = mysqli_query($conexao,"SELECT * FROM sg_aluno WHERE nome_a LIKE '$pesquisar%' AND view = '1'");
 }
-
-/* codido que faz a pesquiasa */
-  $sql_aluno = "SELECT * FROM sg_aluno WHERE view = '1' ORDER BY nome_a";
-  $res_aluno = mysqli_query($conexao,$sql_aluno);
-
-  if (isset($_POST['btn-pesquisa'])) {  
-      $pesquisar = $_POST['txtpesquisar'];
-      $res_aluno = mysqli_query($conexao,"SELECT * FROM sg_aluno WHERE nome_a LIKE '$pesquisar%' AND view = '1'");
-  }
 
 ?>
 

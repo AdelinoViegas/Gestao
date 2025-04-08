@@ -3,16 +3,14 @@ require_once "conection.php";
 require_once "features/getData.php";
 session_start();
 
-//verficar se está logado
 if(!isset($_SESSION['logado']))
   header("Location: index.php");
 
-/* codido que faz a pesquiasa */ 
 $data = getData($conection, "SELECT * FROM sg_encarregado WHERE view = '1' ORDER BY nome_e");
 
 if (isset($_POST['btn-pesquisa'])) {
-    $pesquisar = $_POST['search'];
-    $data = getData($conection, "SELECT * FROM sg_encarregado WHERE nome_e LIKE '$pesquisar%' AND view ='1'");              
+  $pesquisar = $_POST['search'];
+  $data = getData($conection, "SELECT * FROM sg_encarregado WHERE nome_e LIKE '$pesquisar%' AND view ='1'");              
 }
 ?>
 
