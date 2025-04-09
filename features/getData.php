@@ -11,6 +11,6 @@ function getData($conection, $sql){
     $count++;
   }
 
-  return $array_data;
+  return count($array_data) > 1 ? $array_data : $array_data[0];
 }
 ?>

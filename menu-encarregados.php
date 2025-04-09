@@ -124,7 +124,14 @@ if (isset($_POST['btn-pesquisa'])) {
   </div>
 
 <div id="divflex">
-    <a href="encarregado-cadastro.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
+    <a 
+      href="encarregado-cadastro.php"
+      type="button" 
+      id="adicionar" 
+      class="btn btn-secondary"
+    >
+      Adicionar
+    </a>
 
 <form action="" method="post">
   <div id="btn-pesquisar">
