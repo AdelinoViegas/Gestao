@@ -7,8 +7,8 @@ function authentication($conection, $sql, $route, $idUser, $user_painel){
   $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
   $_SESSION['logado'] = true;
   if($user_painel === "professor"){
-    $_SESSION['teacher_id'] = $user['id_p'];
-    $_SESSION['teacher_name'] = $user['nome_p'];
+    $_SESSION['professor_id'] = $user['id_p'];
+    $_SESSION['professor_name'] = $user['nome_p'];
   }elseif($user_painel === "encarregado"){
     $_SESSION['responsible_id'] = $user['id_e'];
     $_SESSION['responsible_name'] = $user['nome_e'];

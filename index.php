@@ -45,9 +45,9 @@ if (isset($_POST['enviar-dados'])) {
     } else {
       if ($painel === 'admin') {
         if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
-          $_SESSION['logado'] = true;
+          $_SESSION['logged'] = true;
           $_SESSION['id_adm'] = $user['id_u'];
-          $_SESSION['nome'] = $user['painel_u'];
+          $_SESSION['name'] = $user['painel_u'];
           header('Location: menu-home.php');
         }
       } elseif ($painel === 'professor') {
