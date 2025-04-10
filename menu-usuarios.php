@@ -11,6 +11,8 @@ $data = getData($conection, "SELECT * FROM sg_usuarios WHERE view = '1' AND pain
 if (isset($_POST['btn-search'])) {
   $pesquisar = $_POST['search'];
   $data = getData($conection, "SELECT * FROM sg_usuarios WHERE nome_u LIKE '$pesquisar%' AND view = '1' AND painel_u != 'admin'");
+print_r($data);
+die();
 }
 ?>
 
@@ -119,7 +121,7 @@ if (isset($_POST['btn-search'])) {
 
 
     <div id="divflex">
-      <h5 id="adicionar">Nª de Usuários : <span id='num'><?= count($data); ?></span></h5>
+      <h5 id="adicionar">Nª de Usuários : <span id='num'><?= count($data)?count($data):"0"; ?></span></h5>
 
       <form action="" method="post">
         <div id="btn-pesquisar">
