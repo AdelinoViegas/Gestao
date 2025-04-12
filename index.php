@@ -1,5 +1,5 @@
 <?php
-require_once "conection.php";
+require_once "connection.php";
 require_once "features/authentication.php";
 session_start();
 
@@ -7,19 +7,19 @@ if (isset($_POST['enviar-dados'])) {
   $erros = array();
 
   $name = mysqli_escape_string(
-    $conection,
+    $connection,
     $_POST['name']
   );
   $password = mysqli_escape_string(
-    $conection,
+    $connection,
     $_POST['password']
   );
   $painel = mysqli_escape_string(
-    $conection,
+    $connection,
     $_POST['selection']
   );
 
-  $consult = mysqli_prepare($conection, "SELECT * FROM sg_usuarios WHERE nome_u = ?");
+  $consult = mysqli_prepare($connection, "SELECT * FROM sg_usuarios WHERE nome_u = ?");
   mysqli_stmt_bind_param($consult, "s", $name);
   mysqli_stmt_execute($consult);
   $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
@@ -32,7 +32,7 @@ if (isset($_POST['enviar-dados'])) {
   }
   
   $sql = "SELECT * FROM sg_usuarios WHERE nome_u = ? AND senha_u = ? AND estado_u = 'activo' AND painel_u = ?";
-  $consult = mysqli_prepare($conection,$sql);
+  $consult = mysqli_prepare($connection,$sql);
   mysqli_stmt_bind_param($consult,"sss", $name, $password, $painel);
   mysqli_stmt_execute($consult);
   $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
@@ -54,19 +54,19 @@ if (isset($_POST['enviar-dados'])) {
         if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
           $sql = "SELECT id_p FROM sg_professor WHERE idUsuario = ?";
           $route = 'Location: professor/homeprof.php';
-          authentication($conection,$sql,$route,$user['id_u'],"professor");
+          authentication($connection,$sql,$route,$user['id_u'],"professor");
         }
       } elseif ($painel === 'encarregado') {
         if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
           $sql = "SELECT id_e FROM sg_encarregado WHERE idUsuario = ?";
           $route = 'Location: encarregado/homepais.php';
-          authentication($conection,$sql,$route,$user['id_u'],"encarregado");
+          authentication($connection,$sql,$route,$user['id_u'],"encarregado");
         }
       } elseif ($painel === 'aluno') {
         if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
           $sql = "SELECT * FROM sg_aluno WHERE idUsuario = ?";
           $route = 'Location: aluno/homealuno.php';
-          authentication($conection,$sql,$route,$user['id_u'],"aluno");
+          authentication($connection,$sql,$route,$user['id_u'],"aluno");
         }
       }
     }

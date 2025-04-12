@@ -3,7 +3,7 @@ require_once "connection.php";
 require_once "features/getData.php";
 session_start();
 
-if (!isset($_SESSION['logged'])) 
+if (!isset($_SESSION['logged']))
   header("Location: index.php");
 
 $data = getData($connection, "SELECT * FROM sg_gerenciar AS g JOIN sg_disciplina AS d ON g.idDisciplina = d.id_d JOIN sg_professor AS p ON g.idProfessor = p.id_p JOIN sg_turma AS t ON g.idTurma = t.id_t WHERE view = '1'");
@@ -45,7 +45,6 @@ if (isset($_POST['btn-search'])) {
   }
   ?>
 
-  <!--Navebar-->
   <div class="navegacao">
     <ul>
       <li class="list">
@@ -128,9 +127,9 @@ if (isset($_POST['btn-search'])) {
       <a href="gerenciar-cadastro.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
 
       <form action="" method="post">
-        <div id="btn-search">
-          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button
-            id="btn-p" type="submit" class="btn btn-success" name="btn-search">search</button>
+        <div id="btn-pesquisar">
+          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button id="btn-p"
+            type="submit" class="btn btn-success" name="btn-search">search</button>
         </div>
       </form>
     </div>
@@ -149,7 +148,7 @@ if (isset($_POST['btn-search'])) {
         <tbody>
           <?php
           if (count($data) > 0) {
-            foreach($data as $l_gerenciar) { ?>
+            foreach ($data as $l_gerenciar) { ?>
               <tr id="tr">
                 <td>
                   <form action="gerenciar-editar.php" method="post">
@@ -173,7 +172,7 @@ if (isset($_POST['btn-search'])) {
         <tfooter class='text text-center'>
           <h5>Nenhum dado encontrado</h5>
         </tfooter>
-      <?php
+        <?php
           }
           ?>
     </div>

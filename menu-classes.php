@@ -7,11 +7,11 @@ if (!isset($_SESSION['logged'])) {
   header("Location: index.php");
 }
 
-$res_classe = getData($connection, "SELECT * FROM sg_classe order by nome_c");
+$data = getData($connection, "SELECT * FROM sg_classe order by nome_c");
 
 if (isset($_POST['btn-search'])) {
   $search = $_POST['search'];
-  $res_classe = getData($connection, "SELECT * FROM sg_classe WHERE nome_c LIKE '$search%'");
+  $data = getData($connection, "SELECT * FROM sg_classe WHERE nome_c LIKE '$search%'");
 }
 ?>
 
@@ -128,8 +128,8 @@ if (isset($_POST['btn-search'])) {
 
       <form action="" method="post">
         <div id="btn-pesquisar">
-          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button
-            id="btn-p" type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
+          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button id="btn-p"
+            type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
         </div>
       </form>
     </div>
@@ -145,7 +145,7 @@ if (isset($_POST['btn-search'])) {
         <tbody>
           <?php
           if (count($data) > 0) {
-            foreach($data as $l_classe) { ?>
+            foreach ($data as $l_classe) { ?>
               <tr id="tr">
                 <td id="editar">
                   <form action="classe-editar.php" method="post">
@@ -167,7 +167,7 @@ if (isset($_POST['btn-search'])) {
         <tfooter class='text text-center'>
           <h5>Nenhum dado encontrado</h5>
         </tfooter>
-      <?php
+        <?php
           }
           ?>
     </div>
