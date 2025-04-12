@@ -1,29 +1,27 @@
 <?php
 require_once "connection.php";
-
+require_once "features/getData.php";
 session_start();
 
-//verficar se está logado
-if (!isset($_SESSION['logged'])) {
+if (!isset($_SESSION['logged']))
   header("Location: index.php");
+
+$data = getData($connection, "SELECT * FROM sg_turma order by nome_t");
+
+if (isset($_POST['btn-search'])) {
+  $search = $_POST['search'];
+  $data = mysqli_query($connection, "SELECT * FROM sg_turma WHERE nome_t LIKE '$search%'");
 }
-
-$sql_turma = ;
-$res_turma = mysqli_query($connection, "SELECT * FROM sg_turma order by nome_t");
-
-if (isset($_POST['btn-pesquisa'])) {
-  $pesquisar = $_POST['txtpesquisar'];
-  $res_turma = mysqli_query($connection, "SELECT * FROM sg_turma WHERE nome_t LIKE '$pesquisar%' ");
-}
-
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Samiga</title>
   <?php require_once "head.php"; ?>
 </head>
+
 <body>
   <div class="divsuperior">
     <h1>Colégio Samiga</h1>
@@ -49,7 +47,6 @@ if (isset($_POST['btn-pesquisa'])) {
   }
   ?>
 
-  <!--Navebar-->
   <div class="navegacao">
     <ul>
       <li class="list">
@@ -133,8 +130,8 @@ if (isset($_POST['btn-pesquisa'])) {
 
       <form action="" method="post">
         <div id="btn-pesquisar">
-          <input type="text" class="form-control me-2" name="txtpesquisar" placeholder="Pesquisa por nome"><button
-            id="btn-p" type="submit" class="btn btn-success" name="btn-pesquisa">Pesquisar</button>
+          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button id="btn-p"
+            type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
         </div>
       </form>
     </div>
@@ -150,7 +147,7 @@ if (isset($_POST['btn-pesquisa'])) {
         <tbody>
           <?php
           if (count($data) > 0) {
-            foreach($data as $l_turma) { ?>
+            foreach ($data as $l_turma) { ?>
               <tr id="tr">
                 <td id="editar">
                   <form action="turma-editar.php" method="post">
@@ -172,7 +169,7 @@ if (isset($_POST['btn-pesquisa'])) {
         <tfooter class='text text-center'>
           <h5>Nenhum dado encontrado</h5>
         </tfooter>
-      <?php
+        <?php
           }
           ?>
     </div>

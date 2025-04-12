@@ -9,8 +9,8 @@ if (!isset($_SESSION['logged']))
 $data = getData($connection, "SELECT * FROM sg_usuarios WHERE view = '1' AND painel_u != 'admin' ORDER BY nome_u");
 
 if (isset($_POST['btn-search'])) {
-  $pesquisar = $_POST['search'];
-  $data = getData($connection, "SELECT * FROM sg_usuarios WHERE nome_u LIKE '$pesquisar%' AND view = '1' AND painel_u != 'admin'");
+  $search = $_POST['search'];
+  $data = getData($connection, "SELECT * FROM sg_usuarios WHERE nome_u LIKE '$search%' AND view = '1' AND painel_u != 'admin'");
 }
 ?>
 
@@ -117,7 +117,7 @@ if (isset($_POST['btn-search'])) {
 
 
     <div id="divflex">
-      <h5 id="adicionar">Nª de Usuários : <span id='num'><?= /*count($data)?count($data):*/ "0"; ?></span></h5>
+      <h5 id="adicionar">Nª de Usuários : <span id='num'><?= count($data)?count($data): "0"; ?></span></h5>
 
       <form action="" method="post">
         <div id="btn-pesquisar">

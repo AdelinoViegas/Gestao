@@ -6,11 +6,11 @@ session_start();
 if (!isset($_SESSION['logged']))
   header("Location: index.php");
 
-$res_disciplina = getData($connection, "SELECT * FROM sg_disciplina order by nome_d");
+$data = getData($connection, "SELECT * FROM sg_disciplina order by nome_d");
 
 if (isset($_POST['btn-search'])) {
   $search = $_POST['search'];
-  $res_disciplina = getData($connection, "SELECT * FROM sg_disciplina WHERE nome_d LIKE '$search%' ");
+  $data = getData($connection, "SELECT * FROM sg_disciplina WHERE nome_d LIKE '$search%'");
 }
 ?>
 
@@ -128,8 +128,8 @@ if (isset($_POST['btn-search'])) {
 
       <form action="" method="post">
         <div id="btn-pesquisar">
-          <input type="text" class="form-control me-2" name="txtpesquisar" placeholder="Pesquisa por nome"><button
-            id="btn-p" type="submit" class="btn btn-success" name="btn-pesquisa">Pesquisar</button>
+          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button
+            id="btn-p" type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
         </div>
       </form>
     </div>
@@ -144,8 +144,8 @@ if (isset($_POST['btn-search'])) {
         </thead>
         <tbody>
           <?php
-          if (mysqli_num_rows($res_disciplina) > 0) {
-            while ($l_disciplina = mysqli_fetch_assoc($res_disciplina)) { ?>
+          if (count($data) > 0) {
+            foreach($data as $l_disciplina) { ?>
               <tr id="tr">
                 <td id="editar">
                   <form action="disciplina-editar.php" method="post">
@@ -167,7 +167,7 @@ if (isset($_POST['btn-search'])) {
         <tfooter class='text text-center'>
           <h5>Nenhum dado encontrado</h5>
         </tfooter>
-      <?php
+        <?php
           }
           ?>
     </div>
