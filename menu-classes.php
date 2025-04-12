@@ -1,19 +1,17 @@
 <?php 
-require_once "conexao.php";
-
+require_once "connection.php";
+require_once "features/getData.php";
 session_start();
 
-//verficar se está logado
-if(!isset($_SESSION['logado'])){
+if(!isset($_SESSION['logged'])){
   header("Location: index.php");
 }
 
-$sql_classe = "SELECT * FROM sg_classe order by nome_c";
-$res_classe = mysqli_query($conexao,$sql_classe);
+$res_classe = getData($connection,"SELECT * FROM sg_classe order by nome_c");
 
-  if (isset($_POST['btn-pesquisa'])) {
-      $pesquisar = $_POST['txtpesquisar'];
-      $res_classe = mysqli_query($conexao,"SELECT * FROM sg_classe WHERE nome_c LIKE '$pesquisar%' ");                    
+  if (isset($_POST['btn-search'])) {
+      $pesquisar = $_POST['search'];
+      $res_classe = mysqli_query($connection,"SELECT * FROM sg_classe WHERE nome_c LIKE '$pesquisar%' ");                    
   }
 
 ?>

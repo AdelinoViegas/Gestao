@@ -30,7 +30,7 @@ if (isset($_POST['enviar-dados'])) {
     if (password_verify($password, $state)) 
       $password = $state;
   }
-
+  
   $sql = "SELECT * FROM sg_usuarios WHERE nome_u = ? AND senha_u = ? AND estado_u = 'activo' AND painel_u = ?";
   $consult = mysqli_prepare($conection,$sql);
   mysqli_stmt_bind_param($consult,"sss", $name, $password, $painel);

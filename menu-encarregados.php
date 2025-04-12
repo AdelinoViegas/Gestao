@@ -1,16 +1,16 @@
 <?php 
-require_once "conection.php";
+require_once "connection.php";
 require_once "features/getData.php";
 session_start();
 
-if(!isset($_SESSION['logado']))
+if(!isset($_SESSION['logged']))
   header("Location: index.php");
 
-$data = getData($conection, "SELECT * FROM sg_encarregado WHERE view = '1' ORDER BY nome_e");
+$data = getData($connection, "SELECT * FROM sg_encarregado WHERE view = '1' ORDER BY nome_e");
 
 if (isset($_POST['btn-pesquisa'])) {
   $pesquisar = $_POST['search'];
-  $data = getData($conection, "SELECT * FROM sg_encarregado WHERE nome_e LIKE '$pesquisar%' AND view ='1'");              
+  $data = getData($connection, "SELECT * FROM sg_encarregado WHERE nome_e LIKE '$pesquisar%' AND view ='1'");              
 }
 ?>
 

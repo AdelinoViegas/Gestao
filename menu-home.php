@@ -1,9 +1,8 @@
 <?php
-require_once "conection.php";
+require_once "connection.php";
 session_start();
 
-//verficar se está logado
-if (!isset($_SESSION['logado'])) 
+if (!isset($_SESSION['logged'])) 
   header("Location: ../index.php");
 ?>
 
@@ -30,7 +29,6 @@ if (!isset($_SESSION['logado']))
     </div>
   </div>
 
-  <!--Navebar-->
   <div class="navegacao">
     <ul>
       <li class="list active">

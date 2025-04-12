@@ -1,16 +1,16 @@
 <?php
-require_once "conection.php";
+require_once "connection.php";
 require_once "features/getData.php";
 session_start();
 
-if (!isset($_SESSION['logado']))
+if (!isset($_SESSION['logged']))
   header("Location: index.php");
 
-$data = getData($conection, "SELECT * FROM sg_usuarios WHERE view = '1' AND painel_u != 'admin' ORDER BY nome_u");
+$data = getData($connection, "SELECT * FROM sg_usuarios WHERE view = '1' AND painel_u != 'admin' ORDER BY nome_u");
 
 if (isset($_POST['btn-search'])) {
   $pesquisar = $_POST['search'];
-  $data = getData($conection, "SELECT * FROM sg_usuarios WHERE nome_u LIKE '$pesquisar%' AND view = '1' AND painel_u != 'admin'");
+  $data = getData($connection, "SELECT * FROM sg_usuarios WHERE nome_u LIKE '$pesquisar%' AND view = '1' AND painel_u != 'admin'");
 }
 ?>
 
@@ -20,7 +20,6 @@ if (isset($_POST['btn-search'])) {
   <title>Samiga</title>
   <?php require_once "head.php"; ?>
 </head>
-
 <body>
   <div class="divsuperior">
     <h1>Colégio Samiga</h1>
@@ -109,7 +108,6 @@ if (isset($_POST['btn-search'])) {
     </ul>
   </div>
 
-
   <?php require_once "navbarMobile.php" ?>
 
   <div class="rounded-3" id="divm">
@@ -119,12 +117,12 @@ if (isset($_POST['btn-search'])) {
 
 
     <div id="divflex">
-      <h5 id="adicionar">Nª de Usuários : <span id='num'><?= /*count($data)?count($data):*/"0"; ?></span></h5>
+      <h5 id="adicionar">Nª de Usuários : <span id='num'><?= /*count($data)?count($data):*/ "0"; ?></span></h5>
 
       <form action="" method="post">
         <div id="btn-pesquisar">
-          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button
-            id="btn-p" type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
+          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button id="btn-p"
+            type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
         </div>
       </form>
     </div>
@@ -141,7 +139,7 @@ if (isset($_POST['btn-search'])) {
         <tbody>
           <?php
           if (count($data) > 0) {
-            foreach($data as $l_usuario) {
+            foreach ($data as $l_usuario) {
               ?>
               <tr>
                 <td id="estado">
@@ -181,7 +179,7 @@ if (isset($_POST['btn-search'])) {
         <tfooter class='text text-center'>
           <h5>Nenhum dado encontrado</h5>
         </tfooter>
-      <?php
+        <?php
           }
           ?>
     </div>

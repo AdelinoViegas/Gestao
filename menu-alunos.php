@@ -1,16 +1,16 @@
 <?php
-require_once "conection.php";
+require_once "connection.php";
 require_once "features/getData.php";
 session_start();
 
-if (!isset($_SESSION['logado']))
+if (!isset($_SESSION['logged']))
   header("Location: index.php");
 
-$data = getData($conection, "SELECT * FROM sg_aluno WHERE view = '1' ORDER BY nome_a");
+$data = getData($connection, "SELECT * FROM sg_aluno WHERE view = '1' ORDER BY nome_a");
 
 if (isset($_POST['btn-pesquisa'])) {
-  $pesquisar = $_POST['search'];
-  $data = getData($conection, "SELECT * FROM sg_aluno WHERE nome_a LIKE '$pesquisar%' AND view = '1'");
+  $search = $_POST['search'];
+  $data = getData($connection, "SELECT * FROM sg_aluno WHERE nome_a LIKE '$search%' AND view = '1'");
 }
 ?>
 
@@ -42,11 +42,8 @@ if (isset($_POST['btn-pesquisa'])) {
     echo $_SESSION['Aluno-actualizado'];
     unset($_SESSION['Aluno-actualizado']);
   }
-
   ?>
 
-
-  <!--Navebar-->
   <div class="navegacao">
     <ul>
       <li class="list">
@@ -209,12 +206,12 @@ if (isset($_POST['btn-pesquisa'])) {
                 <td><?= $l_aluno['sexo_a']; ?></td>
                 <td><?php
                 $class_id = $l_aluno['idClasse'];
-                $class = getData($conection, "SELECT * FROM sg_classe WHERE id_c = '$class_id'");
+                $class = getData($connection, "SELECT * FROM sg_classe WHERE id_c = '$class_id'");
                 echo $class['nome_c']; ?>
                 </td>
                 <td><?php
                 $group_id = $l_aluno['idTurma_a'];
-                $group = getData($conection, "SELECT * FROM sg_turma WHERE id_t = '$group_id'");
+                $group = getData($connection, "SELECT * FROM sg_turma WHERE id_t = '$group_id'");
                 echo $group['nome_t']; ?>
                 </td>
               </tr>
