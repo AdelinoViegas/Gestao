@@ -19,9 +19,9 @@ if (isset($_POST['btn-senha'])) {
     mysqli_stmt_bind_param($update, "ssi", $hash,$date,$id);
     mysqli_stmt_execute($update);
 
-    setMessage("alert-success","Senha actualizada com sucesso!");
+    setMessage("Configured-Message","alert-success","Senha actualizada com sucesso!");
   } else {
-    setMessage("alert-danger","Erro! as senhas não são iguais");
+    setMessage("Configured-Message","alert-danger","Erro! as senhas não são iguais");
   }
 }
 ?>
