@@ -63,12 +63,9 @@ if (isset($_POST['btn-cadastre'])) {
         [$name, $hash, 'activo', 'professor', $date, $date]
       );
       
-      print_r($r_usuario);
-      die();
       //Capturar o id do dado cadastrado
-      $sql_id = mysqli_query($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = '$nome'");
-      $arr = mysqli_fetch_assoc($sql_id);
-      $iduser = $arr['id_u'];
+      $sql_id = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$params]);
+      $iduser = $sql_id['id_u'];
 
       $r_professor = mysqli_query($connection, "INSERT INTO sg_professor(idUsuario,nome_p,email_p,municipio_p,bairro_p,contato_p,sexo_p,nascimento_p,numeroBI_p,dataCadastro_p,dataModificacao_p) VALUES ('$iduser','$nome','$email','$mun','$bairro','$contato','$sexo','$datNasc','$numeroBI','$dt','$dt')");
 
