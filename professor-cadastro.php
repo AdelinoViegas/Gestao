@@ -67,8 +67,13 @@ if (isset($_POST['btn-cadastre'])) {
       $sql_id = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$params]);
       $iduser = $sql_id['id_u'];
 
-      $r_professor = mysqli_query($connection, "INSERT INTO sg_professor(idUsuario,nome_p,email_p,municipio_p,bairro_p,contato_p,sexo_p,nascimento_p,numeroBI_p,dataCadastro_p,dataModificacao_p) VALUES ('$iduser','$nome','$email','$mun','$bairro','$contato','$sexo','$datNasc','$numeroBI','$dt','$dt')");
-
+      $r_professor = mysqli_query($connection, ;
+      
+      $r_usuario = signData(
+        $connection, 
+        "INSERT INTO sg_professor(idUsuario,nome_p,email_p,municipio_p,bairro_p,contato_p,sexo_p,nascimento_p,numeroBI_p,dataCadastro_p,dataModificacao_p) VALUES (?,?,?,?,?,?,?,?,?,?,?)"),
+        [$iduser, $name, $email, $city, $neighborhood, $contact, $gender, $birthday, $BI, $date, $date]
+      );
       if ($r_professor == true && $r_usuario == true) {
         $_SESSION['Professor-cadastrado'] = "
                                    <div id='alerta-confirmar'>
