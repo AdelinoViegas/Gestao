@@ -11,6 +11,3 @@ Este projeto é um sistema de gestão escolar desenvolvido com o objetivo de fac
 - **MySQL** – Banco de dados relacional para armazenamento das informações.
 - **Bootstrap 5** – Framework CSS para desenvolvimento rápido e responsivo.
 
-## 📁 Estrutura do Projeto
-
-Gestao/ ├── aluno/ ├── bootstrap5/ ├── connection.php ├── css/ ├── encarregado/ ├── features/ ├── img/ ├── imag/ ├── index.html ├── js/ ├── login.php ├── professor/ ├── README.md
