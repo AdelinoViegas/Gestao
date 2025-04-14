@@ -1,6 +1,6 @@
 <?php 
 
-include 'pdf-php/src/Cezpdf.php'; // Or use 'vendor/autoload.php' when installed through composer
+/*include 'pdf-php/src/Cezpdf.php'; // Or use 'vendor/autoload.php' when installed through composer
 
 // Initialize a ROS PDF class object using DIN-A4, with background color gray
 $pdf = new Cezpdf('a4','portrait','color',[255,255,255]);
@@ -24,7 +24,7 @@ $pdf->ezText("-------------------------------------//---------------------------
 
 $pdf->ezText(, $size, ['justification'=>'center']);
 // Output the pdf as stream, but uncompress
-$pdf->ezStream(['compress'=>0]);
+$pdf->ezStream(['compress'=>0]);*/
 
 ?>
 
