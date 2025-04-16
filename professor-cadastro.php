@@ -2,6 +2,7 @@
 require_once "connection.php";
 require_once "features/getData.php";
 require_once "features/signData.php";
+require_once "features/setMessage.php";
 session_start();
 
 if (isset($_POST['btn-cadastre'])) {
@@ -21,80 +22,38 @@ if (isset($_POST['btn-cadastre'])) {
   $BI_verification = getData($connection, $sql_BI, [$BI]);
   $email_verification = getData($connection, $sql_email, [$email]);
 
-  if (count($BI_verification) > 0) {
-    $_SESSION['professor-message'] = "
-                     <div id='alerta-confirmar'>
-       <div class='alerta-confirmar'>
-          <div class='alert alert-danger alert-dimissible'>
-           <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-             Codigo de BI já existente!
-          </div>
-       </div>
-       </div>";
+  if ($BI_verification || $email_verification) {
+    $message = $BI_verification ? "Codigo de BI já existente!" : "Email já existente por favor insira outro!";
+    setMessage("professor-message", "alert-danger", $message);
   } else {
-    if (count($email_verification) > 0) {
-      $_SESSION['professor-message'] = "
-                             <div id='alerta-confirmar'>
-               <div class='alerta-confirmar'>
-                  <div class='alert alert-danger alert-dimissible'>
-                   <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-                     Email já existente por favor insira outro!
-                  </div>
-               </div>
-               </div>";
-    } elseif (count($BI_verification) > 0) {
-      $_SESSION['professor-message'] = "
-                             <div id='alerta-confirmar'>
-               <div class='alerta-confirmar'>
-                  <div class='alert alert-danger alert-dimissible'>
-                   <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-                     Professor já existente!
-                  </div>
-               </div>
-               </div>";
+    date_default_timezone_set('Africa/Luanda');
+    $date = date('Y/m/d H:i:s');
+    $hash = password_hash('professor', PASSWORD_DEFAULT);
+    count($BI_verification);
+
+    $r_usuario = signData(
+      $connection,
+      "INSERT INTO sg_usuarios(nome_u, senha_u, estado_u, painel_u, view, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?)",
+      [$name, $hash, 'activo', 'professor', '1', $date, $date]
+    );
+    
+    var_dump($r_usuario);
+    die();
+    //Capturar o id do dado cadastrado
+    $sql_id = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$name]);
+    $user_id = $sql_id['id_u'];
+    
+
+    $r_professor = signData(
+      $connection,
+      "INSERT INTO sg_professor(idUsuario, nome_p,email_p, municipio_p, bairro_p, contato_p, sexo_p, nascimento_p, numeroBI_p, view, dataCadastro_p, dataModificacao_p) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+      [$user_id, $name, $email, $city, $neighborhood, $contact, $gender, $birthday, $BI, "1", $date, $date]
+    );
+
+    if ($r_professor && $r_usuario) {
+      setMessage("professor-message", "alert-success", "Professor cadastrado com sucesso!");
     } else {
-      date_default_timezone_set('Africa/Luanda');
-      $date = date('Y/m/d H:i:s');
-      $hash = password_hash('professor', PASSWORD_DEFAULT);
-
-      $r_usuario = signData(
-        $connection, 
-        "INSERT INTO sg_usuarios(nome_u,senha_u,estado_u,painel_u,dataCadastro_u,dataModificacao_u) VALUES (?,?,?,?,?,?)",
-        [$name, $hash, 'activo', 'professor', $date, $date]
-      );
-      
-      //Capturar o id do dado cadastrado
-      $sql_id = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$params]);
-      $iduser = $sql_id['id_u'];
-      
-      $r_professor = signData(
-        $connection, 
-        "INSERT INTO sg_professor(idUsuario,nome_p,email_p,municipio_p,bairro_p,contato_p,sexo_p,nascimento_p,numeroBI_p,dataCadastro_p,dataModificacao_p) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-        [$iduser, $name, $email, $city, $neighborhood, $contact, $gender, $birthday, $BI, $date, $date]
-      );
-      
-      if ($r_professor == true && $r_usuario == true) {
-        $_SESSION['Professor-cadastrado'] = "
-                                   <div id='alerta-confirmar'>
-                     <div class='alerta-confirmar'>
-                        <div class='alert alert-success alert-dimissible'>
-                         <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-                           Professor cadastrado com sucesso!
-                        </div>
-                     </div>
-                     </div>";
-      } else {
-        $_SESSION['Professor-cadastrado'] = "
-                                   <div id='alerta-confirmar'>
-                     <div class='alerta-confirmar'>
-                        <div class='alert alert-danger alert-dimissible'>
-                         <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-                            Erro ao cadastrar!
-                        </div>
-                     </div>
-                     </div>";
-
-      }
+      setMessage("professor-message", "alert-danger", "Erro ao cadastrar!");
     }
   }
 }
@@ -123,8 +82,8 @@ if (isset($_POST['btn-cadastre'])) {
       </div>
     </div>
   </div>
-  <?php
 
+  <?php
   if (isset($_SESSION['professor-message'])) {
     echo $_SESSION['professor-message'];
     unset($_SESSION['professor-message']);

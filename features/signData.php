@@ -1,8 +1,20 @@
 <?php
 function signData($connection, $sql, $params){
   try{
+    $types = "";
     $query = mysqli_prepare($connection, $sql);
-    $types = str_repeat("s", count($params)); 
+    
+    foreach($params as $value){
+      if(is_int($value)){
+        $types .= "i";
+      }elseif(is_float($value)){
+        $types .= "f";
+      }elseif(is_bool($value)){
+        $types .= "b";
+      }else{
+        $types .= "s";
+      }
+    }
 
     $bind_names = [];
     $bind_names[] = $types; 
@@ -18,6 +30,7 @@ function signData($connection, $sql, $params){
     return true;
   }catch(Exception $e){
     echo "<script>console.log('Erro ao cadastrar!!')</script>";
+    return false;
   }
 }
 ?>

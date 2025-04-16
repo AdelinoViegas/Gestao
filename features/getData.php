@@ -1,5 +1,5 @@
 <?php
-function getData($connection, $sql, $params){
+function getData($connection, $sql, $params = []){
   if(count($params) === 1){
     $query = mysqli_prepare($connection, $sql);
     mysqli_stmt_bind_param($query, "s",$params[0]);
