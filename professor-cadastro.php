@@ -37,8 +37,6 @@ if (isset($_POST['btn-cadastre'])) {
       [$name, $hash, 'activo', 'professor', '1', $date, $date]
     );
     
-    var_dump($r_usuario);
-    die();
     //Capturar o id do dado cadastrado
     $sql_id = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$name]);
     $user_id = $sql_id['id_u'];
