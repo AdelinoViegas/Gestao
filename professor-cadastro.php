@@ -36,12 +36,14 @@ if (isset($_POST['btn-cadastre'])) {
       "INSERT INTO sg_usuarios(nome_u, senha_u, estado_u, painel_u, view, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?)",
       [$name, $hash, 'activo', 'professor', '1', $date, $date]
     );
+
+    var_dump($sql_id);
+    die();
     
     //Capturar o id do dado cadastrado
     $sql_id = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$name]);
-    $user_id = $sql_id['id_u'];
+    //$user_id = $sql_id['id_u'];
     
-
     $r_professor = signData(
       $connection,
       "INSERT INTO sg_professor(idUsuario, nome_p,email_p, municipio_p, bairro_p, contato_p, sexo_p, nascimento_p, numeroBI_p, view, dataCadastro_p, dataModificacao_p) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
