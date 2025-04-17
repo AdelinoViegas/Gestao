@@ -1,22 +1,24 @@
 <?php 
-require_once "conexao.php";
-
+require_once "connection.php";
+require_once "features/getData.php";
+require_once "features/signData.php";
+require_once "features/setMessage.php";
 session_start();
 
 if(isset($_POST['btn-cadastrar'])){
-    $nome = mysqli_escape_string($conexao,$_POST['txtnome']);
-    $mun = mysqli_escape_string($conexao,$_POST['txtmun']);
-    $bairro = mysqli_escape_string($conexao,$_POST['txtbairro']);
-    $sexo = mysqli_escape_string($conexao,$_POST['txtsexo']);
-    $contato = mysqli_escape_string($conexao,$_POST['txtcont']);
-    $dataNasc = mysqli_escape_string($conexao,$_POST['txtnasc']);
-    $numeroBI = mysqli_escape_string($conexao,$_POST['txtbi']);
+    $nome = mysqli_escape_string($connection,trim($_POST['txtnome']));
+    $mun = mysqli_escape_string($connection,trim($_POST['txtmun']));
+    $bairro = mysqli_escape_string($connection,trim($_POST['txtbairro']));
+    $sexo = mysqli_escape_string($connection,trim($_POST['txtsexo']));
+    $contato = mysqli_escape_string($connection,trim($_POST['txtcont']));
+    $dataNasc = mysqli_escape_string($connection,trim($_POST['txtnasc']));
+    $numeroBI = mysqli_escape_string($connection,trim($_POST['txtbi']));
 
 
   $sql_nome = "SELECT nome_e FROM sg_encarregado WHERE nome_e = '$nome' ";
   $sql_bi = "SELECT numeroBI_e FROM sg_encarregado WHERE numeroBI_e = '$numeroBI' ";
-  $verificacao_nome = mysqli_query($conexao,$sql_nome);
-  $verificacao_bi = mysqli_query($conexao,$sql_bi);
+  $verificacao_nome = getData($connection,$sql_nome);
+  $verificacao_bi = getData($connection,$sql_bi);
 
 
 if(mysqli_num_rows($verificacao_bi) > 0){
@@ -64,14 +66,14 @@ if(mysqli_num_rows($verificacao_bi) > 0){
              $dt = date('Y/m/d H:i:s');
               $senha = password_hash('encarregado', PASSWORD_DEFAULT);
 
-          $r_usuario = mysqli_query($conexao,"INSERT INTO sg_usuarios(nome_u,senha_u,estado_u,painel_u,dataCadastro_u,dataModificacao_u) VALUES ('$nome','$senha','activo','encarregado','$dt','$dt')");    
+          $r_usuario = mysqli_query($connection,"INSERT INTO sg_usuarios(nome_u,senha_u,estado_u,painel_u,dataCadastro_u,dataModificacao_u) VALUES ('$nome','$senha','activo','encarregado','$dt','$dt')");    
 
           //Capturar o id do dado cadastrado
-          $sql_id = mysqli_query($conexao,"SELECT id_u FROM sg_usuarios WHERE nome_u = '$nome'");
+          $sql_id = mysqli_query($connection,"SELECT id_u FROM sg_usuarios WHERE nome_u = '$nome'");
           $arr = mysqli_fetch_assoc($sql_id);
           $iduser = $arr['id_u']; 
 
-          $r_encarregado = mysqli_query($conexao,"INSERT INTO sg_encarregado(idUsuario,nome_e,sexo_e,municipio_e,bairro_e,nascimento_e,contato_e,numeroBI_e,dataCadastro_e,dataModificacao_e) VALUES ('$iduser','$nome','$sexo','$mun','$bairro','$dataNasc','$contato','$numeroBI','$dt','$dt')");
+          $r_encarregado = mysqli_query($connection,"INSERT INTO sg_encarregado(idUsuario,nome_e,sexo_e,municipio_e,bairro_e,nascimento_e,contato_e,numeroBI_e,dataCadastro_e,dataModificacao_e) VALUES ('$iduser','$nome','$sexo','$mun','$bairro','$dataNasc','$contato','$numeroBI','$dt','$dt')");
 
                      
 

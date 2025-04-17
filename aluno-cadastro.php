@@ -1,5 +1,8 @@
 <?php
-require_once "conexao.php";
+require_once "connection.php";
+require_once "features/getData.php";
+require_once "features/signData.php";
+require_once "features/setMessage.php";
 session_start();
 
 if (isset($_POST['btn-cadastrar'])) {
