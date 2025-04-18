@@ -47,11 +47,10 @@ if (isset($_POST['btn-cadastre'])) {
       [$user_id, $name, $email, $city, $neighborhood, $contact, $gender, $birthday, $BI, "1", $date, $date]
     );
 
-    if ($sign_professor && $sign_user) {
+    if ($sign_professor && $sign_user)
       setMessage("professor-message", "alert-success", "Professor cadastrado com sucesso!");
-    } else {
+    else 
       setMessage("professor-message", "alert-danger", "Erro ao cadastrar!");
-    }
   }
 }
 ?>
