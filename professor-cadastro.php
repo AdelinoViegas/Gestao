@@ -31,26 +31,23 @@ if (isset($_POST['btn-cadastre'])) {
     $hash = password_hash('professor', PASSWORD_DEFAULT);
     count($BI_verification);
 
-    $r_usuario = signData(
+    $sign_user = signData(
       $connection,
       "INSERT INTO sg_usuarios(nome_u, senha_u, estado_u, painel_u, view, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?,?)",
       [$name, $hash, 'activo', 'professor', '1', $date, $date]
     );
 
-    var_dump($r_usuario);
-    die();
-    
     //Capturar o id do dado cadastrado
-    $sql_id = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$name]);
-    //$user_id = $sql_id['id_u'];
-    
-    $r_professor = signData(
+    $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$name]);
+    $user_id = $user_data['id_u'];
+
+    $sign_professor = signData(
       $connection,
-      "INSERT INTO sg_professor(idUsuario, nome_p,email_p, municipio_p, bairro_p, contato_p, sexo_p, nascimento_p, numeroBI_p, view, dataCadastro_p, dataModificacao_p) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO sg_professor(idUsuario, nome_p, email_p, municipio_p, bairro_p, contato_p, sexo_p, nascimento_p, numeroBI_p, view, dataCadastro_p, dataModificacao_p) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
       [$user_id, $name, $email, $city, $neighborhood, $contact, $gender, $birthday, $BI, "1", $date, $date]
     );
 
-    if ($r_professor && $r_usuario) {
+    if ($sign_professor && $sign_user) {
       setMessage("professor-message", "alert-success", "Professor cadastrado com sucesso!");
     } else {
       setMessage("professor-message", "alert-danger", "Erro ao cadastrar!");

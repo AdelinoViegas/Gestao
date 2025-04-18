@@ -6,18 +6,18 @@ require_once "features/setMessage.php";
 session_start();
 
 if (isset($_POST['btn-cadastrar'])) {
-  $turmaAluno = mysqli_escape_string($connection, trim($_POST['txtturma']));
-  $classeAluno = mysqli_escape_string($connection, trim($_POST['txtclasse']));
-  $nome = mysqli_escape_string($connection, trim($_POST['txtnome']));
-  $mun = mysqli_escape_string($connection, trim($_POST['txtmun']));
-  $bairro = mysqli_escape_string($connection, trim($_POST['txtbairro']));
-  $sexo = mysqli_escape_string($connection, trim($_POST['txtsexo']));
-  $contato = mysqli_escape_string($connection, trim($_POST['txtcont']));
-  $datNasc = mysqli_escape_string($connection, trim($_POST['txtnasc']));
-  $numeroBI = mysqli_escape_string($connection, trim($_POST['txtbi']));
-  $encarregado = mysqli_escape_string($connection, trim($_POST['txtencarregado']));
+  $student_group = mysqli_escape_string($connection, trim($_POST['group']));
+  $student_class = mysqli_escape_string($connection, trim($_POST['class']));
+  $name = mysqli_escape_string($connection, trim($_POST['name']));
+  $city = mysqli_escape_string($connection, trim($_POST['city']));
+  $neighborhood = mysqli_escape_string($connection, trim($_POST['neighborhood']));
+  $sexo = mysqli_escape_string($connection, trim($_POST['gender']));
+  $contact = mysqli_escape_string($connection, trim($_POST['contack']));
+  $birthday = mysqli_escape_string($connection, trim($_POST['birthday']));
+  $BI = mysqli_escape_string($connection, trim($_POST['BI']));
+  $responsible = mysqli_escape_string($connection, trim($_POST['responsible']));
 
-  $sql_bi = "SELECT numeroBI_a FROM sg_aluno WHERE numeroBI_a = '$numeroBI' ";
+  $sql_bi = "SELECT numeroBI_a FROM sg_aluno WHERE numeroBI_a = '$numeroBI'";
   $BI_verification = mysqli_query($connection, $sql_bi);
 
 
@@ -25,31 +25,32 @@ if (isset($_POST['btn-cadastrar'])) {
     $message = $BI_verification ? "Codigo de BI já existente!" : "Email já existente por favor insira outro!";
     setMessage("professor-message", "alert-danger", $message);
   } else {
-
       date_default_timezone_set('Africa/Luanda');
-      $dt = date('Y/m/d H:i:s');
-      $senha = password_hash('aluno', PASSWORD_DEFAULT);
+      $date = date('Y/m/d H:i:s');
+      $hash = password_hash('aluno', PASSWORD_DEFAULT);
 
-      $sql_enc = mysqli_query($connection, "SELECT * FROM sg_encarregado WHERE nome_e = '$encarregado'");
+      $responsible_data = getData($connection, "SELECT * FROM sg_encarregado WHERE nome_e = '$encarregado'");
 
-      if (mysqli_num_rows($sql_enc) > 0) {
-        $enc = mysqli_fetch_assoc($sql_enc);
-        $id_enc = $enc['id_e'];
-      }
+      if (count($responsible_data) > 0) 
+        $responsible_id = $responsible_data['id_e'];
 
-
-
-      $r_usuario = mysqli_query($connection, "INSERT INTO  sg_usuarios(nome_u,senha_u,estado_u,painel_u,dataCadastro_u,dataModificacao_u) VALUES ('$nome','$senha','activo','aluno','$dt','$dt')");
+      $sign_user = signData(
+        $connection, 
+        "INSERT INTO  sg_usuarios(nome_u, senha_u, estado_u, painel_u, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?)",
+        [$name, $hash,'activo','aluno', $date, $date]
+      );
 
       //Capturar o id do dado cadastrado
-      $sql_id = mysqli_query($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = '$nome'");
-      $arr = mysqli_fetch_assoc($sql_id);
-      $iduser = $arr['id_u'];
+      $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?",[$name]);
+      $user_id = $user_data['id_u'];
 
-      $r_aluno = mysqli_query($connection, "INSERT INTO sg_aluno(idTurma_a,idClasse,idEncarregado,idUsuario,nome_a,sexo_a,nascimento_a,municipio_a,bairro_a,contato_a,numeroBI_a,dataCadastro_a,dataModificacao_a) VALUES ('$turmaAluno','$classeAluno','$id_enc','$iduser','$nome','$sexo','$datNasc','$mun','$bairro','$contato','$numeroBI','$dt','$dt')");
+      $sign_student = signData(
+        $connection, 
+        "INSERT INTO sg_aluno(idTurma_a,idClasse,idEncarregado,idUsuario,nome_a,sexo_a,nascimento_a,municipio_a,bairro_a,contato_a,numeroBI_a,dataCadastro_a,dataModificacao_a) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?",
+[$student_group, $student_class, $responsible_id, $user_id, $name, $gender, $birthday,  $city, $neighborhood, $contact, $numeroBI, $date, $date]
+      );
 
-
-      if ($r_aluno == true && $r_usuario == true) {
+      if ($sign_student && $sign_user) {
 
         $_SESSION['Aluno-cadastrado'] = "
                          <div id='alerta-confirmar'>
