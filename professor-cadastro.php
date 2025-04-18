@@ -33,11 +33,11 @@ if (isset($_POST['btn-cadastre'])) {
 
     $r_usuario = signData(
       $connection,
-      "INSERT INTO sg_usuarios(nome_u, senha_u, estado_u, painel_u, view, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?)",
+      "INSERT INTO sg_usuarios(nome_u, senha_u, estado_u, painel_u, view, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?,?)",
       [$name, $hash, 'activo', 'professor', '1', $date, $date]
     );
 
-    var_dump($sql_id);
+    var_dump($r_usuario);
     die();
     
     //Capturar o id do dado cadastrado

@@ -15,7 +15,8 @@ function signData($connection, $sql, $params){
         $types .= "s";
       }
     }
-
+    var_dump($types);
+    die();
     $bind_names = [];
     $bind_names[] = $types; 
     foreach ($params as $key => $value) {
