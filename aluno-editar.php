@@ -8,6 +8,8 @@ $_SESSION['id_a'] = $id;
 $sql_aluno = "SELECT * FROM sg_aluno AS a join sg_classe AS c ON c.id_c = a.idClasse join sg_turma AS t ON a.idTurma_a = t.id_t WHERE id_a ='$id' ";
 $res_aluno = mysqli_query($conexao,$sql_aluno);
 $registro = mysqli_fetch_assoc($res_aluno);
+$city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi", "Talatona", "Cacuaco", "Icolo e Bengo"];
+
 ?>
 
 <!DOCTYPE html>
@@ -159,99 +161,12 @@ $registro = mysqli_fetch_assoc($res_aluno);
             <label for="textmun">Município</label>
             <select id="textmun" class="input form-control"
            name="txtmun" placeholder="Seu município" required>
-             <?php $mun = $registro['municipio_a']; 
-              if ($mun == 'Luanda') {
-            ?>
-              <option value="<?php echo $registro['municipio_a']; ?>">Luanda</option>
-              <option value="Viana">Viana</option>
-              <option value="Belas">Belas</option>
-              <option value="Cazenga">Cazenga</option>
-              <option value="Kissama">Kissama</option>
-              <option value="Kilamba Kiaxi">Kilamba Kiaxi</option>
-              <option value="Talatona">Talatona</option>
-              <option value="Cacuaco">Cacuaco</option>
-              <option value="Icolo e Bengo">Icolo e Bengo</option>
-            <?php } else if ($mun == 'Viana') { ?>
-              <option value="<?php echo $registro['municipio_a']; ?>">Viana</option>
-              <option value="Luanda">Luanda</option>
-              <option value="Belas">Belas</option>
-              <option value="Cazenga">Cazenga</option>
-              <option value="Kissama">Kissama</option>
-              <option value="Kilamba Kiaxi">Kilamba Kiaxi</option>
-              <option value="Talatona">Talatona</option>
-              <option value="Cacuaco">Cacuaco</option>
-              <option value="Icolo e Bengo">Icolo e Bengo</option>
-               <?php } else if ($mun == 'Belas') { ?>
-              <option value="<?php echo $registro['municipio_a']; ?>">Belas</option>
-              <option value="Luanda">Luanda</option>
-              <option value="Viana">Viana</option>
-              <option value="Cazenga">Cazenga</option>
-              <option value="Kissama">Kissama</option>
-              <option value="Kilamba Kiaxi">Kilamba Kiaxi</option>
-              <option value="Talatona">Talatona</option>
-              <option value="Cacuaco">Cacuaco</option>
-              <option value="Icolo e Bengo">Icolo e Bengo</option>
-              <?php } else if ($mun == 'Cazenga') { ?>
-              <option value="<?php echo $registro['municipio_a']; ?>">Cazenga</option>
-              <option value="Luanda">Luanda</option>
-              <option value="Viana">Viana</option>
-              <option value="Belas">Belas</option>
-              <option value="Kissama">Kissama</option>
-              <option value="Kilamba Kiaxi">Kilamba Kiaxi</option>
-              <option value="Talatona">Talatona</option>
-              <option value="Cacuaco">Cacuaco</option>
-              <option value="Icolo e Bengo">Icolo e Bengo</option>
-              <?php } else if ($mun == 'Kissama') { ?>
-              <option value="<?php echo $registro['municipio_a']; ?>">Kissama</option>
-              <option value="Luanda">Luanda</option>
-              <option value="Viana">Viana</option>
-              <option value="Belas">Belas</option>
-              <option value="Cazenga">Cazenga</option>
-              <option value="Kilamba Kiaxi">Kilamba Kiaxi</option>
-              <option value="Talatona">Talatona</option>
-              <option value="Cacuaco">Cacuaco</option>
-              <option value="Icolo e Bengo">Icolo e Bengo</option>
-              <?php }else if ($mun == 'Kilamba Kiaxi') { ?>
-              <option value="<?php echo $registro['municipio_a']; ?>">Kilamba Kiaxi</option>
-              <option value="Luanda">Luanda</option>
-              <option value="Viana">Viana</option>
-              <option value="Belas">Belas</option>
-              <option value="Cazenga">Cazenga</option>
-              <option value="Kissama">Kissama</option>
-              <option value="Talatona">Talatona</option>
-              <option value="Cacuaco">Cacuaco</option>
-              <option value="Icolo e Bengo">Icolo e Bengo</option>
-              <?php } else if ($mun == 'Talatona') { ?>
-              <option value="<?php echo $registro['municipio_a']; ?>">Talatona</option>
-              <option value="Luanda">Luanda</option>
-              <option value="Viana">Viana</option>
-              <option value="Belas">Belas</option>
-              <option value="Cazenga">Cazenga</option>
-              <option value="Kissama">Kissama</option>
-              <option value="Kilamba Kiaxi">Kilamba Kiaxi</option>
-              <option value="Cacuaco">Cacuaco</option>
-              <option value="Icolo e Bengo">Icolo e Bengo</option>
-              <?php } else if ($mun == 'Cacuaco') { ?>
-              <option value="<?php echo $registro['municipio_a']; ?>">Cacuaco</option>
-              <option value="Luanda">Luanda</option>
-              <option value="Viana">Viana</option>
-              <option value="Belas">Belas</option>
-              <option value="Cazenga">Cazenga</option>
-              <option value="Kissama">Kissama</option>
-              <option value="Kilamba Kiaxi">Kilamba Kiaxi</option>
-              <option value="Talatona">Talatona</option>
-              <option value="Icolo e Bengo">Icolo e Bengo</option>
-            <?php } else if ($mun == 'Icolo e Bengo') { ?>
-              <option value="<?php echo $registro['municipio_a']; ?>">Icolo e Bengo</option>
-              <option value="Luanda">Luanda</option>
-              <option value="Viana">Viana</option>
-              <option value="Belas">Belas</option>
-              <option value="Cazenga">Cazenga</option>
-              <option value="Kissama">Kissama</option>
-              <option value="Kilamba Kiaxi">Kilamba Kiaxi</option>
-              <option value="Talatona">Talatona</option>
-              <option value="Cacuaco">Cacuaco</option>
-            <?php }?>
+           <option value="<?= $data['municipio_p'] ?>"><?= $data['municipio_p'] ?></option>
+           <?php   
+             foreach($city_array as $city){
+              if($city !== $data['municipio_p']){?>
+                  <option value="<?= $city ?>"><?= $city ?></option>
+           <?php }}?>
            </select>
          </div>
          <div class="form-group col-md-4 mb-3">

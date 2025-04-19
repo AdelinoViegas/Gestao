@@ -5,7 +5,7 @@ require_once "features/signData.php";
 require_once "features/setMessage.php";
 session_start();
 
-if (isset($_POST['btn-cadastrar'])) {
+if (isset($_POST['btn-cadastre'])) {
   $name = mysqli_real_escape_string($connection, trim($_POST['name']));
   $city = mysqli_real_escape_string($connection, trim($_POST['city']));
   $neighborhood = mysqli_real_escape_string($connection, trim($_POST['neighborhood']));
@@ -20,12 +20,12 @@ if (isset($_POST['btn-cadastrar'])) {
     setMessage("responsible-message", "alert-danger", "Codigo de BI já existente!");
   } else {
     date_default_timezone_set('Africa/Luanda');
-    $dt = date('Y/m/d H:i:s');
+    $date = date('Y/m/d H:i:s');
     $hash = password_hash('encarregado', PASSWORD_DEFAULT);
 
     $sign_user = signData(
       $connection,
-      "INSERT INTO sg_usuarios(nome_u, senha_u, estado_u, painel_u, view, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?)",
+      "INSERT INTO sg_usuarios(nome_u, senha_u, estado_u, painel_u, view, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?,?)",
       [$name, $hash, 'activo', 'encarregado', "1", $date, $date]
     );
 
@@ -35,37 +35,16 @@ if (isset($_POST['btn-cadastrar'])) {
 
     $sign_responsible = signData(
       $connection, 
-      "INSERT INTO sg_encarregado(idUsuario, nome_e, sexo_e, municipio_e, bairro_e, nascimento_e, contato_e, numeroBI_e, view, dataCadastro_e, dataModificacao_e) VALUES ('$iduser','$nome','$sexo','$mun','$bairro','$dataNasc','$contato','$numeroBI','$dt','$dt')",
-     [$iduser, $name, $gender, $city, $neighborhood, $birthday, $contact,  $BI, "1", $date, $date]
+      "INSERT INTO sg_encarregado(idUsuario, nome_e, sexo_e, municipio_e, bairro_e, nascimento_e, contato_e, numeroBI_e, view, dataCadastro_e, dataModificacao_e) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+     [$user_id, $name, $gender, $city, $neighborhood, $birthday, $contact,  $BI, "1", $date, $date]
     );
 
-    if ($r_encarregado && $r_usuario) {
-
-      $_SESSION['Encarregado-cadastrado'] = "
-                         <div id='alerta-confirmar'>
-           <div class='alerta-confirmar'>
-              <div class='alert alert-success alert-dimissible'>
-               <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-                 Encarregado cadastrado com sucesso!
-              </div>
-           </div>
-           </div>";
-
-
-    } else {
-
-      $_SESSION['Encarregado-cadastrado'] = "
-                         <div id='alerta-confirmar'>
-           <div class='alerta-confirmar'>
-              <div class='alert alert-danger alert-dimissible'>
-               <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-                  Erro ao cadastrar!
-              </div>
-           </div>
-           </div>";
+    if ($sign_responsible && $sign_user) 
+      setMessage("responsible-message", "alert-success", "Encarregado cadastrado com sucesso!");
+    else 
+      setMessage("responsible-message", "alert-success", "Erro ao cadastrar!");
     }
   }
-}
 ?>
 
 <!DOCTYPE html>
@@ -93,9 +72,9 @@ if (isset($_POST['btn-cadastrar'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['responsible-cadastrado'])) {
-    echo $_SESSION['responsible-cadastrado'];
-    unset($_SESSION['responsible-cadastrado']);
+  if (isset($_SESSION['responsible-message'])) {
+    echo $_SESSION['responsible-message'];
+    unset($_SESSION['responsible-message']);
   }
   ?>
 
@@ -181,12 +160,12 @@ if (isset($_POST['btn-cadastrar'])) {
       <div class="row">
         <div class="form-group col-md-6 mb-3">
           <label for="textnome">Nome</label>
-          <input type="text" id="textnome" class="form-control" name="txtnome" maxlength="45"
+          <input type="text" id="textnome" class="form-control" name="name" maxlength="45"
             placeholder="Nome completo do encarregado/a" required>
         </div>
         <div class="form-group col-md-3 mb-3">
           <label for="textmun">Município</label>
-          <select id="textmun" class="input form-control" name="txtmun" placeholder="Seu município" required>
+          <select id="textmun" class="input form-control" name="city" placeholder="Seu município" required>
             <option value="">Selecione aqui</option>
             <option value="Luanda">Luanda</option>
             <option value="Viana">Viana</option>
@@ -201,7 +180,7 @@ if (isset($_POST['btn-cadastrar'])) {
         </div>
         <div class="form-group col-md-3 mb-3">
           <label for="textbairro">Bairro</label>
-          <input type="text" id="textbairro" class="form-control" name="txtbairro" maxlength="20"
+          <input type="text" id="textbairro" class="form-control" name="neighborhood" maxlength="20"
             placeholder="Seu bairro" required>
         </div>
       </div>
@@ -209,7 +188,7 @@ if (isset($_POST['btn-cadastrar'])) {
       <div class="row">
         <div class="form-group col-md-3 mb-3">
           <label for="textsexo">sexo</label>
-          <select id="textsexo" class="input form-control" name="txtsexo" required>
+          <select id="textsexo" class="input form-control" name="gender" required>
             <option value="">Selecione aqui</option>
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
@@ -218,23 +197,23 @@ if (isset($_POST['btn-cadastrar'])) {
 
         <div class="form-group col-md-3 mb-3">
           <label for="textcont">Contato</label>
-          <input type="text" id="textcont" class="form-control" name="txtcont" placeholder="xxx-xx-xx-xx" maxlength="9"
+          <input type="text" id="textcont" class="form-control" name="contact" placeholder="xxx-xx-xx-xx" maxlength="9"
             required>
         </div>
 
         <div class="form-group col-md-3 mb-3">
           <label for="textnasc">Data de Nascimento</label>
-          <input type="date" id="textnasc" class="form-control" name="txtnasc" required>
+          <input type="date" id="textnasc" class="form-control" name="birthday" required>
         </div>
         <div class="form-group col-md-3 mb-3">
           <label for="textbi">Número do BI</label>
-          <input type="text" id="textbi" class="form-control" name="txtbi" placeholder="Nª do bilhete" maxlength="15"
+          <input type="text" id="textbi" class="form-control" name="BI" placeholder="Nª do bilhete" maxlength="15"
             required>
         </div>
       </div>
 
       <div class="row" id="marg">
-        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastrar"
+        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastre"
           id="margemBotao">Cadastrar</button>
 
         <div class="col-md-8" id="margemBotao"></div>

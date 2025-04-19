@@ -160,7 +160,7 @@ if (isset($_POST['btn-pesquisa'])) {
                 <td id="editar">
                   <form action="professor-editar.php" method="post">
                     <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $data_professor['id_p']; ?>"
-                      name="id_professor">
+                      name="professor_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>
 
@@ -189,7 +189,7 @@ if (isset($_POST['btn-pesquisa'])) {
                         <!--Rodapé-->
                         <div class="modal-footer">
                           <form action="professor-apagar.php" method="post">
-                            <input type="hidden" name="id_professor" value="<?= $data_professor['id_p']; ?>">
+                            <input type="hidden" name="professor_id" value="<?= $data_professor['id_p']; ?>">
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Sim</button>
                           </form>
 
