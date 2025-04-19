@@ -6,42 +6,42 @@ require_once "features/setMessage.php";
 session_start();
 
 if (isset($_POST['btn-cadastrar'])) {
-  $name = mysqli_escape_string($connection, trim($_POST['name']));
-  $city = mysqli_escape_string($connection, trim($_POST['city']));
-  $neighborhood = mysqli_escape_string($connection, trim($_POST['neighborhood']));
-  $gender = mysqli_escape_string($connection, trim($_POST['gender']));
-  $contact = mysqli_escape_string($connection, trim($_POST['contact']));
-  $birthday = mysqli_escape_string($connection, trim($_POST['birthday']));
-  $BI = mysqli_escape_string($connection, trim($_POST['BI']));
+  $name = mysqli_real_escape_string($connection, trim($_POST['name']));
+  $city = mysqli_real_escape_string($connection, trim($_POST['city']));
+  $neighborhood = mysqli_real_escape_string($connection, trim($_POST['neighborhood']));
+  $gender = mysqli_real_escape_string($connection, trim($_POST['gender']));
+  $contact = mysqli_real_escape_string($connection, trim($_POST['contact']));
+  $birthday = mysqli_real_escape_string($connection, trim($_POST['birthday']));
+  $BI = mysqli_real_escape_string($connection, trim($_POST['BI']));
 
-  $sql_bi = "SELECT numeroBI_e FROM sg_encarregado WHERE numeroBI_e = '$numeroBI' ";
-  $BI_verification = getData($connection, $sql_bi);
-
+  $BI_verification = getData($connection, "SELECT numeroBI_e FROM sg_encarregado WHERE numeroBI_e = ?", [$BI]);
 
   if ($BI_verification) {
-    $message = $BI_verification ? "Codigo de BI já existente!" : "Email já existente por favor insira outro!";
-    setMessage("responsible-message", "alert-danger", $message);
+    setMessage("responsible-message", "alert-danger", "Codigo de BI já existente!");
   } else {
-      date_default_timezone_set('Africa/Luanda');
-      $dt = date('Y/m/d H:i:s');
-      $senha = password_hash('encarregado', PASSWORD_DEFAULT);
+    date_default_timezone_set('Africa/Luanda');
+    $dt = date('Y/m/d H:i:s');
+    $hash = password_hash('encarregado', PASSWORD_DEFAULT);
 
-      $r_usuario = signData(
-        $connection, 
-        "INSERT INTO sg_usuarios(nome_u,senha_u,estado_u,painel_u,dataCadastro_u,dataModificacao_u) VALUES (?,?,?,?,?,?)",
-        [$name, $senha, 'activo', 'encarregado', $date, $date]
-      );
+    $sign_user = signData(
+      $connection,
+      "INSERT INTO sg_usuarios(nome_u, senha_u, estado_u, painel_u, view, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?)",
+      [$name, $hash, 'activo', 'encarregado', "1", $date, $date]
+    );
 
-      //Capturar o id do dado cadastrado
-      $sql_id = mysqli_query($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = '$nome'");
-      $arr = mysqli_fetch_assoc($sql_id);
-      $iduser = $arr['id_u'];
+    //Capturar o id do dado cadastrado
+    $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$name]);
+    $user_id = $user_data['id_u'];
 
-      $r_encarregado = mysqli_query($connection, "INSERT INTO sg_encarregado(idUsuario,nome_e,sexo_e,municipio_e,bairro_e,nascimento_e,contato_e,numeroBI_e,dataCadastro_e,dataModificacao_e) VALUES ('$iduser','$nome','$sexo','$mun','$bairro','$dataNasc','$contato','$numeroBI','$dt','$dt')");
+    $sign_responsible = signData(
+      $connection, 
+      "INSERT INTO sg_encarregado(idUsuario, nome_e, sexo_e, municipio_e, bairro_e, nascimento_e, contato_e, numeroBI_e, view, dataCadastro_e, dataModificacao_e) VALUES ('$iduser','$nome','$sexo','$mun','$bairro','$dataNasc','$contato','$numeroBI','$dt','$dt')",
+     [$iduser, $name, $gender, $city, $neighborhood, $birthday, $contact,  $BI, "1", $date, $date]
+    );
 
-      if ($r_encarregado && $r_usuario) {
+    if ($r_encarregado && $r_usuario) {
 
-        $_SESSION['Encarregado-cadastrado'] = "
+      $_SESSION['Encarregado-cadastrado'] = "
                          <div id='alerta-confirmar'>
            <div class='alerta-confirmar'>
               <div class='alert alert-success alert-dimissible'>
@@ -52,9 +52,9 @@ if (isset($_POST['btn-cadastrar'])) {
            </div>";
 
 
-      } else {
+    } else {
 
-        $_SESSION['Encarregado-cadastrado'] = "
+      $_SESSION['Encarregado-cadastrado'] = "
                          <div id='alerta-confirmar'>
            <div class='alerta-confirmar'>
               <div class='alert alert-danger alert-dimissible'>
@@ -63,9 +63,9 @@ if (isset($_POST['btn-cadastrar'])) {
               </div>
            </div>
            </div>";
-      }
     }
   }
+}
 ?>
 
 <!DOCTYPE html>
@@ -173,13 +173,11 @@ if (isset($_POST['btn-cadastrar'])) {
   <?php require_once "navbarMobile.php" ?>
 
   <div class="fontes rounded-3" id="divm">
-
     <div class="divsuperior3">
       <h5>Formulário de cadastramento de encarregados</h5>
     </div>
 
     <form action="encarregado-cadastro.php" method="post">
-
       <div class="row">
         <div class="form-group col-md-6 mb-3">
           <label for="textnome">Nome</label>
@@ -235,7 +233,6 @@ if (isset($_POST['btn-cadastrar'])) {
         </div>
       </div>
 
-
       <div class="row" id="marg">
         <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastrar"
           id="margemBotao">Cadastrar</button>
@@ -244,7 +241,6 @@ if (isset($_POST['btn-cadastrar'])) {
 
         <a href="menu-encarregados.php" class="btn btn-outline-secondary btn-block col-md-2"
           name="btn-voltar">Voltar</a>
-
       </div>
     </form>
   </div>

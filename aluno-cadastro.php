@@ -11,7 +11,7 @@ if (isset($_POST['btn-cadastre'])) {
   $name = mysqli_real_escape_string($connection, trim($_POST['name']));
   $city = mysqli_real_escape_string($connection, trim($_POST['city']));
   $neighborhood = mysqli_real_escape_string($connection, trim($_POST['neighborhood']));
-  $sexo = mysqli_real_escape_string($connection, trim($_POST['gender']));
+  $gender = mysqli_real_escape_string($connection, trim($_POST['gender']));
   $contact = mysqli_real_escape_string($connection, trim($_POST['contact']));
   $birthday = mysqli_real_escape_string($connection, trim($_POST['birthday']));
   $BI = mysqli_real_escape_string($connection, trim($_POST['BI']));
@@ -33,21 +33,21 @@ if (isset($_POST['btn-cadastre'])) {
 
       $sign_user = signData(
         $connection,
-        "INSERT INTO  sg_usuarios(nome_u, senha_u, estado_u, painel_u, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?)",
-        [$name, $hash, 'activo', 'aluno', $date, $date]
+        "INSERT INTO  sg_usuarios(nome_u, senha_u, estado_u, painel_u, view, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?,?)",
+        [$name, $hash, 'activo', 'aluno', '1', $date, $date]
       );
   
       //Capturar o id do dado cadastrado
       $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$name]);
       $user_id = $user_data['id_u'];
-  
+
       $sign_student = signData(
         $connection,
-        "INSERT INTO sg_aluno(idTurma_a,idClasse,idEncarregado,idUsuario,nome_a,sexo_a,nascimento_a,municipio_a,bairro_a,contato_a,numeroBI_a,dataCadastro_a,dataModificacao_a) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?",
-        [$student_group, $student_class, $responsible_id, $user_id, $name, $gender, $birthday, $city, $neighborhood, $contact, $numeroBI, $date, $date]
+        "INSERT INTO sg_aluno(idTurma_a, idClasse, idEncarregado, idUsuario, nome_a, sexo_a, nascimento_a, municipio_a, bairro_a, contato_a, numeroBI_a, view, dataCadastro_a, dataModificacao_a) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        [$student_group, $student_class, $responsible_id, $user_id, $name, $gender, $birthday, $city, $neighborhood, $contact, $BI, "1", $date, $date]
       );
     }else{
-      $error = "Nome do encarregado não foi encontrado, cadastre-o primeiramente";
+      $error = "Nome do encarregado não foi encontrado, cadastre-o primeiramente ou digite o nome correctamente";
     }
 
     if (isset($sign_student) && isset($sign_user))
