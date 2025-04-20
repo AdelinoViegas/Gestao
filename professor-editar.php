@@ -5,9 +5,7 @@ session_start();
 
 $professor_id = $_POST['professor_id'];
 $_SESSION['professor_id'] = $professor_id;
-
 $data = getData($connection, "SELECT * FROM sg_professor WHERE id_p = ?", [$professor_id]);
-
 $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi", "Talatona", "Cacuaco", "Icolo e Bengo"];
 ?>
 
@@ -180,7 +178,7 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
 
       <div class="row" id="marg">
         <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-update"
-          id="margemBotao">Gravar</button>
+          id="margemBotao">Salvar</button>
 
         <div class="col-md-8" id="margemBotao"></div>
 

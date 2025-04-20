@@ -22,7 +22,7 @@ if(isset($_POST['btn-update'])){
       "UPDATE sg_professor SET nome_p=? , email_p=?, municipio_p=?, bairro_p=?, sexo_p=?, contato_p=?, nascimento_p=?, numeroBI_p=?, dataModificacao_p=? WHERE id_p=?",
       [$name, $email, $city, $neighborhood, $gender, $contact, $birthday, $BI, $date, $_SESSION['professor_id']]
    ); 
-   
+
    $user_data = getData($connection, "SELECT idUsuario FROM sg_professor WHERE id_p = ?", [$_SESSION['professor_id']]);
    $user_id = $user_data['idUsuario'];
 
@@ -30,16 +30,13 @@ if(isset($_POST['btn-update'])){
       $connection, 
       "UPDATE sg_usuarios SET nome_u =?, dataModificacao_u =? WHERE id_u =?",
       [$name, $date, $user_id]
-   );    
-}
-
-print("entrou novamente no arquivo");
-print_r($update_professor, $update_user);
-die();
-if($update_professor && $update_user){
-   setMessage("professor-message", "alert-success", "Dados actualizado com sucesso!");
-   header('Location: menu-professores.php');
-}else{
-   setMessage("professor-message", "alert-danger", "Erro ao actualizar!");
+   );   
+   
+   if($update_professor && $update_user){
+      setMessage("professor-message", "alert-success", "Dados actualizado com sucesso!");
+      header('Location: menu-professores.php');
+   }else{
+      setMessage("professor-message", "alert-danger", "Erro ao actualizar!");
+   }
 }
 ?>

@@ -39,9 +39,9 @@ if (isset($_POST['btn-pesquisa'])) {
   </div>
   <?php
 
-  if (isset($_SESSION['Professor-actualizado'])) {
-    echo $_SESSION['Professor-actualizado'];
-    unset($_SESSION['Professor-actualizado']);
+  if (isset($_SESSION['professor-message'])) {
+    echo $_SESSION['professor-message'];
+    unset($_SESSION['professor-message']);
   }
   ?>
 
