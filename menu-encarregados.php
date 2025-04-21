@@ -16,12 +16,10 @@ if (isset($_POST['btn-pesquisa'])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>Samiga</title>
   <?php require_once "head.php"; ?>
 </head>
-
 <body>
   <div class="divsuperior">
     <h1>Colégio Samiga</h1>
@@ -46,7 +44,6 @@ if (isset($_POST['btn-pesquisa'])) {
   }
   ?>
 
-  <!--Navebar-->
   <div class="navegacao">
     <ul>
       <li class="list">
@@ -141,7 +138,6 @@ if (isset($_POST['btn-pesquisa'])) {
     </div>
 
     <div class="table-responsive" id="tabdados">
-
       <table class="table table-hover table-bordered" id="table">
         <thead class="table-secondary" id="theader">
           <tr>
@@ -155,9 +151,7 @@ if (isset($_POST['btn-pesquisa'])) {
         </thead>
         <tbody>
           <?php
-
           if (count($data) > 0) {
-
             foreach ($data as $responsible_data) {
               ?>
               <tr id="tr">
@@ -171,18 +165,15 @@ if (isset($_POST['btn-pesquisa'])) {
                   <button id="editar2" type="button" data-bs-target="#apagar<?= $responsible_data['id_e']; ?>"
                     data-bs-toggle="modal" class="btn btn-danger">Apagar</button>
 
-                  <!--Modal-->
                   <div class="modal fade" id="apagar<?= $responsible_data['id_e']; ?>">
                     <div class="modal-dialog">
                       <div class="modal-content">
-                        <!--Cabeçalho-->
                         <div class="modal-header">
                           <h4 class="modal-title custom_align text-dark" id="Heading">Eliminar Registro</h4>
 
                           <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                         </div>
 
-                        <!--Corpo do modal-->
                         <div class="modal-body">
                           <div class="alert alert-danger">
                             Deseja excluir
@@ -190,7 +181,6 @@ if (isset($_POST['btn-pesquisa'])) {
                           </div>
                         </div>
 
-                        <!--Rodapé-->
                         <div class="modal-footer">
                           <form action="encarregado-apagar.php" method="post">
                             <input type="hidden" name="responsible_id" value="<?= $responsible_data['id_e']; ?>">
@@ -199,7 +189,6 @@ if (isset($_POST['btn-pesquisa'])) {
 
                           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Não</button>
                         </div>
-
                       </div>
                     </div>
                   </div>
@@ -229,5 +218,4 @@ if (isset($_POST['btn-pesquisa'])) {
 
   <?php require_once "footer.php"; ?>
 </body>
-
 </html>

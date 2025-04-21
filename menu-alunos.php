@@ -165,29 +165,26 @@ if (isset($_POST['btn-search'])) {
 
                   <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_a']; ?>"
                     name="id_estudante">
-                  <button onclick="chamada()" id="editar2" type="button" data-bs-target="#apagar<?= $student_data['id_a']; ?>"
-                    data-bs-toggle="modal" value="<?= $student_data['id_a']; ?>" class="btn btn-danger">Apagar</button>
+                  <button onclick="chamada()" id="editar2" type="button"
+                    data-bs-target="#apagar<?= $student_data['id_a']; ?>" data-bs-toggle="modal"
+                    value="<?= $student_data['id_a']; ?>" class="btn btn-danger">Apagar</button>
 
-                  <!--Modal-->
                   <div class="modal fade" id="apagar<?= $student_data['id_a']; ?>">
                     <div class="modal-dialog">
                       <div class="modal-content">
-                        <!--Cabeçalho-->
                         <div class="modal-header">
                           <h4 class="modal-title custom_align text-dark" id="Heading">Eliminar Registro</h4>
 
                           <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                         </div>
 
-                        <!--Corpo do modal-->
                         <div class="modal-body">
                           <div class="alert alert-danger">
                             Deseja excluir
                             <strong><?= $student_data['nome_a']; ?></strong> ?
                           </div>
                         </div>
-
-                        <!--Rodapé-->
+                        
                         <div class="modal-footer">
                           <form action="aluno-apagar.php" method="post">
                             <input type="hidden" name="id_aluno" value="<?= $student_data['id_a']; ?>">
@@ -198,7 +195,7 @@ if (isset($_POST['btn-search'])) {
                         </div>
                       </div>
                     </div>
-                  </div>    
+                  </div>
                 </td>
                 <td><?= $student_data['nome_a']; ?></td>
                 <td><?= $student_data['municipio_a']; ?></td>
@@ -218,7 +215,7 @@ if (isset($_POST['btn-search'])) {
         <tfooter class='text text-center'>
           <h5>Nenhum dado encontrado</h5>
         </tfooter>
-      <?php
+        <?php
           }
           ?>
     </div>
