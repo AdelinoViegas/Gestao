@@ -5,7 +5,6 @@ session_start();
 
 $responsible_id = $_POST['responsible_id'];
 $_SESSION['responsible_id'] = $responsible_id;
-
 $data = getData($connection, "SELECT * FROM sg_encarregado WHERE id_e = ?", [$responsible_id]);
 $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi", "Talatona", "Cacuaco", "Icolo e Bengo"];
 ?>
@@ -143,13 +142,13 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
           <label for="textsexo">sexo</label>
           <select type="text" id="textsexo" class="input md form-control" name="gender" value="<?= $data['sexo_e']; ?>"
             required>
-            <?php $sexo = $data['sexo_e'];
-            if ($sexo == 'Masculino') {
+            <?php
+            if ($data['sexo_e'] == 'Masculino') {
               ?>
-              <option value="<?= $data['sexo_e']; ?>">Masculino</option>
-              <option>Femenino</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
             <?php } else { ?>
-              <option value="<?= $data['sexo_e']; ?>">Femenino</option>
+              <option value="Femenino">Femenino</option>
               <option value="Masculino">Masculino</option>
             <?php } ?>
           </select>
