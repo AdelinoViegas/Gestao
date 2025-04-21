@@ -1,55 +1,39 @@
-<?php 
-require_once "conexao.php";
-
+<?php
 session_start();
+require_once "connection.php";
+require_once "features/getCurrentDate.php";
+require_once "features/getData.php";
+require_once "features/setMessage.php";
+require_once "features/updateData.php";
 
-$id = $_SESSION['id_e'];
-$nome = $_POST['txtnome'];
-$municipio = $_POST['txtmun'];
-$bairro = $_POST['txtbairro'];
-$sexo = $_POST['txtsexo'];
-$contato = $_POST['txtcont'];
-date_default_timezone_set('Africa/Luanda');
-$dt = date('Y/m/d H:i:s');
+$responsible_id = $_SESSION['responsible_id'];
+$nome = $_POST['name'];
+$municipio = $_POST['city'];
+$bairro = $_POST['neighborhood'];
+$sexo = $_POST['gender'];
+$contato = $_POST['contact'];
+$date = getCurrentDate();
 
-$sql_encarregado = "UPDATE sg_encarregado SET nome_e='$nome',municipio_e='$municipio',bairro_e='$bairro',sexo_e='$sexo',contato_e='$contato',dataModificacao_e='$dt' WHERE id_e='$id'"; 
+$update_responsible = updateData(
+  $connection,
+  "UPDATE sg_encarregado SET nome_e=?, municipio_e=?, bairro_e=?, sexo_e=?, contato_e=?, dataModificacao_e=? WHERE id_e=?",
+  [$name, $city, $neighborhood, $gender, $contact, $date, $responsible_id]
+);
 
-$actualizar_encarregado = mysqli_query($conexao,$sql_encarregado);
+$user_data = getData($connection, "SELECT idUsuario FROM sg_encarregado WHERE id_e = ?", [$responsible_id]);
+$user_id = $user_data['idUsuario'];
 
-//Actualizar na tabela usuarios
-$c=mysqli_query($conexao,"SELECT idUsuario FROM sg_encarregado WHERE nome_e = '$nome'");
-$cat = mysqli_fetch_assoc($c);
-$idger = $cat['idUsuario'];
+$update_user = updateData(
+  $connection,
+  "UPDATE sg_usuarios SET nome_u =?, dataModificacao_u =? WHERE id_u =?",
+  [$name, $date, $user_id]
+);
 
-$actualizar_usuario = mysqli_query($conexao,"UPDATE sg_usuarios SET nome_u ='$nome',dataModificacao_u = '$dt' WHERE id_u ='$idger'"); 
+if ($update_responsible && $update_user) {
+  setMessage("responsible-message", "alert-success", "Dados actualizado com sucesso!");
+  header('Location: menu-encarregados.php');
 
-if($actualizar_encarregado == true && $actualizar_usuario == true){
-
- $_SESSION['Encarregado-actualizado'] = "
-                 <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-success alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-         Dados actualizado com sucesso!
-      </div>
-   </div>
-   </div>";
-
-header('Location: menu-encarregados.php');
-
-}else{
-
-      $_SESSION['Encarregado-actualizado'] = "
-                 <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-danger alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-          Erro ao actualizar!
-      </div>
-   </div>
-   </div>";
+} else {
+  setMessage("responsible-message", "alert-danger", "Erro ao actualizar!");
 }
-
-
-
 ?>

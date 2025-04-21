@@ -116,8 +116,8 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
       <div class="row">
         <div class="form-group col-md-6 mb-3">
           <label for="textnome">Nome</label>
-          <input type="text" id="textnome" class="form-control" name="name" maxlength="45"
-            placeholder="Nome do aluno" value="<?= $data['nome_e']; ?>" required>
+          <input type="text" id="textnome" class="form-control" name="name" maxlength="45" placeholder="Nome do aluno"
+            value="<?= $data['nome_e']; ?>" required>
         </div>
         <div class="form-group col-md-3 mb-3">
           <label for="textmun">Município</label>
@@ -141,8 +141,8 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
       <div class="row">
         <div class="form-group col-md-4 mb-3">
           <label for="textsexo">sexo</label>
-          <select type="text" id="textsexo" class="input md form-control" name="gender"
-            value="<?= $data['sexo_e']; ?>" required>
+          <select type="text" id="textsexo" class="input md form-control" name="gender" value="<?= $data['sexo_e']; ?>"
+            required>
             <?php $sexo = $data['sexo_e'];
             if ($sexo == 'Masculino') {
               ?>
@@ -161,16 +161,16 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
         </div>
         <div class="form-group col-md-4 mb-3">
           <label for="textnasc">Data de Nascimento</label>
-          <input type="date" id="textnasc" class="form-control" name="birthday"
-            value="<?= $data['nascimento_e']; ?>" required>
+          <input type="date" id="textnasc" class="form-control" name="birthday" value="<?= $data['nascimento_e']; ?>"
+            required>
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-3 mb-3">
           <label for="textbi">Número do BI</label>
-          <input type="text" id="textbi" class="form-control" name="BI"
-            value="<?= $data['numeroBI_e']; ?>" placeholder="Nª do bilhete" maxlength="15" required>
+          <input type="text" id="textbi" class="form-control" name="BI" value="<?= $data['numeroBI_e']; ?>"
+            placeholder="Nª do bilhete" maxlength="15" required>
         </div>
       </div>
 
@@ -182,7 +182,6 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
 
         <a href="menu-encarregados.php" class="btn btn-outline-secondary btn-block col-md-2"
           name="btn-voltar">Voltar</a>
-
       </div>
     </form>
   </div>
