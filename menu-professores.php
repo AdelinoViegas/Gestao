@@ -154,21 +154,21 @@ if (isset($_POST['btn-pesquisa'])) {
         <tbody>
           <?php
           if (count($data) > 0) {
-            foreach ($data as $data_professor) {
+            foreach ($data as $professor_data) {
               ?>
               <tr id="tr">
                 <td id="editar">
                   <form action="professor-editar.php" method="post">
-                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $data_professor['id_p']; ?>"
+                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $professor_data['id_p']; ?>"
                       name="professor_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>
 
-                  <button id="editar2" type="button" data-bs-target="#apagar<?= $data_professor['id_p']; ?>"
+                  <button id="editar2" type="button" data-bs-target="#apagar<?= $professor_data['id_p']; ?>"
                     data-bs-toggle="modal" class="btn btn-danger">Apagar</button>
 
                   <!--Modal-->
-                  <div class="modal fade" id="apagar<?= $data_professor['id_p']; ?>">
+                  <div class="modal fade" id="apagar<?= $professor_data['id_p']; ?>">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <!--Cabeçalho-->
@@ -182,14 +182,14 @@ if (isset($_POST['btn-pesquisa'])) {
                         <div class="modal-body">
                           <div class="alert alert-danger">
                             Deseja excluir
-                            <strong><?= $data_professor['nome_p']; ?></strong> ?
+                            <strong><?= $professor_data['nome_p']; ?></strong> ?
                           </div>
                         </div>
 
                         <!--Rodapé-->
                         <div class="modal-footer">
                           <form action="professor-apagar.php" method="post">
-                            <input type="hidden" name="professor_id" value="<?= $data_professor['id_p']; ?>">
+                            <input type="hidden" name="professor_id" value="<?= $professor_data['id_p']; ?>">
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Sim</button>
                           </form>
 
@@ -199,12 +199,12 @@ if (isset($_POST['btn-pesquisa'])) {
                     </div>
                   </div>
                 </td>
-                <td><?= $data_professor['nome_p']; ?></td>
-                <td><?= $data_professor['email_p']; ?></td>
-                <td><?= $data_professor['municipio_p']; ?></td>
-                <td><?= $data_professor['bairro_p']; ?></td>
-                <td><?= $data_professor['sexo_p']; ?></td>
-                <td><?= $data_professor['contato_p']; ?></td>
+                <td><?= $professor_data['nome_p']; ?></td>
+                <td><?= $professor_data['email_p']; ?></td>
+                <td><?= $professor_data['municipio_p']; ?></td>
+                <td><?= $professor_data['bairro_p']; ?></td>
+                <td><?= $professor_data['sexo_p']; ?></td>
+                <td><?= $professor_data['contato_p']; ?></td>
               </tr>
             <?php } ?>
           </tbody>

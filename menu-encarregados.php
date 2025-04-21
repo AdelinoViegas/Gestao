@@ -171,19 +171,19 @@ if (isset($_POST['btn-pesquisa'])) {
 
        if(count($data) > 0){
 
-       foreach($data as $data_encarregado) { 
+       foreach($data as $responsible_data) { 
         ?>
      <tr id="tr">
       <td id="editar">
          <form action="encarregado-editar.php" method="post">
-          <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $data_encarregado['id_e']; ?>" name="id_encarregado">
+          <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $responsible_data['id_e']; ?>" name="responsible_id">
           <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
         </form>
    
-          <button id="editar2" type="button" data-bs-target="#apagar<?= $data_encarregado['id_e']; ?>" data-bs-toggle="modal" class="btn btn-danger">Apagar</button>
+          <button id="editar2" type="button" data-bs-target="#apagar<?= $responsible_data['id_e']; ?>" data-bs-toggle="modal" class="btn btn-danger">Apagar</button>
  
 <!--Modal-->
-<div class="modal fade" id="apagar<?= $data_encarregado['id_e']; ?>">
+<div class="modal fade" id="apagar<?= $responsible_data['id_e']; ?>">
   <div class="modal-dialog">
   <div class="modal-content">
      <!--Cabeçalho-->
@@ -198,7 +198,7 @@ if (isset($_POST['btn-pesquisa'])) {
     <div class="modal-body">
         <div class="alert alert-danger">
           Deseja excluir
-           <strong><?= $data_encarregado['nome_e'];  ?></strong> ?
+           <strong><?= $responsible_data['nome_e'];  ?></strong> ?
          </div>
     </div>
     
@@ -206,7 +206,7 @@ if (isset($_POST['btn-pesquisa'])) {
     <div class="modal-footer">
         <form action="encarregado-apagar.php" method="post">
             <input type="hidden" 
-            name="id_encarregado" value="<?= $data_encarregado['id_e']; ?>">
+            name="responsible_id" value="<?= $responsible_data['id_e']; ?>">
             <button type="submit" class="btn btn-success" 
             data-bs-dismiss="modal">Sim</button>
         </form>
@@ -218,11 +218,11 @@ if (isset($_POST['btn-pesquisa'])) {
  </div>
 </div>
   </td>    
-    <td><?= $data_encarregado['nome_e']; ?></td>
-    <td><?= $data_encarregado['municipio_e']; ?></td>
-    <td><?= $data_encarregado['bairro_e']; ?></td>
-    <td><?= $data_encarregado['sexo_e']; ?></td>
-    <td><?= $data_encarregado['contato_e']; ?></td>
+    <td><?= $responsible_data['nome_e']; ?></td>
+    <td><?= $responsible_data['municipio_e']; ?></td>
+    <td><?= $responsible_data['bairro_e']; ?></td>
+    <td><?= $responsible_data['sexo_e']; ?></td>
+    <td><?= $responsible_data['contato_e']; ?></td>
   </tr>
   <?php } ?>
   </tbody>

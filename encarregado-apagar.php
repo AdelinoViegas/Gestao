@@ -1,10 +1,11 @@
 <?php 
-/*abrir a sessçao*/
 session_start();
+require_once 'connection.php';
+require_once "features/getData.php";
+require_once "features/updateData.php";
+require_once "features/setMessage.php";
 
-require_once 'conexao.php';
-
-$id_encarregado = mysqli_escape_string($conexao,$_POST['id_encarregado']);
+$responsible_id = mysqli_escape_string($conexao,$_POST['responsible_id']);
 $sql = "UPDATE sg_encarregado SET view = '0' WHERE id_e = '$id_encarregado'";
 
 /*Buscar id_usuario na tabela sg_aluno*/

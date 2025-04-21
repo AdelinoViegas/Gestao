@@ -153,23 +153,23 @@ if (isset($_POST['btn-search'])) {
           <?php
 
           if (count($data) > 0) {
-            foreach ($data as $l_aluno) {
+            foreach ($data as $student_data) {
               ?>
               <tr id="tr">
                 <td id="editar">
                   <form action="aluno-editar.php" method="post">
-                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $l_aluno['id_a']; ?>"
+                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_a']; ?>"
                       name="id_estudante">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>
 
-                  <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $l_aluno['id_a']; ?>"
+                  <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_a']; ?>"
                     name="id_estudante">
-                  <button onclick="chamada()" id="editar2" type="button" data-bs-target="#apagar<?= $l_aluno['id_a']; ?>"
-                    data-bs-toggle="modal" value="<?= $l_aluno['id_a']; ?>" class="btn btn-danger">Apagar</button>
+                  <button onclick="chamada()" id="editar2" type="button" data-bs-target="#apagar<?= $student_data['id_a']; ?>"
+                    data-bs-toggle="modal" value="<?= $student_data['id_a']; ?>" class="btn btn-danger">Apagar</button>
 
                   <!--Modal-->
-                  <div class="modal fade" id="apagar<?= $l_aluno['id_a']; ?>">
+                  <div class="modal fade" id="apagar<?= $student_data['id_a']; ?>">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <!--Cabeçalho-->
@@ -183,14 +183,14 @@ if (isset($_POST['btn-search'])) {
                         <div class="modal-body">
                           <div class="alert alert-danger">
                             Deseja excluir
-                            <strong><?= $l_aluno['nome_a']; ?></strong> ?
+                            <strong><?= $student_data['nome_a']; ?></strong> ?
                           </div>
                         </div>
 
                         <!--Rodapé-->
                         <div class="modal-footer">
                           <form action="aluno-apagar.php" method="post">
-                            <input type="hidden" name="id_aluno" value="<?= $l_aluno['id_a']; ?>">
+                            <input type="hidden" name="id_aluno" value="<?= $student_data['id_a']; ?>">
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Sim</button>
                           </form>
 
@@ -200,12 +200,12 @@ if (isset($_POST['btn-search'])) {
                     </div>
                   </div>    
                 </td>
-                <td><?= $l_aluno['nome_a']; ?></td>
-                <td><?= $l_aluno['municipio_a']; ?></td>
-                <td><?= $l_aluno['bairro_a']; ?></td>
-                <td><?= $l_aluno['sexo_a']; ?></td>
-                <td><?= $l_aluno['nome_c']; ?></td>
-                <td><?= $l_aluno['nome_t']; ?></td>
+                <td><?= $student_data['nome_a']; ?></td>
+                <td><?= $student_data['municipio_a']; ?></td>
+                <td><?= $student_data['bairro_a']; ?></td>
+                <td><?= $student_data['sexo_a']; ?></td>
+                <td><?= $student_data['nome_c']; ?></td>
+                <td><?= $student_data['nome_t']; ?></td>
               </tr>
             <?php } ?>
           </tbody>
