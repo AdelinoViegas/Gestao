@@ -38,9 +38,9 @@ if (isset($_POST['btn-pesquisa'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['Encarregado-actualizado'])) {
-    echo $_SESSION['Encarregado-actualizado'];
-    unset($_SESSION['Encarregado-actualizado']);
+  if (isset($_SESSION['responsible-message'])) {
+    echo $_SESSION['responsible-message'];
+    unset($_SESSION['responsible-message']);
   }
   ?>
 

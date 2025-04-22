@@ -8,11 +8,11 @@ require_once "features/updateData.php";
 
 if (isset($_POST['btn-update'])) {
   $responsible_id = $_SESSION['responsible_id'];
-  $nome = $_POST['name'];
-  $municipio = $_POST['city'];
-  $bairro = $_POST['neighborhood'];
-  $sexo = $_POST['gender'];
-  $contato = $_POST['contact'];
+  $name = $_POST['name'];
+  $city = $_POST['city'];
+  $neighborhood = $_POST['neighborhood'];
+  $gender = $_POST['gender'];
+  $contact = $_POST['contact'];
   $date = getCurrentDate();
 
   $update_responsible = updateData(
