@@ -121,10 +121,11 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
         <div class="form-group col-md-3 mb-3">
           <label for="textmun">Município</label>
           <select id="textmun" class="input form-control" name="city" required>
-            <option value="<?= $data['municipio_p'] ?>"><?= $data['municipio_p'] ?></option>
+            <option value="<?= $data['municipio_e'] ?>"><?= $data['municipio_e'] ?></option>
+            
             <?php
             foreach ($city_array as $city) {
-              if ($city !== $data['municipio_p']) { ?>
+              if ($city !== $data['municipio_e']) { ?>
                 <option value="<?= $city ?>"><?= $city ?></option>
               <?php }
             } ?>

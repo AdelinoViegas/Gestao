@@ -8,9 +8,9 @@ require_once "features/setMessage.php";
 $responsible_id = mysqli_escape_string($connection, $_POST['responsible_id']);
 
 $responsible_data = getData($connection, "SELECT * FROM sg_encarregado WHERE  id_e = ?", [$responsible_id]);
-$user_id = $reponsible_data['idUsuario'];
+$user_id = $responsible_data['idUsuario'];
 
-$update_responsible = updateData($connection, "UPDATE sg_encarregado SET view = '0' WHERE id_e = ?", [$reponsible_id]);
+$update_responsible = updateData($connection, "UPDATE sg_encarregado SET view = '0' WHERE id_e = ?", [$responsible_id]);
 $update_user = updateData($connection, "UPDATE sg_usuarios SET view = '0' WHERE id_u = ?", [$user_id]);
 
 if ($update_responsible && $update_user) {

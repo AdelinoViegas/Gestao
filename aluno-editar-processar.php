@@ -1,64 +1,44 @@
-<?php 
-require_once "conexao.php";
-
+<?php
 session_start();
+require_once "connection.php";
+require_once "features/getCurrentDate.php";
+require_once "features/getData.php";
+require_once "features/setMessage.php";
+require_once "features/updateData.php";
 
-$id = $_SESSION['id_a'];
+if (isset($_POST['btn-update'])) {
+  $student_id = $_SESSION['student_id'];
+  $student_group = mysqli_real_escape_string($connection, trim($_POST['group']));
+  $student_class = mysqli_real_escape_string($connection, trim($_POST['class']));
+  $name = mysqli_real_escape_string($connection, trim($_POST['name']));
+  $city = mysqli_real_escape_string($connection, trim($_POST['city']));
+  $neighborhood = mysqli_real_escape_string($connection, trim($_POST['neighborhood']));
+  $gender = mysqli_real_escape_string($connection, trim($_POST['gender']));
+  $contact = mysqli_real_escape_string($connection, trim($_POST['contact']));
+  $birthday = mysqli_real_escape_string($connection, trim($_POST['birthday']));
+  $BI = mysqli_real_escape_string($connection, trim($_POST['BI']));
+  $date = getCurrentDate();
 
+  $update_student = updateData(
+    $connection,
+    "UPDATE sg_aluno SET nome_a=?, idTurma_a=?, idClasse=?, municipio_a=?, bairro_a=?, sexo_a=?, contato_a=?, nascimento_a=?, numeroBI_a=?, dataModificacao_a=? WHERE id_a=?",
+    [$name, $student_group, $student_class, $city, $neighborhood, $gender, $contact, $birthday, $BI, $date, $student_id]
+  );
 
- echo $id;
-$nome = $_POST['txtnome'];
-$turma = $_POST['txtturma'];
-$classe = $_POST['txtclasse'];
-$municipio = $_POST['txtmun'];
-$bairro = $_POST['txtbairro'];
-$sexo = $_POST['txtsexo'];
-$contato = $_POST['txtcont'];
-$datanasc = $_POST['txtnasc'];
-$numeroBI = $_POST['txtbi'];
-date_default_timezone_set('Africa/Luanda');
-$dt = date('Y/m/d H:i:s');
+  $student_data = getData($connection, "SELECT idUsuario FROM sg_aluno WHERE id_a = ?", [$student_id]);
+  $user_id = $student_data['idUsuario'];
 
+  $update_user = updateData(
+    $connection,
+    "UPDATE sg_usuarios SET nome_u =?, dataModificacao_u = ? WHERE id_u =?",
+    [$name, $date, $student_id]
+  );
 
-$sql_aluno = "UPDATE sg_aluno SET nome_a='$nome',idTurma_a='$turma',idClasse='$classe',municipio_a='$municipio',bairro_a='$bairro',sexo_a='$sexo',contato_a='$contato',nascimento_a='$datanasc',numeroBI_a='$numeroBI',dataModificacao_a='$dt' WHERE id_a='$id'"; 
-$actualizar_aluno = mysqli_query($conexao,$sql_aluno);
-
-
-//Actualizar na tabela usuarios
-$c=mysqli_query($conexao,"SELECT idUsuario FROM sg_aluno WHERE nome_a = '$nome'");
-$cat = mysqli_fetch_assoc($c);
-$idger = $cat['idUsuario'];
-
-$actualizar_usuario = mysqli_query($conexao,"UPDATE sg_usuarios SET nome_u ='$nome',dataModificacao_u = '$dt' WHERE id_u ='$idger'"); 
-
-
-if($actualizar_aluno == true && $actualizar_usuario == true){
-
- $_SESSION['Aluno-actualizado'] = "
-                 <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-success alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-         Dados actualizado com sucesso!
-      </div>
-   </div>
-   </div>";
-
-header('Location: menu-alunos.php');
-
-}else{
-
-      $_SESSION['Aluno-actualizado'] = "
-                 <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-danger alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-          Erro ao actualizar!
-      </div>
-   </div>";
-
+  if ($update_student && $update_user) {
+    setMessage("student-message", "alert-success", "Dados actualizado com sucesso!");
+    header('Location: menu-alunos.php');
+  } else {
+    setMessage("student-message", "alert-danger", "Erro ao actualizar!");
+  }
 }
-
- 
 ?>
-

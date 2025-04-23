@@ -38,9 +38,9 @@ if (isset($_POST['btn-search'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['Aluno-actualizado'])) {
-    echo $_SESSION['Aluno-actualizado'];
-    unset($_SESSION['Aluno-actualizado']);
+  if (isset($_SESSION['student-message'])) {
+    echo $_SESSION['student-message'];
+    unset($_SESSION['student-message']);
   }
   ?>
 
@@ -151,7 +151,6 @@ if (isset($_POST['btn-search'])) {
         </thead>
         <tbody>
           <?php
-
           if (count($data) > 0) {
             foreach ($data as $student_data) {
               ?>
@@ -159,7 +158,7 @@ if (isset($_POST['btn-search'])) {
                 <td id="editar">
                   <form action="aluno-editar.php" method="post">
                     <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_a']; ?>"
-                      name="id_estudante">
+                      name="student_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>
 
@@ -184,10 +183,10 @@ if (isset($_POST['btn-search'])) {
                             <strong><?= $student_data['nome_a']; ?></strong> ?
                           </div>
                         </div>
-                        
+
                         <div class="modal-footer">
                           <form action="aluno-apagar.php" method="post">
-                            <input type="hidden" name="id_aluno" value="<?= $student_data['id_a']; ?>">
+                            <input type="hidden" name="student_id" value="<?= $student_data['id_a']; ?>">
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Sim</button>
                           </form>
 
