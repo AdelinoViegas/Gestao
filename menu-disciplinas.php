@@ -39,9 +39,9 @@ if (isset($_POST['btn-search'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['Disciplina-actualizado'])) {
-    echo $_SESSION['Disciplina-actualizado'];
-    unset($_SESSION['Disciplina-actualizado']);
+  if (isset($_SESSION['discipline-message'])) {
+    echo $_SESSION['discipline-message'];
+    unset($_SESSION['discipline-message']);
   }
   ?>
 
@@ -145,16 +145,16 @@ if (isset($_POST['btn-search'])) {
         <tbody>
           <?php
           if (count($data) > 0) {
-            foreach($data as $l_disciplina) { ?>
+            foreach($data as $discipline_data) { ?>
               <tr id="tr">
                 <td id="editar">
                   <form action="disciplina-editar.php" method="post">
-                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?php echo $l_disciplina['id_d']; ?>"
-                      name="id_disciplina">
+                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $discipline_data['id_d']; ?>"
+                      name="discipline_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>
                 </td>
-                <td class="w-50"><?php echo $l_disciplina['nome_d']; ?></td>
+                <td class="w-50"><?= $discipline_data['nome_d']; ?></td>
               </tr>
             <?php } ?>
           </tbody>
