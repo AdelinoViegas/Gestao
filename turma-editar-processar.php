@@ -1,36 +1,24 @@
 <?php
-require_once "conexao.php";
+require_once "connection.php";
+require_once "features/updateData.php";
+require_once "features/setMessage.php";
 session_start();
 
-$id = $_SESSION['id'];
-$nome = $_POST['txtnome'];
+if (isset($_SESSION['btn-update'])) {
+   $group_id = $_SESSION['group_id'];
+   $name = mysqli_real_escape_string($connection, trim($_POST['txtnome']));
 
-$sql_turma = "UPDATE sg_turma SET nome_t ='$nome' WHERE id_t ='$id'";
-$actualizar_turma = mysqli_query($conexao, $sql_turma);
+   $update_group = updateData(
+      $connection,
+      "UPDATE sg_turma SET nome_t ='$nome' WHERE id_t =?",
+      [$group_id]
+   );
 
-if ($actualizar_turma == true) {
-
-   $_SESSION['Turma-actualizado'] = "
-                 <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-success alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-         Dados actualizado com sucesso!
-      </div>
-   </div>
-   </div>";
-
-   header('Location: menu-turmas.php');
-
-} else {
-
-   $_SESSION['Turma-actualizado'] = "
-                 <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-danger alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-          Erro ao actualizar!
-      </div>
-   </div>";
+   if ($update_group) {
+      setMessage("group-message", "alert-success", "Dados actualizado com sucesso!");
+      header('Location: menu-turmas.php');
+   } else {
+      setMessage("group-message", "alert-danger", "Erro ao actualizar!");
+   }
 }
 ?>

@@ -9,19 +9,17 @@ if (!isset($_SESSION['logged']))
 $data = getData($connection, "SELECT * FROM sg_turma order by nome_t");
 
 if (isset($_POST['btn-search'])) {
-  $search = $_POST['search'];
-  $data = mysqli_query($connection, "SELECT * FROM sg_turma WHERE nome_t LIKE '$search%'");
+  $search = mysqli_real_escape_string($connection, trim($_POST['search']));
+  $data = getData($connection, "SELECT * FROM sg_turma WHERE nome_t LIKE '$search%'");
 }
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>Samiga</title>
   <?php require_once "head.php"; ?>
 </head>
-
 <body>
   <div class="divsuperior">
     <h1>Colégio Samiga</h1>
@@ -41,9 +39,9 @@ if (isset($_POST['btn-search'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['Turma-actualizado'])) {
-    echo $_SESSION['Turma-actualizado'];
-    unset($_SESSION['Turma-actualizado']);
+  if (isset($_SESSION['group-message'])) {
+    echo $_SESSION['group-message'];
+    unset($_SESSION['group-message']);
   }
   ?>
 
@@ -147,16 +145,16 @@ if (isset($_POST['btn-search'])) {
         <tbody>
           <?php
           if (count($data) > 0) {
-            foreach ($data as $l_turma) { ?>
+            foreach ($data as $group_data) { ?>
               <tr id="tr">
                 <td id="editar">
                   <form action="turma-editar.php" method="post">
-                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?php echo $l_turma['id_t']; ?>"
-                      name="id_turma">
-                    <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
+                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $group_data['id_t']; ?>"
+                      name="group_id">
+                    <button id="editar1" type="submit" name="btn-update" class="btn btn-warning">Editar</button>
                   </form>
                 </td>
-                <td class="w-50"><?php echo $l_turma['nome_t']; ?></td>
+                <td class="w-50"><?= $group_data['nome_t']; ?></td>
               </tr>
             <?php } ?>
           </tbody>

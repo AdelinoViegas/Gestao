@@ -10,7 +10,7 @@ if (!isset($_SESSION['logged'])) {
 $data = getData($connection, "SELECT * FROM sg_classe order by nome_c");
 
 if (isset($_POST['btn-search'])) {
-  $search = $_POST['search'];
+  $search = mysqli_real_escape_string($connection, trim($_POST['search']));
   $data = getData($connection, "SELECT * FROM sg_classe WHERE nome_c LIKE '$search%'");
 }
 ?>

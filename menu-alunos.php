@@ -9,7 +9,7 @@ if (!isset($_SESSION['logged']))
 $data = getData($connection, "SELECT * FROM sg_aluno AS a JOIN sg_turma AS t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON a.idClasse = c.id_c WHERE view = '1' ORDER BY nome_a");
 
 if (isset($_POST['btn-search'])) {
-  $search = $_POST['search'];
+  $search = mysqli_real_escape_string($connection, trim($_POST['search']));
   $data = getData($connection, "SELECT * FROM sg_aluno AS a JOIN sg_turma AS t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON a.idClasse = c.id_c WHERE nome_a LIKE '$search%' AND view = '1'");
 }
 ?>

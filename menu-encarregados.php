@@ -8,9 +8,9 @@ if (!isset($_SESSION['logged']))
 
 $data = getData($connection, "SELECT * FROM sg_encarregado WHERE view = '1' ORDER BY nome_e");
 
-if (isset($_POST['btn-pesquisa'])) {
-  $pesquisar = $_POST['search'];
-  $data = getData($connection, "SELECT * FROM sg_encarregado WHERE nome_e LIKE '$pesquisar%' AND view ='1'");
+if (isset($_POST['btn-search'])) {
+  $search = mysqli_real_escape_string($connection, trim($_POST['search']));
+  $data = getData($connection, "SELECT * FROM sg_encarregado WHERE nome_e LIKE '$search%' AND view ='1'");
 }
 ?>
 
@@ -130,7 +130,7 @@ if (isset($_POST['btn-pesquisa'])) {
       <form action="" method="post">
         <div id="btn-pesquisar">
           <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome">
-          <button id="btn-p" type="submit" class="btn btn-success" name="btn-pesquisa">
+          <button id="btn-p" type="submit" class="btn btn-success" name="btn-search">
             Pesquisar
           </button>
         </div>

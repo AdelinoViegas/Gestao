@@ -1,14 +1,11 @@
 <?php
-require_once "conexao.php";
+require_once "connection.php";
+require_once "features/getData.php";
 session_start();
 
-$id = $_POST['id_turma'];
-$_SESSION['id'] = $id;
-
-$sql = "SELECT * FROM sg_turma WHERE id_t ='$id' ";
-$res = mysqli_query($conexao, $sql);
-$registro = mysqli_fetch_assoc($res);
-
+$group_id = $_POST['group_id'];
+$_SESSION['group_id'] = $group_id;
+$data = getData($connection, "SELECT * FROM sg_turma WHERE id_t =?", [$group_id]);
 ?>
 
 <!DOCTYPE html>
@@ -118,13 +115,13 @@ $registro = mysqli_fetch_assoc($res);
       <div class="row margB">
         <div class="form-group col-md-4" id="margemB">
           <label for="textnome">Nome</label>
-          <input type="text" id="textnome" class="form-control" name="txtnome" maxlength="30"
-            value="<?php echo $registro['nome_t']; ?>" placeholder="Nome da disciplina" required>
+          <input type="text" id="textnome" class="form-control" name="name" maxlength="30"
+            value="<?= $data['nome_t']; ?>" placeholder="Nome da disciplina" required>
         </div>
       </div>
 
       <div class="row marg">
-        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastrar"
+        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-update"
           id="margemBotao">Gravar</button>
 
         <div class="col-md-8" id="margemBotao"></div>
