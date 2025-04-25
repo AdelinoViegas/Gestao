@@ -1,42 +1,24 @@
-<?php 
-require_once "conexao.php";
-
+<?php
+require_once "connection.php";
+require_once "features/setMessage.php";
+require_once "features/updateData.php";
 session_start();
 
-$id = $_SESSION['id'];
-$nome = $_POST['txtnome'];
+if (isset($_POST['btn-update'])) {
+  $class_id = $_SESSION['class_id'];
+  $name = mysqli_real_escape_string($connection, trim($_POST['name']));
 
+  $update_class = updateData(
+    $connection,
+    "UPDATE sg_classe SET nome_c =? WHERE id_c =?",
+    [$name, $class_id]
+  );
 
-$sql_classe = "UPDATE sg_classe SET nome_c ='$nome' WHERE id_c ='$id'"; 
-
-$actualizar_classe = mysqli_query($conexao,$sql_classe);
-
-if($actualizar_classe == true){
-
- $_SESSION['Classe-actualizado'] = "
-                 <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-success alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-         Dados actualizado com sucesso!
-      </div>
-   </div>
-   </div>";
-
-header('Location: menu-classes.php');
-
-}else{
-
-      $_SESSION['Classe-actualizado'] = "
-                 <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-danger alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-          Erro ao actualizar!
-      </div>
-   </div>";
+  if ($update_class) {
+    setMessage("class-message", "alert-success", "Dados actualizado com sucesso!");
+    header('Location: menu-classes.php');
+  } else {
+    setMessage("class-message", "alert-danger", "Erro ao actualizar!");
+  }
 }
-
-
- ?>
-
+?>

@@ -3,9 +3,8 @@ require_once "connection.php";
 require_once "features/getData.php";
 session_start();
 
-if (!isset($_SESSION['logged'])) {
+if (!isset($_SESSION['logged'])) 
   header("Location: index.php");
-}
 
 $data = getData($connection, "SELECT * FROM sg_classe order by nome_c");
 
@@ -39,9 +38,9 @@ if (isset($_POST['btn-search'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['Classe-actualizado'])) {
-    echo $_SESSION['Classe-actualizado'];
-    unset($_SESSION['Classe-actualizado']);
+  if (isset($_SESSION['class-message'])) {
+    echo $_SESSION['class-message'];
+    unset($_SESSION['class-message']);
   }
   ?>
 
@@ -145,16 +144,16 @@ if (isset($_POST['btn-search'])) {
         <tbody>
           <?php
           if (count($data) > 0) {
-            foreach ($data as $l_classe) { ?>
+            foreach ($data as $class_data) { ?>
               <tr id="tr">
                 <td id="editar">
                   <form action="classe-editar.php" method="post">
-                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?php echo $l_classe['id_c']; ?>"
-                      name="id_classe">
+                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $class_data['id_c']; ?>"
+                      name="class_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>
                 </td>
-                <td class="w-50"><?php echo $l_classe['nome_c']; ?></td>
+                <td class="w-50"><?= $class_data['nome_c']; ?></td>
               </tr>
             <?php } ?>
           </tbody>
