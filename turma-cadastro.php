@@ -1,56 +1,29 @@
 <?php
-require_once "conexao.php";
+require_once "connection.php";
+require_once "features/getData.php";
+require_once "features/setMessage.php";
+require_once "features/signData.php";
 session_start();
 
-if (isset($_POST['btn-cadastrar'])) {
-  $nome = mysqli_escape_string($conexao, $_POST['txtnome']);
-  $verificar_nome = mysqli_query($conexao, "SELECT * FROM sg_turma WHERE nome_t ='$nome'");
+if (isset($_POST['btn-cadastre'])) {
+  $class = mysqli_real_escape_string($connection, trim($_POST['class']));
+  $name = mysqli_real_escape_string($connection, trim($_POST['name']));
+  $group_data = getData($connection, "SELECT * FROM sg_turma WHERE nome_t=?", [$name]);
 
-
-  if (mysqli_num_rows($verificar_nome) > 0) {
-    $_SESSION['Turma-cadastrado'] = "
-      <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-danger alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-          A turma já foi cadastrada!
-      </div>
-   </div>
-   </div>";
-
+  if ($group_data) {
+    setMessage("group-message", "alert-warning", "A turma já foi cadastrada!");
   } else {
-    $sql_turma = "INSERT INTO sg_turma VALUES (default,'$nome')";
+    $sign_group = signData(
+      $connection,
+      "INSERT INTO sg_turma(nome_t, idClasse_t) VALUES (?,?)",
+      [$name, $class]
+    );
 
-    $r_turma = mysqli_query($conexao, $sql_turma);
-
-    if ($r_turma == true) {
-
-      $_SESSION['Turma-cadastrado'] = "
-                 <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-success alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-         Turma cadastrado com sucesso!
-      </div>
-   </div>
-   </div>";
-
-
-    } else {
-
-      $_SESSION['Turma-cadastrado'] = "
-                 <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-danger alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-          Erro ao cadastrar!
-      </div>
-   </div>
-   </div>";
-    }
-
+    if ($sign_group)
+      setMessage("group-message", "alert-success", "Turma cadastrado com sucesso!");
+    else
+      setMessage("group-message", "alert-danger", "Erro ao cadastrar!");
   }
-
 }
 ?>
 
@@ -79,14 +52,12 @@ if (isset($_POST['btn-cadastrar'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['Turma-cadastrado'])) {
-    echo $_SESSION['Turma-cadastrado'];
-    unset($_SESSION['Turma-cadastrado']);
+  if (isset($_SESSION['group-message'])) {
+    echo $_SESSION['group-message'];
+    unset($_SESSION['group-message']);
   }
-
   ?>
 
-  <!--Navebar-->
   <div class="navegacao">
     <ul>
       <li class="list">
@@ -168,14 +139,24 @@ if (isset($_POST['btn-cadastrar'])) {
 
       <div class="row margB">
         <div class="form-group col-md-4" id="margemB">
+          <label for="textsexo">Escolhe a classe</label>
+          <select id="textsexo" class="input form-control" name="class" required>
+           <?php 
+            $class_data = getData($connection, "SELECT * FROM sg_classe");
+            foreach($class_data as $class){?>
+             <option value="<?= $class['id_c'] ?>"><?= $class['nome_c'] ?></option> 
+            <?php }?>
+          </select>
+        </div>
+        <div class="form-group col-md-4" id="margemB">
           <label for="textnome">Nome</label>
-          <input type="text" id="textnome" class="form-control" name="txtnome" maxlength="30"
-            placeholder="Nome da turma" required>
+          <input type="text" id="textnome" class="form-control" name="name" maxlength="30" placeholder="Nome da turma"
+            required>
         </div>
       </div>
 
       <div class="row marg">
-        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastrar"
+        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastre"
           id="margemBotao">Cadastrar</button>
 
         <div class="col-md-8" id="margemBotao"></div>
