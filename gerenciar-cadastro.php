@@ -2,6 +2,7 @@
 require_once "connection.php";
 require_once "features/signData.php";
 require_once "features/getData.php";
+require_once "features/getCurrentDate.php";
 require_once "features/setMessage.php";
 session_start();
 
@@ -9,7 +10,7 @@ if (isset($_POST['btn-sign'])) {
   $discipline = mysqli_escape_string($connection, trim($_POST['discipline']));
   $professor = mysqli_escape_string($connection, trim($_POST['professor']));
   $group = mysqli_escape_string($connection, trim($_POST['group']));
-  $date = Date('y-m-d H:i:s');
+  $date = getCUrrentDate();
 
   $management_data = getData(
     $connection, 
@@ -18,31 +19,19 @@ if (isset($_POST['btn-sign'])) {
   );
 
   if ($management_data) {
+    setMessage("management-message", "alert-warning", "Dados já existentes!");
+  }else{
     $sign_management = signData(
       $connection, 
-      "INSERT INTO sg_gerenciar(idDisciplina,idProfessor,idTurma,ano) VALUES ('$disciplina','$professor','$turma','$data')",
-    [$discipline, ]
+      "INSERT INTO sg_gerenciar(idDisciplina,idProfessor,idTurma,ano) VALUES (?,?,?,?)",
+      [$discipline, $professor, $group, $date]
     );
-    $_SESSION['Gerenciar-cadastrado'] = "
-          <div id='alerta-confirmar'>
-      <div class='alerta-confirmar'>
-      <div class='alert alert-success alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-         Actualizado com sucesso!
-      </div>
-      </div>
-    </div>";
-  } else {
-    $_SESSION['Gerenciar-cadastrado'] = "
-          <div id='alerta-confirmar'>
-      <div class='alerta-confirmar'>
-      <div class='alert alert-danger alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-          Actualização já feita!
-      </div>
-   </div>
-   </div>";
-  }
+
+    if($sign_management)
+      setMessage("management-message", "alert-success", "alert-success", "Dados cadastrado com sucesso!");
+    else
+      setMessage("management-message", "alert-danger", "Erro ao cadastrar!!");
+  } 
 }
 ?>
 
@@ -71,9 +60,9 @@ if (isset($_POST['btn-sign'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['Gerenciar-cadastrado'])) {
-    echo $_SESSION['Gerenciar-cadastrado'];
-    unset($_SESSION['Gerenciar-cadastrado']);
+  if (isset($_SESSION['management-message'])) {
+    echo $_SESSION['management-message'];
+    unset($_SESSION['management-message']);
   }
   ?>
 
@@ -160,12 +149,9 @@ if (isset($_POST['btn-sign'])) {
           <label for="textdisciplina">Disciplinas</label>
           <select id="textdisciplina" class="input form-control" name="discipline" required>
             <option value="">Selecione aqui</option>
-            <?php $query = mysqli_query($conexao, "SELECT id_d,nome_d FROM sg_disciplina ORDER BY nome_d");
-
-            while ($registro = mysqli_fetch_array($query)) {
-              echo "<option value = '" . $registro['id_d'] . "'>" . $registro['nome_d'] . "</option>";
-            }
-
+            <?php $discipline_data = getData($connection, "SELECT id_d,nome_d FROM sg_disciplina ORDER BY nome_d");
+            foreach ($discipline_data as  $data) 
+              echo "<option value = '" . $data['id_d'] . "'>" . $data['nome_d'] . "</option>";
             ?>
           </select>
         </div>
@@ -173,13 +159,9 @@ if (isset($_POST['btn-sign'])) {
           <label for="textprofessor">Professores</label>
           <select id="textprofessor" class="input form-control" name="professor" required>
             <option value="">Selecione aqui</option>
-
-            <?php $query = mysqli_query($conexao, "SELECT id_p,nome_p FROM sg_professor ORDER BY nome_p");
-
-            while ($registro = mysqli_fetch_assoc($query)) {
-              echo "<option value = '" . $registro['id_p'] . "'>" . $registro['nome_p'] . "</option>";
-            }
-
+            <?php $professor_data = getData($connection, "SELECT id_p,nome_p FROM sg_professor ORDER BY nome_p");
+            foreach ($professor_data as $data) 
+              echo "<option value = '" . $data['id_p'] . "'>" . $data['nome_p'] . "</option>";
             ?>
           </select>
         </div>
@@ -187,13 +169,9 @@ if (isset($_POST['btn-sign'])) {
           <label for="textturma">Turmas</label>
           <select id="textturma" class="input form-control" name="group" required>
             <option value="">Selecione aqui</option>
-
-            <?php $query = mysqli_query($conexao, "SELECT id_t,nome_t FROM sg_turma ORDER BY nome_t");
-
-            while ($registro = mysqli_fetch_assoc($query)) {
-              echo "<option value = '" . $registro['id_t'] . "'>" . $registro['nome_t'] . "</option>";
-            }
-
+            <?php $group_data = getData($connection, "SELECT id_t,nome_t FROM sg_turma ORDER BY nome_t");
+            foreach ($group_data as $data) 
+              echo "<option value = '" . $data['id_t'] . "'>" . $data['nome_t'] . "</option>";
             ?>
           </select>
         </div>

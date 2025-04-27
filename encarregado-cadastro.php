@@ -17,7 +17,7 @@ if (isset($_POST['btn-cadastre'])) {
   $BI_verification = getData($connection, "SELECT numeroBI_e FROM sg_encarregado WHERE numeroBI_e = ?", [$BI]);
 
   if ($BI_verification) {
-    setMessage("responsible-message", "alert-danger", "Codigo de BI já existente!");
+    setMessage("responsible-message", "alert-warning", "Codigo de BI já existente!");
   } else {
     date_default_timezone_set('Africa/Luanda');
     $date = date('Y/m/d H:i:s');
