@@ -10,14 +10,14 @@ if (isset($_POST['btn-sign'])) {
   $discipline = mysqli_escape_string($connection, trim($_POST['discipline']));
   $professor = mysqli_escape_string($connection, trim($_POST['professor']));
   $group = mysqli_escape_string($connection, trim($_POST['group']));
-  $date = getCUrrentDate();
+  $date = '2022';//Date('Y');
 
   $management_data = getData(
     $connection, 
-    "SELECT * FROM sg_gerenciar WHERE idDisciplina =? AND idProfessor =? AND idTurma =? AND ano =?", 
-    [$discipline, $professor, $group, $date]
+    "SELECT * FROM sg_gerenciar WHERE idDisciplina =? AND idProfessor =? AND idTurma =?", 
+    [$discipline, $professor, $group]
   );
-
+  
   if ($management_data) {
     setMessage("management-message", "alert-warning", "Dados já existentes!");
   }else{
