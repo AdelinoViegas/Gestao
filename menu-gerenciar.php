@@ -16,10 +16,12 @@ if (isset($_POST['btn-search'])) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Samiga</title>
   <?php require_once "head.php"; ?>
 </head>
+
 <body>
   <div class="divsuperior">
     <h1>Colégio Samiga</h1>
@@ -39,9 +41,9 @@ if (isset($_POST['btn-search'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['Gerenciar-actualizar'])) {
-    echo $_SESSION['Gerenciar-actualizar'];
-    unset($_SESSION['Gerenciar-actualizar']);
+  if (isset($_SESSION['manage-message'])) {
+    echo $_SESSION['manage-message'];
+    unset($_SESSION['manage-message']);
   }
   ?>
 
@@ -148,18 +150,18 @@ if (isset($_POST['btn-search'])) {
         <tbody>
           <?php
           if (count($data) > 0) {
-            foreach ($data as $l_gerenciar) { ?>
+            foreach ($data as $manage_data) { ?>
               <tr id="tr">
                 <td>
                   <form action="gerenciar-editar.php" method="post">
-                    <input id="editar1" type="hidden" value="<?php echo $l_gerenciar['id_g']; ?>" name="id_gerenciar">
+                    <input id="editar1" type="hidden" value="<?= $manage_data['id_g']; ?>" name="manage_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>
                 </td>
-                <td><?php echo $l_gerenciar['nome_d']; ?></td>
-                <td><?php echo $l_gerenciar['nome_p']; ?></td>
-                <td><?php echo $l_gerenciar['nome_t']; ?></td>
-                <td><?php echo $l_gerenciar['ano']; ?></td>
+                <td><?= $manage_data['nome_d']; ?></td>
+                <td><?= $manage_data['nome_p']; ?></td>
+                <td><?= $manage_data['nome_t']; ?></td>
+                <td><?= $manage_data['ano']; ?></td>
               </tr>
             <?php } ?>
           </tbody>
