@@ -154,7 +154,7 @@ if (isset($_POST['btn-search'])) {
               <tr id="tr">
                 <td>
                   <form action="gerenciar-editar.php" method="post">
-                    <input id="editar1" type="hidden" value="<?= $manage_data['id_g']; ?>" name="manage_id">
+                    <input id="editar1" type="hidden" value="<?= $manage_data['id_g']; ?>" name="management_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>
                 </td>

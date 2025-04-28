@@ -17,7 +17,7 @@ if (isset($_POST['btn-sign'])) {
     "SELECT * FROM sg_gerenciar WHERE idDisciplina =? AND idProfessor =? AND idTurma =?", 
     [$discipline, $professor, $group]
   );
-  
+
   if ($management_data) {
     setMessage("management-message", "alert-warning", "Dados já existentes!");
   }else{
@@ -28,7 +28,7 @@ if (isset($_POST['btn-sign'])) {
     );
 
     if($sign_management)
-      setMessage("management-message", "alert-success", "alert-success", "Dados cadastrado com sucesso!");
+      setMessage("management-message", "alert-success",  "Dados cadastrado com sucesso!");
     else
       setMessage("management-message", "alert-danger", "Erro ao cadastrar!!");
   } 
