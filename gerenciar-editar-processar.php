@@ -1,43 +1,27 @@
-<?php 
-require_once "conexao.php";
-
+<?php
+require_once "connection.php";
+require_once "features/updateData.php";
+require_once "features/setMessage.php";
 session_start();
 
-$id = $_SESSION['id_gerenciar'];
-$id_disciplina = $_POST['txtdisciplina'];
-$id_professor = $_POST['txtprofessor'];
-$id_turma = $_POST['txtturma'];
-$data = Date('Y');
+if (isset($_POST['btn-update'])) {
+  $management_id = mysqli_real_escape_string($connection, trim($_SESSION['management_id']));
+  $discipline_id = mysqli_real_escape_string($connection, trim($_POST['discipline']));
+  $professor_id = mysqli_real_escape_string($connection, trim($_POST['professor']));
+  $group_id = mysqli_real_escape_string($connection, trim($_POST['group']));
+  $date = Date('Y');
+  
+  $update_management = updateData(
+    $connection,
+    "UPDATE sg_gerenciar SET idDisciplina=?, idProfessor =?, idTurma =?, ano =? WHERE id_g =?",
+    [$discipline_id, $professor_id, $group_id, $date, $management_id]
+  );
 
-$sql_gerenciar = "UPDATE sg_gerenciar SET idDisciplina ='$id_disciplina',idProfessor = '$id_professor',idTurma = '$id_turma',ano = '$data' WHERE id_g ='$id'"; 
-$actualizar_gerenciar = mysqli_query($conexao,$sql_gerenciar);
-
-if($actualizar_gerenciar == true){
-
-    $_SESSION['Gerenciar-actualizar'] = "
-          <div id='alerta-confirmar'>
-      <div class='alerta-confirmar'>
-      <div class='alert alert-success alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-         Actualização feita com sucesso!
-      </div>
-      </div>
-    </div>";
-
-header('Location: menu-gerenciar.php');
-
-}else{
-
-          $_SESSION['Gerenciar-actualizar'] = "
-          <div id='alerta-confirmar'>
-      <div class='alerta-confirmar'>
-      <div class='alert alert-danger alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-         Erro a actualizar!
-      </div>
-      </div>
-    </div>";
+  if ($update_management) {
+    setMessage("management-message", "alert-success", "Actualização feita com sucesso!");
+    header('Location: menu-gerenciar.php');
+  } else {
+    setMessage("management-message", "alert-danger", "Erro a actualizar!");
+  }
 }
-
-
- ?>
+?>

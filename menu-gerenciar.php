@@ -41,9 +41,9 @@ if (isset($_POST['btn-search'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['manage-message'])) {
-    echo $_SESSION['manage-message'];
-    unset($_SESSION['manage-message']);
+  if (isset($_SESSION['management-message'])) {
+    echo $_SESSION['management-message'];
+    unset($_SESSION['management-message']);
   }
   ?>
 
