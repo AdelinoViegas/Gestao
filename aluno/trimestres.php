@@ -1,12 +1,13 @@
 <?php
-require_once "../conexao.php";
+require_once "../connection.php";
+require_once "features/getData.php";
 session_start();
 
 $student_name = $_SESSION['student_name'];
 $student_id = $_SESSION['student_id'];
 $student_quarter = $_SESSION['quarter'];
-//$_SESSION['tri'] = $student;
-$query = mysqli_query($conection, "SELECT * FROM sg_aluno WHERE nome_a = 'Carla Miguel Bastos Mora'");
+
+$query = getData($connection, "SELECT * FROM sg_aluno WHERE nome_a = ?");
 $data = mysqli_fetch_assoc($query);
 $group = $data['idTurma_a'];
 
