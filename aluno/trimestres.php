@@ -7,25 +7,26 @@ $student_name = $_SESSION['student_name'];
 $student_id = $_SESSION['student_id'];
 $student_quarter = $_SESSION['quarter'];
 
-$query = getData($connection, "SELECT * FROM sg_aluno WHERE nome_a = ?");
-$data = mysqli_fetch_assoc($query);
-$group = $data['idTurma_a'];
+$student_data = getData($connection, "SELECT * FROM sg_aluno WHERE nome_a = ?", [$student_name]);
+$group_id = $student_data['idTurma_a'];
 
-$sql = "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno = '$student_id' AND id_trimestre = '$student_quarter' AND idTurma_a = '$group'";
-$data2 = mysqli_query($conection, $sql);
+$sql = "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =? AND idTurma_a = ?";
+$data2 = getData($connection, $sql, [$student_id, $student_quarter, $group_id]);
 
-if (isset($_POST['btn-pesquisa'])) {
-  $pesquisar = $_POST['txtpesquisar'];
+if (isset($_POST['btn-search'])) {
+  $search = $_POST['txtpesquisar'];
   $data = mysqli_query($conection, "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno = '$student_id' AND id_trimestre = '$student_quarter' AND idTurma_a = '$group_id' AND nome_d LIKE '$pesquisar%'");
 }
 
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>principal</title>
   <?php require_once "../head2.php"; ?>
 </head>
+
 <body>
   <div class="divsuperior">
     <h1>Colégio Samiga</h1>
@@ -35,10 +36,9 @@ if (isset($_POST['btn-pesquisa'])) {
     <div class="divflex">
       <div>
         <?php
-        $query3 = mysqli_query($conection, "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t WHERE id_a = '$student_id'");
-        $data3 = mysqli_fetch_assoc($query3);
+        $student_data = getData($connection, "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t WHERE id_a =?", [$student_id]);
 
-        echo "<h5 id='alinhar'>" . $student_quarter . "º Trimestre  </h5> <p id='fonte'> Turma</p> <h5 id='alinhar'>" . $data3['nome_t'] . "</h5> ";
+        echo "<h5 id='alinhar'>" . $student_quarter . "º Trimestre  </h5> <p id='fonte'> Turma</p> <h5 id='alinhar'>" . $student_data['nome_t'] . "</h5> ";
         ?>
       </div>
       <div class="d-flex">
@@ -48,23 +48,21 @@ if (isset($_POST['btn-pesquisa'])) {
       </div>
     </div>
   </div>
-  
-	<?php require_once "nav-aluno.php" ?>
+
+  <?php require_once "nav-aluno.php" ?>
   <?php require_once "navMob-aluno.php" ?>
 
   <div class="rounded-3" id="divm">
     <div class="divsuperior3">
       <?php
-      $query4 = mysqli_query($conection, "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON c.id_c = a.idClasse WHERE id_a = '$student_id'");
-      $data4 = mysqli_fetch_assoc($query4);
-
-      echo "<h5 id='alinhar'>" . $student_quarter . "º Trimestre  </h5> <p id='fonte'> Turma</p> <h5 id='alinhar'>" . $data4['nome_t'] . "</h5> ";
+      $student_data = getData($conection, "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON c.id_c = a.idClasse WHERE id_a =?", [$student_id]);
+      echo "<h5 id='alinhar'>" . $student_quarter . "º Trimestre  </h5> <p id='fonte'> Turma</p> <h5 id='alinhar'>" . $student_data['nome_t'] . "</h5> ";
       ?>
     </div>
 
     <div id="divflex">
       <button type="submit" id="adicionar" class="btn btn-secondary">
-        <?php echo $data4['nome_c']; ?>
+        <?php echo $student_data['nome_c']; ?>
       </button>
 
       <form action="" method="post">
@@ -93,8 +91,8 @@ if (isset($_POST['btn-pesquisa'])) {
         </thead>
         <tbody>
           <?php
-          if (mysqli_num_rows($data2) > 0) {
-            while ($student = mysqli_fetch_assoc($data2)) {
+          if (count($data2) > 0) {
+            foreach ($data2 as $student) {
               ?>
               <tr>
                 <td><?php echo $student['nome_d']; ?></td>
@@ -137,7 +135,7 @@ if (isset($_POST['btn-pesquisa'])) {
         <tfooter class='text text-center'>
           <h5>Nenhum dado encontrado</h5>
         </tfooter>
-      <?php
+        <?php
           }
           ?>
     </div>
