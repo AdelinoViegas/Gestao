@@ -52,7 +52,7 @@ if (isset($_POST['btn-search'])) {
   <div class="rounded-3" id="divm">
     <div class="divsuperior3">
       <?php
-      $student_data = getData($connection, "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON c.id_c = a.idClasse WHERE id_a =?", [$student_id]);
+      $student_data = getData($connection, "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON c.id_c = a.idClasse WHERE id_a =?", [$student_id])[0];
       echo "<h5 id='alinhar'>" . $student_quarter . "º Trimestre  </h5> <p id='fonte'> Turma</p> <h5 id='alinhar'>" . $student_data['nome_t'] . "</h5> ";
       ?>
     </div>
