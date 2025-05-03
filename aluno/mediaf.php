@@ -1,5 +1,6 @@
 <?php
-require_once "../conexao.php";
+require_once "../connection.php";
+require_once "../features/getData.php";;
 session_start();
 
 $estudante = $_SESSION['student_name'];
