@@ -11,11 +11,15 @@ $student_data = getData($connection, "SELECT * FROM sg_aluno WHERE nome_a = ?", 
 $group_id = $student_data['idTurma_a'];
 
 $sql = "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =? AND idTurma_a = ?";
-$data2 = getData($connection, $sql, [$student_id, $student_quarter, $group_id]);
+$data = getData($connection, $sql, [$student_id, $student_quarter, $group_id]);
 
 if (isset($_POST['btn-search'])) {
-  $search = $_POST['txtpesquisar'];
-  $data = mysqli_query($conection, "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno = '$student_id' AND id_trimestre = '$student_quarter' AND idTurma_a = '$group_id' AND nome_d LIKE '$pesquisar%'");
+  $search = mysqli_real_escape_string($connection, trim($_POST['search']));
+  $data = getData(
+    $connection, 
+    "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =? AND idTurma_a =? AND nome_d LIKE '$search%'", 
+    [$student_id, $student_quarter, $group_id]
+  );
 }
 
 ?>
@@ -64,8 +68,8 @@ if (isset($_POST['btn-search'])) {
 
       <form action="" method="post">
         <div class="d-flex align-items-center" id="btn-pesquisar">
-          <input type="text" class="form-control me-2" name="txtpesquisar" placeholder="Pesquisa por nome"><button
-            type="submit" class="btn btn-success" name="btn-pesquisa">Pesquisar</button>
+          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button
+            type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
         </div>
       </form>
     </div>
@@ -88,8 +92,8 @@ if (isset($_POST['btn-search'])) {
         </thead>
         <tbody>
           <?php
-          if (count($data2) > 0) {
-            foreach ($data2 as $student) {
+          if (count($data) > 0) {
+            foreach ($data as $student) {
               ?>
               <tr>
                 <td><?= $student['nome_d']; ?></td>
