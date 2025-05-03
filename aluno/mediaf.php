@@ -1,12 +1,16 @@
 <?php
 require_once "../connection.php";
-require_once "../features/getData.php";;
+require_once "../features/getData.php";
 session_start();
 
-$estudante = $_SESSION['student_name'];
-$id_estudante = $_SESSION['student_id'];
+$estudent_name = $_SESSION['student_name'];
+$student_id = $_SESSION['student_id'];
 
-$valor = mysqli_query($conection, "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno = '$id_estudante' AND id_trimestre = '1' ");
+$valor = getData(
+  $connection, 
+  "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =?",
+  [$student_id, '1']
+);
 
 while ($area = mysqli_fetch_assoc($valor)) {
   $v[] = $area['mediaF'];
