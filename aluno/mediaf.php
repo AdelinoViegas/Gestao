@@ -6,28 +6,35 @@ session_start();
 $estudent_name = $_SESSION['student_name'];
 $student_id = $_SESSION['student_id'];
 
-$valor = getData(
+$data1 = getData(
   $connection, 
   "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =?",
   [$student_id, '1']
 );
 
-while ($area = mysqli_fetch_assoc($valor)) {
-  $v[] = $area['mediaF'];
+foreach ($data as $value) {
+  $result[] = $value['mediaF'];
 }
 
-$valor1 = mysqli_query($conection, "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno = '$id_estudante' AND id_trimestre = '2' ");
+$data2 = getData(
+  $connection, 
+  "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =?",
+[$student_id, '2']
+);
 
-while ($area1 = mysqli_fetch_assoc($valor1)) {
-  $v1[] = $area1['mediaF'];
+foreach ($data2 as $value) {
+  $result2[] = $value['mediaF'];
 }
 
-$valor2 = mysqli_query($conection, "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno = '$id_estudante' AND id_trimestre = '3' ");
+$data3 = getData(
+  $connection,
+  "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =?",
+  [$student_id, '3']
+);
 
-while ($area2 = mysqli_fetch_assoc($valor2)) {
-  $v2[] = $area2['mediaF'];
-  $disc[] = $area2['nome_d'];
-
+foreach ($data3 as $value) {
+  $result3[] = $value['mediaF'];
+  $disc[] = $value['nome_d'];
 }
 ?>
 
@@ -66,7 +73,11 @@ while ($area2 = mysqli_fetch_assoc($valor2)) {
     <div id="divflex">
       <button type="submit" id="adicionar" class="btn btn-secondary">
         <?php
-        $sum = mysqli_query($conection, "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON c.id_c = a.idClasse WHERE id_a = '$id_estudante'");
+        $ss = getData(
+          $connection, 
+          "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON c.id_c = a.idClasse WHERE id_a =?",
+          [$student_id]
+        );
         $trm = mysqli_fetch_assoc($sum);
         echo $trm['nome_c']; ?>
       </button>
@@ -94,28 +105,26 @@ while ($area2 = mysqli_fetch_assoc($valor2)) {
           <?php
           $res = mysqli_query($conection, "SELECT * FROM sg_notas WHERE id_aluno = '$id_estudante'");
           if (mysqli_num_rows($res) > 0) {
-            for ($c = 0; $c < count($v); $c++) {
+            for ($c = 0; $c < count($result); $c++) {
               ?>
               <tr>
-                <td><?php echo $disc[$c]; ?></td>
+                <td><?= $disc[$c]; ?></td>
                 <td>
-                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($v[$c], 2) . "'>" ?>
+                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($result[$c], 2) . "'>" ?>
                 </td>
                 <td>
-                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($v1[$c], 2) . "'>" ?>
+                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($result1[$c], 2) . "'>" ?>
                 </td>
                 <td>
-                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($v2[$c], 2) . "'>" ?>
+                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($result2[$c], 2) . "'>" ?>
                 </td>
-                <?php $M_Final[] = number_format(($v[$c] + $v1[$c] + $v2[$c]) / 3) ?>
+                <?php $M_Final[] = number_format(($result[$c] + $result1[$c] + $result2[$c]) / 3) ?>
                 <td><?php echo "<input class='form-control ps-1' type='text' readonly value='" . $M_Final[$c] . "'>" ?>
                 </td>
 
                 </td>
               </tr>
-
             <?php } ?>
-
           </tbody>
         </table>
         <?php
