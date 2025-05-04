@@ -12,14 +12,14 @@ $data1 = getData(
   [$student_id, '1']
 );
 
-foreach ($data as $value) {
-  $result[] = $value['mediaF'];
+foreach ($data1 as $value) {
+  $result1[] = $value['mediaF'];
 }
 
 $data2 = getData(
   $connection, 
   "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =?",
-[$student_id, '2']
+  [$student_id, '2']
 );
 
 foreach ($data2 as $value) {
@@ -34,7 +34,7 @@ $data3 = getData(
 
 foreach ($data3 as $value) {
   $result3[] = $value['mediaF'];
-  $disc[] = $value['nome_d'];
+  $discipline[] = $value['nome_d'];
 }
 ?>
 
@@ -73,13 +73,13 @@ foreach ($data3 as $value) {
     <div id="divflex">
       <button type="submit" id="adicionar" class="btn btn-secondary">
         <?php
-        $ss = getData(
+        $class_data = getData(
           $connection, 
           "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON c.id_c = a.idClasse WHERE id_a =?",
           [$student_id]
-        );
-        $trm = mysqli_fetch_assoc($sum);
-        echo $trm['nome_c']; ?>
+        )[0];
+
+        echo $class_data['nome_c']; ?>
       </button>
 
       <form action="" method="post">
@@ -103,25 +103,25 @@ foreach ($data3 as $value) {
         </thead>
         <tbody>
           <?php
-          $res = mysqli_query($conection, "SELECT * FROM sg_notas WHERE id_aluno = '$id_estudante'");
-          if (mysqli_num_rows($res) > 0) {
-            for ($c = 0; $c < count($result); $c++) {
+          $notes = getData($connection, "SELECT * FROM sg_notas WHERE id_aluno =?", [$student_id]);
+          print(count($notes));
+          die();
+          if (count($notes) > 0) {
+            for ($c = 0; $c < count($notes); $c++) {
               ?>
               <tr>
-                <td><?= $disc[$c]; ?></td>
-                <td>
-                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($result[$c], 2) . "'>" ?>
-                </td>
+                <td><?= $discipline[$c]; ?></td>
                 <td>
                   <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($result1[$c], 2) . "'>" ?>
                 </td>
                 <td>
                   <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($result2[$c], 2) . "'>" ?>
                 </td>
-                <?php $M_Final[] = number_format(($result[$c] + $result1[$c] + $result2[$c]) / 3) ?>
-                <td><?php echo "<input class='form-control ps-1' type='text' readonly value='" . $M_Final[$c] . "'>" ?>
+                <td>
+                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($result3[$c], 2) . "'>" ?>
                 </td>
-
+                <?php $M_Final[] = number_format(($result1[$c] + $result2[$c] + $result3[$c]) / 3) ?>
+                <td><?php echo "<input class='form-control ps-1' type='text' readonly value='" . $M_Final[$c] . "'>" ?>
                 </td>
               </tr>
             <?php } ?>
