@@ -103,11 +103,9 @@ foreach ($data3 as $value) {
         </thead>
         <tbody>
           <?php
-          $notes = getData($connection, "SELECT * FROM sg_notas WHERE id_aluno =?", [$student_id]);
-          print(count($notes));
-          die();
-          if (count($notes) > 0) {
-            for ($c = 0; $c < count($notes); $c++) {
+          //$notes = getData($connection, "SELECT * FROM sg_notas WHERE id_aluno =?", [$student_id]);
+          if (count($discipline) > 0) {
+            for ($c = 0; $c < count($discipline); $c++) {
               ?>
               <tr>
                 <td><?= $discipline[$c]; ?></td>
