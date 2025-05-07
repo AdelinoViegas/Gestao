@@ -7,7 +7,7 @@ $estudent_name = $_SESSION['student_name'];
 $student_id = $_SESSION['student_id'];
 
 $data1 = getData(
-  $connection, 
+  $connection,
   "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =?",
   [$student_id, '1']
 );
@@ -17,7 +17,7 @@ foreach ($data1 as $value) {
 }
 
 $data2 = getData(
-  $connection, 
+  $connection,
   "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =?",
   [$student_id, '2']
 );
@@ -74,7 +74,7 @@ foreach ($data3 as $value) {
       <button type="submit" id="adicionar" class="btn btn-secondary">
         <?php
         $class_data = getData(
-          $connection, 
+          $connection,
           "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON c.id_c = a.idClasse WHERE id_a =?",
           [$student_id]
         )[0];
