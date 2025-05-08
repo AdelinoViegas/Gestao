@@ -1,12 +1,12 @@
 <?php 
-require_once "../conexao.php";
-
+require_once "../connection.php";
 session_start();
 
-
-$id_a = $_SESSION['ID_A'];
-$trim = $_SESSION['periodo'];
-$gerenciar = $_SESSION['gerir'];
+var_dump($_SESSION);
+die();
+$id_a = $_SESSION['student_id'];
+$trim = $_SESSION['quarter'];
+$gerenciar = $_SESSION['management_id'];
 
 if (isset($_POST['calc'])) {
 

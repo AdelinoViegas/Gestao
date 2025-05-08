@@ -149,21 +149,21 @@ if(isset($_POST['btn-update'])){
      <tr> 
       <td>
         <form action="" method="post">
-          <input id="editar1" type="hidden" value="<?php echo $student['id_a']; ?>" name="student_id">
+          <input id="editar1" type="hidden" value="<?= $student['id_a']; ?>" name="student_id">
         <button type="submit" class="btn btn-warning text-white" name="btn-update">Editar</button>
         </form>
       </td>   
-      <td><?php echo $student['nome_a']; ?></td>
-      <td><?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name = 'aval1' readonly value='".$notes['avaliacao1']."'>" ?></td>
-      <td><?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='aval2' readonly value='".$notes['avaliacao2']."'>"  ?></td>
-      <td><?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='aval3' readonly value='".$notes['avaliacao3']."'>"  ?></td>
-      <td><?php echo "<input class='form-control ps-1' type='text' name='mediav' readonly value='".number_format($notes['mediaAv'],1)."'>"  ?></td>
-      <td><?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='prova1' readonly value='".$notes['prova1']."'>"  ?></td>
-      <td><?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='prova2' readonly value='".$notes['prova2']."'>"  ?></td>
-      <td><?php echo "<input class='form-control ps-1' type='text' name='mediap' readonly value='".number_format($notes['mediaPv'],1)."'>"  ?></td>
-      <td><?php echo "<input class='form-control ps-1' type='text' name='mediaf' readonly value='".number_format($notes['mediaF'],1)."'>"  ?>  
+      <td><?= $student['nome_a']; ?></td>
+      <td><?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name = 'aval1' readonly value='".$notes['avaliacao1']."'>" ?></td>
+      <td><?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='aval2' readonly value='".$notes['avaliacao2']."'>"  ?></td>
+      <td><?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='aval3' readonly value='".$notes['avaliacao3']."'>"  ?></td>
+      <td><?= "<input class='form-control ps-1' type='text' name='mediav' readonly value='".number_format($notes['mediaAv'],1)."'>"  ?></td>
+      <td><?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='prova1' readonly value='".$notes['prova1']."'>"  ?></td>
+      <td><?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='prova2' readonly value='".$notes['prova2']."'>"  ?></td>
+      <td><?= "<input class='form-control ps-1' type='text' name='mediap' readonly value='".number_format($notes['mediaPv'],1)."'>"  ?></td>
+      <td><?= "<input class='form-control ps-1' type='text' name='mediaf' readonly value='".number_format($notes['mediaF'],1)."'>"  ?>  
       </td>
-      <td><?php echo $notes['classificacao'];  ?>
+      <td><?= $notes['classificacao'];  ?>
         
       </td>
 
