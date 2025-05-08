@@ -8,7 +8,7 @@ $professor_name = $_SESSION['professor_name'];
 
 if (isset($_POST['btn-search'])) {
   $_SESSION['quarter'] = $_POST['quarter'];
-  $_SESSION['management'] = $_POST['management'];
+  $_SESSION['management_id'] = $_POST['management'];
   header('Location: notasAlunos.php');
 }
 ?>
