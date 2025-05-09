@@ -9,16 +9,18 @@ $student_id = $_SESSION['student_id'];
 $quarter = $_SESSION['quarter'];
 $management_id = $_SESSION['management_id'];
 
-if (isset($_POST['calc'])) {
-  $v1 = mysqli_real_escape_string($connection, trim($_POST['aval1']));
-  $v2 = mysqli_real_escape_string($connection, trim($_POST['aval2']));
-  $v3 = mysqli_real_escape_string($connection, trim($_POST['aval3']));
-  $p1 = mysqli_real_escape_string($connection, trim($_POST['prova1']));
-  $p2 = mysqli_real_escape_string($connection, trim($_POST['prova2']));
-  $mav = ($v1 + $v2 + $v3) / 3;
-  $mpv = ($p1 + $p2) / 2;
-  $MF = ($mav + $p1 + $p2) / 3;
-
+if (isset($_POST['btn-calc'])) {
+  $evaluation1 = mysqli_real_escape_string($connection, trim($_POST['evaluation1']));
+  $evaluation2 = mysqli_real_escape_string($connection, trim($_POST['evaluation2']));
+  $evaluation3 = mysqli_real_escape_string($connection, trim($_POST['evaluation3']));
+  $test1 = mysqli_real_escape_string($connection, trim($_POST['test1']));
+  $test2 = mysqli_real_escape_string($connection, trim($_POST['test2']));
+  $mav = ($evaluation1 + $evaluation2 + $evaluation3) / 3;
+  $mpv = ($test1 + $test2) / 2;
+  $MF = ($mav + $test1 + $test2) / 3;
+  print($evaluation1);
+  var_dump($_POST);
+  die();
   $group_data = getData($connection, "SELECT * FROM sg_gerenciar AS g JOIN sg_turma AS t ON t.id_t=g.idTurma WHERE id_g =?", [$management_id]);
   $group_name = $group_data['nome_t'];
 
@@ -162,27 +164,27 @@ if (isset($_POST['calc'])) {
             $notes_data = getData(
               $connection,
               "SELECT * FROM sg_notas AS n INNER JOIN sg_aluno AS a ON a.id_a = n.id_aluno WHERE id_aluno =? AND id_trimestre =? AND id_gerenciar =?",
-              [$student_id, $quarter, $management_id]);
+              [$student_id, $quarter, $management_id])[0];
               ?>
             <tr>
               <td><?php echo $notes_data['nome_a']; ?></td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name = 'aval1'value='" . $notes_data['avaliacao1'] . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name = 'evaluation1' value='" . $notes_data['avaliacao1'] . "'>" ?>
               </td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='aval2'value='" . $notes_data['avaliacao2'] . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='evaluation2' value='" . $notes_data['avaliacao2'] . "'>" ?>
               </td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='aval3'value='" . $notes_data['avaliacao3'] . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='evaluation3' value='" . $notes_data['avaliacao3'] . "'>" ?>
               </td>
               <td>
                 <?php echo "<input class='form-control ps-1' type='text'name='mediaAv' readonly value='" . number_format($notes_data['mediaAv'], 1) . "'>" ?>
               </td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='prova1'value='" . $notes_data['prova1'] . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='test1' value='" . $notes_data['prova1'] . "'>" ?>
               </td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='prova2'value='" . $notes_data['prova2'] . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='test2' value='" . $notes_data['prova2'] . "'>" ?>
               </td>
               <td>
                 <?php echo "<input class='form-control ps-1' type='text' name='mediaPv' readonly value='" . number_format($notes_data['mediaPv'], 1) . "'>" ?>
@@ -198,7 +200,7 @@ if (isset($_POST['calc'])) {
         </table>
       </div>
 
-      <button type="submit" class="my-2 float-start btn btn-success col-md-2" name="calc"> Calcular</button>
+      <button type="submit" class="my-2 float-start btn btn-success col-md-2" name="btn-calc"> Calcular</button>
 
       <a href="notasAlunos.php">
         <button type="button" class="my-2 float-end btn btn-secondary col-md-2" name="btn-voltar">Voltar
