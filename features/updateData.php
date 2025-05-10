@@ -15,11 +15,11 @@ function updateData($connection, $sql, $params){
         $types .= "s";
       }
     }
-    
+
     $bind_names = [];
     $bind_names[] = $types; 
     foreach ($params as $key => $value) {
-        $bind_names[] = &$params[$key]; 
+      $bind_names[] = &$params[$key]; 
     }
 
     call_user_func_array("mysqli_stmt_bind_param", array_merge([$query], $bind_names));

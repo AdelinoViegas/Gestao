@@ -2,7 +2,7 @@
 require_once "../connection.php";
 require_once "../features/getData.php";
 require_once "../features/updateData.php";
-require_once "../features/setMessage.php"; 
+require_once "../features/setMessage.php";
 session_start();
 
 $student_id = $_SESSION['student_id'];
@@ -51,10 +51,10 @@ if (isset($_POST['btn-calc'])) {
       $situation = "reprovado";
     }
   }
-  
+
   $actualizar_notas = updateData(
-    $connection, 
-    "UPDATE sg_notas SET avaliacao1=?, avaliacao2=?, avaliacao3=?, mediaAv=?, mediaPv=?, mediaF=?, prova1=?, prova2=?, classificacao=? WHERE id_aluno=? AND id_trimestre=? AND id_gerenciar=?", 
+    $connection,
+    "UPDATE sg_notas SET avaliacao1=?, avaliacao2=?, avaliacao3=?, mediaAv=?, mediaPv=?, mediaF=?, prova1=?, prova2=?, classificacao=? WHERE id_aluno=? AND id_trimestre=? AND id_gerenciar=?",
     [$evaluation1, $evaluation2, $evaluation3, $mav, $mpv, $MF, $test1, $test2, $situation, $student_id, $quarter, $management_id]
   );
 
@@ -162,8 +162,9 @@ if (isset($_POST['btn-calc'])) {
             $notes_data = getData(
               $connection,
               "SELECT * FROM sg_notas AS n INNER JOIN sg_aluno AS a ON a.id_a = n.id_aluno WHERE id_aluno =? AND id_trimestre =? AND id_gerenciar =?",
-              [$student_id, $quarter, $management_id])[0];
-              ?>
+              [$student_id, $quarter, $management_id]
+            )[0];
+            ?>
             <tr>
               <td><?php echo $notes_data['nome_a']; ?></td>
               <td>
