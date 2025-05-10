@@ -19,7 +19,6 @@ if(isset($_POST['btn-update'])){
   header('Location: notas-editar.php');
 }
 
-
 ?>
 <!DOCTYPE html>
 <html>
