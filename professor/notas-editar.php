@@ -18,10 +18,8 @@ if (isset($_POST['btn-calc'])) {
   $mav = ($evaluation1 + $evaluation2 + $evaluation3) / 3;
   $mpv = ($test1 + $test2) / 2;
   $MF = ($mav + $test1 + $test2) / 3;
-  print($evaluation1);
-  var_dump($_POST);
-  die();
-  $group_data = getData($connection, "SELECT * FROM sg_gerenciar AS g JOIN sg_turma AS t ON t.id_t=g.idTurma WHERE id_g =?", [$management_id]);
+
+  $group_data = getData($connection, "SELECT * FROM sg_gerenciar AS g JOIN sg_turma AS t ON t.id_t=g.idTurma WHERE id_g =?", [$management_id])[0];
   $group_name = $group_data['nome_t'];
 
   $data = getData($connection, "SELECT nome_t FROM sg_turma");
@@ -53,11 +51,11 @@ if (isset($_POST['btn-calc'])) {
       $situation = "reprovado";
     }
   }
-
+  
   $actualizar_notas = updateData(
     $connection, 
     "UPDATE sg_notas SET avaliacao1=?, avaliacao2=?, avaliacao3=?, mediaAv=?, mediaPv=?, mediaF=?, prova1=?, prova2=?, classificacao=? WHERE id_aluno=? AND id_trimestre=? AND id_gerenciar=?", 
-    [$v1, $v2, $v3, $mav, $mpv, $MF, $p1, $p2, $situation, $student_id, $quarter, $management_id]
+    [$evaluation1, $evaluation2, $evaluation3, $mav, $mpv, $MF, $test1, $test2, $situation, $student_id, $quarter, $management_id]
   );
 
   if ($actualizar_notas == true) {

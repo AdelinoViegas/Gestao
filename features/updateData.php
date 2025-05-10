@@ -8,14 +8,14 @@ function updateData($connection, $sql, $params){
       if(is_int($value)){
         $types .= "i";
       }elseif(is_float($value)){
-        $types .= "f";
+        $types .= "d";
       }elseif(is_bool($value)){
         $types .= "b";
       }else{
         $types .= "s";
       }
     }
-
+    
     $bind_names = [];
     $bind_names[] = $types; 
     foreach ($params as $key => $value) {
