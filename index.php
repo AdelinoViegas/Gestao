@@ -6,17 +6,17 @@ session_start();
 if (isset($_POST['enviar-dados'])) {
   $erros = array();
 
-  $name = mysqli_escape_string(
+  $name = mysqli_real_escape_string(
     $connection,
-    $_POST['name']
+    trim($_POST['name'])
   );
-  $password = mysqli_escape_string(
+  $password = mysqli_real_escape_string(
     $connection,
-    $_POST['password']
+    trim($_POST['password'])
   );
-  $painel = mysqli_escape_string(
+  $painel = mysqli_real_escape_string(
     $connection,
-    $_POST['selection']
+    trim($_POST['selection'])
   );
 
   $consult = mysqli_prepare($connection, "SELECT * FROM sg_usuarios WHERE nome_u = ?");
