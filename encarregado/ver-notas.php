@@ -3,12 +3,10 @@ require_once "../connection.php";
 require_once "../features/getData.php";
 session_start();
 
-$responsible_id = $_SESSION['responsible_id'];
-$responsible_name = $_SESSION['responsible_name'];
-
+$responsible_id = mysqli_real_escape_string($connection, trim($_SESSION['responsible_id']));
 if(isset($_POST['btn-notes'])){
- $_SESSION['student_id'] = $_POST['student_id'];
- $_SESSION['quarter'] = $_POST['quarter'];
+  $_SESSION['student_id'] = mysqli_real_escape_string($connection, trim($_POST['student_id']));
+  $_SESSION['quarter'] = mysqli_real_escape_string($connection, trim($_POST['quarter']));
   header('Location: notas-trimestrais.php');
 }
 ?>
