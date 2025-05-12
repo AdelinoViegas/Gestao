@@ -6,16 +6,13 @@ function authentication($conection, $sql, $route, $idUser, $user_painel){
   mysqli_stmt_execute($consult);
   $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
   $_SESSION['logged'] = true;
-  if($user_painel === "professor"){
+
+  if($user_painel === "professor")
     $_SESSION['professor_id'] = $user['id_p'];
-    $_SESSION['professor_name'] = $user['nome_p'];
-  }elseif($user_painel === "encarregado"){
+  elseif($user_painel === "encarregado")
     $_SESSION['responsible_id'] = $user['id_e'];
-    $_SESSION['responsible_name'] = $user['nome_e'];
-  }elseif($user_painel === "aluno"){
+  elseif($user_painel === "aluno")
     $_SESSION['student_id'] = $user['id_a'];
-    $_SESSION['student_name'] = $user['nome_a'];
-  }
 
   header($route);
 }
