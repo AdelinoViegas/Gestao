@@ -6,7 +6,7 @@ require_once "../features/getCurrentDate.php";
 require_once "../features/setMessage.php";
 session_start();
 
-if (isset($_POST['btn-senha'])) {
+if (isset($_POST['btn-password'])) {
   $professor_id = mysqli_real_escape_string($connection, trim($_SESSION['professor_id']));
   $password = mysqli_real_escape_string($connection, trim($_POST['password']));
   $new_password = mysqli_real_escape_string($connection, trim($_POST['new_password']));
@@ -14,7 +14,6 @@ if (isset($_POST['btn-senha'])) {
 
   if ($password === $new_password) {
     $password = password_hash($new_password, PASSWORD_DEFAULT);
-
     $professor_data = getData($connection, "SELECT idUsuario FROM sg_professor WHERE id_p=?", [$professor_id])[0];
 
     $update_data = updateData(
@@ -121,7 +120,7 @@ if (isset($_POST['btn-senha'])) {
 
         <div class=" col-md-2 mb-3">
           <label></label>
-          <button type="submit" id="inserir" class="btn btn-success col-md-12" name="btn-senha">Gravar</button>
+          <button type="submit" id="inserir" class="btn btn-success col-md-12" name="btn-password">Gravar</button>
         </div>
       </div>
     </form>

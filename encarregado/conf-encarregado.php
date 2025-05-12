@@ -6,16 +6,14 @@ require_once "../features/getData.php";
 require_once "../features/updateData.php";
 session_start();
 
-$responsible_id = $_SESSION['responsible_id'];
-
 if (isset($_POST['btn-password'])) {
+  $professor_id = mysqli_real_escape_string($connection, trim($_SESSION['professor_id']));
   $password = mysqli_escape_string($connection, trim($_POST['password']));
   $new_password = mysqli_escape_string($connection, trim($_POST['new_password']));
   $date = getCurrentDate();
 
   if ($password === $new_password) {
     $password = password_hash($new_password, PASSWORD_DEFAULT);
-    
     $responsible_data = getData($connection, "SELECT idUsuario FROM sg_encarregado WHERE id_e=?", [$responsible_id])[0];
      
     $update_data = updateData(

@@ -1,38 +1,33 @@
 <?php
-require_once "../conexao.php";
+require_once "../connection.php";
+require_once "../features/updateData.php";
+require_once "../features/getData.php";
+require_once "../features/getCurrentDate.php";
+require_once "../features/setMessage.php";
 session_start();
 
-$id = $_SESSION['student_id'];
-
-if (isset($_POST['btn-senha'])) {
-  $password = mysqli_escape_string($conection, $_POST['txtsenha']);
-  $new_password = mysqli_escape_string($conection, $_POST['txtnova']);
-  $date = date('Y/m/d');
+if (isset($_POST['btn-password'])) {
+  $student_id = mysqli_real_escape_string($connection, trim($_SESSION['student_id']));
+  $password = mysqli_escape_string($connection, $_POST['password']);
+  $new_password = mysqli_escape_string($connection, $_POST['new_password']);
+  $date = getCurrentDate();
 
   if ($password === $new_password) {
     $password = password_hash($new_password, PASSWORD_DEFAULT);
-    mysqli_query($conection, "UPDATE sg_usuarios SET senha_u ='$password',dataModificacao_u = '$date' WHERE id_u ='$id'");
+    $student_data = getData($connection, "SELECT idUsuario FROM sg_aluno WHERE id_a=?", [$student_id])[0];
 
-    $_SESSION['Configurar-actualizado'] = "
-          <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-success alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-        Senha actualizada com sucesso!
-      </div>
-   </div>
-   </div>";
+    $update_data = updateData(
+      $connection,
+      "UPDATE sg_usuarios SET senha_u =?, dataModificacao_u =? WHERE id_u =?",
+      [$password, $date, $student_data['idUsuario']]
+    );
 
+    if ($update_data)
+      setMessage("settings-message", "alert-success", "Senha actualizada com sucesso!");
+    else
+      setMessage("settings-message", "alert-danger", "Erro a actualizar");
   } else {
-    $_SESSION['Configurar-actualizado'] = "
-         <div id='alerta-confirmar'>
-   <div class='alerta-confirmar'>
-      <div class='alert alert-danger alert-dimissible'>
-       <button style='float:right;' class='btn-close' data-bs-dismiss='alert'></button>
-         Erro! as senhas não são iguais
-      </div>
-   </div>
-   </div>";
+    setMessage("settings-message", "alert-warning", "As senhas devem ser iguais");
   }
 }
 ?>
@@ -62,13 +57,13 @@ if (isset($_POST['btn-senha'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['Configurar-actualizado'])) {
-    echo $_SESSION['Configurar-actualizado'];
-    unset($_SESSION['Configurar-actualizado']);
+  if (isset($_SESSION['settings-message'])) {
+    echo $_SESSION['settings-message'];
+    unset($_SESSION['settings-message']);
   }
   ?>
 
-	<?php require_once "nav-aluno.php" ?>
+  <?php require_once "nav-aluno.php" ?>
   <?php require_once "navMob-aluno.php" ?>
 
   <div class="fontes rounded-3" id="divm">
@@ -79,19 +74,19 @@ if (isset($_POST['btn-senha'])) {
       <div class="row">
         <div class="form-group col-md-4 mb-3">
           <label for="tsenha">Senha</label>
-          <input type="password" id="tsenha" class="form-control" name="txtsenha" maxlength="30"
+          <input type="password" id="tsenha" class="form-control" name="password" maxlength="30"
             placeholder="Insira nova senha" required>
         </div>
 
         <div class="form-group col-md-4 mb-3">
           <label for="tsenha">Confirmar senha</label>
-          <input type="password" id="tsenha" class="form-control" name="txtnova" maxlength="30"
+          <input type="password" id="tsenha" class="form-control" name="new_password" maxlength="30"
             placeholder="Confirmar nova senha" required>
         </div>
 
         <div class=" col-md-2 mb-3">
           <label></label>
-          <button type="submit" id="inserir" class="btn btn-success col-md-12" name="btn-senha">Gravar</button>
+          <button type="submit" id="inserir" class="btn btn-success col-md-12" name="btn-password">Gravar</button>
         </div>
       </div>
     </form>
