@@ -1,27 +1,31 @@
 <?php
 require_once "connection.php";
 require_once "features/setMessage.php";
+require_once "features/getCurrentDate.php";
+require_once "features/updateData.php";
 session_start();
 
-$id = $_SESSION['id_adm'];
-
-if(empty($id))
-  die("Sessão inválido!! acesso foi negado");
-
-if (isset($_POST['btn-senha'])) {
-  $password = mysqli_real_escape_string($connection, trim($_POST['txtsenha']));
-  $new_password = mysqli_real_escape_string($connection, trim($_POST['txtnova']));
-  $date = date('Y/m/d H:i:s');
+if (isset($_POST['btn-password'])) {
+  $admin_id = mysqli_real_escape_string($connection, trim($_SESSION['admin_id']));
+  $password = mysqli_real_escape_string($connection, trim($_POST['password']));
+  $new_password = mysqli_real_escape_string($connection, trim($_POST['new_password']));
+  $date = getCurrentDate();
 
   if ($password === $new_password) {
-    $hash = password_hash($new_password, PASSWORD_DEFAULT);
-    $update = mysqli_prepare($connection, "UPDATE sg_usuarios SET senha_u = ?,dataModificacao_u = ? WHERE id_u = ?");
-    mysqli_stmt_bind_param($update, "ssi", $hash,$date,$id);
-    mysqli_stmt_execute($update);
+    $password = password_hash($new_password, PASSWORD_DEFAULT);
+    
+    $update_data = updateData(
+      $connection, 
+      "UPDATE sg_usuarios SET senha_u = ?, dataModificacao_u = ? WHERE id_u = ?",
+     [$password, $date, $admin_id]
+    );
 
-    setMessage("Configured-Message","alert-success","Senha actualizada com sucesso!");
+    if($update_data)
+      setMessage("settings-message", "alert-success", "Senha actualizada com sucesso!");
+    else
+      setMessage("settings-message", "alert-danger", "Erro ao actualizar!");
   } else {
-    setMessage("Configured-Message","alert-danger","Erro! as senhas não são iguais");
+    setMessage("settings-message", "alert-warning", "As senhas devem ser iguais");
   }
 }
 ?>
@@ -51,9 +55,9 @@ if (isset($_POST['btn-senha'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['Configured-Message'])) {
-    echo $_SESSION['Configured-Message'];
-    unset($_SESSION['Configured-Message']);
+  if (isset($_SESSION['settings-message'])) {
+    echo $_SESSION['settings-message'];
+    unset($_SESSION['settings-message']);
   }
   ?>
 
@@ -135,19 +139,19 @@ if (isset($_POST['btn-senha'])) {
       <div class="row">
         <div class="form-group col-md-4 mb-3">
           <label for="tsenha">Senha</label>
-          <input type="password" id="tsenha" class="form-control" name="txtsenha" maxlength="30"
+          <input type="password" id="tsenha" class="form-control" name="password" maxlength="30"
             placeholder="Insira nova senha" required>
         </div>
 
         <div class="form-group col-md-4 mb-3">
           <label for="tsenha">Confirmar senha</label>
-          <input type="password" id="tsenha" class="form-control" name="txtnova" maxlength="30"
+          <input type="password" id="tsenha" class="form-control" name="new_password" maxlength="30"
             placeholder="Confirmar nova senha" required>
         </div>
 
         <div class=" col-md-2 mb-3">
           <label></label>
-          <button type="submit" id="inserir" class="btn btn-success col-md-12" name="btn-senha">Gravar</button>
+          <button type="submit" id="inserir" class="btn btn-success col-md-12" name="btn-password">Gravar</button>
         </div>
       </div>
     </form>
