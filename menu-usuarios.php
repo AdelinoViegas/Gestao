@@ -144,26 +144,14 @@ if (isset($_POST['btn-search'])) {
               <tr>
                 <td id="estado">
                   <?php
-
-                  if ($l_usuario['estado_u'] === 'activo') {
+                    $button = $l_usuario['estado_u'] === "activo"?"btn-success":"btn-danger";
                     ?>
                     <form action="usuario-mudar.php" method="post">
-                      <input type="hidden" name="estadoU" value="<?= $l_usuario['estado_u']; ?>">
-                      <input type="hidden" name="idUsuario" value="<?= $l_usuario['id_u']; ?>">
-                      <input type="hidden" name="chamada1" value="1">
-                      <button id="btn2" type="submit" class="btn btn-md btn-success">
+                      <input type="hidden" name="userState" value="<?= $l_usuario['estado_u']; ?>">
+                      <input type="hidden" name="userId" value="<?= $l_usuario['id_u']; ?>">
+                      <button id="btn2" name="btn-state" type="submit" class="<?= "btn btn-md ".$button ?>">
                         <?= $l_usuario['estado_u']; ?></button>
                     </form>
-                  <?php } else {
-                    ?>
-                    <form action="usuario-mudar.php" method="post">
-                      <input type="hidden" name="estadoU" value="<?= $l_usuario['estado_u']; ?>">
-                      <input type="hidden" name="idUsuario" value="<?= $l_usuario['id_u']; ?>">
-                      <input type="hidden" name="chamada1" value="1">
-                      <button id="btn2" type="submit" class="btn btn-md btn-danger">
-                        <?= $l_usuario['estado_u']; ?></button>
-                    </form>
-                  <?php } ?>
                 </td>
                 <td id="nome"><?= $l_usuario['nome_u']; ?></td>
                 <td id="painel"><?= $l_usuario['painel_u']; ?></td>

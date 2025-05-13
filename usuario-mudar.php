@@ -1,34 +1,21 @@
 <?php
-require_once "conexao.php";
+require_once "connection.php";
+require_once "features/updateData.php";
 session_start();
 
-$id = $_POST['idUsuario'];
-$estado = $_POST['estadoU'];
+$userId = $_POST['userId'];
+$userState = $_POST['userState'];
 
-if (isset($_POST['chamada1'])) {
-	if ($estado === 'activo') {
-		$sql = "UPDATE sg_usuarios SET estado_u = 'inactivo' WHERE id_u = '$id'";
-		$consulta = mysqli_query($conexao, $sql);
-		header('Location: menu-usuarios.php');
-
-	} else {
-		$sql = "UPDATE sg_usuarios SET estado_u = 'activo' WHERE id_u = '$id'";
-		$consulta = mysqli_query($conexao, $sql);
-		header('Location: menu-usuarios.php');
-	}
-
-} else {
-	if ($estado === 'activo') {
-
-		$sql = "UPDATE sg_usuarios SET estado_u = 'inactivo' WHERE id_u = '$id'";
-		$consulta = mysqli_query($conexao, $sql);
-		header('Location: usuario-pesquisar.php');
-
-	} else {
-		$sql = "UPDATE sg_usuarios SET estado_u = 'activo' WHERE id_u = '$id'";
-		$consulta = mysqli_query($conexao, $sql);
-		header('Location: usuario-pesquisar.php');
-	}
+if (isset($_POST['btn-state'])) {
+  $state = $userState === "activo"?"inactivo":"activo";
+  $sql = "UPDATE sg_usuarios SET estado_u =? WHERE id_u =?";
+  $update_data = updateData(
+    $connection,
+    $sql,
+    [$state, $userId]
+  );
+  
+  if($update_data)
+    header('Location: menu-usuarios.php'); 
 }
-
 ?>

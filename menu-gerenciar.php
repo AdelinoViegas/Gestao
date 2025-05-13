@@ -131,7 +131,7 @@ if (isset($_POST['btn-search'])) {
       <form action="" method="post">
         <div id="btn-pesquisar">
           <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por disciplina"><button id="btn-p"
-            type="submit" class="btn btn-success" name="btn-search">search</button>
+            type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
         </div>
       </form>
     </div>
