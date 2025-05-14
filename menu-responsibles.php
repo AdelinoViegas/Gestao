@@ -53,7 +53,7 @@ if (isset($_POST['btn-search'])) {
     </div>
 
     <div id="divflex">
-      <a href="encarregado-cadastro.php" type="button" id="adicionar" class="btn btn-secondary">
+      <a href="responsibles-sign.php" type="button" id="adicionar" class="btn btn-secondary">
         Adicionar
       </a>
 
@@ -86,7 +86,7 @@ if (isset($_POST['btn-search'])) {
               ?>
               <tr id="tr">
                 <td id="editar">
-                  <form action="encarregado-editar.php" method="post">
+                  <form action="responsibles-edit.php" method="post">
                     <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $responsible_data['id_e']; ?>"
                       name="responsible_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
@@ -112,7 +112,7 @@ if (isset($_POST['btn-search'])) {
                         </div>
 
                         <div class="modal-footer">
-                          <form action="encarregado-apagar.php" method="post">
+                          <form action="responsibles-delete.php" method="post">
                             <input type="hidden" name="responsible_id" value="<?= $responsible_data['id_e']; ?>">
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Sim</button>
                           </form>
