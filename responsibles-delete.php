@@ -15,7 +15,7 @@ $update_user = updateData($connection, "UPDATE sg_usuarios SET view = '0' WHERE 
 
 if ($update_responsible && $update_user) {
   setMessage("responsible-message", "alert-success", "Eliminado com sucesso!");
-  header('Location:menu-encarregados.php');
+  header('Location: menu-reponsibles.php');
 } else {
   setMessage("responsible-message", "alert-success", "Erro ao apagar!");
 }

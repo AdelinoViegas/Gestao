@@ -16,6 +16,6 @@ if (isset($_POST['btn-state'])) {
   );
   
   if($update_data)
-    header('Location: menu-usuarios.php'); 
+    header('Location: menu-users.php'); 
 }
 ?>

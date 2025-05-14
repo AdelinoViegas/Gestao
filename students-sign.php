@@ -37,7 +37,6 @@ if (isset($_POST['btn-cadastre'])) {
         [$name, $hash, 'activo', 'aluno', '1', $date, $date]
       );
   
-      //Capturar o id do dado cadastrado
       $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$name]);
       $user_id = $user_data['id_u'];
 
@@ -95,7 +94,7 @@ if (isset($_POST['btn-cadastre'])) {
     <div class="divsuperior3">
       <h5>Formulário de cadastramento de alunos</h5>
     </div>
-    <form action="aluno-cadastro.php" method="post">
+    <form action="students-sign.php" method="post">
       <div class="row">
         <div class="form-group col-md-6 mb-3">
           <label for="textnome">Nome</label>
@@ -191,7 +190,7 @@ if (isset($_POST['btn-cadastre'])) {
 
         <div class="col-md-8" id="margemBotao"></div>
 
-        <a href="menu-alunos.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar">Voltar</a>
+        <a href="menu-students.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar">Voltar</a>
       </div>
     </form>
   </div>

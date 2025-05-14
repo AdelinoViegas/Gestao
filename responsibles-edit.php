@@ -41,7 +41,7 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
       <h5>Editar dados do encarregado</h5>
     </div>
 
-    <form action="encarregado-editar-processar.php" method="post">
+    <form action="responsibles-edit-process.php" method="post">
       <div class="row">
         <div class="form-group col-md-6 mb-3">
           <label for="textnome">Nome</label>

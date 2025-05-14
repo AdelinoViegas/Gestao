@@ -53,7 +53,7 @@ if (isset($_POST['btn-search'])) {
     </div>
 
     <div id="divflex">
-      <a href="aluno-cadastro.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
+      <a href="students-sign.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
 
       <form action="" method="post">
         <div id="btn-pesquisar">
@@ -86,7 +86,7 @@ if (isset($_POST['btn-search'])) {
               ?>
               <tr id="tr">
                 <td id="editar">
-                  <form action="aluno-editar.php" method="post">
+                  <form action="students-edit.php" method="post">
                     <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_a']; ?>"
                       name="student_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
@@ -94,7 +94,7 @@ if (isset($_POST['btn-search'])) {
 
                   <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_a']; ?>"
                     name="id_estudante">
-                  <button onclick="chamada()" id="editar2" type="button"
+                  <button id="editar2" type="button"
                     data-bs-target="#apagar<?= $student_data['id_a']; ?>" data-bs-toggle="modal"
                     value="<?= $student_data['id_a']; ?>" class="btn btn-danger">Apagar</button>
 
@@ -115,7 +115,7 @@ if (isset($_POST['btn-search'])) {
                         </div>
 
                         <div class="modal-footer">
-                          <form action="aluno-apagar.php" method="post">
+                          <form action="students-delete.php" method="post">
                             <input type="hidden" name="student_id" value="<?= $student_data['id_a']; ?>">
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Sim</button>
                           </form>

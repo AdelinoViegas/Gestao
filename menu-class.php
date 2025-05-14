@@ -53,7 +53,7 @@ if (isset($_POST['btn-search'])) {
     </div>
 
     <div id="divflex">
-      <a href="classe-cadastro.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
+      <a href="class-sign.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
 
       <form action="" method="post">
         <div id="btn-pesquisar">
@@ -77,7 +77,7 @@ if (isset($_POST['btn-search'])) {
             foreach ($data as $class_data) { ?>
               <tr id="tr">
                 <td id="editar">
-                  <form action="classe-editar.php" method="post">
+                  <form action="class-edit.php" method="post">
                     <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $class_data['id_c']; ?>"
                       name="class_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>

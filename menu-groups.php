@@ -54,7 +54,7 @@ if (isset($_POST['btn-search'])) {
     </div>
 
     <div id="divflex">
-      <a href="turma-cadastro.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
+      <a href="groups-sign.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
 
       <form action="" method="post">
         <div id="btn-pesquisar">
@@ -78,7 +78,7 @@ if (isset($_POST['btn-search'])) {
             foreach ($data as $group_data) { ?>
               <tr id="tr">
                 <td id="editar">
-                  <form action="turma-editar.php" method="post">
+                  <form action="groups-edit.php" method="post">
                     <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $group_data['id_t']; ?>"
                       name="group_id">
                     <button id="editar1" type="submit" name="btn-update" class="btn btn-warning">Editar</button>

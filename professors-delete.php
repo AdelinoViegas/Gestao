@@ -15,7 +15,7 @@ $update_user = updateData($connection, "UPDATE sg_usuarios SET view = '0' WHERE 
 
 if ($update_professor && $update_user){
   setMessage("professor-message", "alert-success", "Eliminado com sucesso!");
-  header('Location:menu-professores.php');
+  header('Location: menu-professors.php');
 } else {
   setMessage("professor-message", "alert-danger", "Erro ao apagar!");
 }

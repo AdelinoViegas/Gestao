@@ -79,7 +79,7 @@ if (isset($_POST['btn-search'])) {
                   <?php
                     $button = $l_usuario['estado_u'] === "activo"?"btn-success":"btn-danger";
                     ?>
-                    <form action="usuario-mudar.php" method="post">
+                    <form action="change-user.php" method="post">
                       <input type="hidden" name="userState" value="<?= $l_usuario['estado_u']; ?>">
                       <input type="hidden" name="userId" value="<?= $l_usuario['id_u']; ?>">
                       <button id="btn2" name="btn-state" type="submit" class="<?= "btn btn-md ".$button ?>">

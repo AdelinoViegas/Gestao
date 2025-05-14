@@ -56,7 +56,7 @@ if (isset($_POST['btn-search'])) {
     </div>
 
     <div id="divflex">
-      <a href="gerenciar-cadastro.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
+      <a href="management-sign.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
 
       <form action="" method="post">
         <div id="btn-pesquisar">
@@ -83,7 +83,7 @@ if (isset($_POST['btn-search'])) {
             foreach ($data as $manage_data) { ?>
               <tr id="tr">
                 <td>
-                  <form action="gerenciar-editar.php" method="post">
+                  <form action="management-edit.php" method="post">
                     <input id="editar1" type="hidden" value="<?= $manage_data['id_g']; ?>" name="management_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>

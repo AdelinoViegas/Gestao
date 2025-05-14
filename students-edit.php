@@ -7,7 +7,7 @@ $student_id = $_POST['student_id'];
 $_SESSION['student_id'] = $student_id;
 
 $sql_student = "SELECT * FROM sg_aluno AS a join sg_classe AS c ON c.id_c = a.idClasse join sg_turma AS t ON a.idTurma_a = t.id_t WHERE id_a =?";
-$student_data = getData($connection, $sql_student, [$student_id]);
+$student_data = getData($connection, $sql_student, [$student_id])[0];
 $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi", "Talatona", "Cacuaco", "Icolo e Bengo"];
 ?>
 
@@ -35,84 +35,14 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
     </div>
   </div>
 
-  <div class="navegacao">
-    <ul>
-      <li class="list">
-        <a href="menu-home.php">
-          <span class="icon"><img src="img/home_white_24dp.svg"></span>
-          <span class="title">HOME</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-professores.php">
-          <span class="icon"><img src="img/perm_identity_white_24dp.svg"></span>
-          <span class="title">Professores</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-Encarregados.php">
-          <span class="icon"><img src="img/escalator_warning_white_24dp.svg"></span>
-          <span class="title">Encarregados</span>
-        </a>
-      </li>
-      <li class="list active">
-        <a href="menu-alunos.php">
-          <span class="icon"><img src="img/school_white_24dp.svg"></span>
-          <span class="title">Alunos</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-usuarios.php">
-          <span class="icon"><img src="img/perm_identity_white_24dp.svg"></span>
-          <span class="title">Usuarios</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-disciplinas.php">
-          <span class="icon"><img src="img/livro.png"></span>
-          <span class="title">Disciplinas</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-turmas.php">
-          <span class="icon"><img src="img/edit.png"></span>
-          <span class="title">Turmas</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-classes.php">
-          <span class="icon"><img src="img/edit.png"></span>
-          <span class="title">Classes</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-gerenciar.php">
-          <span class="icon"><img src="img/gerenciar.png"></span>
-          <span class="title">Gerenciamento</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-configurar.php">
-          <span class="icon"><img src="img/settings.png"></span>
-          <span class="title">Alterar-senha</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="logoult.php">
-          <span class="icon"><img src="img/logout_white_24dp.svg"></span>
-          <span class="title">Sair</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-
+  <?php require_once "navigation.php" ?>
   <?php require_once "navbarMobile.php" ?>
 
   <div class="fontes rounded-3" id="divm">
     <div class="divsuperior3">
       <h5>Editar dados do aluno</h5>
     </div>
-    <form action="aluno-editar-processar.php" method="post">
+    <form action="students-edit-process.php" method="post">
       <div class="row">
         <div class="form-group col-md-6 mb-3">
           <label for="textnome">Nome</label>
@@ -198,7 +128,7 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
 
       <div class="row">
         <?php
-        $responsible_data = getData($connection, "SELECT * FROM sg_encarregado AS e INNER JOIN sg_aluno AS a ON e.id_e = a.idEncarregado WHERE id_a = ?", [$student_id]);
+        $responsible_data = getData($connection, "SELECT * FROM sg_encarregado AS e INNER JOIN sg_aluno AS a ON e.id_e = a.idEncarregado WHERE id_a = ?", [$student_id])[0];
         ?>
         <div class="form-group col-md-6 mb-3">
           <label for="textencarregado">Encarregado</label>
@@ -213,7 +143,7 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
 
         <div class="col-md-8" id="margemBotao"></div>
 
-        <a href="menu-alunos.php" class="btn btn-outline-secondary btn-block col-md-2" name="cadastramento">Voltar</a>
+        <a href="menu-students.php" class="btn btn-outline-secondary btn-block col-md-2" name="cadastramento">Voltar</a>
       </div>
     </form>
   </div>
