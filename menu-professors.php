@@ -56,7 +56,7 @@ if (isset($_POST['btn-search'])) {
     </div>
 
     <div id="divflex">
-      <a href="professor-cadastro.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
+      <a href="professors-sign.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
 
       <form action="" method="post">
         <div id="btn-pesquisar">
@@ -89,7 +89,7 @@ if (isset($_POST['btn-search'])) {
               ?>
               <tr id="tr">
                 <td id="editar">
-                  <form action="professor-editar.php" method="post">
+                  <form action="professors-edit.php" method="post">
                     <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $professor_data['id_p']; ?>"
                       name="professor_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
@@ -115,7 +115,7 @@ if (isset($_POST['btn-search'])) {
                         </div>
 
                         <div class="modal-footer">
-                          <form action="professor-apagar.php" method="post">
+                          <form action="professor-delete.php" method="post">
                             <input type="hidden" name="professor_id" value="<?= $professor_data['id_p']; ?>">
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Sim</button>
                           </form>

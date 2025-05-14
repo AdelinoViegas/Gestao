@@ -37,7 +37,6 @@ if (isset($_POST['btn-cadastre'])) {
       [$name, $hash, 'activo', 'professor', '1', $date, $date]
     );
 
-    //Capturar o id do dado cadastrado
     $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$name]);
     $user_id = $user_data['id_u'];
 
@@ -86,77 +85,7 @@ if (isset($_POST['btn-cadastre'])) {
   }
   ?>
 
-  <div class="navegacao">
-    <ul>
-      <li class="list">
-        <a href="menu-home.php">
-          <span class="icon"><img src="img/home_white_24dp.svg"></span>
-          <span class="title">HOME</span>
-        </a>
-      </li>
-      <li class="list active">
-        <a href="menu-professores.php">
-          <span class="icon"><img src="img/perm_identity_white_24dp.svg"></span>
-          <span class="title">Professores</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-Encarregados.php">
-          <span class="icon"><img src="img/escalator_warning_white_24dp.svg"></span>
-          <span class="title">Encarregados</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-alunos.php">
-          <span class="icon"><img src="img/school_white_24dp.svg"></span>
-          <span class="title">Alunos</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-usuarios.php">
-          <span class="icon"><img src="img/perm_identity_white_24dp.svg"></span>
-          <span class="title">Usuarios</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-disciplinas.php">
-          <span class="icon"><img src="img/livro.png"></span>
-          <span class="title">Disciplinas</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-turmas.php">
-          <span class="icon"><img src="img/edit.png"></span>
-          <span class="title">Turmas</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-classes.php">
-          <span class="icon"><img src="img/edit.png"></span>
-          <span class="title">Classes</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-gerenciar.php">
-          <span class="icon"><img src="img/gerenciar.png"></span>
-          <span class="title">Gerenciamento</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="menu-configurar.php">
-          <span class="icon"><img src="img/settings.png"></span>
-          <span class="title">Alterar-senha</span>
-        </a>
-      </li>
-      <li class="list">
-        <a href="logoult.php">
-          <span class="icon"><img src="img/logout_white_24dp.svg"></span>
-          <span class="title">Sair</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-
+  <?php require_once "navigation.php"; ?>
   <?php require_once "navbarMobile.php"; ?>
 
   <div class="fontes rounded-3" id="divm">
@@ -164,7 +93,7 @@ if (isset($_POST['btn-cadastre'])) {
       <h5>Formulário de cadastramento de professores</h5>
     </div>
 
-    <form action="professor-cadastro.php" method="post">
+    <form action="professors-sign.php" method="post">
       <div class="row">
         <div class="form-group col-md-6 mb-3">
           <label for="textnome">Nome</label>
@@ -232,7 +161,7 @@ if (isset($_POST['btn-cadastre'])) {
 
         <div class="col-md-8" id="margemBotao"></div>
 
-        <a href="menu-professores.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar">Voltar</a>
+        <a href="menu-professors.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar">Voltar</a>
       </div>
     </form>
   </div>
