@@ -65,8 +65,7 @@ if (isset($_POST['btn-cadastre'])) {
     <div class="divsuperior3">
       <h5>Formulário de cadastramento de turmas</h5>
     </div>
-    <form action="turma-cadastro.php" method="post">
-
+    <form action="groups-sign.php" method="post">
       <div class="row margB">
         <div class="form-group col-md-4" id="margemB">
           <label for="textsexo">Escolhe a classe</label>

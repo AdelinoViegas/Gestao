@@ -85,7 +85,7 @@ if (isset($_POST['btn-cadastre'])) {
       <h5>Formulário de cadastramento de encarregados</h5>
     </div>
 
-    <form action="encarregado-cadastro.php" method="post">
+    <form action="responsibles-sign.php" method="post">
       <div class="row">
         <div class="form-group col-md-6 mb-3">
           <label for="textnome">Nome</label>

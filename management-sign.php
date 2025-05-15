@@ -7,9 +7,9 @@ require_once "features/setMessage.php";
 session_start();
 
 if (isset($_POST['btn-sign'])) {
-  $discipline = mysqli_escape_string($connection, trim($_POST['discipline']));
-  $professor = mysqli_escape_string($connection, trim($_POST['professor']));
-  $group = mysqli_escape_string($connection, trim($_POST['group']));
+  $discipline = mysqli_real_escape_string($connection, trim($_POST['discipline']));
+  $professor = mysqli_real_escape_string($connection, trim($_POST['professor']));
+  $group = mysqli_real_escape_string($connection, trim($_POST['group']));
   $date = '2022';
 
   $management_data = getData(
@@ -73,7 +73,7 @@ if (isset($_POST['btn-sign'])) {
     <div class="divsuperior3">
       <h5>Gerenciar</h5>
     </div>
-    <form action="gerenciar-cadastro.php" method="post">
+    <form action="management-sign.php" method="post">
       <div class="row margB">
         <div class="form-group col-md-4" id="margemB">
           <label for="textdisciplina">Disciplinas</label>
