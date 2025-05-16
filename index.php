@@ -47,7 +47,7 @@ if (isset($_POST['enviar-dados'])) {
         if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
           $_SESSION['logged'] = true;
           $_SESSION['admin_id'] = $user['id_u'];
-          header('Location: menu-home.php');
+          header('Location: admin/menu-home.php');
         }
       } elseif ($painel === 'professor') {
         if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
