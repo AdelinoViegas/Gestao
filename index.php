@@ -52,19 +52,19 @@ if (isset($_POST['enviar-dados'])) {
       } elseif ($painel === 'professor') {
         if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
           $sql = "SELECT id_p FROM sg_professor WHERE idUsuario = ?";
-          $route = 'Location: professor/homeprof.php';
+          $route = 'Location: users/professors/home.php';
           authentication($connection,$sql,$route,$user['id_u'],"professor");
         }
       } elseif ($painel === 'encarregado') {
         if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
           $sql = "SELECT id_e FROM sg_encarregado WHERE idUsuario = ?";
-          $route = 'Location: encarregado/homepais.php';
+          $route = 'Location: users/responsibles/home.php';
           authentication($connection,$sql,$route,$user['id_u'],"encarregado");
         }
       } elseif ($painel === 'aluno') {
         if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
           $sql = "SELECT * FROM sg_aluno WHERE idUsuario = ?";
-          $route = 'Location: aluno/homealuno.php';
+          $route = 'Location: users/students/home.php';
           authentication($connection,$sql,$route,$user['id_u'],"aluno");
         }
       }

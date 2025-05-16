@@ -29,7 +29,7 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
       </div>
       <div class="d-flex">
         <h5 class="me-2">Usuário :</h5>
-        <img class="me-1" src="img/person.svg" id="IMG">
+        <img class="me-1" src="../img/person.svg" id="IMG">
         <h5 class="me-3">Administrador</h5>
       </div>
     </div>
