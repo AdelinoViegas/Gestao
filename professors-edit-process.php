@@ -34,7 +34,7 @@ if(isset($_POST['btn-update'])){
    
    if($update_professor && $update_user){
       setMessage("professor-message", "alert-success", "Dados actualizado com sucesso!");
-      header('Location: menu-professores.php');
+      header('Location: menu-professors.php');
    }else{
       setMessage("professor-message", "alert-danger", "Erro ao actualizar!");
    }

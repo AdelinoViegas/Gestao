@@ -3,6 +3,7 @@ require_once "connection.php";
 require_once "features/getData.php";
 require_once "features/signData.php";
 require_once "features/setMessage.php";
+require_once "features/getCurrentDate.php";
 session_start();
 
 if (isset($_POST['btn-cadastre'])) {
@@ -19,8 +20,7 @@ if (isset($_POST['btn-cadastre'])) {
   if ($BI_verification) {
     setMessage("responsible-message", "alert-warning", "Codigo de BI já existente!");
   } else {
-    date_default_timezone_set('Africa/Luanda');
-    $date = date('Y/m/d H:i:s');
+    $date = getCurrentDate();
     $hash = password_hash('encarregado', PASSWORD_DEFAULT);
 
     $sign_user = signData(
@@ -29,7 +29,7 @@ if (isset($_POST['btn-cadastre'])) {
       [$name, $hash, 'activo', 'encarregado', "1", $date, $date]
     );
 
-    $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$name]);
+    $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ? AND dataCadastro_u =?", [$name, $date])[0];
     $user_id = $user_data['id_u'];
 
     $sign_responsible = signData(

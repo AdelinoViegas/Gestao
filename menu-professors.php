@@ -115,7 +115,7 @@ if (isset($_POST['btn-search'])) {
                         </div>
 
                         <div class="modal-footer">
-                          <form action="professor-delete.php" method="post">
+                          <form action="professors-delete.php" method="post">
                             <input type="hidden" name="professor_id" value="<?= $professor_data['id_p']; ?>">
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Sim</button>
                           </form>

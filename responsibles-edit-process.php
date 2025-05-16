@@ -34,7 +34,7 @@ if (isset($_POST['btn-update'])) {
 
   if ($update_responsible && $update_user) {
     setMessage("responsible-message", "alert-success", "Dados actualizado com sucesso!");
-    header('Location: menu-encarregados.php');
+    header('Location: menu-responsibles.php');
   } else {
     setMessage("responsible-message", "alert-danger", "Erro ao actualizar!");
   }

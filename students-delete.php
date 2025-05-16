@@ -5,7 +5,7 @@ require_once "features/getData.php";
 require_once "features/setMessage.php";
 session_start();
 
-$student_id = mysqli_real_escape_string($connection, trim($_POST['id_aluno']));
+$student_id = mysqli_real_escape_string($connection, trim($_POST['student_id']));
 
 $student_data = getData($connection, "SELECT * FROM sg_aluno WHERE  id_a =?", [$student_id]);
 $user_id = $student_data['idUsuario'];

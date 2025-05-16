@@ -3,6 +3,7 @@ require_once "connection.php";
 require_once "features/getData.php";
 require_once "features/signData.php";
 require_once "features/setMessage.php";
+require_once "features/getCurrentDate.php";
 session_start();
 
 if (isset($_POST['btn-cadastre'])) {
@@ -15,20 +16,19 @@ if (isset($_POST['btn-cadastre'])) {
   $contact = mysqli_real_escape_string($connection, trim($_POST['contact']));
   $birthday = mysqli_real_escape_string($connection, trim($_POST['birthday']));
   $BI = mysqli_real_escape_string($connection, trim($_POST['BI']));
-  $responsible = mysqli_real_escape_string($connection, trim($_POST['responsible']));
-
+  $responsible_BI = mysqli_real_escape_string($connection, trim($_POST['responsible']));
+  
   $BI_verification = getData($connection, "SELECT numeroBI_a FROM sg_aluno WHERE numeroBI_a = ?", [$BI]);
-
+  
   if ($BI_verification) {
     setMessage("student-message", "alert-danger", "Codigo de BI já existente!");
   } else {
-    date_default_timezone_set('Africa/Luanda');
-    $date = date('Y/m/d H:i:s');
+    $date = getCurrentDate();
     $hash = password_hash('aluno', PASSWORD_DEFAULT);
 
-    $responsible_data = getData($connection, "SELECT * FROM sg_encarregado WHERE nome_e = ?", [$responsible]);
-    
-    if (count($responsible_data) > 0){
+    $responsible_data = getData($connection, "SELECT * FROM sg_encarregado WHERE numeroBI_e = ?", [$responsible_BI])[0];
+
+    if (is_array($responsible_data) && count($responsible_data) > 0){
       $responsible_id = $responsible_data['id_e'];
 
       $sign_user = signData(
@@ -37,7 +37,7 @@ if (isset($_POST['btn-cadastre'])) {
         [$name, $hash, 'activo', 'aluno', '1', $date, $date]
       );
   
-      $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ?", [$name]);
+      $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ? AND dataCadastro_u =?", [$name, $date]);
       $user_id = $user_data['id_u'];
 
       $sign_student = signData(
@@ -46,7 +46,7 @@ if (isset($_POST['btn-cadastre'])) {
         [$student_group, $student_class, $responsible_id, $user_id, $name, $gender, $birthday, $city, $neighborhood, $contact, $BI, "1", $date, $date]
       );
     }else{
-      $error = "Nome do encarregado não foi encontrado, cadastre-o primeiramente ou digite o nome correctamente";
+      $error = "BI do encarregado não foi encontrado, cadastre-o primeiramente ou digite o BI correctamente";
     }
 
     if (isset($sign_student) && isset($sign_user))
@@ -177,10 +177,10 @@ if (isset($_POST['btn-cadastre'])) {
       </div>
 
       <div class="row">
-        <div class="form-group col-md-6 mb-3">
-          <label for="textencarregado">Encarregado</label>
+        <div class="form-group col-md-4 mb-3">
+          <label for="textencarregado">Encarregado/a</label>
           <input type="text" id="textencarregado" class="form-control" name="responsible" maxlength="45"
-            placeholder="Nome completo do encarregado/a" required>
+            placeholder="Número do BI" required>
         </div>
       </div>
 
