@@ -69,7 +69,7 @@ if(isset($_POST['btn-update'])){
     </a>
   </li>
   <li class="list">
-    <a href="conf-professor.php">
+    <a href="settings.php">
       <span class="icon"><img src="../img/settings.png"></span>
       <span class="title">Alterar-senha</span>
     </a>

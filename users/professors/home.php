@@ -2,7 +2,6 @@
 require_once "../../connection.php";
 session_start();
 
-//verficar se está logado
 if (!isset($_SESSION['logged']))
   header("Location: ../../index.php");
 ?>
@@ -34,7 +33,7 @@ if (!isset($_SESSION['logged']))
   <div class="navegacao">
     <ul>
       <li class="list active">
-        <a href="homeprof.php">
+        <a href="home.php">
           <span class="icon"><img src="../../img/home_white_24dp.svg"></span>
           <span class="title">HOME</span>
         </a>
@@ -52,7 +51,7 @@ if (!isset($_SESSION['logged']))
         </a>
       </li>
       <li class="list">
-        <a href="conf-professor.php">
+        <a href="settings.php">
           <span class="icon"><img src="../../img/settings.png"></span>
           <span class="title">Alterar-senha</span>
         </a>
@@ -66,7 +65,7 @@ if (!isset($_SESSION['logged']))
     </ul>
   </div>
 
-  <?php require_once "navMob-professor.php" ?>
+  <?php require_once "navMob-professor.php"; ?>
 
   <div id="imagem">
     <img src="../../img/prof-escola.png">

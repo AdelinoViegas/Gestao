@@ -1,5 +1,5 @@
 <?php
-require_once "../connection.php";
+require_once "../../connection.php";
 session_start();
 
 /*$id_gerenciar = $_SESSION['gerir'];
@@ -23,7 +23,7 @@ if (isset($_POST['idest'])) {
 <html>
 <head>
   <title>Samiga</title>
-  <?php require_once "../head2.php"; ?>
+  <?php require_once "../../head2.php"; ?>
 </head>
 <body>
   <div class="divsuperior">
@@ -37,7 +37,7 @@ if (isset($_POST['idest'])) {
       </div>
       <div class="d-flex">
         <h5 class="me-2">Usuário :</h5>
-        <img class="me-1" src="../img/person.svg" id="IMG">
+        <img class="me-1" src="../../img/person.svg" id="IMG">
         <h5 class="me-3">Professor</h5>
       </div>
     </div>
@@ -46,39 +46,39 @@ if (isset($_POST['idest'])) {
   <div class="navegacao">
     <ul>
       <li class="list">
-        <a href="homeprof.php">
-          <span class="icon"><img src="../img/home_white_24dp.svg"></span>
+        <a href="home.php">
+          <span class="icon"><img src="../../img/home_white_24dp.svg"></span>
           <span class="title">HOME</span>
         </a>
       </li>
       <li class="list">
         <a href="lancar-notas.php">
-          <span class="icon"><img src="../img/perm_identity_white_24dp.svg"></span>
+          <span class="icon"><img src="../../img/perm_identity_white_24dp.svg"></span>
           <span class="title">Lancar-notas</span>
         </a>
       </li>
       <li class="list active">
         <a href="exames.php">
-          <span class="icon"><img src="../img/format_list_numbered_white_24dp.svg"></span>
+          <span class="icon"><img src="../../img/format_list_numbered_white_24dp.svg"></span>
           <span class="title">Exame</span>
         </a>
       </li>
       <li class="list">
-        <a href="conf-professor.php">
-          <span class="icon"><img src="../img/settings.png"></span>
+        <a href="settings.php">
+          <span class="icon"><img src="../../img/settings.png"></span>
           <span class="title">Alterar-senha</span>
         </a>
       </li>
       <li class="list">
-        <a href="../logoult.php">
-          <span class="icon"><img src="../img/logout_white_24dp.svg"></span>
+        <a href="../../logoult.php">
+          <span class="icon"><img src="../../img/logout_white_24dp.svg"></span>
           <span class="title">Sair</span>
         </a>
       </li>
     </ul>
   </div>
 
-  <?php require_once "navMob-professor.php" ?>
+  <?php require_once "navMob-professor.php"; ?>
 
   <div class="fontes rounded-3" id="divm">
     <div class="divsuperior3">
@@ -104,7 +104,6 @@ if (isset($_POST['idest'])) {
     </form>
   </div>
 
-  <?php require_once "../footer2.php"; ?>
-  <script src="calc.js?v=4"></script>
+  <?php require_once "../../footer2.php"; ?>
 </body>
 </html>
