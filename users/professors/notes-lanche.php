@@ -8,7 +8,7 @@ $professor_id = $_SESSION['professor_id'];
 if (isset($_POST['btn-search'])) {
   $_SESSION['quarter'] = $_POST['quarter'];
   $_SESSION['management_id'] = $_POST['management'];
-  header('Location: notasAlunos.php');
+  header('Location: student-notes.php');
 }
 ?>
 
@@ -45,7 +45,7 @@ if (isset($_POST['btn-search'])) {
         </a>
       </li>
       <li class="list active">
-        <a href="lancar-notas.php">
+        <a href="notes-lanche.php">
           <span class="icon"><img src="../../img/perm_identity_white_24dp.svg"></span>
           <span class="title">Lancar-notas</span>
         </a>

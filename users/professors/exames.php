@@ -52,7 +52,7 @@ if (isset($_POST['idest'])) {
         </a>
       </li>
       <li class="list">
-        <a href="lancar-notas.php">
+        <a href="notes-lanche.php">
           <span class="icon"><img src="../../img/perm_identity_white_24dp.svg"></span>
           <span class="title">Lancar-notas</span>
         </a>
