@@ -22,6 +22,8 @@ let route = [
   ["logoult.php"],
 ]
 
+
+function routing(){
 let fileName = window.location.pathname.split("/").pop();
 let menu = document.querySelectorAll(".navegacao ul li");
 let count = 0;
@@ -32,3 +34,4 @@ menu.forEach((value) => {
     value.setAttribute("class", "list");
   count++;
 });
+}

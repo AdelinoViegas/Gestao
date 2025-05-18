@@ -93,5 +93,6 @@ if (isset($_POST['btn-password'])) {
   </div>
 
   <?php require_once "../../footer2.php"; ?>
+  <script src="routing.js"></script>
 </body>
 </html>

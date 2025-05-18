@@ -9,37 +9,31 @@
     <div class="navbar-collapse collapse" id="menu-mobile">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" id="opcMobile" href="homeprof.php">
+          <a class="nav-link" id="opcMobile" href="home.php">
             <span class="icon"><img src="../../img/home_white_24dp.svg"></span>
             <span class="title">HOME</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="opcMobile" href="lancar-notas.php">
+          <a class="nav-link" id="opcMobile" href="notes.php">
             <span class="icon"><img src="../../img/perm_identity_white_24dp.svg"></span>
-            <span class="title">Lançar-Notas</span>
+            <span class="title">Notas-Trimestrais</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="opcMobile" href="#">
-            <span class="icon"><img src="../../img/school_white_24dp.svg"></span>
-            <span class="title">Gerenciamento</span>
+          <a class="nav-link" id="opcMobile" href="average.php">
+            <span class="icon"><img src="../../img/format_list_numbered_white_24dp.svg"></span>
+            <span class="title">Resultado-Final</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="opcMobile" href="#">
-            <span class="icon"><img src="../../img/escalator_warning_white_24dp.svg"></span>
-            <span class="title">Pautas</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="opcMobile" href="#">
+          <a class="nav-link" id="opcMobile" href="settings.php">
             <span class="icon"><img src="../../img/settings.png"></span>
             <span class="title">Alterar-senha</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="opcMobile" href="logoult.php">
+          <a class="nav-link" id="opcMobile" href="../../logoult.php">
             <span class="icon"><img src="../../img/logout_white_24dp.svg"></span>
             <span class="title">Sair</span>
           </a>

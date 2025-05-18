@@ -10,31 +10,25 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" id="opcMobile" href="homepais.php">
-                 <span class="icon"><img src="../img/home_white_24dp.svg"></span>
+                 <span class="icon"><img src="../../img/home_white_24dp.svg"></span>
            <span class="title">HOME</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="opcMobile" href="ver-notas.php">
-      <span class="icon"><img src="../img/perm_identity_white_24dp.svg"></span>
+      <span class="icon"><img src="../../img/perm_identity_white_24dp.svg"></span>
       <span class="title">Ver-Notas</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="opcMobile" href="conf-encarregado.php">
-               <span class="icon"><img src="../img/settings.png"></span>
-           <span class="title">Alterar-senha</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="opcMobile" href="#">
-            <span class="icon"><img src="../img/escalator_warning_white_24dp.svg"></span>
-            <span class="title">Pautas</span>
+               <span class="icon"><img src="../../img/settings.png"></span>
+           <span class="title">Alterar-Senha</span>
                 </a>
             </li>
              <li class="nav-item">
-                <a class="nav-link" id="opcMobile" href="../logoult.php">
-            <span class="icon"><img src="../img/logout_white_24dp.svg"></span>
+                <a class="nav-link" id="opcMobile" href="../../logoult.php">
+            <span class="icon"><img src="../../img/logout_white_24dp.svg"></span>
             <span class="title">Sair</span>
                 </a>
             </li>
