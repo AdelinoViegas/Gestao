@@ -95,17 +95,12 @@ if (isset($_POST['btn-update'])) {
     <div id="divflex">
       <button type="button" id="adicionar" class="btn btn-primary" data-bs-target="#apagar"
         data-bs-toggle="modal">Gravar</button>
-      <!--<h5 id="adicionar">Nª de alunos : <span id='num'><?php /*
-$nomeT = $p['nome_t'];
-$result = mysqli_query($conexao,"SELECT nome_a FROM sg_aluno JOIN sg_turma ON sg_aluno.idTurma = sg_turma.id_t WHERE nome_t = '$nomeT'");
-$alunos = mysqli_num_rows($result);
-echo $alunos; */ ?></span></h5>-->
 
       <form action="" method="post">
         <div class="d-flex align-items-center" id="btn-pesquisar">
-          <input type="text" class="form-control me-2" name="txtpesquisar" placeholder="Pesquisa por nome"><button
-            type="submit" class="btn btn-success" name="btn-pesquisa">Pesquisar</button>
-        </div>
+          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button
+            type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
+        </div> 
       </form>
     </div>
 

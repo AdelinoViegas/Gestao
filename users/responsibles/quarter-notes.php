@@ -1,6 +1,6 @@
 <?php
-require_once "../connection.php";
-require_once "../features/getData.php";
+require_once "../../connection.php";
+require_once "../../features/getData.php";
 session_start();
 
   $student_id = mysqli_real_escape_string($connection, trim($_SESSION['student_id']));
@@ -19,7 +19,7 @@ session_start();
 <html>
 <head>
   <title>Samiga</title>
-  <?php require_once "../head2.php"; ?>
+  <?php require_once "../../head2.php"; ?>
 </head>
 <body>
   <div class="divsuperior">
@@ -36,7 +36,7 @@ session_start();
       </div>
       <div class="d-flex">
         <h5 class="me-2">Usuário :</h5>
-        <img class="me-1" src="../img/person.svg" id="IMG">
+        <img class="me-1" src="../../img/person.svg" id="IMG">
         <h5 class="me-3">Encarregado</h5>
       </div>
     </div>
@@ -45,26 +45,26 @@ session_start();
   <div class="navegacao">
     <ul>
       <li class="list">
-        <a href="homepais.php">
-          <span class="icon"><img src="../img/home_white_24dp.svg"></span>
+        <a href="home.php">
+          <span class="icon"><img src="../../img/home_white_24dp.svg"></span>
           <span class="title">HOME</span>
         </a>
       </li>
       <li class="list active">
-        <a href="ver-notas.php">
-          <span class="icon"><img src="../img/perm_identity_white_24dp.svg"></span>
+        <a href="notes.php">
+          <span class="icon"><img src="../../img/perm_identity_white_24dp.svg"></span>
           <span class="title">Ver-notas</span>
         </a>
       </li>
       <li class="list">
-        <a href="conf-encarregado.php">
-          <span class="icon"><img src="../img/settings.png"></span>
+        <a href="settings.php">
+          <span class="icon"><img src="../../img/settings.png"></span>
           <span class="title">Alterar-senha</span>
         </a>
       </li>
       <li class="list">
-        <a href="../logoult.php">
-          <span class="icon"><img src="../img/logout_white_24dp.svg"></span>
+        <a href="../../logoult.php">
+          <span class="icon"><img src="../../img/logout_white_24dp.svg"></span>
           <span class="title">Sair</span>
         </a>
       </li>
@@ -160,6 +160,6 @@ session_start();
     </div>
   </div>
 
-  <?php require_once "../footer2.php"; ?>
+  <?php require_once "../../footer2.php"; ?>
 </body>
 </html>
