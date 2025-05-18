@@ -16,12 +16,6 @@
         </a>
       </li>
       <li class="list">
-        <a href="#">
-          <span class="icon"><img src="../../img/format_list_numbered_white_24dp.svg"></span>
-          <span class="title">Exame</span>
-        </a>
-      </li>
-      <li class="list">
         <a href="average.php">
           <span class="icon"><img src="../../img/format_list_numbered_white_24dp.svg"></span>
           <span class="title">Resultado-final</span>
