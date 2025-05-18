@@ -1,10 +1,10 @@
 <?php
-require_once "../connection.php";
+require_once "../../connection.php";
 session_start();
 
 if (isset($_POST['search'])) {
   $_SESSION['quarter'] = $_POST['quarter'];
-  header('Location: trimestres.php');
+  header('Location: quarter.php');
 }
 ?>
 
@@ -12,7 +12,7 @@ if (isset($_POST['search'])) {
 <html>
 <head>
   <title>principal</title>
-  <?php require_once "../head2.php"; ?>
+  <?php require_once "../../head2.php"; ?>
 </head>
 <body>
   <div class="divsuperior">
@@ -26,14 +26,14 @@ if (isset($_POST['search'])) {
       </div>
       <div class="d-flex">
         <h5 class="me-2">Usuário :</h5>
-        <img class="me-1" src="../img/person.svg" id="IMG">
+        <img class="me-1" src="../../img/person.svg" id="IMG">
         <h5 class="me-3">Aluno</h5>
       </div>
     </div>
   </div>
 
-  <?php require_once "nav-aluno.php" ?>
-  <?php require_once "navMob-aluno.php" ?>
+  <?php require_once "nav-student.php" ?>
+  <?php require_once "navMob-student.php" ?>
 
   <div class="fontes rounded-3" id="divm">
     <div class="divsuperior3">
@@ -60,6 +60,6 @@ if (isset($_POST['search'])) {
     </form>
   </div>
 
-  <?php require_once "../footer2.php"; ?>
+  <?php require_once "../../footer2.php"; ?>
 </body>
 </html>

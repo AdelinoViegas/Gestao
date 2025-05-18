@@ -1,13 +1,13 @@
 <?php
-require_once "../connection.php";
-require_once "../features/getData.php";
+require_once "../../connection.php";
+require_once "../../features/getData.php";
 session_start();
 
-$student_name = $_SESSION['student_name'];
+
 $student_id = $_SESSION['student_id'];
 $student_quarter = $_SESSION['quarter'];
 
-$student_data = getData($connection, "SELECT * FROM sg_aluno WHERE nome_a = ?", [$student_name])[0];
+$student_data = getData($connection, "SELECT * FROM sg_aluno WHERE id_a = ?", [$student_id])[0];
 $group_id = $student_data['idTurma_a'];
 
 $sql = "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =? AND idTurma_a = ?";
@@ -27,7 +27,7 @@ if (isset($_POST['btn-search'])) {
 <html>
 <head>
   <title>principal</title>
-  <?php require_once "../head2.php"; ?>
+  <?php require_once "../../head2.php"; ?>
 </head>
 <body>
   <div class="divsuperior">
@@ -44,14 +44,14 @@ if (isset($_POST['btn-search'])) {
       </div>
       <div class="d-flex">
         <h5 class="me-2">Usuário :</h5>
-        <img class="me-1" src="../img/person.svg" id="IMG">
+        <img class="me-1" src="../../img/person.svg" id="IMG">
         <h5 class="me-3">Aluno</h5>
       </div>
     </div>
   </div>
 
-  <?php require_once "nav-aluno.php" ?>
-  <?php require_once "navMob-aluno.php" ?>
+  <?php require_once "nav-student.php" ?>
+  <?php require_once "navMob-student.php" ?>
 
   <div class="rounded-3" id="divm">
     <div class="divsuperior3">
@@ -142,6 +142,6 @@ if (isset($_POST['btn-search'])) {
     </div>
   </div>
 
-  <?php require_once "../footer2.php"; ?>
+  <?php require_once "../../footer2.php"; ?>
 </body>
 </html>

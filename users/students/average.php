@@ -1,9 +1,8 @@
 <?php
-require_once "../connection.php";
-require_once "../features/getData.php";
+require_once "../../connection.php";
+require_once "../../features/getData.php";
 session_start();
 
-$estudent_name = $_SESSION['student_name'];
 $student_id = $_SESSION['student_id'];
 
 $data1 = getData(
@@ -42,7 +41,7 @@ foreach ($data3 as $value) {
 <html>
 <head>
   <title>principal</title>
-  <?php require_once "../head2.php"; ?>
+  <?php require_once "../../head2.php"; ?>
 </head>
 <body>
   <div class="divsuperior">
@@ -56,14 +55,14 @@ foreach ($data3 as $value) {
       </div>
       <div class="d-flex">
         <h5 class="me-2">Usuário :</h5>
-        <img class="me-1" src="../img/person.svg" id="IMG">
+        <img class="me-1" src="../../img/person.svg" id="IMG">
         <h5 class="me-3">Aluno</h5>
       </div>
     </div>
   </div>
 
-  <?php require_once "nav-aluno.php" ?>
-  <?php require_once "navMob-aluno.php" ?>
+  <?php require_once "nav-student.php" ?>
+  <?php require_once "navMob-student.php" ?>
 
   <div class="rounded-3" id="divm">
     <div class="divsuperior3">
@@ -139,6 +138,6 @@ foreach ($data3 as $value) {
     <button type="submit" id="adicionar" class="btn btn-info my-2">Condição Final
   </div>
 
-  <?php require_once "../footer2.php"; ?>
+  <?php require_once "../../footer2.php"; ?>
 </body>
 </html>
