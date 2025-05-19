@@ -3,13 +3,14 @@ require_once "../../connection.php";
 require_once "../../features/getData.php";
 session_start();
 
-$professor_id = $_SESSION['professor_id'];
+$professor_id = mysqli_real_escape_string($connection, trim($_SESSION['professor_id']));
 
 if (isset($_POST['btn-search'])) {
-  $_SESSION['quarter'] = $_POST['quarter'];
-  $_SESSION['management_id'] = $_POST['management'];
+  $_SESSION['quarter'] = mysqli_real_escape_string($connection, trim($_POST['quarter']));
+  $_SESSION['management_id'] = mysqli_real_escape_string($connection, trim($_POST['management']));
   header('Location: student-notes.php');
 }
+
 ?>
 
 <!DOCTYPE html>

@@ -4,6 +4,7 @@ require_once "../../features/getData.php";
 session_start();
 
 $responsible_id = mysqli_real_escape_string($connection, trim($_SESSION['responsible_id']));
+
 if(isset($_POST['btn-notes'])){
   $_SESSION['student_id'] = mysqli_real_escape_string($connection, trim($_POST['student_id']));
   $_SESSION['quarter'] = mysqli_real_escape_string($connection, trim($_POST['quarter']));

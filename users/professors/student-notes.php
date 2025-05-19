@@ -4,18 +4,18 @@ require_once "../../features/getData.php";
 require_once "../../features/signData.php";
 session_start();
 
-$management_id = $_SESSION['management_id'];
-$quarter = $_SESSION['quarter'];
+$management_id = mysqli_real_escape_string($connection, trim($_SESSION['management_id']));
+$quarter = mysqli_real_escape_string($connection, trim($_SESSION['quarter']));
 
 $data = getData($connection, "SELECT a.nome_a,a.id_a FROM sg_aluno AS a JOIN sg_gerenciar AS g ON a.idTurma_a = g.idTurma WHERE id_g =? ORDER BY nome_a", [$management_id]);
 
 if (isset($_POST['btn-search'])) {
-  $search = $_POST['search'];
+  $search = mysqli_real_escape_string($connection, trim($_POST['search']));
   $data = getData($connection, "SELECT a.nome_a,a.id_a FROM sg_aluno AS a JOIN sg_gerenciar AS g ON a.idTurma_a = g.idTurma WHERE nome_a LIKE '$search%' AND id_g = ?", [$management_id]);
 }
 
 if (isset($_POST['btn-update'])) {
-  $_SESSION['student_id'] = $_POST['student_id'];
+  $_SESSION['student_id'] = mysqli_real_escape_string($connection, trim($_POST['student_id']));
   header('Location: notes-edit.php');
 }
 ?>
@@ -62,7 +62,7 @@ if (isset($_POST['btn-update'])) {
       <button type="button" id="adicionar" class="btn btn-primary" data-bs-target="#apagar"
         data-bs-toggle="modal">Gravar</button>
 
-      <form action="" method="post">
+      <form action="student-notes.php" method="post">
         <div class="d-flex align-items-center" id="btn-pesquisar">
           <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button
             type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
@@ -106,7 +106,7 @@ if (isset($_POST['btn-update'])) {
               ?>
               <tr>
                 <td>
-                  <form action="" method="post">
+                  <form action="student-notes.php" method="post">
                     <input id="editar1" type="hidden" value="<?= $student['id_a']; ?>" name="student_id">
                     <button type="submit" class="btn btn-warning text-white" name="btn-update">Editar</button>
                   </form>
@@ -180,6 +180,9 @@ if (isset($_POST['btn-update'])) {
   </div>
 
   <?php require_once "../../footer2.php"; ?>
-  <script scr="routing.js"></script>
+  <script src="routing.js"></script>
+  <script>
+
+  </script>
 </body>
 </html>

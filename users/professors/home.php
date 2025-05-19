@@ -38,6 +38,6 @@ if (!isset($_SESSION['logged']))
   </div>
 
   <?php require_once "../../footer2.php"; ?>
-  <script src="../../js/script.js"></script>
+  <script src="routing.js"></script>
 </body>
 </html>
