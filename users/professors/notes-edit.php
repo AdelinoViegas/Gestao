@@ -158,7 +158,6 @@ if (isset($_POST['btn-calc'])) {
                 <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($notes_data['mediaF'], 1) . "'>" ?>
               </td>
               <td><?php echo $notes_data['classificacao']; ?>
-
               </td>
             </tr>
           </tbody>

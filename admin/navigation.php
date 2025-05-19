@@ -53,11 +53,11 @@
       <li class="list ">
         <a href="menu-set.php">
           <span class="icon"><img src="../img/settings.png"></span>
-          <span class="title">Alterar-senha</span>
+          <span class="title">Alterar-Senha</span>
         </a>
       </li>
       <li class="list">
-        <a href="logoult.php">
+        <a href="../../logoult.php">
           <span class="icon"><img src="../img/logout_white_24dp.svg"></span>
           <span class="title">Sair</span>
         </a>

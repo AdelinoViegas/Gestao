@@ -1,10 +1,11 @@
 let file = window.location.pathname.split("/").pop();
-let list = document.querySelectorAll("li"); 
+console.log(file);
+/*let list = document.querySelectorAll("li"); 
 let routes = [
   ['home.php'],
-  ['notes-lanche.php', 'student-notes.php','notes-edit.php'],
+  ['notes-lanche.php', 'student-notes.php', 'notes-edit.php'],
   ['settings.php'],
-]
+];
 let count = 0;
 
 list.forEach((link)=>{
@@ -13,4 +14,4 @@ list.forEach((link)=>{
   else
     link.setAttribute("class","list");
   count++;
-});
+});*/
