@@ -1,5 +1,5 @@
 let file = window.location.pathname.split("/").pop();
-let list = document.querySelectorAll("li"); 
+let list = [...document.querySelectorAll("li")]; 
 let routes = [
   ['home.php'],
   ['notes.php', 'quarter.php'],
