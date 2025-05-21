@@ -3,9 +3,9 @@ require_once "../connection.php";
 require_once "../features/getData.php";
 session_start();
 
-$responsible_id = $_POST['responsible_id'];
+$responsible_id = mysqli_real_escape_string($connection, trim($_POST['responsible_id']));
 $_SESSION['responsible_id'] = $responsible_id;
-$data = getData($connection, "SELECT * FROM sg_encarregado WHERE id_e = ?", [$responsible_id])[0];
+$data = getData($connection, "SELECT * FROM sg_encarregado WHERE id_e = ?", [$responsible_id]);
 $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi", "Talatona", "Cacuaco", "Icolo e Bengo"];
 ?>
 

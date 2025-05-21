@@ -29,7 +29,7 @@ if (isset($_POST['btn-cadastre'])) {
       [$name, $hash, 'activo', 'encarregado', "1", $date, $date]
     );
 
-    $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ? AND dataCadastro_u =?", [$name, $date])[0];
+    $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ? AND dataCadastro_u =?", [$name, $date]);
     $user_id = $user_data['id_u'];
 
     $sign_responsible = signData(

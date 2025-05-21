@@ -11,12 +11,10 @@ $data = getData($connection, "SELECT * FROM sg_disciplina WHERE id_d=?", [$disci
 
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>Aluno</title>
   <?php require_once "head.php"; ?>
 </head>
-
 <body>
   <div class="divsuperior">
     <h1>Colégio Samiga</h1>
