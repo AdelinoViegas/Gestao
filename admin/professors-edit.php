@@ -5,7 +5,7 @@ session_start();
 
 $professor_id = $_POST['professor_id'];
 $_SESSION['professor_id'] = $professor_id;
-$data = getData($connection, "SELECT * FROM sg_professor WHERE id_p = ?", [$professor_id]);
+$data = getData($connection, "SELECT * FROM sg_professor WHERE id_p = ?", [$professor_id])[0];
 $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi", "Talatona", "Cacuaco", "Icolo e Bengo"];
 ?>
 

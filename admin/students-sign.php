@@ -26,9 +26,9 @@ if (isset($_POST['btn-cadastre'])) {
     $date = getCurrentDate();
     $hash = password_hash('aluno', PASSWORD_DEFAULT);
 
-    $responsible_data = getData($connection, "SELECT * FROM sg_encarregado WHERE numeroBI_e = ?", [$responsible_BI])[0];
+    $responsible_data = getData($connection, "SELECT * FROM sg_encarregado WHERE numeroBI_e = ?", [$responsible_BI]);
 
-    if (is_array($responsible_data) && count($responsible_data) > 0){
+    if (count($responsible_data) > 0){
       $responsible_id = $responsible_data['id_e'];
 
       $sign_user = signData(

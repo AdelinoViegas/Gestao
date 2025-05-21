@@ -128,7 +128,7 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
 
       <div class="row">
         <?php
-        $responsible_data = getData($connection, "SELECT * FROM sg_encarregado AS e INNER JOIN sg_aluno AS a ON e.id_e = a.idEncarregado WHERE id_a = ?", [$student_id])[0];
+        $responsible_data = getData($connection, "SELECT * FROM sg_encarregado AS e INNER JOIN sg_aluno AS a ON e.id_e = a.idEncarregado WHERE id_a = ?", [$student_id]);
         ?>
         <div class="form-group col-md-6 mb-3">
           <label for="textencarregado">Encarregado</label>

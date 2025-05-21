@@ -25,7 +25,7 @@ if (isset($_POST['btn-update'])) {
     [$name, $student_group, $student_class, $city, $neighborhood, $gender, $contact, $birthday, $BI, $date, $student_id]
   );
 
-  $student_data = getData($connection, "SELECT idUsuario FROM sg_aluno WHERE id_a = ?", [$student_id]);
+  $student_data = getData($connection, "SELECT idUsuario FROM sg_aluno WHERE id_a = ?", [$student_id])[0];
   $user_id = $student_data['idUsuario'];
 
   $update_user = updateData(

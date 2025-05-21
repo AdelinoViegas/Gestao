@@ -23,7 +23,7 @@ if(isset($_POST['btn-update'])){
       [$name, $email, $city, $neighborhood, $gender, $contact, $birthday, $BI, $date, $_SESSION['professor_id']]
    ); 
 
-   $user_data = getData($connection, "SELECT idUsuario FROM sg_professor WHERE id_p = ?", [$_SESSION['professor_id']]);
+   $user_data = getData($connection, "SELECT idUsuario FROM sg_professor WHERE id_p = ?", [$_SESSION['professor_id']])[0];
    $user_id = $user_data['idUsuario'];
 
    $update_user = updateData(

@@ -38,7 +38,7 @@ function getData($connection, $sql, $params = []){
     $array_data[$count]  = $data;
     $count++;
   }
-
-  return count($array_data) <= 0 || count($array_data) > 1 ?$array_data:$array_data[0];
+  
+  return $array_data ?? [];
 }
 ?>
