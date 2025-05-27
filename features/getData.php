@@ -22,7 +22,7 @@ function getData($connection, $sql, $params = []){
     $bind_names = [];
     $bind_names[] = $types; 
     foreach ($params as $key => $value) {
-        $bind_names[] = &$params[$key]; 
+      $bind_names[] = &$params[$key]; 
     }
     
     call_user_func_array("mysqli_stmt_bind_param", array_merge([$query], $bind_names));
@@ -35,7 +35,7 @@ function getData($connection, $sql, $params = []){
   }
 
   while($data = mysqli_fetch_assoc($result)){
-    $array_data[$count]  = $data;
+    $array_data[$count] = $data;
     $count++;
   }
   
