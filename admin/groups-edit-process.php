@@ -9,9 +9,9 @@ if (isset($_POST['btn-update'])) {
    $name = mysqli_real_escape_string($connection, trim($_POST['name']));
 
    $update_group = updateData(
-      $connection,
-      "UPDATE sg_turma SET nome_t =? WHERE id_t =?",
-      [$name, $group_id]
+    $connection,
+    "UPDATE sg_turma SET nome_t =? WHERE id_t =?",
+    [$name, $group_id]
    );
    
    if ($update_group) {

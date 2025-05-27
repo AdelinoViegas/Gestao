@@ -48,7 +48,6 @@ if (isset($_POST['btn-search'])) {
       <h5>Usuários cadastrados</h5>
     </div>
 
-
     <div id="divflex">
       <h5 id="adicionar">Nª de Usuários : <span id='num'><?= count($data)?count($data): "0"; ?></span></h5>
 

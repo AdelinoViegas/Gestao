@@ -16,12 +16,10 @@ if (isset($_POST['btn-search'])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>Samiga</title>
   <?php require_once "head.php"; ?>
 </head>
-
 <body>
   <div class="divsuperior">
     <h1>Colégio Samiga</h1>

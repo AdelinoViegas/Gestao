@@ -20,4 +20,3 @@ if($update_student && $update_user){
    setMessage("student-message", "alert-danger", "Erro ao apagar!");
  }
  ?>
-

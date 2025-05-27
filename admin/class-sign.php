@@ -9,7 +9,6 @@ if (isset($_POST['btn-cadastre'])) {
   $name = mysqli_escape_string($connection, trim($_POST['name']));
   $class_data = getData($connection, "SELECT * FROM sg_classe WHERE nome_c=?", [$name]);
 
-
   if ($class_data) {
     setMessage("class-message", "alert-warning", "A classe já foi cadastrada!");
   } else {
