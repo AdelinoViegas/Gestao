@@ -5,7 +5,7 @@ let routes = [
   ['notes.php', 'quarter.php'],
   ['average.php'],
   ['settings.php'],
-]
+];
 let count = 0;
 
 list.forEach((link)=>{

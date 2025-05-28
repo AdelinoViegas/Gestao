@@ -181,8 +181,5 @@ if (isset($_POST['btn-update'])) {
 
   <?php require_once "../../footer2.php"; ?>
   <script src="routing.js"></script>
-  <script>
-
-  </script>
 </body>
 </html>

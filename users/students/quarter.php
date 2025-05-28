@@ -3,7 +3,6 @@ require_once "../../connection.php";
 require_once "../../features/getData.php";
 session_start();
 
-
 $student_id = $_SESSION['student_id'];
 $student_quarter = $_SESSION['quarter'];
 
