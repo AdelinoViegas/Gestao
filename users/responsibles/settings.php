@@ -7,7 +7,7 @@ require_once "../../features/updateData.php";
 session_start();
 
 if (isset($_POST['btn-password'])) {
-  $professor_id = mysqli_real_escape_string($connection, trim($_SESSION['professor_id']));
+  $responsible_id = mysqli_real_escape_string($connection, trim($_SESSION['responsible_id']));
   $password = mysqli_escape_string($connection, trim($_POST['password']));
   $new_password = mysqli_escape_string($connection, trim($_POST['new_password']));
   $date = getCurrentDate();
@@ -71,7 +71,7 @@ if (isset($_POST['btn-password'])) {
     <div class="divsuperior3">
       <h5>Formulário de cadastramento de alunos</h5>
     </div>
-    <form action="conf-encarregado.php" method="post">
+    <form action="settings.php" method="post">
       <div class="row">
         <div class="form-group col-md-4 mb-3">
           <label for="tsenha">Senha</label>
