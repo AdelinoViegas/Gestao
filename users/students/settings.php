@@ -70,7 +70,7 @@ if (isset($_POST['btn-password'])) {
     <div class="divsuperior3">
       <h5>Formulário de cadastramento de alunos</h5>
     </div>
-    <form action="conf-aluno.php" method="post">
+    <form action="settings.php" method="post">
       <div class="row">
         <div class="form-group col-md-4 mb-3">
           <label for="tsenha">Senha</label>
