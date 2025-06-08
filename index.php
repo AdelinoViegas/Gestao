@@ -19,7 +19,7 @@ if (isset($_POST['enviar-dados'])) {
     trim($_POST['selection'])
   );
 
-  $consult = mysqli_prepare($connection, "SELECT * FROM sg_usuarios WHERE nome_u = ?");
+  $consult = mysqli_prepare($connection, "SELECT * FROM tb_users WHERE nome_u = ?");
   mysqli_stmt_bind_param($consult, "s", $name);
   mysqli_stmt_execute($consult);
   $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
@@ -31,7 +31,7 @@ if (isset($_POST['enviar-dados'])) {
       $password = $state;
   }
   
-  $sql = "SELECT * FROM sg_usuarios WHERE nome_u = ? AND senha_u = ? AND estado_u = 'activo' AND painel_u = ?";
+  $sql = "SELECT * FROM tb_users WHERE nome_u = ? AND senha_u = ? AND estado_u = 'activo' AND painel_u = ?";
   $consult = mysqli_prepare($connection,$sql);
   mysqli_stmt_bind_param($consult,"sss", $name, $password, $painel);
   mysqli_stmt_execute($consult);
