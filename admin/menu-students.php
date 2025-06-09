@@ -95,7 +95,7 @@ if (isset($_POST['btn-search'])) {
                   <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_s']; ?>"
                     name="id_estudante">
                   <button id="editar2" type="button"
-                    data-bs-target="#apagar<?= $student_data['id_a']; ?>" data-bs-toggle="modal"
+                    data-bs-target="#apagar<?= $student_data['id_s']; ?>" data-bs-toggle="modal"
                     value="<?= $student_data['id_s']; ?>" class="btn btn-danger">Apagar</button>
 
                   <div class="modal fade" id="apagar<?= $student_data['id_s']; ?>">
@@ -128,8 +128,8 @@ if (isset($_POST['btn-search'])) {
                 </td>
                 <td><?= $student_data['name_s']; ?></td>
                 <td><?= $student_data['city_s']; ?></td>
-                <td><?= $student_data['neighborhood_a']; ?></td>
-                <td><?= $student_data['gender_a']; ?></td>
+                <td><?= $student_data['neighborhood_s']; ?></td>
+                <td><?= $student_data['gender_s']; ?></td>
                 <td><?= $student_data['name_c']; ?></td>
                 <td><?= $student_data['name_g']; ?></td>
               </tr>

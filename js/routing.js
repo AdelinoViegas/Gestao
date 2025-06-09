@@ -10,13 +10,12 @@ let route = [
     ["menu-management.php", "management-sign.php","management-edit.php"],
     ["menu-set.php"],
     ["logoult.php"],
-  ]
-  
-  
+  ];
+
   let fileName = window.location.pathname.split("/").pop();
   let menu = [...document.querySelectorAll(".navegacao ul li")];
   let count = 0;
-  
+
   menu.forEach((value) => {
     if(route[count].includes(fileName))
       value.setAttribute("class", "list active");

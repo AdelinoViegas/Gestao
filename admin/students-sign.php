@@ -26,10 +26,10 @@ if (isset($_POST['btn-cadastre'])) {
     $date = getCurrentDate();
     $hash = password_hash('aluno', PASSWORD_DEFAULT);
 
-    $responsible_data = getData($connection, "SELECT * FROM tb_responsibles WHERE BI_r = ?", [$responsible_BI]);
+    $responsible_data = getData($connection, "SELECT * FROM tb_responsibles WHERE BI_r = ?", [$responsible_BI])[0];
 
     if (count($responsible_data) > 0){
-      $responsible_id = $responsible_data['id_e'];
+      $responsible_id = $responsible_data['id_r'];
 
       $sign_user = signData(
         $connection,
@@ -105,12 +105,10 @@ if (isset($_POST['btn-cadastre'])) {
           <label for="textclasse">Classe</label>
           <select id="textclasse" class="input form-control" name="class" required>
             <option value="">Selecione aqui</option>
-
             <?php
-            $class = getData($connection, "SELECT id_c, nome_c FROM sg_classe ORDER BY id_c");
-
+            $class = getData($connection, "SELECT * FROM tb_class ORDER BY id_c");
             foreach ($class as $data)
-              echo "<option value = '" . $data['id_c'] . "'>" . $data['nome_c'] . "</option>";
+              echo "<option value = '" . $data['id_c'] . "'>" . $data['name_c'] . "</option>";
             ?>
           </select>
         </div>
@@ -120,10 +118,9 @@ if (isset($_POST['btn-cadastre'])) {
           <select id="textturma" class="input form-control" name="group" required>
             <option value="">Selecione aqui</option>
             <?php
-            $group = getData($connection, "SELECT id_t,nome_t FROM sg_turma ORDER BY nome_t");
-
+            $group = getData($connection, "SELECT id_g, name_g FROM tb_groups ORDER BY name_g");
             foreach($group as $data) 
-              echo "<option value = '" . $data['id_t'] . "'>" . $data['nome_t'] . "</option>";
+              echo "<option value = '" . $data['id_g'] . "'>" . $data['name_g'] . "</option>";
             ?>
           </select>
         </div>

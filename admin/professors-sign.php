@@ -16,8 +16,8 @@ if (isset($_POST['btn-cadastre'])) {
   $birthday = mysqli_real_escape_string($connection, trim($_POST['birthday']));
   $BI = mysqli_real_escape_string($connection, trim($_POST['BI']));
 
-  $sql_name = "SELECT nome_p FROM tb_professors WHERE name_p = ?";
-  $sql_BI = "SELECT numeroBI_p FROM tb_professors WHERE BI_p = ?";
+  $sql_name = "SELECT name_p FROM tb_professors WHERE name_p = ?";
+  $sql_BI = "SELECT BI_p FROM tb_professors WHERE BI_p = ?";
   $sql_email = "SELECT email_p FROM tb_professors WHERE email_p = ?";
   $name_verification = getData($connection, $sql_name, [$name]);
   $BI_verification = getData($connection, $sql_BI, [$BI]);

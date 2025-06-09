@@ -46,25 +46,26 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
       <div class="row">
         <div class="form-group col-md-6 mb-3">
           <label for="textnome">Nome</label>
-          <input type="text" id="textnome" class="form-control" name="name" value="<?= $student_data['nome_a']; ?>">
+          <input type="text" id="textnome" class="form-control" name="name" value="<?= $student_data['name_s']; ?>">
         </div>
+
         <div class="form-group col-md-3 mb-3">
           <label for="textclasse">Classe</label>
           <select id="textclasse" class="input form-control" name="class" required>
             <option value="<?= $student_data['classID_s'] ?>"><?= $student_data['name_c']; ?></option>
             <?php
-            $class_data = getData($connection, "SELECT id_c, nome_c FROM tb_class");
-            foreach ($class_data as $class) {
+            $class_data = getData($connection, "SELECT * FROM tb_class");
+            foreach ($class_data as $class)
               echo "<option value = '" . $class['id_c'] . "'>" . $class['name_c'] . "</option>";
-            }
             ?>
           </select>
         </div>
+
         <div class="form-group col-md-3 mb-3">
           <label for="textturma">Turma</label>
           <select id="textturma" class="input form-control" name="group" required>
             <option value="<?= $student_data['groupID_s'] ?>"><?= $student_data['name_g']; ?></option>
-            <?php
+            <?php 
             $group_data = getData($connection, "SELECT id_g, name_g FROM tb_groups");
             foreach ($group_data as $group) {
               echo "<option value = '" . $group['id_g'] . "'>" . $group['name_g'] . "</option>";
@@ -87,11 +88,13 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
             } ?>
           </select>
         </div>
+
         <div class="form-group col-md-4 mb-3">
           <label for="textbairro">Bairro</label>
           <input type="text" id="textbairro" class="form-control" name="neighborhood"
             value="<?= $student_data['neighborhood_s']; ?>">
         </div>
+
         <div class="form-group col-md-4 mb-3">
           <label for="textsexo">sexo</label>
           <select type="text" id="textsexo" class="input md form-control" name="gender"
@@ -115,11 +118,13 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
           <input type="text" id="textcont" class="form-control" name="contact"
             value="<?= $student_data['contact_s']; ?>">
         </div>
+
         <div class="form-group col-md-4" id="margemB">
           <label for="textnasc">Data de Nascimento</label>
           <input type="date" id="textnasc" class="form-control" name="birthday"
             value="<?= $student_data['birthday_s']; ?>">
         </div>
+
         <div class="form-group col-md-4 mb-3">
           <label for="textbi">Número do BI</label>
           <input type="text" id="textbi" class="form-control" name="BI" value="<?= $student_data['BI_s']; ?>">
@@ -128,7 +133,7 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
 
       <div class="row">
         <?php
-        $responsible_data = getData($connection, "SELECT * FROM tb_responsibles AS r INNER JOIN tb_students AS s ON r.id_r = s.responsiblesID_s WHERE id_s = ?", [$student_id]);
+        $responsible_data = getData($connection, "SELECT * FROM tb_students AS s INNER JOIN tb_responsibles AS r ON s.responsibleID_s = r.id_r WHERE id_s = ?", [$student_id])[0];
         ?>
         <div class="form-group col-md-6 mb-3">
           <label for="textencarregado">Encarregado</label>
