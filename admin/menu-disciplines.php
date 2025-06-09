@@ -6,11 +6,11 @@ session_start();
 if (!isset($_SESSION['logged']))
   header("Location: index.php");
 
-$data = getData($connection, "SELECT * FROM sg_disciplina order by nome_d");
+$data = getData($connection, "SELECT * FROM tb_disciplines order by name_d");
 
 if (isset($_POST['btn-search'])) {
   $search = mysqli_real_escape_string($connection, trim($_POST['search']));
-  $data = getData($connection, "SELECT * FROM sg_disciplina WHERE nome_d LIKE '$search%'");
+  $data = getData($connection, "SELECT * FROM tb_disciplines WHERE name_d LIKE '$search%'");
 }
 ?>
 
@@ -84,7 +84,7 @@ if (isset($_POST['btn-search'])) {
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>
                 </td>
-                <td class="w-50"><?= $discipline_data['nome_d']; ?></td>
+                <td class="w-50"><?= $discipline_data['name_d']; ?></td>
               </tr>
             <?php } ?>
           </tbody>

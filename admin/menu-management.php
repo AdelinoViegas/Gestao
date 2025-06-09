@@ -6,11 +6,11 @@ session_start();
 if (!isset($_SESSION['logged']))
   header("Location: index.php");
 
-$data = getData($connection, "SELECT * FROM sg_gerenciar AS g JOIN sg_disciplina AS d ON g.idDisciplina = d.id_d JOIN sg_professor AS p ON g.idProfessor = p.id_p JOIN sg_turma AS t ON g.idTurma = t.id_t WHERE view = '1'");
+$data = getData($connection, "SELECT * FROM tb_management AS m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d JOIN tb_professors AS p ON m.professorID_m = p.id_p JOIN tb_groups AS g ON m.groupID_m = g.id_g WHERE view_p = '1'");
 
 if (isset($_POST['btn-search'])) {
   $search = $_POST['search'];
-  $data = getData($connection, "SELECT * FROM sg_gerenciar AS g JOIN sg_disciplina AS d ON g.idDisciplina = d.id_d JOIN sg_professor AS p ON g.idProfessor = p.id_p JOIN sg_turma AS t ON g.idTurma = t.id_t WHERE (nome_p LIKE '$search%') OR (nome_t LIKE '$search%') OR (nome_d LIKE '$search%') AND (view ='1')");
+  $data = getData($connection, "SELECT * FROM tb_management AS m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d JOIN tb_professors AS p ON m.professorID_m = p.id_p JOIN tb_groups AS g ON m.groupID_m = g.id_g WHERE (name_p LIKE '$search%') OR (name_g LIKE '$search%') OR (name_d LIKE '$search%') AND (view_p ='1')");
 }
 ?>
 
@@ -78,18 +78,18 @@ if (isset($_POST['btn-search'])) {
         <tbody>
           <?php
           if (count($data) > 0) {
-            foreach ($data as $manage_data) { ?>
+            foreach ($data as $management_data) { ?>
               <tr id="tr">
                 <td>
                   <form action="management-edit.php" method="post">
-                    <input id="editar1" type="hidden" value="<?= $manage_data['id_g']; ?>" name="management_id">
+                    <input id="editar1" type="hidden" value="<?= $management_data['id_g']; ?>" name="management_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>
                 </td>
-                <td><?= $manage_data['nome_d']; ?></td>
-                <td><?= $manage_data['nome_p']; ?></td>
-                <td><?= $manage_data['nome_t']; ?></td>
-                <td><?= $manage_data['ano']; ?></td>
+                <td><?= $management_data['name_d']; ?></td>
+                <td><?= $management_data['name_p']; ?></td>
+                <td><?= $management_data['name_g']; ?></td>
+                <td><?= $management_data['year_m']; ?></td>
               </tr>
             <?php } ?>
           </tbody>

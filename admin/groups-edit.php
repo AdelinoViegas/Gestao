@@ -5,7 +5,7 @@ session_start();
 
 $group_id = $_POST['group_id'];
 $_SESSION['group_id'] = $group_id;
-$data = getData($connection, "SELECT * FROM tb_groups WHERE id_t =?", [$group_id])[0];
+$data = getData($connection, "SELECT * FROM tb_groups WHERE id_g =?", [$group_id])[0];
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +45,7 @@ $data = getData($connection, "SELECT * FROM tb_groups WHERE id_t =?", [$group_id
         <div class="form-group col-md-4" id="margemB">
           <label for="textnome">Nome</label>
           <input type="text" id="textnome" class="form-control" name="name" maxlength="30"
-            value="<?= $data['name_t']; ?>" placeholder="Nome da disciplina" required>
+            value="<?= $data['name_g']; ?>" placeholder="Nome da disciplina" required>
         </div>
       </div>
 

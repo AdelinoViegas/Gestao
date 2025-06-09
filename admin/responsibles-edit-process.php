@@ -19,16 +19,16 @@ if (isset($_POST['btn-update'])) {
 
   $update_responsible = updateData(
     $connection,
-    "UPDATE sg_encarregado SET nome_e=?, municipio_e=?, bairro_e=?, nascimento_e=?, sexo_e=?, contato_e=?, dataModificacao_e=? WHERE id_e=?",
+    "UPDATE tb_responsibles SET name_r=?, city_r=?, neighborhood_r=?, birthday_r=?, gender_r=?, contact_r=?, dateModification_r=? WHERE id_r=?",
     [$name, $city, $neighborhood, $birthday, $gender, $contact, $date, $_SESSION['responsible_id']]
   );
 
-  $user_data = getData($connection, "SELECT idUsuario FROM sg_encarregado WHERE id_e = ?", [$_SESSION['responsible_id']])[0];
-  $user_id = $user_data['idUsuario'];
+  $user_data = getData($connection, "SELECT userID_r FROM tb_responsibles WHERE id_r = ?", [$_SESSION['responsible_id']])[0];
+  $user_id = $user_data['userID_r'];
 
   $update_user = updateData(
     $connection,
-    "UPDATE sg_usuarios SET nome_u =?, dataModificacao_u =? WHERE id_u =?",
+    "UPDATE tb_users SET name_u =?, dateModification_u =? WHERE id_u =?",
     [$name, $date, $user_id]
   );
 

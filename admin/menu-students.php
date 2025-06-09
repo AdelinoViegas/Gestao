@@ -6,11 +6,11 @@ session_start();
 if (!isset($_SESSION['logged']))
   header("Location: index.php");
 
-$data = getData($connection, "SELECT * FROM sg_aluno AS a JOIN sg_turma AS t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON a.idClasse = c.id_c WHERE view = '1' ORDER BY nome_a");
+$data = getData($connection, "SELECT * FROM tb_students AS s JOIN tb_groups AS g ON s.groupID_s = g.id_g JOIN tb_class AS c ON s.classID_s = c.id_c WHERE view_s = '1' ORDER BY name_s");
 
 if (isset($_POST['btn-search'])) {
   $search = mysqli_real_escape_string($connection, trim($_POST['search']));
-  $data = getData($connection, "SELECT * FROM sg_aluno AS a JOIN sg_turma AS t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON a.idClasse = c.id_c WHERE nome_a LIKE '$search%' AND view = '1'");
+  $data = getData($connection, "SELECT * FROM tb_students AS s JOIN tb_groups AS g ON s.groupID_s = g.id_g JOIN tb_class AS c ON s.classID_s = c.id_c WHERE name_s LIKE '$search%' AND view_s = '1'");
 }
 ?>
 
@@ -87,18 +87,18 @@ if (isset($_POST['btn-search'])) {
               <tr id="tr">
                 <td id="editar">
                   <form action="students-edit.php" method="post">
-                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_a']; ?>"
+                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_s']; ?>"
                       name="student_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>
 
-                  <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_a']; ?>"
+                  <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_s']; ?>"
                     name="id_estudante">
                   <button id="editar2" type="button"
                     data-bs-target="#apagar<?= $student_data['id_a']; ?>" data-bs-toggle="modal"
-                    value="<?= $student_data['id_a']; ?>" class="btn btn-danger">Apagar</button>
+                    value="<?= $student_data['id_s']; ?>" class="btn btn-danger">Apagar</button>
 
-                  <div class="modal fade" id="apagar<?= $student_data['id_a']; ?>">
+                  <div class="modal fade" id="apagar<?= $student_data['id_s']; ?>">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -110,13 +110,13 @@ if (isset($_POST['btn-search'])) {
                         <div class="modal-body">
                           <div class="alert alert-danger">
                             Deseja excluir
-                            <strong><?= $student_data['nome_a']; ?></strong> ?
+                            <strong><?= $student_data['name_s']; ?></strong> ?
                           </div>
                         </div>
 
                         <div class="modal-footer">
                           <form action="students-delete.php" method="post">
-                            <input type="hidden" name="student_id" value="<?= $student_data['id_a']; ?>">
+                            <input type="hidden" name="student_id" value="<?= $student_data['id_s']; ?>">
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Sim</button>
                           </form>
 
@@ -126,12 +126,12 @@ if (isset($_POST['btn-search'])) {
                     </div>
                   </div>
                 </td>
-                <td><?= $student_data['nome_a']; ?></td>
-                <td><?= $student_data['municipio_a']; ?></td>
-                <td><?= $student_data['bairro_a']; ?></td>
-                <td><?= $student_data['sexo_a']; ?></td>
-                <td><?= $student_data['nome_c']; ?></td>
-                <td><?= $student_data['nome_t']; ?></td>
+                <td><?= $student_data['name_s']; ?></td>
+                <td><?= $student_data['city_s']; ?></td>
+                <td><?= $student_data['neighborhood_a']; ?></td>
+                <td><?= $student_data['gender_a']; ?></td>
+                <td><?= $student_data['name_c']; ?></td>
+                <td><?= $student_data['name_g']; ?></td>
               </tr>
             <?php } ?>
           </tbody>

@@ -10,7 +10,7 @@ if (isset($_POST['btn-update'])) {
 
   $update_group = updateData(
     $connection,
-    "UPDATE tb_groups SET name_t =? WHERE id_t =?",
+    "UPDATE tb_groups SET name_g =? WHERE id_g =?",
     [$name, $group_id]
   );
 

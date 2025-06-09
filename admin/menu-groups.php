@@ -6,11 +6,11 @@ session_start();
 if (!isset($_SESSION['logged']))
   header("Location: index.php");
 
-$data = getData($connection, "SELECT * FROM sg_turma order by nome_t");
+$data = getData($connection, "SELECT * FROM tb_groups order by name_g");
 
 if (isset($_POST['btn-search'])) {
   $search = mysqli_real_escape_string($connection, trim($_POST['search']));
-  $data = getData($connection, "SELECT * FROM sg_turma WHERE nome_t LIKE '$search%'");
+  $data = getData($connection, "SELECT * FROM tb_groups WHERE name_g LIKE '$search%'");
 }
 ?>
 
@@ -79,12 +79,12 @@ if (isset($_POST['btn-search'])) {
               <tr id="tr">
                 <td id="editar">
                   <form action="groups-edit.php" method="post">
-                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $group_data['id_t']; ?>"
+                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $group_data['id_g']; ?>"
                       name="group_id">
                     <button id="editar1" type="submit" name="btn-update" class="btn btn-warning">Editar</button>
                   </form>
                 </td>
-                <td class="w-50"><?= $group_data['nome_t']; ?></td>
+                <td class="w-50"><?= $group_data['name_g']; ?></td>
               </tr>
             <?php } ?>
           </tbody>

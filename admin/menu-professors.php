@@ -6,11 +6,11 @@ session_start();
 if (!isset($_SESSION['logged']))
   header("Location: index.php");
 
-$data = getData($connection, "SELECT * FROM sg_professor WHERE view = '1' ORDER BY nome_p");
+$data = getData($connection, "SELECT * FROM tb_professors WHERE view_p = '1' ORDER BY name_p");
 
 if (isset($_POST['btn-search'])) {
   $search = mysqli_real_escape_string($connection, trim($_POST['search']));
-  $data = getData($connection, "SELECT * FROM sg_professor WHERE nome_p LIKE '$search%' AND view = '1'");
+  $data = getData($connection, "SELECT * FROM tb_professors WHERE name_p LIKE '$search%' AND view_p = '1'");
 }
 ?>
 
@@ -108,7 +108,7 @@ if (isset($_POST['btn-search'])) {
                         <div class="modal-body">
                           <div class="alert alert-danger">
                             Deseja excluir
-                            <strong><?= $professor_data['nome_p']; ?></strong> ?
+                            <strong><?= $professor_data['name_p']; ?></strong> ?
                           </div>
                         </div>
 
@@ -124,12 +124,12 @@ if (isset($_POST['btn-search'])) {
                     </div>
                   </div>
                 </td>
-                <td><?= $professor_data['nome_p']; ?></td>
+                <td><?= $professor_data['name_p']; ?></td>
                 <td><?= $professor_data['email_p']; ?></td>
-                <td><?= $professor_data['municipio_p']; ?></td>
-                <td><?= $professor_data['bairro_p']; ?></td>
-                <td><?= $professor_data['sexo_p']; ?></td>
-                <td><?= $professor_data['contato_p']; ?></td>
+                <td><?= $professor_data['city_p']; ?></td>
+                <td><?= $professor_data['neighborhood_p']; ?></td>
+                <td><?= $professor_data['gender_p']; ?></td>
+                <td><?= $professor_data['contact_p']; ?></td>
               </tr>
             <?php } ?>
           </tbody>

@@ -16,7 +16,7 @@ if (isset($_POST['btn-password'])) {
     
     $update_data = updateData(
       $connection, 
-      "UPDATE sg_usuarios SET senha_u = ?, dataModificacao_u = ? WHERE id_u = ?",
+      "UPDATE tb_users SET password_u = ?, dateModification_u = ? WHERE id_u = ?",
       [$password, $date, $admin_id]
     );
 

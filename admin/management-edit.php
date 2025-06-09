@@ -73,12 +73,12 @@ $data = getData($connection, $sql_gerenciar, [$management_id])[0];
         <div class="form-group col-md-4" id="margemB">
           <label for="textturma">Turmas</label>
           <select id="textturma" class="input form-control" name="group" required>
-            <option value="<?= $data['id_t'] ?>"><?= $data['nome_t']; ?></option>
+            <option value="<?= $data['id_g'] ?>"><?= $data['name_g']; ?></option>
             <?php
-            $group_data = getData($connection, "SELECT id_t,nome_t FROM sg_turma ORDER BY nome_t");
+            $group_data = getData($connection, "SELECT id_g, name_g FROM tb_groups ORDER BY name_g");
             foreach ($group_data as $group) {
-              if ($group['nome_t'] !== $data['nome_t'])
-                echo "<option value = '" . $group['id_t'] . "'>" . $group['nome_t'] . "</option>";
+              if ($group['name_g'] !== $data['name_g'])
+                echo "<option value = '" . $group['id_g'] . "'>" . $group['name_g'] . "</option>";
             }
             ?>
           </select>

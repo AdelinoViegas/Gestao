@@ -15,7 +15,7 @@ if (isset($_POST['btn-cadastre'])) {
   $birthday = mysqli_real_escape_string($connection, trim($_POST['birthday']));
   $BI = mysqli_real_escape_string($connection, trim($_POST['BI']));
 
-  $BI_verification = getData($connection, "SELECT numeroBI_e FROM sg_encarregado WHERE numeroBI_e = ?", [$BI]);
+  $BI_verification = getData($connection, "SELECT BI_r FROM tb_responsibles WHERE BI_r = ?", [$BI]);
 
   if ($BI_verification) {
     setMessage("responsible-message", "alert-warning", "Codigo de BI já existente!");
@@ -25,16 +25,16 @@ if (isset($_POST['btn-cadastre'])) {
 
     $sign_user = signData(
       $connection,
-      "INSERT INTO sg_usuarios(nome_u, senha_u, estado_u, painel_u, view, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?,?)",
+      "INSERT INTO tb_users(name_u, password_u, state_u, painel_u, view_u, dateCadastre_u, dateModification_u) VALUES (?,?,?,?,?,?,?)",
       [$name, $hash, 'activo', 'encarregado', "1", $date, $date]
     );
 
-    $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ? AND dataCadastro_u =?", [$name, $date])[0];
+    $user_data = getData($connection, "SELECT id_u FROM tb_users WHERE name_u = ? AND dateCadastre_u =?", [$name, $date])[0];
     $user_id = $user_data['id_u'];
 
     $sign_responsible = signData(
       $connection, 
-      "INSERT INTO sg_encarregado(idUsuario, nome_e, sexo_e, municipio_e, bairro_e, nascimento_e, contato_e, numeroBI_e, view, dataCadastro_e, dataModificacao_e) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO tb_responsibles(userID_r, name_r, gender_r, city_r, neighborhood_r, birthday_r, contact_r, BI_r, view_r, dateCadastre_r, dateModification_r) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
      [$user_id, $name, $gender, $city, $neighborhood, $birthday, $contact,  $BI, "1", $date, $date]
     );
 

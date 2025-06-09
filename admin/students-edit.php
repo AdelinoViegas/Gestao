@@ -6,7 +6,7 @@ session_start();
 $student_id = $_POST['student_id'];
 $_SESSION['student_id'] = $student_id;
 
-$sql_student = "SELECT * FROM sg_aluno AS a join sg_classe AS c ON c.id_c = a.idClasse join sg_turma AS t ON a.idTurma_a = t.id_t WHERE id_a =?";
+$sql_student = "SELECT * FROM tb_students AS s join tb_class AS c ON s.classID_s = c.id_c join tb_groups AS g ON s.groupID_s = g.id_g WHERE id_s =?";
 $student_data = getData($connection, $sql_student, [$student_id])[0];
 $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi", "Talatona", "Cacuaco", "Icolo e Bengo"];
 ?>
@@ -51,11 +51,11 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
         <div class="form-group col-md-3 mb-3">
           <label for="textclasse">Classe</label>
           <select id="textclasse" class="input form-control" name="class" required>
-            <option value="<?= $student_data['idClasse'] ?>"><?= $student_data['nome_c']; ?></option>
+            <option value="<?= $student_data['classID_s'] ?>"><?= $student_data['name_c']; ?></option>
             <?php
-            $class_data = getData($connection, "SELECT id_c, nome_c FROM sg_classe");
+            $class_data = getData($connection, "SELECT id_c, nome_c FROM tb_class");
             foreach ($class_data as $class) {
-              echo "<option value = '" . $class['id_c'] . "'>" . $class['nome_c'] . "</option>";
+              echo "<option value = '" . $class['id_c'] . "'>" . $class['name_c'] . "</option>";
             }
             ?>
           </select>
@@ -63,11 +63,11 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
         <div class="form-group col-md-3 mb-3">
           <label for="textturma">Turma</label>
           <select id="textturma" class="input form-control" name="group" required>
-            <option value="<?= $student_data['idTurma_a'] ?>"><?= $student_data['nome_t']; ?></option>
+            <option value="<?= $student_data['groupID_s'] ?>"><?= $student_data['name_g']; ?></option>
             <?php
-            $group_data = getData($connection, "SELECT id_t,nome_t FROM sg_turma");
+            $group_data = getData($connection, "SELECT id_g, name_g FROM tb_groups");
             foreach ($group_data as $group) {
-              echo "<option value = '" . $group['id_t'] . "'>" . $group['nome_t'] . "</option>";
+              echo "<option value = '" . $group['id_g'] . "'>" . $group['name_g'] . "</option>";
             }
             ?>
           </select>
@@ -78,10 +78,10 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
         <div class="form-group col-md-4 mb-3">
           <label for="textmun">Município</label>
           <select id="textmun" class="input form-control" name="city" placeholder="Seu município" required>
-            <option value="<?= $student_data['municipio_a'] ?>"><?= $student_data['municipio_a'] ?></option>
+            <option value="<?= $student_data['city_s'] ?>"><?= $student_data['city_s'] ?></option>
             <?php
             foreach ($city_array as $city) {
-              if ($city !== $student_data['municipio_a']) { ?>
+              if ($city !== $student_data['city_s']) { ?>
                 <option value="<?= $city ?>"><?= $city ?></option>
               <?php }
             } ?>
@@ -90,19 +90,19 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
         <div class="form-group col-md-4 mb-3">
           <label for="textbairro">Bairro</label>
           <input type="text" id="textbairro" class="form-control" name="neighborhood"
-            value="<?= $student_data['bairro_a']; ?>">
+            value="<?= $student_data['neighborhood_s']; ?>">
         </div>
         <div class="form-group col-md-4 mb-3">
           <label for="textsexo">sexo</label>
           <select type="text" id="textsexo" class="input md form-control" name="gender"
-            value="<?= $student_data['sexo_a']; ?>" required>
+            value="<?= $student_data['gender_s']; ?>" required>
             <?php
-            if ($student_data['sexo_a'] == 'Masculino') {
+            if ($student_data['gender_s'] == 'Masculino') {
               ?>
               <option value="Masculino">Masculino</option>
               <option value="Femenino">Femenino</option>
             <?php } else { ?>
-              <option value="<?= $student_data['sexo_a']; ?>">Femenino</option>
+              <option value="<?= $student_data['gender_s']; ?>">Femenino</option>
               <option value="Masculino">Masculino</option>
             <?php } ?>
           </select>
@@ -113,27 +113,27 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
         <div class="form-group col-md-4 mb-3">
           <label for="textcont">Contato</label>
           <input type="text" id="textcont" class="form-control" name="contact"
-            value="<?= $student_data['contato_a']; ?>">
+            value="<?= $student_data['contact_s']; ?>">
         </div>
         <div class="form-group col-md-4" id="margemB">
           <label for="textnasc">Data de Nascimento</label>
           <input type="date" id="textnasc" class="form-control" name="birthday"
-            value="<?= $student_data['nascimento_a']; ?>">
+            value="<?= $student_data['birthday_s']; ?>">
         </div>
         <div class="form-group col-md-4 mb-3">
           <label for="textbi">Número do BI</label>
-          <input type="text" id="textbi" class="form-control" name="BI" value="<?= $student_data['numeroBI_a']; ?>">
+          <input type="text" id="textbi" class="form-control" name="BI" value="<?= $student_data['BI_s']; ?>">
         </div>
       </div>
 
       <div class="row">
         <?php
-        $responsible_data = getData($connection, "SELECT * FROM sg_encarregado AS e INNER JOIN sg_aluno AS a ON e.id_e = a.idEncarregado WHERE id_a = ?", [$student_id]);
+        $responsible_data = getData($connection, "SELECT * FROM tb_responsibles AS r INNER JOIN tb_students AS s ON r.id_r = s.responsiblesID_s WHERE id_s = ?", [$student_id]);
         ?>
         <div class="form-group col-md-6 mb-3">
           <label for="textencarregado">Encarregado</label>
           <input type="text" readonly id="textencarregado" class="form-control" name="responsible_id" maxlength="45"
-            value="<?= $responsible_data['nome_e']; ?>" required>
+            value="<?= $responsible_data['name_r']; ?>" required>
         </div>
       </div>
 

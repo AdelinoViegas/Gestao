@@ -16,9 +16,9 @@ if (isset($_POST['btn-cadastre'])) {
   $birthday = mysqli_real_escape_string($connection, trim($_POST['birthday']));
   $BI = mysqli_real_escape_string($connection, trim($_POST['BI']));
 
-  $sql_name = "SELECT nome_p FROM sg_professor WHERE nome_p = ?";
-  $sql_BI = "SELECT numeroBI_p FROM sg_professor WHERE numeroBI_p = ?";
-  $sql_email = "SELECT email_p FROM sg_professor WHERE email_p = ?";
+  $sql_name = "SELECT nome_p FROM tb_professors WHERE name_p = ?";
+  $sql_BI = "SELECT numeroBI_p FROM tb_professors WHERE BI_p = ?";
+  $sql_email = "SELECT email_p FROM tb_professors WHERE email_p = ?";
   $name_verification = getData($connection, $sql_name, [$name]);
   $BI_verification = getData($connection, $sql_BI, [$BI]);
   $email_verification = getData($connection, $sql_email, [$email]);
@@ -33,16 +33,16 @@ if (isset($_POST['btn-cadastre'])) {
 
     $sign_user = signData(
       $connection,
-      "INSERT INTO sg_usuarios(nome_u, senha_u, estado_u, painel_u, view, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?,?)",
+      "INSERT INTO tb_users(name_u, password_u, state_u, painel_u, view_u, dateCadastre_u, dateModification_u) VALUES (?,?,?,?,?,?,?)",
       [$name, $hash, 'activo', 'professor', '1', $date, $date]
     );
 
-    $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u =? AND dataCadastro_u =?", [$name, $date])[0];
+    $user_data = getData($connection, "SELECT id_u FROM tb_users WHERE name_u =? AND dateCadastre_u =?", [$name, $date])[0];
     $user_id = $user_data['id_u'];
 
     $sign_professor = signData(
       $connection,
-      "INSERT INTO sg_professor(idUsuario, nome_p, email_p, municipio_p, bairro_p, contato_p, sexo_p, nascimento_p, numeroBI_p, view, dataCadastro_p, dataModificacao_p) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO tb_professors(userID_p, name_p, email_p, city_p, neighborhood_p, contact_p, gender_p, birthday_p, BI_p, view_p, dateCadastre_p, dateModification_p) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
       [$user_id, $name, $email, $city, $neighborhood, $contact, $gender, $birthday, $BI, "1", $date, $date]
     );
 

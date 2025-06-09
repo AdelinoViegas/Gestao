@@ -10,7 +10,7 @@ if (isset($_POST['btn-update'])) {
 
   $update_class = updateData(
     $connection,
-    "UPDATE tb_class SET nome_c =? WHERE id_c =?",
+    "UPDATE tb_class SET name_c =? WHERE id_c =?",
     [$name, $class_id]
   );
 

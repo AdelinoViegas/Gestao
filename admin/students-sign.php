@@ -18,7 +18,7 @@ if (isset($_POST['btn-cadastre'])) {
   $BI = mysqli_real_escape_string($connection, trim($_POST['BI']));
   $responsible_BI = mysqli_real_escape_string($connection, trim($_POST['responsible']));
   
-  $BI_verification = getData($connection, "SELECT numeroBI_a FROM sg_aluno WHERE numeroBI_a = ?", [$BI]);
+  $BI_verification = getData($connection, "SELECT BI_s FROM tb_students WHERE BI_s = ?", [$BI]);
   
   if ($BI_verification) {
     setMessage("student-message", "alert-danger", "Codigo de BI do aluno já existente!");
@@ -26,23 +26,23 @@ if (isset($_POST['btn-cadastre'])) {
     $date = getCurrentDate();
     $hash = password_hash('aluno', PASSWORD_DEFAULT);
 
-    $responsible_data = getData($connection, "SELECT * FROM sg_encarregado WHERE numeroBI_e = ?", [$responsible_BI]);
+    $responsible_data = getData($connection, "SELECT * FROM tb_responsibles WHERE BI_r = ?", [$responsible_BI]);
 
     if (count($responsible_data) > 0){
       $responsible_id = $responsible_data['id_e'];
 
       $sign_user = signData(
         $connection,
-        "INSERT INTO  sg_usuarios(nome_u, senha_u, estado_u, painel_u, view, dataCadastro_u, dataModificacao_u) VALUES (?,?,?,?,?,?,?)",
+        "INSERT INTO  tb_users(name_u, password_u, state_u, painel_u, view_u, dateCadastre_u, dateModification_u) VALUES (?,?,?,?,?,?,?)",
         [$name, $hash, 'activo', 'aluno', '1', $date, $date]
       );
   
-      $user_data = getData($connection, "SELECT id_u FROM sg_usuarios WHERE nome_u = ? AND dataCadastro_u =?", [$name, $date])[0];
+      $user_data = getData($connection, "SELECT id_u FROM tb_users WHERE name_u = ? AND dateCadastre_u =?", [$name, $date])[0];
       $user_id = $user_data['id_u'];
 
       $sign_student = signData(
         $connection,
-        "INSERT INTO sg_aluno(idTurma_a, idClasse, idEncarregado, idUsuario, nome_a, sexo_a, nascimento_a, municipio_a, bairro_a, contato_a, numeroBI_a, view, dataCadastro_a, dataModificacao_a) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO tb_students(groupID_s, classID_s, responsibleID_s, userID_s, name_s, gender_s, birthday_s, city_s, neighborhood_s, contact_s, BI_s, view_s, dateCadastre_s, dateModification_s) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [$student_group, $student_class, $responsible_id, $user_id, $name, $gender, $birthday, $city, $neighborhood, $contact, $BI, "1", $date, $date]
       );
     }else{

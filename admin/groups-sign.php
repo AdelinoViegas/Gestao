@@ -8,14 +8,14 @@ session_start();
 if (isset($_POST['btn-cadastre'])) {
   $class = mysqli_real_escape_string($connection, trim($_POST['class']));
   $name = mysqli_real_escape_string($connection, trim($_POST['group']));
-  $group_data = getData($connection, "SELECT * FROM tb_groups WHERE name_t=?", [$name]);
+  $group_data = getData($connection, "SELECT * FROM tb_groups WHERE name_g=?", [$name]);
 
   if ($group_data) {
     setMessage("group-message", "alert-warning", "A turma já foi cadastrada!");
   } else {
     $sign_group = signData(
       $connection,
-      "INSERT INTO tb_groups(name_t, classID_t) VALUES (?,?)",
+      "INSERT INTO tb_groups(name_g, classID_g) VALUES (?,?)",
       [$name, $class]
     );
 

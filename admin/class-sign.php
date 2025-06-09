@@ -7,7 +7,7 @@ session_start();
 
 if (isset($_POST['btn-cadastre'])) {
   $name = mysqli_real_escape_string($connection, trim($_POST['name']));
-  $class_data = getData($connection, "SELECT * FROM tb_class WHERE nome_c=?", [$name]);
+  $class_data = getData($connection, "SELECT * FROM tb_class WHERE name_c=?", [$name]);
 
   if ($class_data) {
     setMessage("class-message", "alert-warning", "A classe já foi cadastrada!");

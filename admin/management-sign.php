@@ -14,7 +14,7 @@ if (isset($_POST['btn-sign'])) {
 
   $management_data = getData(
     $connection, 
-    "SELECT * FROM sg_gerenciar WHERE idDisciplina =? AND idProfessor =? AND idTurma =?", 
+    "SELECT * FROM tb_management WHERE disciplineID_m=? AND professorID_m=? AND groupID_m=?", 
     [$discipline, $professor, $group]
   );
 
@@ -23,7 +23,7 @@ if (isset($_POST['btn-sign'])) {
   }else{
     $sign_management = signData(
       $connection, 
-      "INSERT INTO sg_gerenciar(idDisciplina,idProfessor,idTurma,ano) VALUES (?,?,?,?)",
+      "INSERT INTO tb_management(disciplineID_m, professorID_m, groupID_m, year_m) VALUES (?,?,?,?)",
       [$discipline, $professor, $group, $date]
     );
 
@@ -79,9 +79,9 @@ if (isset($_POST['btn-sign'])) {
           <label for="textdisciplina">Disciplinas</label>
           <select id="textdisciplina" class="input form-control" name="discipline" required>
             <option value="">Selecione aqui</option>
-            <?php $discipline_data = getData($connection, "SELECT id_d,nome_d FROM sg_disciplina ORDER BY nome_d");
+            <?php $discipline_data = getData($connection, "SELECT id_d, nome_d FROM tb_disciplines ORDER BY name_d");
             foreach ($discipline_data as  $data) 
-              echo "<option value = '" . $data['id_d'] . "'>" . $data['nome_d'] . "</option>";
+              echo "<option value = '" . $data['id_d'] . "'>" . $data['name_d'] . "</option>";
             ?>
           </select>
         </div>
@@ -89,9 +89,9 @@ if (isset($_POST['btn-sign'])) {
           <label for="textprofessor">Professores</label>
           <select id="textprofessor" class="input form-control" name="professor" required>
             <option value="">Selecione aqui</option>
-            <?php $professor_data = getData($connection, "SELECT id_p,nome_p FROM sg_professor ORDER BY nome_p");
+            <?php $professor_data = getData($connection, "SELECT id_p, nome_p FROM tb_professors ORDER BY name_p");
             foreach ($professor_data as $data) 
-              echo "<option value = '" . $data['id_p'] . "'>" . $data['nome_p'] . "</option>";
+              echo "<option value = '" . $data['id_p'] . "'>" . $data['name_p'] . "</option>";
             ?>
           </select>
         </div>
@@ -99,9 +99,9 @@ if (isset($_POST['btn-sign'])) {
           <label for="textturma">Turmas</label>
           <select id="textturma" class="input form-control" name="group" required>
             <option value="">Selecione aqui</option>
-            <?php $group_data = getData($connection, "SELECT id_t,nome_t FROM sg_turma ORDER BY nome_t");
+            <?php $group_data = getData($connection, "SELECT id_g, name_g FROM tb_groups ORDER BY name_g");
             foreach ($group_data as $data) 
-              echo "<option value = '" . $data['id_t'] . "'>" . $data['nome_t'] . "</option>";
+              echo "<option value = '" . $data['id_g'] . "'>" . $data['name_g'] . "</option>";
             ?>
           </select>
         </div>

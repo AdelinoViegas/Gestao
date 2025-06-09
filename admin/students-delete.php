@@ -7,11 +7,11 @@ session_start();
 
 $student_id = mysqli_real_escape_string($connection, trim($_POST['student_id']));
 
-$student_data = getData($connection, "SELECT * FROM sg_aluno WHERE  id_a =?", [$student_id]);
-$user_id = $student_data['idUsuario'];
+$student_data = getData($connection, "SELECT * FROM tb_students WHERE  id_s =?", [$student_id]);
+$user_id = $student_data['userID_s'];
 
-$update_student = updateData($connection, "UPDATE sg_aluno SET view = '0' WHERE id_a =?", [$student_id]);
-$update_user = updateData($connection, "UPDATE sg_usuarios SET view = '0' WHERE id_u =?", [$user_id]);
+$update_student = updateData($connection, "UPDATE tb_students SET view_s = '0' WHERE id_s =?", [$student_id]);
+$update_user = updateData($connection, "UPDATE tb_users SET view_u = '0' WHERE id_u =?", [$user_id]);
 
 if($update_student && $update_user){
    setMessage("student-message", "alert-success", "Eliminado com sucesso!");

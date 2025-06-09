@@ -5,7 +5,7 @@ session_start();
 
 $responsible_id = mysqli_real_escape_string($connection, trim($_POST['responsible_id']));
 $_SESSION['responsible_id'] = $responsible_id;
-$data = getData($connection, "SELECT * FROM sg_encarregado WHERE id_e = ?", [$responsible_id])[0];
+$data = getData($connection, "SELECT * FROM tb_responsibles WHERE id_r = ?", [$responsible_id])[0];
 $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi", "Talatona", "Cacuaco", "Icolo e Bengo"];
 ?>
 
@@ -46,16 +46,16 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
         <div class="form-group col-md-6 mb-3">
           <label for="textnome">Nome</label>
           <input type="text" id="textnome" class="form-control" name="name" maxlength="45" placeholder="Nome do aluno"
-            value="<?= $data['nome_e']; ?>" required>
+            value="<?= $data['name_r']; ?>" required>
         </div>
         <div class="form-group col-md-3 mb-3">
           <label for="textmun">Município</label>
           <select id="textmun" class="input form-control" name="city" required>
-            <option value="<?= $data['municipio_e'] ?>"><?= $data['municipio_e'] ?></option>
+            <option value="<?= $data['city_r'] ?>"><?= $data['city_r'] ?></option>
             
             <?php
             foreach ($city_array as $city) {
-              if ($city !== $data['municipio_e']) { ?>
+              if ($city !== $data['city_r']) { ?>
                 <option value="<?= $city ?>"><?= $city ?></option>
               <?php }
             } ?>
@@ -64,17 +64,17 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
         <div class="form-group col-md-3 mb-3">
           <label for="textbairro">Bairro</label>
           <input type="text" id="textbairro" class="form-control" name="neighborhood" maxlength="20"
-            placeholder="Seu bairro" value="<?= $data['bairro_e']; ?>" required>
+            placeholder="Seu bairro" value="<?= $data['neighborhood_r']; ?>" required>
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-4 mb-3">
           <label for="textsexo">sexo</label>
-          <select type="text" id="textsexo" class="input md form-control" name="gender" value="<?= $data['sexo_e']; ?>"
+          <select type="text" id="textsexo" class="input md form-control" name="gender" value="<?= $data['gender_r']; ?>"
             required>
             <?php
-            if ($data['sexo_e'] == 'Masculino') {
+            if ($data['gender_r'] == 'Masculino') {
               ?>
               <option value="Masculino">Masculino</option>
               <option value="Femenino">Femenino</option>
@@ -87,11 +87,11 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
         <div class="form-group col-md-4 mb-3">
           <label for="textcont">Contato</label>
           <input type="text" id="textcont" class="form-control" name="contact" maxlength="9"
-            value="<?= $data['contato_e']; ?>" placeholder="xxx-xx-xx-xx" required>
+            value="<?= $data['contact_r']; ?>" placeholder="xxx-xx-xx-xx" required>
         </div>
         <div class="form-group col-md-4 mb-3">
           <label for="textnasc">Data de Nascimento</label>
-          <input type="date" id="textnasc" class="form-control" name="birthday" value="<?= $data['nascimento_e']; ?>"
+          <input type="date" id="textnasc" class="form-control" name="birthday" value="<?= $data['birthday_r']; ?>"
             required>
         </div>
       </div>
@@ -99,7 +99,7 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
       <div class="row">
         <div class="form-group col-md-3 mb-3">
           <label for="textbi">Número do BI</label>
-          <input type="text" id="textbi" class="form-control" name="BI" value="<?= $data['numeroBI_e']; ?>"
+          <input type="text" id="textbi" class="form-control" name="BI" value="<?= $data['BI_r']; ?>"
             placeholder="Nª do bilhete" maxlength="15" required>
         </div>
       </div>

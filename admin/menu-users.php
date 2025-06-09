@@ -6,11 +6,11 @@ session_start();
 if (!isset($_SESSION['logged']))
   header("Location: index.php");
 
-$data = getData($connection, "SELECT * FROM sg_usuarios WHERE view = '1' AND painel_u != 'admin' ORDER BY nome_u");
+$data = getData($connection, "SELECT * FROM tb_users WHERE view_u = '1' AND painel_u != 'admin' ORDER BY name_u");
 
 if (isset($_POST['btn-search'])) {
   $search = $_POST['search'];
-  $data = getData($connection, "SELECT * FROM sg_usuarios WHERE nome_u LIKE '$search%' AND view = '1' AND painel_u != 'admin'");
+  $data = getData($connection, "SELECT * FROM tb_users WHERE name_u LIKE '$search%' AND view_u = '1' AND painel_u != 'admin'");
 }
 ?>
 
@@ -76,16 +76,16 @@ if (isset($_POST['btn-search'])) {
               <tr>
                 <td id="estado">
                   <?php
-                    $button = $l_usuario['estado_u'] === "activo"?"btn-success":"btn-danger";
+                    $button = $l_usuario['state_u'] === "activo"?"btn-success":"btn-danger";
                     ?>
                     <form action="change-user.php" method="post">
-                      <input type="hidden" name="userState" value="<?= $l_usuario['estado_u']; ?>">
+                      <input type="hidden" name="userState" value="<?= $l_usuario['state_u']; ?>">
                       <input type="hidden" name="userId" value="<?= $l_usuario['id_u']; ?>">
                       <button id="btn2" name="btn-state" type="submit" class="<?= "btn btn-md ".$button ?>">
-                        <?= $l_usuario['estado_u']; ?></button>
+                        <?= $l_usuario['state_u']; ?></button>
                     </form>
                 </td>
-                <td id="nome"><?= $l_usuario['nome_u']; ?></td>
+                <td id="nome"><?= $l_usuario['name_u']; ?></td>
                 <td id="painel"><?= $l_usuario['painel_u']; ?></td>
               </tr>
             <?php } ?>

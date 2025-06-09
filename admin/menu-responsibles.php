@@ -6,11 +6,11 @@ session_start();
 if (!isset($_SESSION['logged']))
   header("Location: index.php");
 
-$data = getData($connection, "SELECT * FROM sg_encarregado WHERE view = '1' ORDER BY nome_e");
+$data = getData($connection, "SELECT * FROM tb_responsibles WHERE view_r = '1' ORDER BY name_r");
 
 if (isset($_POST['btn-search'])) {
   $search = mysqli_real_escape_string($connection, trim($_POST['search']));
-  $data = getData($connection, "SELECT * FROM sg_encarregado WHERE nome_e LIKE '$search%' AND view ='1'");
+  $data = getData($connection, "SELECT * FROM tb_responsibles WHERE name_r LIKE '$search%' AND view_r ='1'");
 }
 ?>
 
@@ -87,15 +87,15 @@ if (isset($_POST['btn-search'])) {
               <tr id="tr">
                 <td id="editar">
                   <form action="responsibles-edit.php" method="post">
-                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $responsible_data['id_e']; ?>"
+                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $responsible_data['id_r']; ?>"
                       name="responsible_id">
                     <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
                   </form>
 
-                  <button id="editar2" type="button" data-bs-target="#apagar<?= $responsible_data['id_e']; ?>"
+                  <button id="editar2" type="button" data-bs-target="#apagar<?= $responsible_data['id_r']; ?>"
                     data-bs-toggle="modal" class="btn btn-danger">Apagar</button>
 
-                  <div class="modal fade" id="apagar<?= $responsible_data['id_e']; ?>">
+                  <div class="modal fade" id="apagar<?= $responsible_data['id_r']; ?>">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -107,13 +107,13 @@ if (isset($_POST['btn-search'])) {
                         <div class="modal-body">
                           <div class="alert alert-danger">
                             Deseja excluir
-                            <strong><?= $responsible_data['nome_e']; ?></strong> ?
+                            <strong><?= $responsible_data['name_r']; ?></strong> ?
                           </div>
                         </div>
 
                         <div class="modal-footer">
                           <form action="responsibles-delete.php" method="post">
-                            <input type="hidden" name="responsible_id" value="<?= $responsible_data['id_e']; ?>">
+                            <input type="hidden" name="responsible_id" value="<?= $responsible_data['id_r']; ?>">
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Sim</button>
                           </form>
 
@@ -123,11 +123,11 @@ if (isset($_POST['btn-search'])) {
                     </div>
                   </div>
                 </td>
-                <td><?= $responsible_data['nome_e']; ?></td>
-                <td><?= $responsible_data['municipio_e']; ?></td>
-                <td><?= $responsible_data['bairro_e']; ?></td>
-                <td><?= $responsible_data['sexo_e']; ?></td>
-                <td><?= $responsible_data['contato_e']; ?></td>
+                <td><?= $responsible_data['name_r']; ?></td>
+                <td><?= $responsible_data['city_r']; ?></td>
+                <td><?= $responsible_data['neighborhood_r']; ?></td>
+                <td><?= $responsible_data['gender_r']; ?></td>
+                <td><?= $responsible_data['contact_r']; ?></td>
               </tr>
             <?php } ?>
           </tbody>
