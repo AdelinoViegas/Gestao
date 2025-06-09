@@ -8,7 +8,7 @@ $userState = $_POST['userState'];
 
 if (isset($_POST['btn-state'])) {
   $state = $userState === "activo"?"inactivo":"activo";
-  $sql = "UPDATE sg_usuarios SET estado_u =? WHERE id_u =?";
+  $sql = "UPDATE tb_users SET state_u =? WHERE id_u =?";
   $update_data = updateData(
     $connection,
     $sql,

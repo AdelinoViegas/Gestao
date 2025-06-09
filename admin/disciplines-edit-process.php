@@ -11,14 +11,13 @@ if (isset($_POST['btn-update'])) {
 
 $update_discipline = updateData(
   $connection,
-  "UPDATE sg_disciplina SET nome_d =? WHERE id_d =?",
+  "UPDATE tb_disciplines SET name_d =? WHERE id_d =?",
   [$name, $discipline_id]
 );
 
 if ($update_discipline) {
   setMessage("discipline-message", "alert-success", "Dados actualizado com sucesso!");
   header('Location: menu-disciplines.php');
-
 } else {
   setMessage("discipline-message", "alert-danger", "Erro ao actualizar!");
 }

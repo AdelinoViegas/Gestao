@@ -6,15 +6,15 @@ require_once "../features/setMessage.php";
 session_start();
 
 if (isset($_POST['btn-cadastre'])) {
-  $name = mysqli_escape_string($connection, trim($_POST['name']));
-  $class_data = getData($connection, "SELECT * FROM sg_classe WHERE nome_c=?", [$name]);
+  $name = mysqli_real_escape_string($connection, trim($_POST['name']));
+  $class_data = getData($connection, "SELECT * FROM tb_class WHERE nome_c=?", [$name]);
 
   if ($class_data) {
     setMessage("class-message", "alert-warning", "A classe já foi cadastrada!");
   } else {
     $sign_class = signData(
       $connection,
-      "INSERT INTO sg_classe(nome_c) VALUES (?)",
+      "INSERT INTO tb_class(name_c) VALUES (?)",
       [$name]
     );
 
@@ -80,7 +80,6 @@ if (isset($_POST['btn-cadastre'])) {
         <div class="col-md-8" id="margemBotao"></div>
 
         <a href="menu-class.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar">Voltar</a>
-
       </div>
     </form>
   </div>

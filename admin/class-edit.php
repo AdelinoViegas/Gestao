@@ -5,7 +5,7 @@ session_start();
 
 $class_id = $_POST['class_id'];
 $_SESSION['class_id'] = $class_id;
-$data = getData($connection, "SELECT * FROM sg_classe WHERE id_c =?", [$class_id])[0];
+$data = getData($connection, "SELECT * FROM tb_class WHERE id_c =?", [$class_id])[0];
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +45,7 @@ $data = getData($connection, "SELECT * FROM sg_classe WHERE id_c =?", [$class_id
         <div class="form-group col-md-4" id="margemB">
           <label for="textnome">Nome</label>
           <input type="text" id="textnome" class="form-control" name="name" maxlength="30"
-            value="<?= $data['nome_c']; ?>" placeholder="Nome da disciplina" required>
+            value="<?= $data['name_c']; ?>" placeholder="Nome da disciplina" required>
         </div>
       </div>
 

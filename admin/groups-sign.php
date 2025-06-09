@@ -8,14 +8,14 @@ session_start();
 if (isset($_POST['btn-cadastre'])) {
   $class = mysqli_real_escape_string($connection, trim($_POST['class']));
   $name = mysqli_real_escape_string($connection, trim($_POST['group']));
-  $group_data = getData($connection, "SELECT * FROM sg_turma WHERE nome_t=?", [$name]);
+  $group_data = getData($connection, "SELECT * FROM tb_groups WHERE name_t=?", [$name]);
 
   if ($group_data) {
     setMessage("group-message", "alert-warning", "A turma já foi cadastrada!");
   } else {
     $sign_group = signData(
       $connection,
-      "INSERT INTO sg_turma(nome_t, idClasse_t) VALUES (?,?)",
+      "INSERT INTO tb_groups(name_t, classID_t) VALUES (?,?)",
       [$name, $class]
     );
 
@@ -71,9 +71,9 @@ if (isset($_POST['btn-cadastre'])) {
           <label for="textsexo">Escolhe a classe</label>
           <select id="textsexo" class="input form-control" name="class" required>
            <?php 
-            $class_data = getData($connection, "SELECT * FROM sg_classe");
+            $class_data = getData($connection, "SELECT * FROM tb_class");
             foreach($class_data as $class){?>
-             <option value="<?= $class['id_c'] ?>"><?= $class['nome_c'] ?></option> 
+             <option value="<?= $class['id_c'] ?>"><?= $class['name_c'] ?></option> 
             <?php }?>
           </select>
         </div>

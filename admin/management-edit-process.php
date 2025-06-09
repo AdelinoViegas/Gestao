@@ -13,7 +13,7 @@ if (isset($_POST['btn-update'])) {
   
   $update_management = updateData(
     $connection,
-    "UPDATE sg_gerenciar SET idDisciplina=?, idProfessor =?, idTurma =?, ano =? WHERE id_g =?",
+    "UPDATE tb_management SET disciplineID_m=?, ProfessorID_m=?, groupID_m=?, year_m=? WHERE id_m=?",
     [$discipline_id, $professor_id, $group_id, $date, $management_id]
   );
 

@@ -10,7 +10,7 @@ if (isset($_POST['btn-cadastre'])) {
 
   $discipline_data = getData(
     $connection,
-    "SELECT * FROM sg_disciplina WHERE nome_d =?",
+    "SELECT * FROM tb_disciplines WHERE name_d =?",
     [$name]
   );
 
@@ -19,7 +19,7 @@ if (isset($_POST['btn-cadastre'])) {
   } else {
     $sign_discipline = signData(
       $connection,
-      "INSERT INTO sg_disciplina(nome_d) VALUES (?)",
+      "INSERT INTO tb_disciplines(name_d) VALUES (?)",
       [$name]
     );
 

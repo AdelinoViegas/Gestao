@@ -19,19 +19,19 @@ if (isset($_POST['enviar-dados'])) {
     trim($_POST['selection'])
   );
 
-  $consult = mysqli_prepare($connection, "SELECT * FROM tb_users WHERE nome_u = ?");
+  $consult = mysqli_prepare($connection, "SELECT * FROM tb_users WHERE name_u = ?");
   mysqli_stmt_bind_param($consult, "s", $name);
   mysqli_stmt_execute($consult);
   $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
 
   if (count($user) > 0) {
-    $state = $user['senha_u'];
+    $state = $user['password_u'];
 
     if (password_verify($password, $state)) 
       $password = $state;
   }
   
-  $sql = "SELECT * FROM tb_users WHERE nome_u = ? AND senha_u = ? AND estado_u = 'activo' AND painel_u = ?";
+  $sql = "SELECT * FROM tb_users WHERE name_u = ? AND password_u = ? AND state_u = 'activo' AND painel_u = ?";
   $consult = mysqli_prepare($connection,$sql);
   mysqli_stmt_bind_param($consult,"sss", $name, $password, $painel);
   mysqli_stmt_execute($consult);
@@ -44,26 +44,26 @@ if (isset($_POST['enviar-dados'])) {
       $erros[] = "<span>Usuário enexistente</span>";
     } else {
       if ($painel === 'admin') {
-        if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
+        if ($user['password_u'] === $password && $user['name_u'] === $name) {
           $_SESSION['logged'] = true;
           $_SESSION['admin_id'] = $user['id_u'];
           header('Location: admin/menu-home.php');
         }
       } elseif ($painel === 'professor') {
-        if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
-          $sql = "SELECT id_p FROM sg_professor WHERE idUsuario = ?";
+        if ($user['password_u'] === $password && $user['name_u'] === $name) {
+          $sql = "SELECT id_p FROM tb_professors WHERE userID_p = ?";
           $route = 'Location: users/professors/home.php';
           authentication($connection,$sql,$route,$user['id_u'],"professor");
         }
       } elseif ($painel === 'encarregado') {
-        if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
-          $sql = "SELECT id_e FROM sg_encarregado WHERE idUsuario = ?";
+        if ($user['password_u'] === $password && $user['name_u'] === $name) {
+          $sql = "SELECT id_e FROM tb_responsibles WHERE userID_r = ?";
           $route = 'Location: users/responsibles/home.php';
           authentication($connection,$sql,$route,$user['id_u'],"encarregado");
         }
       } elseif ($painel === 'aluno') {
-        if ($user['senha_u'] === $password && $user['nome_u'] === $name) {
-          $sql = "SELECT * FROM sg_aluno WHERE idUsuario = ?";
+        if ($user['password_u'] === $password && $user['nome_u'] === $name) {
+          $sql = "SELECT * FROM sg_aluno WHERE userID_s = ?";
           $route = 'Location: users/students/home.php';
           authentication($connection,$sql,$route,$user['id_u'],"aluno");
         }

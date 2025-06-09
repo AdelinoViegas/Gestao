@@ -6,7 +6,7 @@ session_start();
 $management_id = $_POST['management_id'];
 $_SESSION['management_id'] = $management_id;
 
-$sql_gerenciar = "SELECT * FROM sg_gerenciar AS g JOIN sg_disciplina AS d ON g.idDisciplina = d.id_d JOIN sg_professor AS p ON g.idProfessor = p.id_p JOIN sg_turma AS t ON g.idTurma = t.id_t WHERE id_g =?";
+$sql_gerenciar = "SELECT * FROM tb_management AS m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d JOIN tb_professors AS p ON m.professorID_m = p.id_p JOIN tb_groups AS g ON m.groupID_m = g.id_g WHERE id_m =?";
 $data = getData($connection, $sql_gerenciar, [$management_id])[0];
 ?>
 

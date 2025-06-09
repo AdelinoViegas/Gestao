@@ -6,7 +6,7 @@ session_start();
 $discipline_id = $_POST['discipline_id'];
 $_SESSION['discipline_id'] = $discipline_id;
 
-$data = getData($connection, "SELECT * FROM sg_disciplina WHERE id_d=?", [$discipline_id])[0];
+$data = getData($connection, "SELECT * FROM tb_disciplines WHERE id_d=?", [$discipline_id])[0];
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +45,7 @@ $data = getData($connection, "SELECT * FROM sg_disciplina WHERE id_d=?", [$disci
         <div class="form-group col-md-4" id="margemB">
           <label for="textnome">Nome</label>
           <input type="text" id="textnome" class="form-control" name="name" maxlength="30"
-            value="<?= $data['nome_d']; ?>" placeholder="Nome da disciplina" required>
+            value="<?= $data['name_d']; ?>" placeholder="Nome da disciplina" required>
         </div>
       </div>
 

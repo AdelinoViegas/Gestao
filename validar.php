@@ -16,11 +16,11 @@ $Mav = (($Aval1 + $Aval2 + $Aval3) / 3) * 0.5;
 $Mpv = (($Pv1 + $Pv2) / 2) * 0.3;
 $MF = $Mav + $Mpv + 0.2;
 //Buscar turma
-$Turm = mysqli_query($conexao, "SELECT * FROM sg_gerenciar AS g JOIN sg_turma AS t ON t.id_t=g.idTurma WHERE id_g ='1'");
+$Turm = mysqli_query($conexao, "SELECT * FROM tb_management AS g JOIN tb_groups AS t ON t.id_t=g.idTurma WHERE id_g ='1'");
 $vet = mysqli_fetch_assoc($Turm);
 $nomeTurma = $vet['nome_t'];
 
-$res = mysqli_query($conexao, "SELECT nome_t FROM sg_turma");
+$res = mysqli_query($conexao, "SELECT nome_t FROM tb_groups");
 while ($arr = mysqli_fetch_assoc($res)) {
   $vector[] = $arr['nome_t'];
 }
