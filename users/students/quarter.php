@@ -7,7 +7,7 @@ $student_id = $_SESSION['student_id'];
 $student_quarter = $_SESSION['quarter'];
 
 $student_data = getData($connection, "SELECT * FROM tb_students WHERE id_s = ?", [$student_id])[0];
-$group_id = $student_data['idTurma_a'];
+$group_id = $student_data['groupID_s'];
 
 $sql = "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d WHERE studentID_n =? AND quarterID_n =? AND groupID_s = ?";
 $data = getData($connection, $sql, [$student_id, $student_quarter, $group_id]);
@@ -38,7 +38,7 @@ if (isset($_POST['btn-search'])) {
       <div>
         <?php
         $student_data = getData($connection, "SELECT * FROM tb_students AS s JOIN tb_groups as g ON s.groupID_s = g.id_g WHERE id_s =?", [$student_id])[0];
-        echo "<h5 id='alinhar'>" . $student_quarter . "º Trimestre  </h5> <p id='fonte'> Turma</p> <h5 id='alinhar'>" . $student_data['nome_t'] . "</h5> ";
+        echo "<h5 id='alinhar'>" . $student_quarter . "º Trimestre  </h5> <p id='fonte'> Turma</p> <h5 id='alinhar'>" . $student_data['name_g'] . "</h5> ";
         ?>
       </div>
       <div class="d-flex">

@@ -3,6 +3,7 @@ require_once "../../connection.php";
 require_once "../../features/getData.php";
 session_start();
 
+$discipline = [];
 $student_id = $_SESSION['student_id'];
 
 $data1 = getData(
