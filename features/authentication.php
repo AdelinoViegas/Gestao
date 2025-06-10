@@ -10,9 +10,9 @@ function authentication($conection, $sql, $route, $idUser, $user_painel){
   if($user_painel === "professor")
     $_SESSION['professor_id'] = $user['id_p'];
   elseif($user_painel === "encarregado")
-    $_SESSION['responsible_id'] = $user['id_e'];
+    $_SESSION['responsible_id'] = $user['id_r'];
   elseif($user_painel === "aluno")
-    $_SESSION['student_id'] = $user['id_a'];
+    $_SESSION['student_id'] = $user['id_s'];
 
   header($route);
 }

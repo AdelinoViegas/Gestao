@@ -7,33 +7,33 @@ $student_id = $_SESSION['student_id'];
 
 $data1 = getData(
   $connection,
-  "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =?",
+  "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND quarterID_n =?",
   [$student_id, '1']
 );
 
 foreach ($data1 as $value) {
-  $result1[] = $value['mediaF'];
+  $result1[] = $value['mediaF_n'];
 }
 
 $data2 = getData(
   $connection,
-  "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =?",
+  "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND quarterID_n =?",
   [$student_id, '2']
 );
 
 foreach ($data2 as $value) {
-  $result2[] = $value['mediaF'];
+  $result2[] = $value['mediaF_n'];
 }
 
 $data3 = getData(
   $connection,
-  "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =?",
+  "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND quarterID_n =?",
   [$student_id, '3']
 );
 
 foreach ($data3 as $value) {
-  $result3[] = $value['mediaF'];
-  $discipline[] = $value['nome_d'];
+  $result3[] = $value['mediaF_n'];
+  $discipline[] = $value['name_d'];
 }
 ?>
 
@@ -74,11 +74,11 @@ foreach ($data3 as $value) {
         <?php
         $class_data = getData(
           $connection,
-          "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON c.id_c = a.idClasse WHERE id_a =?",
+          "SELECT * FROM tb_students AS s JOIN tb_groups as g ON s.groupID_s = g.id_g JOIN tb_class AS c ON s.classID_s = c.id_c WHERE id_s =?",
           [$student_id]
         )[0];
 
-        echo $class_data['nome_c']; ?>
+        echo $class_data['name_c']; ?>
       </button>
 
       <form action="" method="post">

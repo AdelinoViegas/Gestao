@@ -62,8 +62,8 @@ if (isset($_POST['enviar-dados'])) {
           authentication($connection,$sql,$route,$user['id_u'],"encarregado");
         }
       } elseif ($painel === 'aluno') {
-        if ($user['password_u'] === $password && $user['nome_u'] === $name) {
-          $sql = "SELECT * FROM sg_aluno WHERE userID_s = ?";
+        if ($user['password_u'] === $password && $user['name_u'] === $name) {
+          $sql = "SELECT * FROM tb_students WHERE userID_s = ?";
           $route = 'Location: users/students/home.php';
           authentication($connection,$sql,$route,$user['id_u'],"aluno");
         }

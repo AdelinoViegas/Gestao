@@ -6,17 +6,17 @@ session_start();
 $student_id = $_SESSION['student_id'];
 $student_quarter = $_SESSION['quarter'];
 
-$student_data = getData($connection, "SELECT * FROM sg_aluno WHERE id_a = ?", [$student_id])[0];
+$student_data = getData($connection, "SELECT * FROM tb_students WHERE id_s = ?", [$student_id])[0];
 $group_id = $student_data['idTurma_a'];
 
-$sql = "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =? AND idTurma_a = ?";
+$sql = "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d WHERE studentID_n =? AND quarterID_n =? AND groupID_s = ?";
 $data = getData($connection, $sql, [$student_id, $student_quarter, $group_id]);
 
 if (isset($_POST['btn-search'])) {
   $search = mysqli_real_escape_string($connection, trim($_POST['search']));
   $data = getData(
     $connection, 
-    "SELECT * FROM sg_notas AS n JOIN sg_aluno AS a ON n.id_aluno = a.id_a JOIN sg_gerenciar AS g ON g.id_g = n.id_gerenciar JOIN sg_disciplina AS d ON d.id_d = g.idDisciplina WHERE id_aluno =? AND id_trimestre =? AND idTurma_a =? AND nome_d LIKE '$search%'", 
+    "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n  = m.id_m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d WHERE studentID_n =? AND quarterID_n =? AND groupID_s =? AND name_d LIKE '$search%'", 
     [$student_id, $student_quarter, $group_id]
   );
 }
@@ -37,7 +37,7 @@ if (isset($_POST['btn-search'])) {
     <div class="divflex">
       <div>
         <?php
-        $student_data = getData($connection, "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t WHERE id_a =?", [$student_id])[0];
+        $student_data = getData($connection, "SELECT * FROM tb_students AS s JOIN tb_groups as g ON s.groupID_s = g.id_g WHERE id_s =?", [$student_id])[0];
         echo "<h5 id='alinhar'>" . $student_quarter . "º Trimestre  </h5> <p id='fonte'> Turma</p> <h5 id='alinhar'>" . $student_data['nome_t'] . "</h5> ";
         ?>
       </div>
@@ -55,14 +55,14 @@ if (isset($_POST['btn-search'])) {
   <div class="rounded-3" id="divm">
     <div class="divsuperior3">
       <?php
-      $student_data = getData($connection, "SELECT * FROM sg_aluno AS a JOIN sg_turma as t ON a.idTurma_a = t.id_t JOIN sg_classe AS c ON c.id_c = a.idClasse WHERE id_a =?", [$student_id])[0];
-      echo "<h5 id='alinhar'>" . $student_quarter . "º Trimestre  </h5> <p id='fonte'> Turma</p> <h5 id='alinhar'>" . $student_data['nome_t'] . "</h5> ";
+      $student_data = getData($connection, "SELECT * FROM tb_students AS s JOIN tb_groups as g ON s.groupID_s = g.id_g JOIN tb_class AS c ON s.classID_s = c.id_c WHERE id_s =?", [$student_id])[0];
+      echo "<h5 id='alinhar'>" . $student_quarter . "º Trimestre  </h5> <p id='fonte'> Turma</p> <h5 id='alinhar'>" . $student_data['name_g'] . "</h5> ";
       ?>
     </div>
 
     <div id="divflex">
       <button type="submit" id="adicionar" class="btn btn-secondary">
-      <?= $student_data['nome_c']; ?>
+      <?= $student_data['name_c']; ?>
       </button>
 
       <form action="" method="post">
@@ -95,32 +95,32 @@ if (isset($_POST['btn-search'])) {
             foreach ($data as $student) {
               ?>
               <tr>
-                <td><?= $student['nome_d']; ?></td>
+                <td><?= $student['name_d']; ?></td>
                 <td>
-                  <?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name = 'aval1' readonly value='" . $student['avaliacao1'] . "'>" ?>
+                  <?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name = 'aval1' readonly value='" . $student['evaluation1_n'] . "'>" ?>
                 </td>
                 <td>
-                  <?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='aval2' readonly value='" . $student['avaliacao2'] . "'>" ?>
+                  <?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='aval2' readonly value='" . $student['evaluation2_n'] . "'>" ?>
                 </td>
                 <td>
-                  <?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='aval3' readonly value='" . $student['avaliacao3'] . "'>" ?>
+                  <?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='aval3' readonly value='" . $student['evaluation3_n'] . "'>" ?>
                 </td>
                 <td>
-                  <?= "<input class='form-control ps-1' type='text' name='mediav' readonly value='" . number_format($student['mediaAv'], 2) . "'>" ?>
+                  <?= "<input class='form-control ps-1' type='text' name='mediav' readonly value='" . number_format($student['mediaAv_n'], 2) . "'>" ?>
                 </td>
                 <td>
-                  <?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='prova1' readonly value='" . $student['prova1'] . "'>" ?>
+                  <?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='prova1' readonly value='" . $student['test1_n'] . "'>" ?>
                 </td>
                 <td>
-                  <?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='prova2' readonly value='" . $student['prova2'] . "'>" ?>
+                  <?= "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='prova2' readonly value='" . $student['test2_n'] . "'>" ?>
                 </td>
                 <td>
-                  <?= "<input class='form-control ps-1' type='text' name='mediap' readonly value='" . number_format($student['mediaPv'], 2) . "'>" ?>
+                  <?= "<input class='form-control ps-1' type='text' name='mediap' readonly value='" . number_format($student['mediaPv_n'], 2) . "'>" ?>
                 </td>
                 <td>
-                  <?= "<input class='form-control ps-1' type='text' readonly value='" . number_format($student['mediaF'], 1) . "'>" ?>
+                  <?= "<input class='form-control ps-1' type='text' readonly value='" . number_format($student['mediaF_n'], 1) . "'>" ?>
                 </td>
-                <td><?= $student['classificacao']; ?>
+                <td><?= $student['classification_n']; ?>
                 </td>
               </tr>
             <?php } ?>
