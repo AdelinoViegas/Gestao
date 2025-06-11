@@ -6,7 +6,7 @@ session_start();
   $student_id = mysqli_real_escape_string($connection, trim($_SESSION['student_id']));
   $quarter = mysqli_real_escape_string($connection, trim($_SESSION['quarter']));
 
-  $query = "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n  = s.id_s JOIN tb_management AS m ON n.id_gerenciar = m.id_m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d WHERE studentID_n=? AND quarterID_n=?";
+  $query = "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n  = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d WHERE studentID_n=? AND quarterID_n=?";
   $data = getData($connection, $query, [$student_id, $quarter]);
 
   if (isset($_POST['btn-search'])) {
@@ -48,8 +48,8 @@ session_start();
   <div class="rounded-3" id="divm">
     <div class="divsuperior3">
       <?php
-        $group_data = getData($connection, "SELECT * FROM tb_groups AS g JOIN tb_students as s ON s.groupID_s = g.id_g JOIN tb_class as c ON  g.classID_g = c.id_c  WHERE id_s =?", [$student_id])[0];
-        echo "<h5 id='alinhar'>" . $quarter . "º Trimestre </h5> <h5 id='alinhar'>      </h5><p id='fonte'>Turma:</p> <h5 id='alinhar'>" . $group_data['name_g'] . "</h5> ";
+        $group_data = getData($connection, "SELECT * FROM tb_groups AS g JOIN tb_students as s ON g.id_g = s.groupID_s JOIN tb_class as c ON g.classID_g = c.id_c WHERE id_s =?", [$student_id])[0];
+        echo "<h5 id='alinhar'>" . $quarter . "º Trimestre </h5> <h5 id='alinhar'></h5><p id='fonte'>Turma:</p> <h5 id='alinhar'>" . $group_data['name_g'] . "</h5> ";
       ?>
     </div>
 

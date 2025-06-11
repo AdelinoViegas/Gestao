@@ -51,7 +51,7 @@ if(isset($_POST['btn-notes'])){
           <select id="textdisciplina" class="input form-control" name="student_id" required>
             <option value="">Selecione aqui</option>
 
-            <?php $query = getData($connection, "SELECT s.name_s, s.id_s, r.id_r FROM tb_students AS s INNER JOIN tb_responsibles AS r ON r.id_r = s.reponsibleID_s WHERE responsibleID_s =?", [$responsible_id]);
+            <?php $query = getData($connection, "SELECT s.name_s, s.id_s, r.id_r FROM tb_students AS s INNER JOIN tb_responsibles AS r ON s.responsibleID_s = r.id_r WHERE responsibleID_s =?", [$responsible_id]);
             foreach ($query as $data)
               echo "<option value = '" . $data['id_s'] . "'>" . $data['name_s'] . "</option>";
             ?>
