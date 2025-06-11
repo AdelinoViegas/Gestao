@@ -51,13 +51,13 @@ if (isset($_POST['enviar-dados'])) {
         }
       } elseif ($painel === 'professor') {
         if ($user['password_u'] === $password && $user['name_u'] === $name) {
-          $sql = "SELECT id_p FROM tb_professors WHERE userID_p = ?";
+          $sql = "SELECT * FROM tb_professors WHERE userID_p = ?";
           $route = 'Location: users/professors/home.php';
           authentication($connection,$sql,$route,$user['id_u'],"professor");
         }
       } elseif ($painel === 'encarregado') {
         if ($user['password_u'] === $password && $user['name_u'] === $name) {
-          $sql = "SELECT id_e FROM tb_responsibles WHERE userID_r = ?";
+          $sql = "SELECT * FROM tb_responsibles WHERE userID_r = ?";
           $route = 'Location: users/responsibles/home.php';
           authentication($connection,$sql,$route,$user['id_u'],"encarregado");
         }
