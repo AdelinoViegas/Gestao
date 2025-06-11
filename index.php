@@ -24,7 +24,7 @@ if (isset($_POST['enviar-dados'])) {
   mysqli_stmt_execute($consult);
   $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
 
-  if (count($user) > 0) {
+  if (isset($user) && count($user) > 0) {
     $state = $user['password_u'];
 
     if (password_verify($password, $state)) 
@@ -36,7 +36,7 @@ if (isset($_POST['enviar-dados'])) {
   mysqli_stmt_bind_param($consult,"sss", $name, $password, $painel);
   mysqli_stmt_execute($consult);
   $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
-
+  
   if (empty($name) || empty($password)) {
     $erros[] = "<span>O campo login e senha preecisa ser preenchido</span>";
   } else {

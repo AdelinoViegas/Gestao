@@ -18,13 +18,13 @@ if (isset($_POST['btn-calc'])) {
   $mav = ($evaluation1 + $evaluation2 + $evaluation3) / 3;
   $mpv = ($test1 + $test2) / 2;
   $MF = ($mav + $test1 + $test2) / 3;
+  
+  $group_data = getData($connection, "SELECT * FROM tb_management AS m JOIN tb_groups AS g ON m.groupID_m = g.id_g WHERE id_m =?", [$management_id])[0];
+  $group_name = $group_data['name_g'];
 
-  $group_data = getData($connection, "SELECT * FROM sg_gerenciar AS g JOIN sg_turma AS t ON t.id_t=g.idTurma WHERE id_g =?", [$management_id])[0];
-  $group_name = $group_data['nome_t'];
-
-  $data = getData($connection, "SELECT nome_t FROM sg_turma");
+  $data = getData($connection, "SELECT name_g FROM tb_groups");
   foreach ($data as $group) {
-    $vector[] = $group['nome_t'];
+    $vector[] = $group['name_g'];
   }
 
   foreach ($vector as $val) {
@@ -54,7 +54,7 @@ if (isset($_POST['btn-calc'])) {
 
   $actualizar_notas = updateData(
     $connection,
-    "UPDATE sg_notas SET avaliacao1=?, avaliacao2=?, avaliacao3=?, mediaAv=?, mediaPv=?, mediaF=?, prova1=?, prova2=?, classificacao=? WHERE id_aluno=? AND id_trimestre=? AND id_gerenciar=?",
+    "UPDATE tb_notes SET evaluation1_n=?, evaluation2_n=?, evaluation3_n=?, mediaAv_n=?, mediaPv_n=?, mediaF_n=?, test1_n=?, test2_n=?, classification_n=? WHERE studentID_n=? AND quarterID_n=? AND managementID_n=?",
     [$evaluation1, $evaluation2, $evaluation3, $mav, $mpv, $MF, $test1, $test2, $situation, $student_id, $quarter, $management_id]
   );
 
@@ -127,37 +127,37 @@ if (isset($_POST['btn-calc'])) {
             <?php
             $notes_data = getData(
               $connection,
-              "SELECT * FROM sg_notas AS n INNER JOIN sg_aluno AS a ON a.id_a = n.id_aluno WHERE id_aluno =? AND id_trimestre =? AND id_gerenciar =?",
+              "SELECT * FROM tb_notes AS n INNER JOIN tb_students AS s ON n.studentID_n = s.id_s WHERE studentID_n=? AND quarterID_n=? AND managementID_n=?",
               [$student_id, $quarter, $management_id]
             )[0];
             ?>
             <tr>
-              <td><?php echo $notes_data['nome_a']; ?></td>
+              <td><?php echo $notes_data['name_s']; ?></td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name = 'evaluation1' value='" . $notes_data['avaliacao1'] . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name = 'evaluation1' value='" . $notes_data['evaluation1_n'] . "'>" ?>
               </td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='evaluation2' value='" . $notes_data['avaliacao2'] . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='evaluation2' value='" . $notes_data['evaluation2_n'] . "'>" ?>
               </td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='evaluation3' value='" . $notes_data['avaliacao3'] . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='evaluation3' value='" . $notes_data['evaluation3_n'] . "'>" ?>
               </td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text'name='mediaAv' readonly value='" . number_format($notes_data['mediaAv'], 1) . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text'name='mediaAv' readonly value='" . number_format($notes_data['mediaAv_n'], 1) . "'>" ?>
               </td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='test1' value='" . $notes_data['prova1'] . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='test1' value='" . $notes_data['test1_n'] . "'>" ?>
               </td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='test2' value='" . $notes_data['prova2'] . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text' maxlength='4' size='2' name='test2' value='" . $notes_data['test2_n'] . "'>" ?>
               </td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text' name='mediaPv' readonly value='" . number_format($notes_data['mediaPv'], 1) . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text' name='mediaPv' readonly value='" . number_format($notes_data['mediaPv_n'], 1) . "'>" ?>
               </td>
               <td>
-                <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($notes_data['mediaF'], 1) . "'>" ?>
+                <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($notes_data['mediaF_n'], 1) . "'>" ?>
               </td>
-              <td><?php echo $notes_data['classificacao']; ?>
+              <td><?php echo $notes_data['classification_n']; ?>
               </td>
             </tr>
           </tbody>

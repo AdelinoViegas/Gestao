@@ -51,9 +51,9 @@ if (isset($_POST['btn-search'])) {
           <label for="textdisciplina">Disciplina e Turma</label>
           <select id="textdisciplina" class="input form-control" name="management" required>
             <option value="">Selecione aqui</option>
-            <?php $query = getData($connection, "SELECT g.id_g, t.nome_t, d.nome_d FROM sg_gerenciar AS g JOIN sg_disciplina AS d ON g.idDisciplina = d.id_d JOIN sg_professor AS p ON g.idProfessor = p.id_p JOIN sg_turma AS t ON g.idTurma = t.id_t WHERE p.id_P =?", [$professor_id]);
+            <?php $query = getData($connection, "SELECT m.id_m, g.name_g, d.name_d FROM tb_management AS m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d JOIN tb_professors AS p ON m.professorID_m = p.id_p JOIN tb_groups AS g ON m.groupID_m = g.id_g WHERE p.id_P =?", [$professor_id]);
             foreach ($query as $data) 
-              echo "<option value = '" . $data['id_g'] . "'>" . $data['nome_d'] . " - " . $data['nome_t'] . "</option>";            
+              echo "<option value = '" . $data['id_m'] . "'>" . $data['name_d'] . " - " . $data['name_g'] . "</option>";            
             ?>
           </select>
         </div>

@@ -14,12 +14,12 @@ if (isset($_POST['btn-password'])) {
 
   if ($password === $new_password) {
     $password = password_hash($new_password, PASSWORD_DEFAULT);
-    $professor_data = getData($connection, "SELECT idUsuario FROM sg_professor WHERE id_p=?", [$professor_id])[0];
+    $professor_data = getData($connection, "SELECT userID_p FROM tb_professors WHERE id_p=?", [$professor_id])[0];
 
     $update_data = updateData(
       $connection,
-      "UPDATE sg_usuarios SET senha_u =?, dataModificacao_u =? WHERE id_u =?",
-      [$password, $date, $professor_data['idUsuario']]
+      "UPDATE tb_users SET password_u =?, dateModification_u =? WHERE id_u =?",
+      [$password, $date, $professor_data['userID_p']]
     );
 
     if ($update_data)
