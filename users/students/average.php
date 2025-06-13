@@ -5,6 +5,7 @@ session_start();
 
 $some = 0;
 $discipline = [];
+$list = [];
 $student_id = $_SESSION['student_id'];
 
 $data1 = getData(
@@ -39,22 +40,29 @@ foreach ($data3 as $value) {
 }
 
 if (isset($_POST['btn-search'])) {
-  /*$search = mysqli_real_escape_string($connection, trim($_POST['search']));
+  global $search;
+  $search = mysqli_real_escape_string($connection, trim($_POST['search']));
   $search_discipline = getData(
     $connection,
-    "SELECT mediaF_n FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND name_d LIKE '$search%'",
+    "SELECT mediaF_n, quarterID_n, name_d FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND name_d LIKE '$search%' ORDER BY quarterID_n",
     [$student_id]
   );
-   
-  foreach($search_discipline as $value){
-    $some += (number_format($value['mediaF_n'], 2));
-  } 
   
-  print((round($some/3)).'<br>');
-  var_dump($search_discipline);
-  echo "<br>";
-  array_sum($search_discipline);
-  die();*/
+  if(count($search_discipline)){
+    foreach($search_discipline as $value){
+      $some += (number_format($value['mediaF_n'], 2));
+      if(!in_array($value['name_d'], $list)){
+        array_push($list, $value['name_d']);
+      }
+      
+      if(!in_array($value['mediaF_n'], $list)){
+        array_push($list, number_format($value['mediaF_n'], 2));
+      }
+    }
+  }
+   
+  if(count($list))
+      array_push($list, round($some / 3));
 }
 
 ?>
@@ -125,26 +133,21 @@ if (isset($_POST['btn-search'])) {
           </tr>
         </thead>
         <tbody>
+
           <?php
-          //if(count($search_discipline) > 0){  ?>
-            <!--<tr>
-            <td><?=  ''//$search_discipline['name_d']; ?></td>
+           if(count($list) && strlen($search)){                 
+          ?>
+            <tr>
+            <td><?=  $list[0]; ?></td>
+            <?php for($i = 1; $i < count($list); $i++){?>
             <td>
-              <?php //echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($search_discipline[$c], 2) . "'>" ?>
+              <?php echo "<input class='form-control ps-1' type='text' readonly value='" . $list[$i] . "'>" ?>
             </td>
-            <td>
-              <?php //echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($search_discipline[$c], 2) . "'>" ?>
-            </td>
-            <td>
-              <?php //echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($search_discipline[$c], 2) . "'>" ?>
-            </td>
-            <?php //$M_Final[] = number_format(($result1[$c] + $result2[$c] + $result3[$c]) / 3) ?>
-            <td><?php// echo "<input class='form-control ps-1' type='text' readonly value='" . $M_Final[$c] . "'>" ?>
-            </td>
-          </tr>-->
+            <?php }?>
+          </tr>
           <?php
-          /*}else*/ if (count($discipline) > 0) {
-            for ($c = 0; $c < count($discipline); $c++) {
+          }else if (count($discipline) || strlen($search)) {
+            var_dump("entra aqui jovem"); die(); for ($c = 0; $c < count($discipline); $c++) {
               ?>
               <tr>
                 <td><?= $discipline[$c]; ?></td>
@@ -161,16 +164,12 @@ if (isset($_POST['btn-search'])) {
                 <td><?php echo "<input class='form-control ps-1' type='text' readonly value='" . $M_Final[$c] . "'>" ?>
                 </td>
               </tr>
-          <?php }
-          } else {
-            ?>
-          </tbody>
-          <tfooter class='text text-center'>
-            <h5>Nenhum dado encontrado</h5>
-          </tfooter>
-          <?php
-          }
-          ?>
+          <?php } 
+        }else{ ?>
+        <tfooter class='text text-center'>
+          <h5>Nenhum dado encontrado</h5>
+        </tfooter>
+        <?php } ?>
       </table>
     </div>
     <button type="submit" id="adicionar" class="btn btn-info my-2">Condição Final
