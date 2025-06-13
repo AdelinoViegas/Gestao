@@ -3,12 +3,13 @@ require_once "../../connection.php";
 require_once "../../features/getData.php";
 session_start();
 
+$some = 0;
 $discipline = [];
 $student_id = $_SESSION['student_id'];
 
 $data1 = getData(
   $connection,
-  "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND quarterID_n =?",
+  "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND quarterID_n =? ORDER BY name_d",
   [$student_id, '1']
 );
 
@@ -18,7 +19,7 @@ foreach ($data1 as $value) {
 
 $data2 = getData(
   $connection,
-  "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND quarterID_n =?",
+  "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND quarterID_n =? ORDER BY name_d",
   [$student_id, '2']
 );
 
@@ -28,7 +29,7 @@ foreach ($data2 as $value) {
 
 $data3 = getData(
   $connection,
-  "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND quarterID_n =?",
+  "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND quarterID_n =? ORDER BY name_d",
   [$student_id, '3']
 );
 
@@ -36,14 +37,36 @@ foreach ($data3 as $value) {
   $result3[] = $value['mediaF_n'];
   $discipline[] = $value['name_d'];
 }
+
+if (isset($_POST['btn-search'])) {
+  /*$search = mysqli_real_escape_string($connection, trim($_POST['search']));
+  $search_discipline = getData(
+    $connection,
+    "SELECT mediaF_n FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND name_d LIKE '$search%'",
+    [$student_id]
+  );
+   
+  foreach($search_discipline as $value){
+    $some += (number_format($value['mediaF_n'], 2));
+  } 
+  
+  print((round($some/3)).'<br>');
+  var_dump($search_discipline);
+  echo "<br>";
+  array_sum($search_discipline);
+  die();*/
+}
+
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>principal</title>
   <?php require_once "../../head2.php"; ?>
 </head>
+
 <body>
   <div class="divsuperior">
     <h1>Colégio Samiga</h1>
@@ -84,8 +107,8 @@ foreach ($data3 as $value) {
 
       <form action="" method="post">
         <div class="d-flex align-items-center" id="btn-pesquisar">
-          <input type="text" class="form-control me-2" name="txtpesquisar" placeholder="Pesquisa por nome"><button
-            type="submit" class="btn btn-success" name="btn-pesquisa">Pesquisar</button>
+          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button
+            type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
         </div>
       </form>
     </div>
@@ -103,7 +126,24 @@ foreach ($data3 as $value) {
         </thead>
         <tbody>
           <?php
-          if (count($discipline) > 0) {
+          //if(count($search_discipline) > 0){  ?>
+            <!--<tr>
+            <td><?=  ''//$search_discipline['name_d']; ?></td>
+            <td>
+              <?php //echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($search_discipline[$c], 2) . "'>" ?>
+            </td>
+            <td>
+              <?php //echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($search_discipline[$c], 2) . "'>" ?>
+            </td>
+            <td>
+              <?php //echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($search_discipline[$c], 2) . "'>" ?>
+            </td>
+            <?php //$M_Final[] = number_format(($result1[$c] + $result2[$c] + $result3[$c]) / 3) ?>
+            <td><?php// echo "<input class='form-control ps-1' type='text' readonly value='" . $M_Final[$c] . "'>" ?>
+            </td>
+          </tr>-->
+          <?php
+          /*}else*/ if (count($discipline) > 0) {
             for ($c = 0; $c < count($discipline); $c++) {
               ?>
               <tr>
@@ -117,24 +157,21 @@ foreach ($data3 as $value) {
                 <td>
                   <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($result3[$c], 2) . "'>" ?>
                 </td>
-                <?php $M_Final[] = number_format(($result1[$c] + $result2[$c] + $result3[$c]) / 3) ?>
+                <?php $M_Final[] = round(($result1[$c] + $result2[$c] + $result3[$c]) / 3); ?>
                 <td><?php echo "<input class='form-control ps-1' type='text' readonly value='" . $M_Final[$c] . "'>" ?>
                 </td>
               </tr>
-            <?php } ?>
-          </tbody>
-        </table>
-        <?php
+          <?php }
           } else {
             ?>
-        </tbody>
-        </table>
-        <tfooter class='text text-center'>
-          <h5>Nenhum dado encontrado</h5>
-        </tfooter>
-        <?php
+          </tbody>
+          <tfooter class='text text-center'>
+            <h5>Nenhum dado encontrado</h5>
+          </tfooter>
+          <?php
           }
           ?>
+      </table>
     </div>
     <button type="submit" id="adicionar" class="btn btn-info my-2">Condição Final
   </div>
