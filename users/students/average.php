@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once "../../connection.php";
 require_once "../../features/getData.php";
-session_start();
 
 $some = 0;
 $discipline = [];

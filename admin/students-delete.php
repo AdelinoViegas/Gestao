@@ -1,9 +1,9 @@
 <?php 
+session_start();
 require_once '../connection.php';
 require_once "../features/updateData.php";
 require_once "../features/getData.php";
 require_once "../features/setMessage.php";
-session_start();
 
 $student_id = mysqli_real_escape_string($connection, trim($_POST['student_id']));
 

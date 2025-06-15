@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once "../connection.php";
 require_once "../features/updateData.php";
-session_start();
 
 $userId = $_POST['userId'];
 $userState = $_POST['userState'];

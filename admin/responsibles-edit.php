@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once "../connection.php";
 require_once "../features/getData.php";
-session_start();
 
 $responsible_id = mysqli_real_escape_string($connection, trim($_POST['responsible_id']));
 $_SESSION['responsible_id'] = $responsible_id;

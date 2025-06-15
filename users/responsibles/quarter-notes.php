@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once "../../connection.php";
 require_once "../../features/getData.php";
-session_start();
 
   $student_id = mysqli_real_escape_string($connection, trim($_SESSION['student_id']));
   $quarter = mysqli_real_escape_string($connection, trim($_SESSION['quarter']));

@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once "../connection.php";
 require_once "../features/getData.php";
-session_start();
 
 $discipline_id = $_POST['discipline_id'];
 $_SESSION['discipline_id'] = $discipline_id;

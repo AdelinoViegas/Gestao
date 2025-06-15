@@ -1,7 +1,7 @@
 <?php
+session_start();
 require_once "../connection.php";
 require_once "../features/getData.php";
-session_start();
 
 $group_id = $_POST['group_id'];
 $_SESSION['group_id'] = $group_id;

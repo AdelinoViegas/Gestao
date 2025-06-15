@@ -1,8 +1,8 @@
 <?php
+session_start();
 require_once "../../connection.php";
 require_once "../../features/getData.php";
 require_once "../../features/signData.php";
-session_start();
 
 $management_id = mysqli_real_escape_string($connection, trim($_SESSION['management_id']));
 $quarter = mysqli_real_escape_string($connection, trim($_SESSION['quarter']));

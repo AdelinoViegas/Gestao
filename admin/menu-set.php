@@ -1,9 +1,9 @@
 <?php
+session_start();
 require_once "../connection.php";
 require_once "../features/setMessage.php";
 require_once "../features/getCurrentDate.php";
 require_once "../features/updateData.php";
-session_start();
 
 if (isset($_POST['btn-password'])) {
   $admin_id = mysqli_real_escape_string($connection, trim($_SESSION['admin_id']));

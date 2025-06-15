@@ -1,10 +1,10 @@
 <?php
+session_start();
 require_once "../connection.php";
 require_once "../features/getData.php";
 require_once "../features/signData.php";
 require_once "../features/setMessage.php";
 require_once "../features/getCurrentDate.php";
-session_start();
 
 if (isset($_POST['btn-cadastre'])) {
   $name = mysqli_real_escape_string($connection, trim($_POST['name']));

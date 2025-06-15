@@ -1,8 +1,8 @@
 <?php
+session_start();
 require_once "../connection.php";
 require_once "../features/updateData.php";
 require_once "../features/setMessage.php";
-session_start();
 
 if (isset($_POST['btn-update'])) {
   $discipline_id = $_SESSION['discipline_id'];
