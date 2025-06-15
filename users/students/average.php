@@ -147,7 +147,7 @@ if (isset($_POST['btn-search'])) {
           </tr>
           <?php
           }else if (count($discipline) || strlen($search)) {
-            var_dump("entra aqui jovem"); die(); for ($c = 0; $c < count($discipline); $c++) {
+            for ($c = 0; $c < count($discipline); $c++) {
               ?>
               <tr>
                 <td><?= $discipline[$c]; ?></td>
