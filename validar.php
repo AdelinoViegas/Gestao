@@ -1,6 +1,6 @@
 <?php
-require_once "connection.php";
 session_start();
+require_once "connection.php";
 
 /*Da 1 ate 6-classe maior nota é 10valores
   Da 7 ate 9-classe maior nota é 20valores

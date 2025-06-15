@@ -15,7 +15,7 @@ $data1 = getData(
 );
 
 foreach ($data1 as $value) {
-  $result1[] = $value['mediaF_n'];
+  $quarter1[] = $value['mediaF_n'];
 }
 
 $data2 = getData(
@@ -25,7 +25,7 @@ $data2 = getData(
 );
 
 foreach ($data2 as $value) {
-  $result2[] = $value['mediaF_n'];
+  $quarter2[] = $value['mediaF_n'];
 }
 
 $data3 = getData(
@@ -35,7 +35,7 @@ $data3 = getData(
 );
 
 foreach ($data3 as $value) {
-  $result3[] = $value['mediaF_n'];
+  $quarter3[] = $value['mediaF_n'];
   $discipline[] = $value['name_d'];
 }
 
@@ -152,15 +152,15 @@ if (isset($_POST['btn-search'])) {
               <tr>
                 <td><?= $discipline[$c]; ?></td>
                 <td>
-                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($result1[$c], 2) . "'>" ?>
+                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($quarter1[$c], 2) . "'>" ?>
                 </td>
                 <td>
-                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($result2[$c], 2) . "'>" ?>
+                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($quarter2[$c], 2) . "'>" ?>
                 </td>
                 <td>
-                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($result3[$c], 2) . "'>" ?>
+                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($quarter3[$c], 2) . "'>" ?>
                 </td>
-                <?php $M_Final[] = round(($result1[$c] + $result2[$c] + $result3[$c]) / 3); ?>
+                <?php $M_Final[] = round(($quarter1[$c] + $quarter2[$c] + $quarter3[$c]) / 3); ?>
                 <td><?php echo "<input class='form-control ps-1' type='text' readonly value='" . $M_Final[$c] . "'>" ?>
                 </td>
               </tr>
