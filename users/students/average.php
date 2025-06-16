@@ -6,6 +6,7 @@ require_once "../../features/getData.php";
 $some = 0;
 $discipline = [];
 $list = [];
+$search = "";
 $student_id = $_SESSION['student_id'];
 
 $data1 = getData(
@@ -44,10 +45,10 @@ if (isset($_POST['btn-search'])) {
   $search = mysqli_real_escape_string($connection, trim($_POST['search']));
   $search_discipline = getData(
     $connection,
-    "SELECT mediaF_n, quarterID_n, name_d FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND name_d LIKE '$search%' ORDER BY quarterID_n",
+    "SELECT mediaF_n, quarterID_n, name_d FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON d.id_d = m.disciplineID_m WHERE studentID_n =? AND name_d LIKE '$search%'",
     [$student_id]
   );
-  
+
   if(count($search_discipline)){
     foreach($search_discipline as $value){
       $some += (number_format($value['mediaF_n'], 2));
@@ -134,7 +135,7 @@ if (isset($_POST['btn-search'])) {
         </thead>
         <tbody>
 
-          <?php
+          <?php 
            if(count($list) && strlen($search)){                 
           ?>
             <tr>
@@ -145,8 +146,11 @@ if (isset($_POST['btn-search'])) {
             </td>
             <?php }?>
           </tr>
-          <?php
-          }else if (count($discipline) || strlen($search)) {
+          <?php } else if(count($list) === 0 && strlen($search)){ ?>
+        <tfooter class='text text-center'>
+          <h5>Nenhum dado encontrado</h5>
+        </tfooter>
+        <?php }else{
             for ($c = 0; $c < count($discipline); $c++) {
               ?>
               <tr>
@@ -164,12 +168,7 @@ if (isset($_POST['btn-search'])) {
                 <td><?php echo "<input class='form-control ps-1' type='text' readonly value='" . $M_Final[$c] . "'>" ?>
                 </td>
               </tr>
-          <?php } 
-        }else{ ?>
-        <tfooter class='text text-center'>
-          <h5>Nenhum dado encontrado</h5>
-        </tfooter>
-        <?php } ?>
+          <?php } } ?>
       </table>
     </div>
     <button type="submit" id="adicionar" class="btn btn-info my-2">Condição Final

@@ -1,3 +1,4 @@
+console.log("entrou no script");
 let file = window.location.pathname.split("/").pop();
 let list = [...document.querySelectorAll("li")]; 
 let routes = [
