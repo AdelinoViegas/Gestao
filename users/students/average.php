@@ -147,9 +147,15 @@ if (isset($_POST['btn-search'])) {
             <?php }?>
           </tr>
           <?php } else if(count($list) === 0 && strlen($search)){ ?>
-        <tfooter class='text text-center'>
-          <h5>Nenhum dado encontrado</h5>
-        </tfooter>
+        <tfoot class='text text-center'>
+          <tr>
+            <td colspan="5">
+              <h5>
+                Nenhum dado encontrado
+              </h5>
+            </td>
+          </tr>
+        </tfoot>
         <?php }else{
             for ($c = 0; $c < count($discipline); $c++) {
               ?>

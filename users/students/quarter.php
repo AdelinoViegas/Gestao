@@ -73,7 +73,7 @@ if (isset($_POST['btn-search'])) {
       </form>
     </div>
 
-    <div class="table-responsive" id="tabdados">
+    <table class="table-responsive" id="tabdados">
       <table class="table table-hover table-bordered" id="table">
         <thead class="table-secondary" id="theader">
           <tr>
@@ -123,21 +123,21 @@ if (isset($_POST['btn-search'])) {
                 <td><?= $student['classification_n']; ?>
                 </td>
               </tr>
-            <?php } ?>
-          </tbody>
-        </table>
-        <?php
-          } else {
-
-            ?>
+            <?php } } else { ?>
         </tbody>
-        </table>
-        <tfooter class='text text-center'>
-          <h5>Nenhum dado encontrado</h5>
-        </tfooter>
+        <tfoot class='text text-center'>
+          <tr>
+            <td colspan="10">
+              <h5>
+                Nenhum dado encontrado
+              </h5>
+            </td>
+          </tr>
+        </tfoot>
         <?php
           }
           ?>
+      </table>
     </div>
   </div>
 
