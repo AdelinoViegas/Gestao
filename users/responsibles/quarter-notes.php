@@ -115,20 +115,21 @@ require_once "../../features/getData.php";
                 </td>
                 <td><?= $student['classification_n']; ?>
               </tr>
-            <?php } ?>
-          </tbody>
-        </table>
-        <?php
-          } else {
+            <?php }
+              } else {
             ?>
         </tbody>
-        </table>
-        <tfooter class='text text-center'>
-          <h5>Nenhum dado encontrado</h5>
-        </tfooter>
+        <tfoot class='text text-center'>
+          <tr>
+            <td colspan="10">
+              <h5>Nenhum dado encontrado</h5>
+            </td>
+          </tr>
+        </tfoot>
       <?php
           }
           ?>
+      </table>
     </div>
   </div>
 
