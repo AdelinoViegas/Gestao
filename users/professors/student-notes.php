@@ -139,20 +139,21 @@ if (isset($_POST['btn-update'])) {
                 <td><?= $notes['classification_n']; ?>
                 </td>
               </tr>
-            <?php } ?>
-          </tbody>
-        </table>
-        <?php
+            <?php }
           } else {
             ?>
         </tbody>
-        </table>
-        <tfooter class='text text-center'>
-          <h5>Nenhum dado encontrado</h5>
-        </tfooter>
+        <tfoot class='text text-center'>
+          <tr>
+            <td colspan="11">
+              <h5>Nenhum dado encontrado</h5>
+            </td>
+          </tr>
+        </tfoot>
       <?php
           }
           ?>
+      </table>
     </div>
   </div>
 
