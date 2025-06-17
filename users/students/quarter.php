@@ -73,7 +73,7 @@ if (isset($_POST['btn-search'])) {
       </form>
     </div>
 
-    <table class="table-responsive" id="tabdados">
+    <div class="table-responsive" id="tabdados">
       <table class="table table-hover table-bordered" id="table">
         <thead class="table-secondary" id="theader">
           <tr>
