@@ -3,16 +3,16 @@ session_start();
 require_once "../../connection.php";
 require_once "../../features/getData.php";
 
-  $student_id = mysqli_real_escape_string($connection, trim($_SESSION['student_id']));
-  $quarter = mysqli_real_escape_string($connection, trim($_SESSION['quarter']));
+$student_id = mysqli_real_escape_string($connection, trim($_SESSION['student_id']));
+$quarter = mysqli_real_escape_string($connection, trim($_SESSION['quarter']));
 
-  $query = "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n  = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d WHERE studentID_n=? AND quarterID_n=?";
-  $data = getData($connection, $query, [$student_id, $quarter]);
+$query = "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n  = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d WHERE studentID_n=? AND quarterID_n=?";
+$data = getData($connection, $query, [$student_id, $quarter]);
 
-  if (isset($_POST['btn-search'])) {
-    $search = mysqli_real_escape_string($connection, trim($_POST['search']));
-    $data = getData($connection, "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d WHERE studentID_n=? AND quarterID_n=? AND name_d LIKE '$search%'", [$student_id, $quarter]);
-  }
+if (isset($_POST['btn-search'])) {
+  $search = mysqli_real_escape_string($connection, trim($_POST['search']));
+  $data = getData($connection, "SELECT * FROM tb_notes AS n JOIN tb_students AS s ON n.studentID_n = s.id_s JOIN tb_management AS m ON n.managementID_n = m.id_m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d WHERE studentID_n=? AND quarterID_n=? AND name_d LIKE '$search%'", [$student_id, $quarter]);
+}
 ?>
 
 <!DOCTYPE html>
@@ -83,10 +83,8 @@ require_once "../../features/getData.php";
           </tr>
         </thead>
         <tbody>
-          <?php
-          if (count($data) > 0) {
-            foreach ($data as $student) {
-              ?>
+          <?php if (count($data) > 0) {
+            foreach ($data as $student) { ?>
               <tr>
                 <td><?= $student['name_d']; ?></td>
                 <td>
@@ -115,9 +113,7 @@ require_once "../../features/getData.php";
                 </td>
                 <td><?= $student['classification_n']; ?>
               </tr>
-            <?php }
-              } else {
-            ?>
+            <?php } } else { ?>
         </tbody>
         <tfoot class='text text-center'>
           <tr>
@@ -126,9 +122,7 @@ require_once "../../features/getData.php";
             </td>
           </tr>
         </tfoot>
-      <?php
-          }
-          ?>
+      <?php } ?>
       </table>
     </div>
   </div>

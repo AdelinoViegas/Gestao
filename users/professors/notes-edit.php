@@ -37,7 +37,6 @@ if (isset($_POST['btn-calc'])) {
     }
   }
 
-
   if (in_array($group_name, $group_first)) {
     if ($MF >= 5 && $MF <= 10) {
       $situation = "Aprovado";

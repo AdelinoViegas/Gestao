@@ -26,7 +26,6 @@ if (isset($_POST['btn-password'])) {
       setMessage("settings-message", "alert-success", "Senha actualizada com sucesso!");
     else
       setMessage("settings-message", "alert-danger", "Erro a actualizar");
-
   } else {
     setMessage("settings-message", "alert-warning", "As senhas devem ser iguais");
   }
@@ -58,10 +57,10 @@ if (isset($_POST['btn-password'])) {
   </div>
 
   <?php
-  if (isset($_SESSION['settings-message'])) {
-    echo $_SESSION['settings-message'];
-    unset($_SESSION['settings-message']);
-  }
+    if (isset($_SESSION['settings-message'])) {
+      echo $_SESSION['settings-message'];
+      unset($_SESSION['settings-message']);
+    }
   ?>
 
   <?php require_once "nav-responsibles.php" ?>

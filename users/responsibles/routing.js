@@ -1,11 +1,11 @@
+let count = 0;
 let file = window.location.pathname.split("/").pop();
 let list = [...document.querySelectorAll("li")]; 
 let routes = [
   ['home.php'],
   ['notes.php', 'quarter-notes.php'],
   ['settings.php'],
-]
-let count = 0;
+];
 
 list.forEach((link)=>{
   if(routes[count].includes(file))
