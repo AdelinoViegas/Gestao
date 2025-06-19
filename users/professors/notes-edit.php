@@ -21,43 +21,38 @@ if (isset($_POST['btn-calc'])) {
   
   $group_data = getData($connection, "SELECT * FROM tb_management AS m JOIN tb_groups AS g ON m.groupID_m = g.id_g WHERE id_m =?", [$management_id])[0];
   $group_name = $group_data['name_g'];
-
   $data = getData($connection, "SELECT name_g FROM tb_groups");
+  
   foreach ($data as $group) {
     $vector[] = $group['name_g'];
   }
-
-  foreach ($vector as $val) {
-    if (!($val == '01-A') && !($val == '01-B') && !($val == '02-A') && !($val == '02-B') && !($val == '03-A') && !($val == '03-B') && !($val == '04-A') && !($val == '04-B') && !($val == '05-A') && !($val == '05-B') && !($val == '06-A') && !($val == '06-B')) {
-      $group_second[] = $val;
-    }
-
-    if (!($val == '07-A') && !($val == '07-B') && !($val == '08-A') && !($val == '08-B') && !($val == '09-A') && !($val == '09-B')) {
-      $group_first[] = $val;
-    }
+  
+  foreach ($vector as $value) {
+    if (in_array($value, ['07-A','07-B','08-A','08-B','09-A','09-B']))
+      $group_second[] = $value;
+    else
+      $group_first[] = $value;
   }
 
   if (in_array($group_name, $group_first)) {
-    if ($MF >= 5 && $MF <= 10) {
+    if ($MF >= 5 && $MF <= 10) 
       $situation = "Aprovado";
-    } elseif ($MF >= 1 && $MF < 5) {
+    elseif ($MF >= 1 && $MF < 5) 
       $situation = "reprovado";
-    }
   } elseif (in_array($group_name, $group_second)) {
-    if ($MF >= 10 && $MF <= 20) {
+    if ($MF >= 10 && $MF <= 20) 
       $situation = "Aprovado";
-    } elseif ($MF >= 1 && $MF < 10) {
+    elseif ($MF >= 1 && $MF < 10)
       $situation = "reprovado";
-    }
   }
 
-  $actualizar_notas = updateData(
+  $update_notes = updateData(
     $connection,
     "UPDATE tb_notes SET evaluation1_n=?, evaluation2_n=?, evaluation3_n=?, mediaAv_n=?, mediaPv_n=?, mediaF_n=?, test1_n=?, test2_n=?, classification_n=? WHERE studentID_n=? AND quarterID_n=? AND managementID_n=?",
     [$evaluation1, $evaluation2, $evaluation3, $mav, $mpv, $MF, $test1, $test2, $situation, $student_id, $quarter, $management_id]
   );
 
-  if ($actualizar_notas == true) {
+  if ($update_notes) {
     setMessage("notes-message", "alert-success", "Calculo feito com sucesso!");
   } else {
     setMessage("notes-message", "alert-danger", "Falha ao calcular!");
