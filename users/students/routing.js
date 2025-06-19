@@ -1,13 +1,13 @@
-console.log("entrou no script");
+let count = 0;
 let file = window.location.pathname.split("/").pop();
-let list = [...document.querySelectorAll("li")]; 
+let list = [...document.querySelectorAll(".navegacao ul li")]; 
 let routes = [
   ['home.php'],
   ['notes.php', 'quarter.php'],
   ['average.php'],
   ['settings.php'],
+  ['../../logoult.php'],
 ];
-let count = 0;
 
 list.forEach((link)=>{
   if(routes[count].includes(file))

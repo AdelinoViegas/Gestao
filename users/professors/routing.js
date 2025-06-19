@@ -1,10 +1,11 @@
 let count = 0;
 let file = window.location.pathname.split("/").pop();
-let list = [...document.querySelectorAll("li")]; 
+let list = [...document.querySelectorAll(".navegacao ul li")]; 
 let routes = [
   ['home.php'],
   ['notes-lanche.php', 'student-notes.php', 'notes-edit.php'],
   ['settings.php'],
+  ['../../logoult.php'],
 ];
 
 list.forEach((link)=>{
