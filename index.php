@@ -3,8 +3,8 @@ session_start();
 require_once "connection.php";
 require_once "features/authentication.php";
 
-if (isset($_POST['enviar-dados'])) {
-  $erros = array();
+if (isset($_POST['btn-login'])) {
+  $erros = [];
 
   $name = mysqli_real_escape_string(
     $connection,
@@ -55,13 +55,13 @@ if (isset($_POST['enviar-dados'])) {
           $route = 'Location: users/professors/home.php';
           authentication($connection,$sql,$route,$user['id_u'],"professor");
         }
-      } elseif ($painel === 'encarregado') {
+      } elseif ($painel === 'responsible') {
         if ($user['password_u'] === $password && $user['name_u'] === $name) {
           $sql = "SELECT * FROM tb_responsibles WHERE userID_r = ?";
           $route = 'Location: users/responsibles/home.php';
           authentication($connection,$sql,$route,$user['id_u'],"encarregado");
         }
-      } elseif ($painel === 'aluno') {
+      } elseif ($painel === 'student') {
         if ($user['password_u'] === $password && $user['name_u'] === $name) {
           $sql = "SELECT * FROM tb_students WHERE userID_s = ?";
           $route = 'Location: users/students/home.php';
@@ -107,13 +107,13 @@ if (isset($_POST['enviar-dados'])) {
           <label for="textusuario">Painel</label>
           <select id="textusuario" class="input form-control" name="selection" required>
             <option value="">Selecione o painel</option>
-            <option value="aluno">Aluno</option>
+            <option value="student">Aluno</option>
             <option value="admin">Administrador</option>
             <option value="professor">Professor</option>
-            <option value="encarregado">Encarregado</option>
+            <option value="responsible">Encarregado</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-outline-primary btn-block" name="enviar-dados">Entrar</button>
+        <button type="submit" class="btn btn-outline-primary btn-block" name="btn-login">Entrar</button>
       </form>
     </div>
   </div>
