@@ -4,8 +4,7 @@ require_once "connection.php";
 require_once "features/authentication.php";
 
 if (isset($_POST['btn-login'])) {
-  $erros = [];
-
+  $errors = [];
   $name = mysqli_real_escape_string(
     $connection,
     trim($_POST['name'])
@@ -38,10 +37,10 @@ if (isset($_POST['btn-login'])) {
   $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
   
   if (empty($name) || empty($password)) {
-    $erros[] = "<span>O campo login e senha preecisa ser preenchido</span>";
+    $errors[] = "<span>O campo login e senha preecisa ser preenchido</span>";
   } else {
     if (empty($user)) {
-      $erros[] = "<span>Usuário enexistente</span>";
+      $errors[] = "<span>Usuário enexistente</span>";
     } else {
       if ($painel === 'admin') {
         if ($user['password_u'] === $password && $user['name_u'] === $name) {
@@ -91,8 +90,8 @@ if (isset($_POST['btn-login'])) {
         <img src="img/logo/logo3.jpg">
       </div>
       <?php
-      if (!empty($erros)) {
-        foreach ($erros as $value)
+      if (!empty($errors)) {
+        foreach ($errors as $value)
           echo $value . "<br>";
       }
       ?>
