@@ -17,57 +17,38 @@ if (isset($_POST['btn-login'])) {
     $connection,
     trim($_POST['selection'])
   );
-
-  $consult = mysqli_prepare($connection, "SELECT * FROM tb_users WHERE name_u = ?");
-  mysqli_stmt_bind_param($consult, "s", $name);
-  mysqli_stmt_execute($consult);
-  $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
-
-  if (isset($user) && count($user) > 0) {
-    $state = $user['password_u'];
-
-    if (password_verify($password, $state)) 
-      $password = $state;
-  }
-  
-  $sql = "SELECT * FROM tb_users WHERE name_u = ? AND password_u = ? AND state_u = 'activo' AND painel_u = ?";
-  $consult = mysqli_prepare($connection,$sql);
-  mysqli_stmt_bind_param($consult,"sss", $name, $password, $painel);
-  mysqli_stmt_execute($consult);
-  $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
-  
+   
   if (empty($name) || empty($password)) {
     $errors[] = "<span>O campo login e senha preecisa ser preenchido</span>";
   } else {
-    if (empty($user)) {
-      $errors[] = "<span>Usuário enexistente</span>";
-    } else {
-      if ($painel === 'admin') {
-        if ($user['password_u'] === $password && $user['name_u'] === $name) {
-          $_SESSION['logged'] = true;
-          $_SESSION['admin_id'] = $user['id_u'];
-          header('Location: admin/menu-home.php');
-        }
-      } elseif ($painel === 'professor') {
-        if ($user['password_u'] === $password && $user['name_u'] === $name) {
-          $sql = "SELECT * FROM tb_professors WHERE userID_p = ?";
-          $route = 'Location: users/professors/home.php';
-          authentication($connection,$sql,$route,$user['id_u'],"professor");
-        }
-      } elseif ($painel === 'responsible') {
-        if ($user['password_u'] === $password && $user['name_u'] === $name) {
-          $sql = "SELECT * FROM tb_responsibles WHERE userID_r = ?";
-          $route = 'Location: users/responsibles/home.php';
-          authentication($connection,$sql,$route,$user['id_u'],"encarregado");
-        }
-      } elseif ($painel === 'student') {
-        if ($user['password_u'] === $password && $user['name_u'] === $name) {
-          $sql = "SELECT * FROM tb_students WHERE userID_s = ?";
-          $route = 'Location: users/students/home.php';
-          authentication($connection,$sql,$route,$user['id_u'],"aluno");
-        }
+    $consult = mysqli_prepare($connection, "SELECT * FROM tb_users WHERE name_u = ?");
+    mysqli_stmt_bind_param($consult, "s", $name);
+    mysqli_stmt_execute($consult);
+    $user = mysqli_fetch_assoc(mysqli_stmt_get_result($consult)); 
+
+    if($user && password_verify($password, $user['password_u']) && $user['state_u'] === 'activo' && $user['painel_u'] === $painel){
+      session_regenerate_id(true);
+      
+      if($painel === 'admin'){
+        $_SESSION['logged'] = true;
+        $_SESSION['admin_id'] = $user['id_u'];
+        header('Location: admin/menu-home.php');
+      }elseif($painel === 'professor'){
+        $sql = "SELECT * FROM tb_professors WHERE userID_p = ?";
+        $route = 'Location: users/professors/home.php';
+        authentication($connection,$sql,$route,$user['id_u'],"professor");
+      }elseif($painel === 'encarregado'){
+        $sql = "SELECT * FROM tb_responsibles WHERE userID_r = ?";
+        $route = 'Location: users/responsibles/home.php';
+        authentication($connection,$sql,$route,$user['id_u'],"encarregado");
+      }elseif($painel === 'aluno'){
+        $sql = "SELECT * FROM tb_students WHERE userID_s = ?";
+        $route = 'Location: users/students/home.php';
+        authentication($connection,$sql,$route,$user['id_u'],"aluno");
       }
-    }
+    } else {
+      $errors[] = "<span>Usuário enexistente</span>";
+    } 
   }
 }
 ?>
@@ -106,10 +87,10 @@ if (isset($_POST['btn-login'])) {
           <label for="textusuario">Painel</label>
           <select id="textusuario" class="input form-control" name="selection" required>
             <option value="">Selecione o painel</option>
-            <option value="student">Aluno</option>
+            <option value="aluno">Aluno</option>
             <option value="admin">Administrador</option>
             <option value="professor">Professor</option>
-            <option value="responsible">Encarregado</option>
+            <option value="encarregado">Encarregado</option>
           </select>
         </div>
         <button type="submit" class="btn btn-outline-primary btn-block" name="btn-login">Entrar</button>
