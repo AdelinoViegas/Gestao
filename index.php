@@ -2,9 +2,9 @@
 session_start();
 require_once "connection.php";
 require_once "features/authentication.php";
+$errors = [];
 
 if (isset($_POST['btn-login'])) {
-  $errors = [];
   $name = mysqli_real_escape_string(
     $connection,
     trim($_POST['name'])

@@ -7,6 +7,7 @@ try{
    
    mysqli_set_charset($connection, 'utf8');
   }catch(Exception $error){
-  echo "Erro: ". $error->getMessage();
-}
+    echo "Erro: ". $error->getMessage();
+    exit;
+  }
 ?>
