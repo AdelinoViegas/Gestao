@@ -33,6 +33,7 @@ if (isset($_POST['btn-login'])) {
         $_SESSION['logged'] = true;
         $_SESSION['admin_id'] = $user['id_u'];
         header('Location: admin/menu-home.php');
+        exit;
       }elseif($painel === 'professor'){
         $sql = "SELECT * FROM tb_professors WHERE userID_p = ?";
         $route = 'Location: users/professors/home.php';
@@ -78,7 +79,7 @@ if (isset($_POST['btn-login'])) {
       ?>
       <form id="formulario" action="index.php" method="post">
         <div class="form-group">
-          <input type="texy" id="textnome" class="form-control" name="name" placeholder="Nome do usuário">
+          <input type="text" id="textnome" class="form-control" name="name" placeholder="Nome do usuário">
         </div>
         <div class="form-group">
           <input type="password" id="textsenha" class="form-control" name="password" placeholder="Senha do usuário">

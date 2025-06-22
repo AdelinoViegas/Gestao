@@ -1,6 +1,7 @@
 <?php
 function updateData($connection, $sql, $params){
   try{
+    $bind_names = [];
     $types = "";
     $query = mysqli_prepare($connection, $sql);
     
@@ -16,14 +17,12 @@ function updateData($connection, $sql, $params){
       }
     }
 
-    $bind_names = [];
     $bind_names[] = $types; 
     foreach ($params as $key => $value) {
       $bind_names[] = &$params[$key]; 
     }
 
     call_user_func_array("mysqli_stmt_bind_param", array_merge([$query], $bind_names));
-
     mysqli_stmt_execute($query);
     mysqli_stmt_close($query);
     

@@ -1,6 +1,7 @@
 <?php
 function getData($connection, $sql, $params = []){
   $count = 0;
+  $bind_names = [];
   $array_data = [];
   $types = "";
 
@@ -19,7 +20,6 @@ function getData($connection, $sql, $params = []){
       }
     }
 
-    $bind_names = [];
     $bind_names[] = $types; 
     foreach ($params as $key => $value) {
       $bind_names[] = &$params[$key]; 
