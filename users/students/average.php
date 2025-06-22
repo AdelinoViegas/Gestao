@@ -3,7 +3,7 @@ session_start();
 require_once "../../connection.php";
 require_once "../../features/getData.php";
 
-$some = 0;
+$sum = 0;
 $discipline = [];
 $list = [];
 $search = "";
@@ -51,7 +51,7 @@ if (isset($_POST['btn-search'])) {
 
   if(count($search_discipline)){
     foreach($search_discipline as $value){
-      $some += (number_format($value['mediaF_n'], 2));
+      $sum += (number_format($value['mediaF_n'], 2));
       if(!in_array($value['name_d'], $list)){
         array_push($list, $value['name_d']);
       }
@@ -63,7 +63,7 @@ if (isset($_POST['btn-search'])) {
   }
    
   if(count($list))
-      array_push($list, round($some / 3));
+      array_push($list, round($sum / 3));
 }
 
 ?>
