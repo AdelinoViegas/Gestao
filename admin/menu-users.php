@@ -49,7 +49,7 @@ if (isset($_POST['btn-search'])) {
     </div>
 
     <div id="divflex">
-      <h5 id="adicionar">Nª de Usuários : <span id='num'><?= count($data)?count($data): "0"; ?></span></h5>
+      <h5 id="adicionar">Nª de Usuários : <span id='num'><?= count($data) ? count($data) : "0"; ?></span></h5>
 
       <form action="" method="post">
         <div id="btn-pesquisar">
@@ -68,40 +68,37 @@ if (isset($_POST['btn-search'])) {
             <th scope="col">Painel</th>
           </tr>
         </thead>
-        <tbody>
-          <?php
-          if (count($data) > 0) {
-            foreach ($data as $l_usuario) {
+        <?php if (count($data) > 0) { ?>
+          <tbody>
+            <?php foreach ($data as $l_usuario) {
               ?>
               <tr>
                 <td id="estado">
                   <?php
-                    $button = $l_usuario['state_u'] === "activo"?"btn-success":"btn-danger";
-                    ?>
-                    <form action="change-user.php" method="post">
-                      <input type="hidden" name="userState" value="<?= $l_usuario['state_u']; ?>">
-                      <input type="hidden" name="userId" value="<?= $l_usuario['id_u']; ?>">
-                      <button id="btn2" name="btn-state" type="submit" class="<?= "btn btn-md ".$button ?>">
-                        <?= $l_usuario['state_u']; ?></button>
-                    </form>
+                  $button = $l_usuario['state_u'] === "activo" ? "btn-success" : "btn-danger";
+                  ?>
+                  <form action="change-user.php" method="post">
+                    <input type="hidden" name="userState" value="<?= $l_usuario['state_u']; ?>">
+                    <input type="hidden" name="userId" value="<?= $l_usuario['id_u']; ?>">
+                    <button id="btn2" name="btn-state" type="submit" class="<?= "btn btn-md " . $button ?>">
+                      <?= $l_usuario['state_u']; ?></button>
+                  </form>
                 </td>
                 <td id="nome"><?= $l_usuario['name_u']; ?></td>
                 <td id="painel"><?= $l_usuario['painel_u']; ?></td>
               </tr>
             <?php } ?>
           </tbody>
-        </table>
-        <?php
-          } else {
-            ?>
-        </tbody>
-        </table>
-        <tfooter class='text text-center'>
-          <h5>Nenhum dado encontrado</h5>
-        </tfooter>
-        <?php
-          }
-          ?>
+        <?php } else { ?>
+          <tfoot class='text text-center'>
+            <tr>
+              <td colspan="3">
+                <h5>Nenhum dado encontrado</h5>
+              </td>
+            </tr>
+          </tfoot>
+        <?php } ?>
+      </table>
     </div>
   </div>
   <?php require_once "footer.php"; ?>
