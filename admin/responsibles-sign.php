@@ -88,13 +88,13 @@ if (isset($_POST['btn-cadastre'])) {
     <form action="responsibles-sign.php" method="post">
       <div class="row">
         <div class="form-group col-md-6 mb-3">
-          <label for="textnome">Nome</label>
-          <input type="text" id="textnome" class="form-control" name="name" maxlength="45"
+          <label for="textname">Nome</label>
+          <input type="text" id="textname" class="form-control" name="name" maxlength="45"
             placeholder="Nome completo do encarregado/a" required>
         </div>
         <div class="form-group col-md-3 mb-3">
-          <label for="textmun">Município</label>
-          <select id="textmun" class="input form-control" name="city" placeholder="Seu município" required>
+          <label for="textcity">Município</label>
+          <select id="textcity" class="input form-control" name="city" placeholder="Seu município" required>
             <option value="">Selecione aqui</option>
             <option value="Luanda">Luanda</option>
             <option value="Viana">Viana</option>
@@ -108,16 +108,16 @@ if (isset($_POST['btn-cadastre'])) {
           </select>
         </div>
         <div class="form-group col-md-3 mb-3">
-          <label for="textbairro">Bairro</label>
-          <input type="text" id="textbairro" class="form-control" name="neighborhood" maxlength="20"
+          <label for="textneighborhood">Bairro</label>
+          <input type="text" id="textneighborhood" class="form-control" name="neighborhood" maxlength="20"
             placeholder="Seu bairro" required>
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-md-3 mb-3">
-          <label for="textsexo">sexo</label>
-          <select id="textsexo" class="input form-control" name="gender" required>
+          <label for="textgender">sexo</label>
+          <select id="textgender" class="input form-control" name="gender" required>
             <option value="">Selecione aqui</option>
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
@@ -125,14 +125,14 @@ if (isset($_POST['btn-cadastre'])) {
         </div>
 
         <div class="form-group col-md-3 mb-3">
-          <label for="textcont">Contato</label>
-          <input type="text" id="textcont" class="form-control" name="contact" placeholder="xxx-xx-xx-xx" maxlength="9"
+          <label for="textcontact">Contato</label>
+          <input type="text" id="textcontact" class="form-control" name="contact" placeholder="xxx-xx-xx-xx" maxlength="9"
             required>
         </div>
 
         <div class="form-group col-md-3 mb-3">
-          <label for="textnasc">Data de Nascimento</label>
-          <input type="date" id="textnasc" class="form-control" name="birthday" required>
+          <label for="textbirthday">Data de Nascimento</label>
+          <input type="date" id="textbirthday" class="form-control" name="birthday" required>
         </div>
         <div class="form-group col-md-3 mb-3">
           <label for="textbi">Número do BI</label>
@@ -147,8 +147,7 @@ if (isset($_POST['btn-cadastre'])) {
 
         <div class="col-md-8" id="margemBotao"></div>
 
-        <a href="menu-responsibles.php" class="btn btn-outline-secondary btn-block col-md-2"
-          name="btn-voltar">Voltar</a>
+        <a href="menu-responsibles.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>
     </form>
   </div>

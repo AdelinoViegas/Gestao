@@ -68,8 +68,8 @@ if (isset($_POST['btn-cadastre'])) {
     <form action="groups-sign.php" method="post">
       <div class="row margB">
         <div class="form-group col-md-4" id="margemB">
-          <label for="textsexo">Escolhe a classe</label>
-          <select id="textsexo" class="input form-control" name="class" required>
+          <label for="textgender">Escolhe a classe</label>
+          <select id="textgender" class="input form-control" name="class" required>
            <?php 
             $class_data = getData($connection, "SELECT * FROM tb_class");
             foreach($class_data as $class){?>
@@ -78,8 +78,8 @@ if (isset($_POST['btn-cadastre'])) {
           </select>
         </div>
         <div class="form-group col-md-4" id="margemB">
-          <label>Digite a Turma</label>
-          <input type="text" id="textnome" class="form-control" name="group" maxlength="30" placeholder="Nome da turma"
+          <label for="textname">Digite a Turma</label>
+          <input type="text" id="textname" class="form-control" name="group" maxlength="30" placeholder="Nome da turma"
             required>
         </div>
       </div>
@@ -90,7 +90,7 @@ if (isset($_POST['btn-cadastre'])) {
 
         <div class="col-md-8" id="margemBotao"></div>
 
-        <a href="menu-groups.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar">Voltar</a>
+        <a href="menu-groups.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>
     </form>
   </div>

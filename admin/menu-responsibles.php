@@ -79,11 +79,9 @@ if (isset($_POST['btn-search'])) {
             <th scope="col">Contato</th>
           </tr>
         </thead>
-        <tbody>
-          <?php
-          if (count($data) > 0) {
-            foreach ($data as $responsible_data) {
-              ?>
+        <?php if (count($data) > 0) { ?>
+          <tbody>
+            <?php foreach ($data as $responsible_data) { ?>
               <tr id="tr">
                 <td id="editar">
                   <form action="responsibles-edit.php" method="post">
@@ -131,21 +129,18 @@ if (isset($_POST['btn-search'])) {
               </tr>
             <?php } ?>
           </tbody>
-        </table>
-        <?php
-          } else {
-            ?>
-        </tbody>
-        </table>
-        <tfooter class='text text-center'>
-          <h5>Nenhum dado encontrado</h5>
-        </tfooter>
-      <?php
-          }
-          ?>
+        <?php } else { ?>
+          <tfoot class='text text-center'>
+            <tr>
+              <td>
+                <h5>Nenhum dado encontrado</h5>
+              </td>
+            </tr>
+          </tfoot>
+        <?php } ?>
+      </table>
     </div>
   </div>
-
   <?php require_once "footer.php"; ?>
 </body>
 </html>

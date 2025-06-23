@@ -44,8 +44,8 @@ $data = getData($connection, $sql_gerenciar, [$management_id])[0];
     <form action="management-edit-process.php" method="post">
       <div class="row margB">
         <div class="form-group col-md-4" id="margemB">
-          <label for="textdisciplina">Disciplinas</label>
-          <select id="textdisciplina" class="input form-control" name="discipline" required>
+          <label for="textdiscipline">Disciplinas</label>
+          <select id="textdiscipline" class="input form-control" name="discipline" required>
             <option value="<?= $data['id_d']; ?>"><?= $data['nome_d']; ?></option>
             <?php
             $discipline_data = getData($connection, "SELECT id_d,nome_d FROM sg_disciplina ORDER BY nome_d");
@@ -71,8 +71,8 @@ $data = getData($connection, $sql_gerenciar, [$management_id])[0];
         </div>
 
         <div class="form-group col-md-4" id="margemB">
-          <label for="textturma">Turmas</label>
-          <select id="textturma" class="input form-control" name="group" required>
+          <label for="textgroup">Turmas</label>
+          <select id="textgroup" class="input form-control" name="group" required>
             <option value="<?= $data['id_g'] ?>"><?= $data['name_g']; ?></option>
             <?php
             $group_data = getData($connection, "SELECT id_g, name_g FROM tb_groups ORDER BY name_g");
@@ -91,8 +91,7 @@ $data = getData($connection, $sql_gerenciar, [$management_id])[0];
 
         <div class="col-md-8" id="margemBotao"></div>
 
-        <a href="menu-management.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar"
-          id="margemBotao">Voltar</a>
+        <a href="menu-management.php" class="btn btn-outline-secondary btn-block col-md-2" id="margemBotao">Voltar</a>
       </div>
     </form>
   </div>

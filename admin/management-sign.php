@@ -10,8 +10,8 @@ if (isset($_POST['btn-sign'])) {
   $discipline = mysqli_real_escape_string($connection, trim($_POST['discipline']));
   $professor = mysqli_real_escape_string($connection, trim($_POST['professor']));
   $group = mysqli_real_escape_string($connection, trim($_POST['group']));
-  $date = '2022';
-
+  $date = Date('Y');
+  
   $management_data = getData(
     $connection, 
     "SELECT * FROM tb_management WHERE disciplineID_m=? AND professorID_m=? AND groupID_m=?", 
@@ -76,8 +76,8 @@ if (isset($_POST['btn-sign'])) {
     <form action="management-sign.php" method="post">
       <div class="row margB">
         <div class="form-group col-md-4" id="margemB">
-          <label for="textdisciplina">Disciplinas</label>
-          <select id="textdisciplina" class="input form-control" name="discipline" required>
+          <label for="textdiscipline">Disciplinas</label>
+          <select id="textdiscipline" class="input form-control" name="discipline" required>
             <option value="">Selecione aqui</option>
             <?php $discipline_data = getData($connection, "SELECT id_d, nome_d FROM tb_disciplines ORDER BY name_d");
             foreach ($discipline_data as  $data) 
@@ -96,8 +96,8 @@ if (isset($_POST['btn-sign'])) {
           </select>
         </div>
         <div class="form-group col-md-4" id="margemB">
-          <label for="textturma">Turmas</label>
-          <select id="textturma" class="input form-control" name="group" required>
+          <label for="textgroup">Turmas</label>
+          <select id="textgroup" class="input form-control" name="group" required>
             <option value="">Selecione aqui</option>
             <?php $group_data = getData($connection, "SELECT id_g, name_g FROM tb_groups ORDER BY name_g");
             foreach ($group_data as $data) 
@@ -113,8 +113,7 @@ if (isset($_POST['btn-sign'])) {
 
         <div class="col-md-8" id="margemBotao"></div>
 
-        <a href="menu-management.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar"
-          id="margemBotao">Voltar</a>
+        <a href="menu-management.php" class="btn btn-outline-secondary btn-block col-md-2" id="margemBotao">Voltar</a>
       </div>
     </form>
   </div>

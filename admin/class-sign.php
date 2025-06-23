@@ -67,8 +67,8 @@ if (isset($_POST['btn-cadastre'])) {
     <form action="class-sign.php" method="post">
       <div class="row margB">
         <div class="form-group col-md-4" id="margemB">
-          <label for="textnome">Nome</label>
-          <input type="text" id="textnome" class="form-control" name="name" maxlength="30"
+          <label for="textname">Nome</label>
+          <input type="text" id="textname" class="form-control" name="name" maxlength="30"
             placeholder="Nome da classe" required>
         </div>
       </div>

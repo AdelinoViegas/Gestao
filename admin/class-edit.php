@@ -43,8 +43,8 @@ $data = getData($connection, "SELECT * FROM tb_class WHERE id_c =?", [$class_id]
     <form action="class-edit-process.php" method="post">
       <div class="row margB">
         <div class="form-group col-md-4" id="margemB">
-          <label for="textnome">Nome</label>
-          <input type="text" id="textnome" class="form-control" name="name" maxlength="30"
+          <label for="textname">Nome</label>
+          <input type="text" id="textname" class="form-control" name="name" maxlength="30"
             value="<?= $data['name_c']; ?>" placeholder="Nome da disciplina" required>
         </div>
       </div>
@@ -55,7 +55,7 @@ $data = getData($connection, "SELECT * FROM tb_class WHERE id_c =?", [$class_id]
 
         <div class="col-md-8" id="margemBotao"></div>
 
-        <a href="menu-class.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar">Voltar</a>
+        <a href="menu-class.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>
     </form>
   </div>

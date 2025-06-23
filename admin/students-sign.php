@@ -97,13 +97,13 @@ if (isset($_POST['btn-cadastre'])) {
     <form action="students-sign.php" method="post">
       <div class="row">
         <div class="form-group col-md-6 mb-3">
-          <label for="textnome">Nome</label>
-          <input type="text" id="textnome" class="form-control" name="name" maxlength="45"
+          <label for="textname">Nome</label>
+          <input type="text" id="textname" class="form-control" name="name" maxlength="45"
             placeholder="Nome completo do aluno/a" required>
         </div>
         <div class="form-group col-md-3 mb-3">
-          <label for="textclasse">Classe</label>
-          <select id="textclasse" class="input form-control" name="class" required>
+          <label for="textclass">Classe</label>
+          <select id="textclass" class="input form-control" name="class" required>
             <option value="">Selecione aqui</option>
             <?php
             $class = getData($connection, "SELECT * FROM tb_class ORDER BY id_c");
@@ -114,8 +114,8 @@ if (isset($_POST['btn-cadastre'])) {
         </div>
 
         <div class="form-group col-md-3 mb-3">
-          <label for="textturma">Turmas</label>
-          <select id="textturma" class="input form-control" name="group" required>
+          <label for="textgroup">Turmas</label>
+          <select id="textgroup" class="input form-control" name="group" required>
             <option value="">Selecione aqui</option>
             <?php
             $group = getData($connection, "SELECT id_g, name_g FROM tb_groups ORDER BY name_g");
@@ -128,8 +128,8 @@ if (isset($_POST['btn-cadastre'])) {
 
       <div class="row">
         <div class="form-group col-md-4 mb-3">
-          <label for="textmun">Município</label>
-          <select id="textmun" class="input form-control" name="city" placeholder="Seu município" required>
+          <label for="textcity">Município</label>
+          <select id="textcity" class="input form-control" name="city" placeholder="Seu município" required>
             <option value="">Selecione aqui</option>
             <option value="Luanda">Luanda</option>
             <option value="Viana">Viana</option>
@@ -143,13 +143,13 @@ if (isset($_POST['btn-cadastre'])) {
           </select>
         </div>
         <div class="form-group col-md-4 mb-3">
-          <label for="textbairro">Bairro</label>
-          <input type="text" id="textbairro" class="form-control" name="neighborhood" maxlength="20"
+          <label for="textneighborhood">Bairro</label>
+          <input type="text" id="textneighborhood" class="form-control" name="neighborhood" maxlength="20"
             placeholder="Seu bairro" required>
         </div>
         <div class="form-group col-md-4 mb-3">
-          <label for="textsexo">sexo</label>
-          <select id="textsexo" class="input form-control" name="gender" required>
+          <label for="textgender">sexo</label>
+          <select id="textgender" class="input form-control" name="gender" required>
             <option value="">Selecione aqui</option>
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
@@ -159,12 +159,12 @@ if (isset($_POST['btn-cadastre'])) {
 
       <div class="row">
         <div class="form-group col-md-4 mb-3">
-          <label for="textcont">Contato(opcional)</label>
-          <input type="text" id="textcont" class="form-control" name="contact" placeholder="xxx-xx-xx-xx" maxlength="9">
+          <label for="textcontact">Contato(opcional)</label>
+          <input type="text" id="textcontact" class="form-control" name="contact" placeholder="xxx-xx-xx-xx" maxlength="9">
         </div>
         <div class="form-group col-md-4 mb-3">
-          <label for="textnasc">Data de Nascimento</label>
-          <input type="date" id="textnasc" class="form-control" name="birthday" required>
+          <label for="textbirthday">Data de Nascimento</label>
+          <input type="date" id="textbirthday" class="form-control" name="birthday" required>
         </div>
         <div class="form-group col-md-4 mb-3">
           <label for="textbi">Número do BI</label>
@@ -175,8 +175,8 @@ if (isset($_POST['btn-cadastre'])) {
 
       <div class="row">
         <div class="form-group col-md-4 mb-3">
-          <label for="textencarregado">Encarregado/a</label>
-          <input type="text" id="textencarregado" class="form-control" name="responsible" maxlength="45"
+          <label for="textresponsible">Encarregado/a</label>
+          <input type="text" id="textresponsible" class="form-control" name="responsible" maxlength="45"
             placeholder="Número do BI" required>
         </div>
       </div>
@@ -187,7 +187,7 @@ if (isset($_POST['btn-cadastre'])) {
 
         <div class="col-md-8" id="margemBotao"></div>
 
-        <a href="menu-students.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar">Voltar</a>
+        <a href="menu-students.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>
     </form>
   </div>

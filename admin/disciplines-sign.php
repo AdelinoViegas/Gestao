@@ -72,8 +72,8 @@ if (isset($_POST['btn-cadastre'])) {
     <form action="disciplines-sign.php" method="post">
       <div class="row margB">
         <div class="form-group col-md-4" id="margemB">
-          <label for="textnome">Nome</label>
-          <input type="text" id="textnome" class="form-control" name="name" maxlength="30"
+          <label for="textname">Nome</label>
+          <input type="text" id="textname" class="form-control" name="name" maxlength="30"
             placeholder="Nome da disciplina" required>
         </div>
       </div>
@@ -84,8 +84,7 @@ if (isset($_POST['btn-cadastre'])) {
 
         <div class="col-md-8" id="margemBotao"></div>
 
-        <a href="menu-disciplines.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar"
-          id="margemBotao">Voltar</a>
+        <a href="menu-disciplines.php" class="btn btn-outline-secondary btn-block col-md-2" id="margemBotao">Voltar</a>
       </div>
     </form>
   </div>

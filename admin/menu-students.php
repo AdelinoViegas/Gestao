@@ -79,11 +79,9 @@ if (isset($_POST['btn-search'])) {
             <th scope="col">Turma</th>
           </tr>
         </thead>
-        <tbody>
-          <?php
-          if (count($data) > 0) {
-            foreach ($data as $student_data) {
-              ?>
+        <?php if (count($data) > 0) { ?>
+          <tbody>
+            <?php foreach ($data as $student_data) { ?>
               <tr id="tr">
                 <td id="editar">
                   <form action="students-edit.php" method="post">
@@ -135,18 +133,15 @@ if (isset($_POST['btn-search'])) {
               </tr>
             <?php } ?>
           </tbody>
-        </table>
-        <?php
-          } else {
-            ?>
-        </tbody>
-        </table>
-        <tfooter class='text text-center'>
+        <?php } else { ?>
+        <tfoot class='text text-center'>
+          <tr>
+            <td colspan="7">
           <h5>Nenhum dado encontrado</h5>
-        </tfooter>
-        <?php
-          }
-          ?>
+            </td>
+          </tr>
+        </tfoot>
+        <?php } ?>
     </div>
   </div>
 

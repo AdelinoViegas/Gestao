@@ -43,8 +43,8 @@ $data = getData($connection, "SELECT * FROM tb_groups WHERE id_g =?", [$group_id
     <form action="groups-edit-process.php" method="post">
       <div class="row margB">
         <div class="form-group col-md-4" id="margemB">
-          <label for="textnome">Nome</label>
-          <input type="text" id="textnome" class="form-control" name="name" maxlength="30"
+          <label for="textname">Nome</label>
+          <input type="text" id="textname" class="form-control" name="name" maxlength="30"
             value="<?= $data['name_g']; ?>" placeholder="Nome da disciplina" required>
         </div>
       </div>
@@ -55,7 +55,7 @@ $data = getData($connection, "SELECT * FROM tb_groups WHERE id_g =?", [$group_id
 
         <div class="col-md-8" id="margemBotao"></div>
 
-        <a href="menu-groups.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar">Voltar</a>
+        <a href="menu-groups.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>
     </form>
   </div>

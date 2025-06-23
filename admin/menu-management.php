@@ -58,8 +58,8 @@ if (isset($_POST['btn-search'])) {
 
       <form action="" method="post">
         <div id="btn-pesquisar">
-          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por disciplina"><button id="btn-p"
-            type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
+          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por disciplina"><button
+            id="btn-p" type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
         </div>
       </form>
     </div>
@@ -76,9 +76,9 @@ if (isset($_POST['btn-search'])) {
           </tr>
         </thead>
         <tbody>
-          <?php
-          if (count($data) > 0) {
-            foreach ($data as $management_data) { ?>
+          <?php if (count($data) > 0) { ?>
+          <tbody>
+            <?php foreach ($data as $management_data) { ?>
               <tr id="tr">
                 <td>
                   <form action="management-edit.php" method="post">
@@ -93,21 +93,17 @@ if (isset($_POST['btn-search'])) {
               </tr>
             <?php } ?>
           </tbody>
-        </table>
-        <?php
-          } else {
-            ?>
-        </tbody>
-        </table>
-        <tfooter class='text text-center'>
-          <h5>Nenhum dado encontrado</h5>
-        </tfooter>
-        <?php
-          }
-          ?>
+        <?php } else { ?>
+          <tfoot class='text text-center'>
+            <tr>
+              <td colspan="5">
+                <h5>Nenhum dado encontrado</h5>
+              </td>
+            </tr>
+          </tfoot>
+        <?php } ?>
+      </table>  
     </div>
-  </div>
-  </div>
   </div>
 
   <?php require_once "footer.php"; ?>
