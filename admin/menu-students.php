@@ -142,6 +142,7 @@ if (isset($_POST['btn-search'])) {
           </tr>
         </tfoot>
         <?php } ?>
+      </table>
     </div>
   </div>
 

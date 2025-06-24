@@ -87,10 +87,9 @@ if (isset($_POST['btn-update'])) {
             <th scope="col">Classificação</th>
           </tr>
         </thead>
-        <tbody>
-          <?php
-          if (count($data) > 0) {
-            foreach ($data as $student) {
+          <?php if (count($data) > 0) { ?>
+          <tbody>
+           <?php foreach ($data as $student) {
               $student_id = $student['id_s'];
               $consult = getData($connection, "SELECT * FROM tb_notes WHERE studentID_n =? AND quarterID_n =? AND managementID_n =?", [$student_id, $quarter, $management_id]);
 
@@ -139,10 +138,10 @@ if (isset($_POST['btn-update'])) {
                 <td><?= $notes['classification_n']; ?>
                 </td>
               </tr>
-            <?php }
-          } else {
+            <?php } ?>
+          </tbody>
+          <?php } else {
             ?>
-        </tbody>
         <tfoot class='text text-center'>
           <tr>
             <td colspan="11">
@@ -150,9 +149,7 @@ if (isset($_POST['btn-update'])) {
             </td>
           </tr>
         </tfoot>
-      <?php
-          }
-          ?>
+      <?php } ?>
       </table>
     </div>
   </div>
