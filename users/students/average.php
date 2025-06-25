@@ -49,33 +49,31 @@ if (isset($_POST['btn-search'])) {
     [$student_id]
   );
 
-  if(count($search_discipline)){
-    foreach($search_discipline as $value){
+  if (count($search_discipline)) {
+    foreach ($search_discipline as $value) {
       $sum += (number_format($value['mediaF_n'], 2));
-      if(!in_array($value['name_d'], $list)){
+      if (!in_array($value['name_d'], $list)) {
         array_push($list, $value['name_d']);
       }
-      
-      if(!in_array($value['mediaF_n'], $list)){
+
+      if (!in_array($value['mediaF_n'], $list)) {
         array_push($list, number_format($value['mediaF_n'], 2));
       }
     }
   }
-   
-  if(count($list))
-      array_push($list, round($sum / 3));
+
+  if (count($list))
+    array_push($list, round($sum / 3));
 }
 
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>principal</title>
   <?php require_once "../../head2.php"; ?>
 </head>
-
 <body>
   <div class="divsuperior">
     <h1>Colégio Samiga</h1>
@@ -133,48 +131,51 @@ if (isset($_POST['btn-search'])) {
             <th scope="col">Resultado-Final</th>
           </tr>
         </thead>
-        <tbody>
-
-          <?php 
-           if(count($list) && strlen($search)){                 
+        <?php
+        if (count($list) && strlen($search)) {
           ?>
+          <tbody>
             <tr>
-            <td><?=  $list[0]; ?></td>
-            <?php for($i = 1; $i < count($list); $i++){?>
-            <td>
-              <?php echo "<input class='form-control ps-1' type='text' readonly value='" . $list[$i] . "'>" ?>
-            </td>
-            <?php }?>
-          </tr>
-          <?php } else if(count($list) === 0 && strlen($search)){ ?>
-        <tfoot class='text text-center'>
-          <tr>
-            <td colspan="5">
-              <h5>
-                Nenhum dado encontrado
-              </h5>
-            </td>
-          </tr>
-        </tfoot>
-        <?php }else{
-            for ($c = 0; $c < count($discipline); $c++) {
-              ?>
+              <td><?= $list[0]; ?></td>
+              <?php for ($i = 1; $i < count($list); $i++) { ?>
+                <td>
+                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . $list[$i] . "'>" ?>
+                </td>
+              <?php } ?>
+            </tr>
+          </tbody>
+        <?php } else if (count($list) === 0 && strlen($search)) { ?>
+            <tfoot class='text text-center'>
               <tr>
-                <td><?= $discipline[$c]; ?></td>
-                <td>
-                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($quarter1[$c], 2) . "'>" ?>
-                </td>
-                <td>
-                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($quarter2[$c], 2) . "'>" ?>
-                </td>
-                <td>
-                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($quarter3[$c], 2) . "'>" ?>
-                </td>
-                <?php $M_Final[] = round(($quarter1[$c] + $quarter2[$c] + $quarter3[$c]) / 3); ?>
-                <td><?php echo "<input class='form-control ps-1' type='text' readonly value='" . $M_Final[$c] . "'>" ?>
+                <td colspan="5">
+                  <h5>
+                    Nenhum dado encontrado
+                  </h5>
                 </td>
               </tr>
-          <?php } } ?>
+            </tfoot>
+        <?php } else { ?>
+            <tbody>
+            <?php for ($c = 0; $c < count($discipline); $c++) {
+              ?>
+                <tr>
+                  <td><?= $discipline[$c]; ?></td>
+                  <td>
+                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($quarter1[$c], 2) . "'>" ?>
+                  </td>
+                  <td>
+                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($quarter2[$c], 2) . "'>" ?>
+                  </td>
+                  <td>
+                  <?php echo "<input class='form-control ps-1' type='text' readonly value='" . number_format($quarter3[$c], 2) . "'>" ?>
+                  </td>
+                <?php $M_Final[] = round(($quarter1[$c] + $quarter2[$c] + $quarter3[$c]) / 3); ?>
+                  <td><?php echo "<input class='form-control ps-1' type='text' readonly value='" . $M_Final[$c] . "'>" ?>
+                  </td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        <?php } ?>
       </table>
     </div>
     <button type="submit" id="adicionar" class="btn btn-info my-2">Condição Final

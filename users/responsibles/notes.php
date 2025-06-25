@@ -47,8 +47,8 @@ if(isset($_POST['btn-notes'])){
     <form action="" method="post">
       <div class="row">
         <div class="form-group col-md-4" id="margemB">
-          <label for="textdisciplina">Aluno</label>
-          <select id="textdisciplina" class="input form-control" name="student_id" required>
+          <label for="textdiscipline">Aluno</label>
+          <select id="textdiscipline" class="input form-control" name="student_id" required>
             <option value="">Selecione aqui</option>
             <?php $query = getData($connection, "SELECT s.name_s, s.id_s, r.id_r FROM tb_students AS s INNER JOIN tb_responsibles AS r ON s.responsibleID_s = r.id_r WHERE responsibleID_s =?", [$responsible_id]);
             foreach ($query as $data)
@@ -58,8 +58,8 @@ if(isset($_POST['btn-notes'])){
         </div>
 
         <div class="form-group col-md-4" id="margemB">
-          <label for="ttrimAluno">Trimestres</label>
-          <select id="ttrimAluno" class="input form-control" name="quarter" required>
+          <label for="quarterstudent">Trimestres</label>
+          <select id="quarterstudent" class="input form-control" name="quarter" required>
             <option value="">Selecione aqui</option>
             <option value="1">1ª Trimestre</option>
             <option value="2">2ª Trimestre</option>

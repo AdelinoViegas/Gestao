@@ -43,8 +43,8 @@ if (isset($_POST['search'])) {
     <form action="" method="post">
       <div class="row margB">
         <div class="form-group col-md-4" id="margemB">
-          <label for="ttrimAluno">Trimestres</label>
-          <select id="ttrimAluno" class="input form-control" name="quarter" required>
+          <label for="quarterstudent">Trimestres</label>
+          <select id="quarterstudent" class="input form-control" name="quarter" required>
             <option value="">Selecione aqui</option>
             <option value="1">1ª Trimestre</option>
             <option value="2">2ª Trimestre</option>

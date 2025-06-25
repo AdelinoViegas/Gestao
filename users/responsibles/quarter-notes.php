@@ -82,9 +82,9 @@ if (isset($_POST['btn-search'])) {
             <th scope="col">Classificação</th>
           </tr>
         </thead>
-        <tbody>
-          <?php if (count($data) > 0) {
-            foreach ($data as $student) { ?>
+          <?php if (count($data) > 0) { ?>
+          <tbody>
+            <?php foreach ($data as $student) { ?>
               <tr>
                 <td><?= $student['name_d']; ?></td>
                 <td>
@@ -113,8 +113,9 @@ if (isset($_POST['btn-search'])) {
                 </td>
                 <td><?= $student['classification_n']; ?>
               </tr>
-            <?php } } else { ?>
-        </tbody>
+            <?php } ?>
+          </tbody>
+          <?php } else { ?>
         <tfoot class='text text-center'>
           <tr>
             <td colspan="10">
