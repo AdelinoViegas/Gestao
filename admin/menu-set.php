@@ -83,9 +83,8 @@ if (isset($_POST['btn-password'])) {
             placeholder="Confirmar nova senha" required>
         </div>
 
-        <div class=" col-md-2 mb-3">
-          <label></label>
-          <button type="submit" id="inserir" class="btn btn-success col-md-12" name="btn-password">Gravar</button>
+        <div class="col-md-2 mb-3 align-self-end">
+          <button type="submit" id="inserir" class="btn btn-success col-md-12" name="btn-password">Salvar</button>
         </div>
       </div>
     </form>

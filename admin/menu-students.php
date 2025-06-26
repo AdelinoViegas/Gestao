@@ -53,13 +53,13 @@ if (isset($_POST['btn-search'])) {
     </div>
 
     <div id="divflex">
-      <a href="students-sign.php" type="button" id="adicionar" class="btn btn-secondary">Adicionar</a>
+      <a href="students-sign.php" type="button" id="adicionar" class="btn btn-primary">Adicionar</a>
 
       <form action="" method="post">
         <div id="btn-pesquisar">
           <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome">
 
-          <button id="btn-p" type="submit" class="btn btn-success" name="btn-search">
+          <button id="btn-p" type="submit" class="btn btn-secondary" name="btn-search">
             Pesquisar
           </button>
         </div>

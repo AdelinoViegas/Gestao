@@ -141,11 +141,8 @@ if (isset($_POST['btn-cadastre'])) {
         </div>
       </div>
 
-      <div class="row" id="marg">
-        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastre"
-          id="margemBotao">Cadastrar</button>
-
-        <div class="col-md-8" id="margemBotao"></div>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastre">Salvar</button>
 
         <a href="menu-responsibles.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>

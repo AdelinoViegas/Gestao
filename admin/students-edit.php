@@ -142,11 +142,8 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
         </div>
       </div>
 
-      <div class="row" id="marg">
-        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-update"
-          id="margemBotao">Gravar</button>
-
-        <div class="col-md-8" id="margemBotao"></div>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-update">Salvar</button>
 
         <a href="menu-students.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>
