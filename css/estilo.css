@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+img {
+  width: 100%;
+  height: 100%;
+}
+
 #homeimg {
   float: right;
   display: block;
@@ -19,11 +24,6 @@
 
 #alinhar {
   display: inline-block;
-}
-
-img {
-  width: 100%;
-  height: 100%;
 }
 
 #IMG {

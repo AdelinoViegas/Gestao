@@ -79,14 +79,16 @@ if (isset($_POST['btn-login'])) {
       ?>
       <form id="formulario" action="index.php" method="post">
         <div class="form-group">
-          <input type="text" id="textnome" class="form-control" name="name" placeholder="Nome do usuário">
+          <input type="text" id="textnome" class="form-control mt-2 mb-2" name="name" placeholder="Nome do usuário">
         </div>
+
         <div class="form-group">
-          <input type="password" id="textsenha" class="form-control" name="password" placeholder="Senha do usuário">
+          <input type="password" id="textsenha" class="form-control mt-2 mb-2" name="password" placeholder="Senha do usuário">
         </div>
+
         <div class="form-group">
-          <label for="textusuario">Painel</label>
-          <select id="textusuario" class="input form-control" name="selection" required>
+          <label for="textpainel" class="form-label">Painel</label>
+          <select id="textpainel" class="form-select" name="selection" required>
             <option value="">Selecione o painel</option>
             <option value="aluno">Aluno</option>
             <option value="admin">Administrador</option>
@@ -94,7 +96,8 @@ if (isset($_POST['btn-login'])) {
             <option value="encarregado">Encarregado</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-outline-primary btn-block" name="btn-login">Entrar</button>
+
+        <button type="submit" class="btn btn-outline-primary btn-block w-100 mt-3" name="btn-login">Entrar</button>
       </form>
     </div>
   </div>

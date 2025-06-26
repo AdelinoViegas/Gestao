@@ -38,15 +38,6 @@ label{
   font-size: 19px;
 }
 
-#formulario input{
-  margin: 8px 0px 15px 0px;
-}
-
-#formulario button{
-  width: 100%;
-  margin-top: 15px;
-}
-
 span{
   color: red;
 }
