@@ -65,10 +65,10 @@ if (isset($_POST['btn-login'])) {
   <link rel="stylesheet" type="text/css" href="css/media.css?v=5">
 </head>
 <body>
-  <div class="card" id="formlog">
-    <div id="txtlogin">Login</div>
+  <div class="card position-absolute top-50 start-50" id="login-form">
+    <div class="text-center fs-2 fw-bold" id="txtlogin">Login</div>
     <div class="card-body">
-      <div id="img">
+      <div id="login-image">
         <img src="img/logo/logo3.jpg">
       </div>
       <?php
@@ -78,16 +78,16 @@ if (isset($_POST['btn-login'])) {
       }
       ?>
       <form id="formulario" action="index.php" method="post">
-        <div class="form-group">
-          <input type="text" id="textnome" class="form-control mt-2 mb-2" name="name" placeholder="Nome do usuário">
+        <div class=" mt-2 mb-3">
+          <input type="text" id="textnome" class="form-control" name="name" placeholder="Nome do usuário" required>
         </div>
 
-        <div class="form-group">
-          <input type="password" id="textsenha" class="form-control mt-2 mb-2" name="password" placeholder="Senha do usuário">
+        <div class="mt-2 mb-3">
+          <input type="password" id="textsenha" class="form-control" name="password" placeholder="Senha do usuário" required>
         </div>
 
-        <div class="form-group">
-          <label for="textpainel" class="form-label">Painel</label>
+        <div class="mb-3">
+          <label for="textpainel" class="form-label fw-bold" id="label-select">Painel</label>
           <select id="textpainel" class="form-select" name="selection" required>
             <option value="">Selecione o painel</option>
             <option value="aluno">Aluno</option>
@@ -97,7 +97,7 @@ if (isset($_POST['btn-login'])) {
           </select>
         </div>
 
-        <button type="submit" class="btn btn-outline-primary btn-block w-100 mt-3" name="btn-login">Entrar</button>
+        <button type="submit" class="btn btn-outline-primary w-100 mt-3" name="btn-login">Entrar</button>
       </form>
     </div>
   </div>

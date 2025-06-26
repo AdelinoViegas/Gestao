@@ -3,13 +3,10 @@ body{
 }
 
 #txtlogin{
-	text-align: center;
-	font-size: 28px;
-	font-weight:600;
 	color: #bbb;
 }
 
-#img img{
+#login-image img{
   width: 120px;
   height: 80px;
   display: block;
@@ -17,25 +14,15 @@ body{
   padding: 0px;
 }
 
-#formlog{
-  position: absolute;
-  top: 50%;
-  left: 50%;
+#login-form{
   transform: translate(-50%,-50%);
   width: 350px;
   box-shadow: 1px 5px 30px rgb(188,188,195); 
 }
 
-#textusuario{
-  margin: 8px 0px 15px 0px;
-}
-
-#op_discreto{
-  color: blue;
-}
-
-label{
+#label-select{
   font-size: 19px;
+  color: #bbb;
 }
 
 span{
