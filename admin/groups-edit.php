@@ -15,19 +15,19 @@ $data = getData($connection, "SELECT * FROM tb_groups WHERE id_g =?", [$group_id
   <?php require_once "head.php"; ?>
 </head>
 <body>
-  <div class="divsuperior">
-    <h1>Colégio Samiga</h1>
+  <div class="m-0" id="head-main">
+    <h1 class="text-white text-center fs-1 fw-bold">Colégio Samiga</h1>
   </div>
-
-  <div class="divsuperior2">
-    <div class="divflex">
+  
+  <div id="head-second">
+    <div class="position-relative d-flex justify-content-between">
       <div>
-        <h5>Editar dados da turma</h5>
+        <h5 class="fs-5 fw-bold">Editar dados da turma</h5>
       </div>
       <div class="d-flex">
-        <h5 class="me-2">Usuário :</h5>
+        <h5 class="me-2 fs-5 fw-bold">Usuário :</h5>
         <img class="me-1" src="../img/person.svg" id="IMG">
-        <h5 class="me-3">Administrador</h5>
+        <h5 class="me-3 fs-5 fw-bold">Administrador</h5>
       </div>
     </div>
   </div>

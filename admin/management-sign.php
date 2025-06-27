@@ -42,19 +42,19 @@ if (isset($_POST['btn-sign'])) {
   <?php require_once "head.php"; ?>
 </head>
 <body>
-  <div class="divsuperior">
-    <h1>Colégio Samiga</h1>
+  <div class="m-0" id="head-main">
+    <h1 class="text-white text-center fs-1 fw-bold">Colégio Samiga</h1>
   </div>
-
-  <div class="divsuperior2">
-    <div class="divflex">
+  
+  <div id="head-second">
+    <div class="position-relative d-flex justify-content-between">
       <div>
-        <h5>Gerenciar</h5>
+        <h5 class="fs-5 fw-bold">Gerenciar</h5>
       </div>
       <div class="d-flex">
-        <h5 class="me-2">Usuário :</h5>
+        <h5 class="me-2 fs-5 fw-bold">Usuário :</h5>
         <img class="me-1" src="../img/person.svg" id="IMG">
-        <h5 class="me-3">Administrador</h5>
+        <h5 class="me-3 fs-5 fw-bold">Administrador</h5>
       </div>
     </div>
   </div>
@@ -79,7 +79,7 @@ if (isset($_POST['btn-sign'])) {
           <label for="textdiscipline">Disciplinas</label>
           <select id="textdiscipline" class="input form-control" name="discipline" required>
             <option value="">Selecione aqui</option>
-            <?php $discipline_data = getData($connection, "SELECT id_d, nome_d FROM tb_disciplines ORDER BY name_d");
+            <?php $discipline_data = getData($connection, "SELECT * FROM tb_disciplines ORDER BY name_d");
             foreach ($discipline_data as  $data) 
               echo "<option value = '" . $data['id_d'] . "'>" . $data['name_d'] . "</option>";
             ?>
@@ -89,7 +89,7 @@ if (isset($_POST['btn-sign'])) {
           <label for="textprofessor">Professores</label>
           <select id="textprofessor" class="input form-control" name="professor" required>
             <option value="">Selecione aqui</option>
-            <?php $professor_data = getData($connection, "SELECT id_p, nome_p FROM tb_professors ORDER BY name_p");
+            <?php $professor_data = getData($connection, "SELECT id_p, name_p FROM tb_professors ORDER BY name_p");
             foreach ($professor_data as $data) 
               echo "<option value = '" . $data['id_p'] . "'>" . $data['name_p'] . "</option>";
             ?>
@@ -99,7 +99,7 @@ if (isset($_POST['btn-sign'])) {
           <label for="textgroup">Turmas</label>
           <select id="textgroup" class="input form-control" name="group" required>
             <option value="">Selecione aqui</option>
-            <?php $group_data = getData($connection, "SELECT id_g, name_g FROM tb_groups ORDER BY name_g");
+            <?php $group_data = getData($connection, "SELECT * FROM tb_groups ORDER BY name_g");
             foreach ($group_data as $data) 
               echo "<option value = '" . $data['id_g'] . "'>" . $data['name_g'] . "</option>";
             ?>
