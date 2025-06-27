@@ -13,15 +13,11 @@
     box-shadow: 1px 5px 30px rgb(188, 188, 195);
   }
 
-  .divsuperior h1 {
+  #head-main h1 {
     font-size: 35px;
   }
 
-  .divsuperior2 {
-    display: none;
-  }
-
-  .divsuperior2 h5 {
+  #head-second {
     display: none;
   }
 
@@ -80,7 +76,7 @@
     margin: 16% auto;
   }
 
-  #imagem {
+  #imagem-main {
     position: static;
     width: 100%;
     height: calc(100vh - 21.5%);
@@ -181,7 +177,7 @@
 }
 
 @media(max-width: 520px) {
-  #divflex {
+  #head-second > div {
     display: block;
   }
 
