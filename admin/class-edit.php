@@ -35,25 +35,22 @@ $data = getData($connection, "SELECT * FROM tb_class WHERE id_c =?", [$class_id]
   <?php require_once "navigation.php" ?>
   <?php require_once "navbarMobile.php" ?>
 
-  <div class="fs-5 fw-bold rounded-3" id="container-table">
+  <div class="fs-6 fw-bold rounded-3" id="container-table">
     <div id="head-third">
       <h5>Editar dados da classe</h5>
     </div>
 
     <form action="class-edit-process.php" method="post">
-      <div class="row margB">
-        <div class="form-group col-md-4" id="margemB">
+      <div class="row mb-4">
+        <div class="col-md-4">
           <label for="textname">Nome</label>
-          <input type="text" id="textname" class="form-control" name="name" maxlength="30"
+          <input type="text" id="textname" class="form-control w-100" name="name" maxlength="30"
             value="<?= $data['name_c']; ?>" placeholder="Nome da disciplina" required>
         </div>
       </div>
 
-      <div class="row marg">
-        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-update"
-          id="margemBotao">Gravar</button>
-
-        <div class="col-md-8" id="margemBotao"></div>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-outline-primary btn-block col-md-2" name="btn-update">Gravar</button>
 
         <a href="menu-class.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>

@@ -48,7 +48,7 @@ if (isset($_POST['btn-search'])) {
   <?php require_once "navigation.php"; ?>
   <?php require_once "navbarMobile.php" ?>
 
-  <div class="fs-5 fw-bold rounded-3" id="container-table">
+  <div class="fs-6 fw-bold rounded-3" id="container-table">
     <div id="head-third">
       <h5>Disciplinas cadastradas</h5>
     </div>

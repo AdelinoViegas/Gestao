@@ -65,24 +65,21 @@ if (isset($_POST['btn-cadastre'])) {
   <?php require_once "navigation.php" ?>
   <?php require_once "navbarMobile.php" ?>
 
-  <div class="fs-5 fw-bold rounded-3" id="container-table">
+  <div class="fs-6 fw-bold rounded-3" id="container-table">
     <div id="head-third">
       <h5>Formulário de cadastramento de disciplinas</h5>
     </div>
     <form action="disciplines-sign.php" method="post">
-      <div class="row margB">
-        <div class="form-group col-md-4" id="margemB">
+      <div class="row mb-4">
+        <div class="col-md-4">
           <label for="textname">Nome</label>
           <input type="text" id="textname" class="form-control" name="name" maxlength="30"
             placeholder="Nome da disciplina" required>
         </div>
       </div>
 
-      <div class="row marg">
-        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastre"
-          id="margemBotao">Cadastrar</button>
-
-        <div class="col-md-8" id="margemBotao"></div>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastre">Cadastrar</button>
 
         <a href="menu-disciplines.php" class="btn btn-outline-secondary btn-block col-md-2" id="margemBotao">Voltar</a>
       </div>

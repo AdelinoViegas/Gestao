@@ -201,7 +201,7 @@ body {
   margin: 0px;
 }
 
-#container_table {
+#container-table {
   position: absolute;
   top: calc(5% + 100px);
   left: calc(3% + 65px);
@@ -233,7 +233,7 @@ body {
   color: white;
 }
 
-#container_table tbody {
+#container-table tbody {
   background-color: #fff;
 }
 
