@@ -50,8 +50,8 @@ if (isset($_POST['btn-search'])) {
   <?php require_once "navigation.php"; ?>
   <?php require_once "navbarMobile.php" ?>
 
-  <div class="rounded-3" id="divm">
-    <div class="divsuperior3">
+  <div class="fs-5 fw-bold rounded-3" id="container-table">
+    <div id="head-third">
       <h5>Turmas cadastradas</h5>
     </div>
 

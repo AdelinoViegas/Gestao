@@ -21,7 +21,7 @@
     display: none;
   }
 
-  .divsuperior3 {
+  #head-third {
     display: block;
     position: relative;
     top: -20px;
@@ -34,8 +34,7 @@
     border-bottom: 1px solid #ccc;
   }
 
-  .divsuperior3 h5 {
-    display: block;
+  #head-third h5 {
     font-weight: bold;
     font-size: 20px;
     font-family: Bahnschrift Light;
@@ -46,7 +45,7 @@
     display: none;
   }
 
-  #divm {
+  #container_table {
     position: static;
     margin: 0 auto;
     margin-top: 15%;

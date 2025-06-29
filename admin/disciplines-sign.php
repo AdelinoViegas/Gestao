@@ -65,8 +65,8 @@ if (isset($_POST['btn-cadastre'])) {
   <?php require_once "navigation.php" ?>
   <?php require_once "navbarMobile.php" ?>
 
-  <div class="fontes rounded-3" id="divm">
-    <div class="divsuperior3">
+  <div class="fs-5 fw-bold rounded-3" id="container-table">
+    <div id="head-third">
       <h5>Formulário de cadastramento de disciplinas</h5>
     </div>
     <form action="disciplines-sign.php" method="post">

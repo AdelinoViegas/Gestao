@@ -201,30 +201,21 @@ body {
   margin: 0px;
 }
 
-#divm {
+#container_table {
   position: absolute;
   top: calc(5% + 100px);
   left: calc(3% + 65px);
   padding: 20px;
   margin: 30px 0px;
   background-color: #dee2e6;
+  color: #aaa;
   width: 88%;
   border: 2px solid #bbb;
-}
-
-.divsuperior3 {
-  display: none;
-}
-
-.divsuperior3 h5 {
-  display: none;
-}
-
-.fontes {
-  color: #aaa;
   font-family: Bahnschrift Light;
-  font-size: 20px;
-  font-weight: bold;
+}
+
+#head-third {
+  display: none;
 }
 
 .margB {
@@ -242,7 +233,7 @@ body {
   color: white;
 }
 
-#divm tbody {
+#container_table tbody {
   background-color: #fff;
 }
 

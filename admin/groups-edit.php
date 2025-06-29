@@ -35,8 +35,8 @@ $data = getData($connection, "SELECT * FROM tb_groups WHERE id_g =?", [$group_id
   <?php require_once "navigation.php" ?>
   <?php require_once "navbarMobile.php" ?>
 
-  <div class="fontes rounded-3" id="divm">
-    <div class="divsuperior3">
+  <div class="fs-5 fw-bold rounded-3" id="container-table">
+    <div id="head-third">
       <h5>Editar dados da turma</h5>
     </div>
 

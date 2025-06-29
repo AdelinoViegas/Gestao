@@ -37,19 +37,19 @@ if (isset($_POST['btn-password'])) {
   <?php require_once "head.php"; ?>
 </head>
 <body>
-  <div class="divsuperior">
-    <h1>Colégio Samiga</h1>
+  <div class="m-0" id="head-main">
+    <h1 class="text-white text-center fs-1 fw-bold">Colégio Samiga</h1>
   </div>
-
-  <div class="divsuperior2">
-    <div class="divflex">
+  
+  <div id="head-second">
+    <div class="position-relative d-flex justify-content-between">
       <div>
-        <h5>Configurações do Admin</h5>
+        <h5 class="fs-5 fw-bold">Configurações do admin</h5>
       </div>
       <div class="d-flex">
-        <h5 class="me-2">Usuário :</h5>
+        <h5 class="me-2 fs-5 fw-bold">Usuário :</h5>
         <img class="me-1" src="../img/person.svg" id="IMG">
-        <h5 class="me-3">Administrador</h5>
+        <h5 class="me-3 fs-5 fw-bold">Administrador</h5>
       </div>
     </div>
   </div>
@@ -64,8 +64,8 @@ if (isset($_POST['btn-password'])) {
   <?php require_once "navigation.php"; ?>
   <?php require_once "navbarMobile.php"; ?>
 
-  <div class="fontes rounded-3" id="divm">
-    <div class="divsuperior3">
+  <div class="fs-5 fw-bold rounded-3" id="container-table">
+    <div id="head-third">
       <h5>Formulário de cadastramento de alunos</h5>
     </div>
 

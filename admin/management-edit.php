@@ -37,8 +37,8 @@ $data = getData($connection, $sql_gerenciar, [$management_id])[0];
   <?php require_once "navigation.php" ?>
   <?php require_once "navbarMobile.php" ?>
 
-  <div class="fontes rounded-3" id="divm">
-    <div class="divsuperior3">
+  <div class="fs-5 fw-bold rounded-3" id="container-table">
+    <div id="head-third">
       <h5>Gerenciar</h5>
     </div>
     <form action="management-edit-process.php" method="post">
