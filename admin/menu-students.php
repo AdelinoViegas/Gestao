@@ -53,8 +53,8 @@ if (isset($_POST['btn-search'])) {
       <h5>Alunos cadastrados</h5>
     </div>
 
-    <div id="divflex">
-      <a href="students-sign.php" type="button" id="adicionar" class="btn btn-primary">Adicionar</a>
+    <div class="d-flex justify-content-between" id="margin">
+      <a href="students-sign.php" type="button" class="btn btn-primary">Adicionar</a>
 
       <form action="" method="post">
         <div id="btn-pesquisar">
@@ -67,9 +67,9 @@ if (isset($_POST['btn-search'])) {
       </form>
     </div>
 
-    <div class="table-responsive" id="tabdados">
-      <table class="table table-hover table-bordered" id="table">
-        <thead class="table-secondary" id="theader">
+    <div class="table-responsive" id="table">
+      <table class="table table-hover table-bordered m-0">
+        <thead class="table-secondary position-sticky top-0 left-0" id="theader">
           <tr>
             <th scope="col">Ações</th>
             <th scope="col">Nome</th>
@@ -83,19 +83,19 @@ if (isset($_POST['btn-search'])) {
         <?php if (count($data) > 0) { ?>
           <tbody>
             <?php foreach ($data as $student_data) { ?>
-              <tr id="tr">
+              <tr>
                 <td id="editar">
                   <form action="students-edit.php" method="post">
-                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_s']; ?>"
+                    <input type="hidden" class="btn btn-warning w-100 text-white" value="<?= $student_data['id_s']; ?>"
                       name="student_id">
-                    <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
+                    <button type="submit" class="btn btn-warning w-100 text-white">Editar</button>
                   </form>
 
-                  <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $student_data['id_s']; ?>"
+                  <input type="hidden" class="btn btn-warning w-100 text-white" value="<?= $student_data['id_s']; ?>"
                     name="id_estudante">
-                  <button id="editar2" type="button"
+                  <button type="button"
                     data-bs-target="#apagar<?= $student_data['id_s']; ?>" data-bs-toggle="modal"
-                    value="<?= $student_data['id_s']; ?>" class="btn btn-danger">Apagar</button>
+                    value="<?= $student_data['id_s']; ?>" class="btn btn-danger w-100 text-white">Apagar</button>
 
                   <div class="modal fade" id="apagar<?= $student_data['id_s']; ?>">
                     <div class="modal-dialog">

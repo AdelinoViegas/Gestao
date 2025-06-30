@@ -44,14 +44,14 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
     </div>
     <form action="students-edit-process.php" method="post">
       <div class="row">
-        <div class="form-group col-md-6 mb-3">
+        <div class="col-md-6 mb-3">
           <label for="textname">Nome</label>
           <input type="text" id="textname" class="form-control" name="name" value="<?= $student_data['name_s']; ?>">
         </div>
 
-        <div class="form-group col-md-3 mb-3">
+        <div class="col-md-3 mb-3">
           <label for="textclass">Classe</label>
-          <select id="textclass" class="input form-control" name="class" required>
+          <select id="textclass" class="form-select" name="class" required>
             <option value="<?= $student_data['classID_s'] ?>"><?= $student_data['name_c']; ?></option>
             <?php
             $class_data = getData($connection, "SELECT * FROM tb_class");
@@ -61,9 +61,9 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
           </select>
         </div>
 
-        <div class="form-group col-md-3 mb-3">
+        <div class="col-md-3 mb-3">
           <label for="textgroup">Turma</label>
-          <select id="textgroup" class="input form-control" name="group" required>
+          <select id="textgroup" class="form-select" name="group" required>
             <option value="<?= $student_data['groupID_s'] ?>"><?= $student_data['name_g']; ?></option>
             <?php 
             $group_data = getData($connection, "SELECT id_g, name_g FROM tb_groups");
@@ -76,9 +76,9 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
       </div>
 
       <div class="row">
-        <div class="form-group col-md-4 mb-3">
+        <div class="col-md-4 mb-3">
           <label for="textcity">Município</label>
-          <select id="textcity" class="input form-control" name="city" placeholder="Seu município" required>
+          <select id="textcity" class="form-select" name="city" placeholder="Seu município" required>
             <option value="<?= $student_data['city_s'] ?>"><?= $student_data['city_s'] ?></option>
             <?php
             foreach ($city_array as $city) {
@@ -89,13 +89,13 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
           </select>
         </div>
 
-        <div class="form-group col-md-4 mb-3">
+        <div class="col-md-4 mb-3">
           <label for="textneighborhood">Bairro</label>
           <input type="text" id="textneighborhood" class="form-control" name="neighborhood"
             value="<?= $student_data['neighborhood_s']; ?>">
         </div>
 
-        <div class="form-group col-md-4 mb-3">
+        <div class="col-md-4 mb-3">
           <label for="textgender">sexo</label>
           <select type="text" id="textgender" class="input md form-control" name="gender"
             value="<?= $student_data['gender_s']; ?>" required>
@@ -113,19 +113,19 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
       </div>
 
       <div class="row">
-        <div class="form-group col-md-4 mb-3">
+        <div class="col-md-4 mb-3">
           <label for="textcontact">Contato</label>
           <input type="text" id="textcontact" class="form-control" name="contact"
             value="<?= $student_data['contact_s']; ?>">
         </div>
 
-        <div class="form-group col-md-4" id="margemB">
+        <div class="col-md-4" id="margemB">
           <label for="textbirthday">Data de Nascimento</label>
           <input type="date" id="textbirthday" class="form-control" name="birthday"
             value="<?= $student_data['birthday_s']; ?>">
         </div>
 
-        <div class="form-group col-md-4 mb-3">
+        <div class="col-md-4 mb-3">
           <label for="textbi">Número do BI</label>
           <input type="text" id="textbi" class="form-control" name="BI" value="<?= $student_data['BI_s']; ?>">
         </div>
@@ -135,7 +135,7 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
         <?php
         $responsible_data = getData($connection, "SELECT * FROM tb_students AS s INNER JOIN tb_responsibles AS r ON s.responsibleID_s = r.id_r WHERE id_s = ?", [$student_id])[0];
         ?>
-        <div class="form-group col-md-6 mb-3">
+        <div class="col-md-6 mb-3">
           <label for="textresponsible">Encarregado</label>
           <input type="text" readonly id="textresponsible" class="form-control" name="responsible_id" maxlength="45"
             value="<?= $responsible_data['name_r']; ?>" required>

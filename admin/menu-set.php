@@ -71,20 +71,20 @@ if (isset($_POST['btn-password'])) {
 
     <form action="menu-set.php" method="post">
       <div class="row">
-        <div class="form-group col-md-4 mb-3">
+        <div class="col-md-4 mb-3">
           <label for="textpassword">Senha</label>
           <input type="password" id="textpassword" class="form-control" name="password" maxlength="30"
             placeholder="Insira nova senha" required>
         </div>
 
-        <div class="form-group col-md-4 mb-3">
+        <div class="col-md-4 mb-3">
           <label for="textpassword-confirm">Confirmar senha</label>
           <input type="password" id="textnewpassword-confirm" class="form-control" name="new_password" maxlength="30"
             placeholder="Confirmar nova senha" required>
         </div>
 
         <div class="col-md-2 mb-3 align-self-end">
-          <button type="submit" id="inserir" class="btn btn-success col-md-12" name="btn-password">Salvar</button>
+          <button type="submit" class="btn btn-success col-md-12" name="btn-password">Salvar</button>
         </div>
       </div>
     </form>

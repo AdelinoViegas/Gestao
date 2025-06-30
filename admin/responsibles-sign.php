@@ -92,9 +92,10 @@ if (isset($_POST['btn-cadastre'])) {
           <input type="text" id="textname" class="form-control" name="name" maxlength="45"
             placeholder="Nome completo do encarregado/a" required>
         </div>
+
         <div class="form-group col-md-3 mb-3">
           <label for="textcity">Município</label>
-          <select id="textcity" class="input form-control" name="city" placeholder="Seu município" required>
+          <select id="textcity" class="form-select" name="city" placeholder="Seu município" required>
             <option value="">Selecione aqui</option>
             <option value="Luanda">Luanda</option>
             <option value="Viana">Viana</option>
@@ -107,6 +108,7 @@ if (isset($_POST['btn-cadastre'])) {
             <option value="Icolo e Bengo">Icolo e Bengo</option>
           </select>
         </div>
+
         <div class="form-group col-md-3 mb-3">
           <label for="textneighborhood">Bairro</label>
           <input type="text" id="textneighborhood" class="form-control" name="neighborhood" maxlength="20"
@@ -117,7 +119,7 @@ if (isset($_POST['btn-cadastre'])) {
       <div class="row">
         <div class="form-group col-md-3 mb-3">
           <label for="textgender">sexo</label>
-          <select id="textgender" class="input form-control" name="gender" required>
+          <select id="textgender" class="form-select" name="gender" required>
             <option value="">Selecione aqui</option>
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
@@ -134,6 +136,7 @@ if (isset($_POST['btn-cadastre'])) {
           <label for="textbirthday">Data de Nascimento</label>
           <input type="date" id="textbirthday" class="form-control" name="birthday" required>
         </div>
+        
         <div class="form-group col-md-3 mb-3">
           <label for="textbi">Número do BI</label>
           <input type="text" id="textbi" class="form-control" name="BI" placeholder="Nª do bilhete" maxlength="15"

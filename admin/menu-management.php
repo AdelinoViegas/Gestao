@@ -64,9 +64,9 @@ if (isset($_POST['btn-search'])) {
       </form>
     </div>
 
-    <div class="table-responsive" id="tabdados">
-      <table class="table table-hover table-bordered" id="table">
-        <thead class="table-secondary" id="theader">
+    <div class="table-responsive" id="table">
+      <table class="table table-hover table-bordered m-0">
+        <thead class="table-secondary position-sticky top-0 left-0" id="theader">
           <tr>
             <th scope="col">Ações</th>
             <th scope="col">Disciplinas</th>
@@ -79,7 +79,7 @@ if (isset($_POST['btn-search'])) {
           <?php if (count($data) > 0) { ?>
           <tbody>
             <?php foreach ($data as $management_data) { ?>
-              <tr id="tr">
+              <tr>
                 <td>
                   <form action="management-edit.php" method="post">
                     <input id="editar1" type="hidden" value="<?= $management_data['id_g']; ?>" name="management_id">

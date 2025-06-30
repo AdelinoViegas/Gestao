@@ -66,9 +66,9 @@ if (isset($_POST['btn-search'])) {
       </form>
     </div>
 
-    <div class="table-responsive" id="tabdados">
-      <table class="table table-hover table-bordered" id="table">
-        <thead class="table-secondary" id="theader">
+    <div class="table-responsive" id="table">
+      <table class="table table-hover table-bordered m-0">
+        <thead class="table-secondary position-sticky top-0 left-0" id="theader">
           <tr>
             <th scope="col">Ações</th>
             <th scope="col">Nome</th>
@@ -77,12 +77,12 @@ if (isset($_POST['btn-search'])) {
         <?php if (count($data) > 0) { ?>
           <tbody>
             <?php foreach ($data as $group_data) { ?>
-              <tr id="tr">
+              <tr>
                 <td id="editar">
                   <form action="groups-edit.php" method="post">
-                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $group_data['id_g']; ?>"
+                    <input type="hidden" class="btn btn-warning w-100 text-white" value="<?= $group_data['id_g']; ?>"
                       name="group_id">
-                    <button id="editar1" type="submit" name="btn-update" class="btn btn-warning">Editar</button>
+                    <button type="submit" name="btn-update" class="btn btn-warning w-100 text-white">Editar</button>
                   </form>
                 </td>
                 <td class="w-50"><?= $group_data['name_g']; ?></td>

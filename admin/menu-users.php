@@ -46,8 +46,8 @@ if (isset($_POST['btn-search'])) {
       <h5>Usuários cadastrados</h5>
     </div>
 
-    <div id="divflex">
-      <h5 id="adicionar">Nª de Usuários : <span id='num'><?= count($data) ? count($data) : "0"; ?></span></h5>
+    <div class="d-flex justify-content-between" id="margin">
+      <h5>Nª de Usuários : <span id='num'><?= count($data) ? count($data) : "0"; ?></span></h5>
 
       <form action="" method="post">
         <div id="btn-pesquisar">
@@ -57,9 +57,9 @@ if (isset($_POST['btn-search'])) {
       </form>
     </div>
 
-    <div class="table-responsive" id="tabdados">
-      <table class="table table-hover table-bordered" id="table">
-        <thead class="table-secondary" id="theader">
+    <div class="table-responsive" id="table">
+      <table class="table table-hover table-bordered m-0">
+        <thead class="table-secondary position-sticky top-0 left-0" id="theader">
           <tr>
             <th scope="col">Estado</th>
             <th scope="col">Nome</th>

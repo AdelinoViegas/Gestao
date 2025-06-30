@@ -48,11 +48,11 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
           <input type="text" id="textname" class="form-control" name="name" maxlength="45" placeholder="Nome do aluno"
             value="<?= $data['name_r']; ?>" required>
         </div>
+
         <div class="form-group col-md-3 mb-3">
           <label for="textcity">Município</label>
-          <select id="textcity" class="input form-control" name="city" required>
+          <select id="textcity" class="form-select" name="city" required>
             <option value="<?= $data['city_r'] ?>"><?= $data['city_r'] ?></option>
-            
             <?php
             foreach ($city_array as $city) {
               if ($city !== $data['city_r']) { ?>
@@ -61,6 +61,7 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
             } ?>
           </select>
         </div>
+
         <div class="form-group col-md-3 mb-3">
           <label for="textneighborhood">Bairro</label>
           <input type="text" id="textneighborhood" class="form-control" name="neighborhood" maxlength="20"
@@ -71,7 +72,7 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
       <div class="row">
         <div class="form-group col-md-4 mb-3">
           <label for="textgender">sexo</label>
-          <select type="text" id="textgender" class="input md form-control" name="gender" value="<?= $data['gender_r']; ?>"
+          <select type="text" id="textgender" class="form-select" name="gender" value="<?= $data['gender_r']; ?>"
             required>
             <?php
             if ($data['gender_r'] == 'Masculino') {
@@ -84,11 +85,13 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
             <?php } ?>
           </select>
         </div>
+
         <div class="form-group col-md-4 mb-3">
           <label for="textcontact">Contato</label>
           <input type="text" id="textcontact" class="form-control" name="contact" maxlength="9"
             value="<?= $data['contact_r']; ?>" placeholder="xxx-xx-xx-xx" required>
         </div>
+        
         <div class="form-group col-md-4 mb-3">
           <label for="textbirthday">Data de Nascimento</label>
           <input type="date" id="textbirthday" class="form-control" name="birthday" value="<?= $data['birthday_r']; ?>"

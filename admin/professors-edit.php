@@ -43,12 +43,13 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
 
     <form action="professors-edit-process.php" method="post">
       <div class="row">
-        <div class="form-group col-md-6 mb-3">
+        <div class="col-md-6 mb-3">
           <label for="textname">Nome</label>
           <input type="text" id="textname" class="form-control" name="name" placeholder="Nome do professor"
             value="<?= $data['name_p']; ?>">
         </div>
-        <div class="form-group col-md-6" id="margemB">
+
+        <div class="col-md-6" id="margemB">
           <label for="textemail">E-mail</label>
           <input type="email" id="textemail" class="form-control" name="email" placeholder="E-mail do professor"
             value="<?= $data['email_p']; ?>">
@@ -56,9 +57,9 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
       </div>
 
       <div class="row">
-        <div class="form-group col-md-4 mb-3">
+        <div class="col-md-4 mb-3">
           <label for="textcity">Município</label>
-          <select id="textcity" class="input form-control" name="city" required>
+          <select id="textcity" class="form-select" name="city" required>
             <option value="<?= $data['city_p'] ?>"><?= $data['city_p'] ?></option>
            <?php   
              foreach($city_array as $city){
@@ -67,14 +68,16 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
            <?php }}?>
           </select>
         </div>
-        <div class="form-group col-md-4 mb-3">
+
+        <div class="col-md-4 mb-3">
           <label for="textneighborhood">Bairro</label>
           <input type="text" id="textneighborhood" class="form-control" name="neighborhood" placeholder="Seu bairro"
             value="<?= $data['neighborhood_p']; ?>" required>
         </div>
-        <div class="form-group col-md-4 mb-3">
+
+        <div class="col-md-4 mb-3">
           <label for="textgender">sexo</label>
-          <select type="text" id="textgender" class="input md form-control" name="gender" required>
+          <select type="text" id="textgender" class="form-select" name="gender" required>
             <?php
             if ($data['gender_p'] === "Masculino") {
               ?>
@@ -89,17 +92,19 @@ $city_array = ["Luanda", "Viana", "Belas", "Cazenga", "Kissama", "Kilamba Kiaxi"
       </div>
 
       <div class="row">
-        <div class="form-group col-md-4 mb-3">
+        <div class="col-md-4 mb-3">
           <label for="textcontact">Contato</label>
           <input type="text" id="textcontact" class="form-control" name="contact" placeholder="xxx-xx-xx-xx"
             value="<?= $data['contact_p']; ?>">
         </div>
-        <div class="form-group col-md-4 mb-3">
+
+        <div class="col-md-4 mb-3">
           <label for="textbirthday">Data de Nascimento</label>
           <input type="date" id="textbirthday" class="form-control" name="birthday"
             value="<?= $data['birthday_p']; ?>">
         </div>
-        <div class="form-group col-md-4 mb-3">
+        
+        <div class="col-md-4 mb-3">
           <label for="textbi">Número do BI</label>
           <input type="text" id="textbi" class="form-control" name="BI" placeholder="Nª do bilhete"
             value="<?= $data['BI_p']; ?>">

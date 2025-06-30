@@ -67,9 +67,9 @@ if (isset($_POST['btn-search'])) {
       </form>
     </div>
 
-    <div class="table-responsive" id="tabdados">
-      <table class="table table-hover table-bordered" id="table">
-        <thead class="table-secondary" id="theader">
+    <div class="table-responsive" id="table">
+      <table class="table table-hover table-bordered m-0">
+        <thead class="table-secondary position-sticky top-0 left-0" id="theader">
           <tr>
             <th scope="col">Ações</th>
             <th scope="col">Nome</th>
@@ -83,16 +83,16 @@ if (isset($_POST['btn-search'])) {
         <?php if (count($data) > 0) { ?>
           <tbody>
             <?php foreach ($data as $professor_data) { ?>
-              <tr id="tr">
+              <tr>
                 <td id="editar">
                   <form action="professors-edit.php" method="post">
-                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $professor_data['id_p']; ?>"
+                    <input type="hidden" class="btn btn-warning w-100 text-white" value="<?= $professor_data['id_p']; ?>"
                       name="professor_id">
-                    <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
+                    <button type="submit" class="btn btn-warning w-100 text-white">Editar</button>
                   </form>
 
-                  <button id="editar2" type="button" data-bs-target="#apagar<?= $professor_data['id_p']; ?>"
-                    data-bs-toggle="modal" class="btn btn-danger">Apagar</button>
+                  <button type="button" data-bs-target="#apagar<?= $professor_data['id_p']; ?>"
+                    data-bs-toggle="modal" class="btn btn-danger w-100 text-white">Apagar</button>
 
                   <div class="modal fade" id="apagar<?= $professor_data['id_p']; ?>">
                     <div class="modal-dialog">
