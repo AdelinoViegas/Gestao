@@ -57,7 +57,7 @@ if (isset($_POST['btn-search'])) {
       <a href="students-sign.php" type="button" class="btn btn-primary">Adicionar</a>
 
       <form action="" method="post">
-        <div id="btn-pesquisar">
+        <div id="btn-search">
           <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome">
 
           <button id="btn-p" type="submit" class="btn btn-secondary" name="btn-search">

@@ -180,12 +180,12 @@
     display: block;
   }
 
-  #btn-pesquisar {
+  #btn-search {
     margin-top: 22px;
     display: block;
   }
 
-  #btn-pesquisar #btn-p {
+  #btn-search #btn-p {
     margin-top: 5px;
   }
 }

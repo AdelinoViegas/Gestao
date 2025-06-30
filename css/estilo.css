@@ -193,10 +193,6 @@ body {
   margin: 0;
 }
 
-#num {
-  font-weight: normal;
-}
-
 #container-table {
   position: absolute;
   top: calc(5% + 100px);
@@ -289,7 +285,7 @@ body {
   margin: 15px 0px 24px 0px;
 }
 
-#btn-pesquisar label {
+#btn-search label {
   font-weight: bold;
   font-size: 22px;
   font-family: Bahnschrift Light;
@@ -297,12 +293,15 @@ body {
   margin-right: 4px;
 }
 
-#btn-pesquisar {
+#btn-search {
   display: flex;
+  /*justify-content: flex-end;*/
   align-items: center;
+  /*margin:0px 0px 10px 0px;*/
 }
 
-#btn-pesquisar input {
+#btn-search input {
+  width: 250px;
   height: 30px;
 }
 

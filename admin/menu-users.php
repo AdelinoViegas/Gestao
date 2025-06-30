@@ -47,10 +47,10 @@ if (isset($_POST['btn-search'])) {
     </div>
 
     <div class="d-flex justify-content-between" id="margin">
-      <h5>Nª de Usuários : <span id='num'><?= count($data) ? count($data) : "0"; ?></span></h5>
+      <h5 class="fw-bold text-black">Nª de Usuários : <span class="fw-normal"><?= count($data) ? count($data) : "0"; ?></span></h5>
 
       <form action="" method="post">
-        <div id="btn-pesquisar">
+        <div id="btn-search">
           <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button id="btn-p"
             type="submit" class="btn btn-secondary" name="btn-search">Pesquisar</button>
         </div>
