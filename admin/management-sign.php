@@ -74,10 +74,10 @@ if (isset($_POST['btn-sign'])) {
       <h5>Gerenciar</h5>
     </div>
     <form action="management-sign.php" method="post">
-      <div class="row margB">
-        <div class="form-group col-md-4" id="margemB">
+      <div class="row mb-4">
+        <div class="col-md-4">
           <label for="textdiscipline">Disciplinas</label>
-          <select id="textdiscipline" class="input form-control" name="discipline" required>
+          <select id="textdiscipline" class="form-select" name="discipline" required>
             <option value="">Selecione aqui</option>
             <?php $discipline_data = getData($connection, "SELECT * FROM tb_disciplines ORDER BY name_d");
             foreach ($discipline_data as  $data) 
@@ -85,9 +85,10 @@ if (isset($_POST['btn-sign'])) {
             ?>
           </select>
         </div>
-        <div class="form-group col-md-4" id="margemB">
+
+        <div class="col-md-4">
           <label for="textprofessor">Professores</label>
-          <select id="textprofessor" class="input form-control" name="professor" required>
+          <select id="textprofessor" class="form-select" name="professor" required>
             <option value="">Selecione aqui</option>
             <?php $professor_data = getData($connection, "SELECT id_p, name_p FROM tb_professors ORDER BY name_p");
             foreach ($professor_data as $data) 
@@ -95,9 +96,9 @@ if (isset($_POST['btn-sign'])) {
             ?>
           </select>
         </div>
-        <div class="form-group col-md-4" id="margemB">
+        <div class="col-md-4">
           <label for="textgroup">Turmas</label>
-          <select id="textgroup" class="input form-control" name="group" required>
+          <select id="textgroup" class="form-select" name="group" required>
             <option value="">Selecione aqui</option>
             <?php $group_data = getData($connection, "SELECT * FROM tb_groups ORDER BY name_g");
             foreach ($group_data as $data) 
@@ -107,13 +108,10 @@ if (isset($_POST['btn-sign'])) {
         </div>
       </div>
 
-      <div class="row marg">
-        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-sign"
-          id="margemBotao">Salvar</button>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-sign">Salvar</button>
 
-        <div class="col-md-8" id="margemBotao"></div>
-
-        <a href="menu-management.php" class="btn btn-outline-secondary btn-block col-md-2" id="margemBotao">Voltar</a>
+        <a href="menu-management.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>
     </form>
   </div>

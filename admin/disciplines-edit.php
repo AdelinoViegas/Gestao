@@ -50,7 +50,7 @@ $data = getData($connection, "SELECT * FROM tb_disciplines WHERE id_d=?", [$disc
       </div>
 
       <div class="d-flex justify-content-between mt-4">
-        <button type="submit" class="btn btn-outline-primary btn-block col-md-2" name="btn-update">Gravar</button>
+        <button type="submit" class="btn btn-outline-primary btn-block col-md-2" name="btn-update">Salvar</button>
 
         <a href="menu-disciplines.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>

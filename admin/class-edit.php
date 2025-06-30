@@ -50,7 +50,7 @@ $data = getData($connection, "SELECT * FROM tb_class WHERE id_c =?", [$class_id]
       </div>
 
       <div class="d-flex justify-content-between mt-4">
-        <button type="submit" class="btn btn-outline-primary btn-block col-md-2" name="btn-update">Gravar</button>
+        <button type="submit" class="btn btn-outline-primary btn-block col-md-2" name="btn-update">Salvar</button>
 
         <a href="menu-class.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>

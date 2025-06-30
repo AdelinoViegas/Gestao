@@ -74,7 +74,7 @@ if (isset($_POST['btn-cadastre'])) {
       </div>
 
       <div class="d-flex justify-content-between mt-4">
-        <button type="submit" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastre">Cadastrar</button>
+        <button type="submit" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastre">Salvar</button>
 
         <a href="menu-class.php" class="btn btn-outline-secondary btn-block col-md-2" name="btn-voltar">Voltar</a>
       </div>

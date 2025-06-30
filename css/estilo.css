@@ -197,10 +197,6 @@ body {
   font-weight: normal;
 }
 
-#table {
-  margin: 0px;
-}
-
 #container-table {
   position: absolute;
   top: calc(5% + 100px);
@@ -220,12 +216,6 @@ body {
 
 .margB {
   margin-bottom: 30px;
-}
-
-#theader {
-  position: sticky;
-  top: 0;
-  left: 0;
 }
 
 #theader tr th {
@@ -288,7 +278,7 @@ body {
   z-index: -2;
 }
 
-#tabdados {
+#table {
   border: 2px solid #ccc;
   max-height: 542px;
 }

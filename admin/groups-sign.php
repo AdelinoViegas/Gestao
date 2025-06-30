@@ -66,10 +66,10 @@ if (isset($_POST['btn-cadastre'])) {
       <h5>Formulário de cadastramento de turmas</h5>
     </div>
     <form action="groups-sign.php" method="post">
-      <div class="row margB">
-        <div class="form-group col-md-4" id="margemB">
+      <div class="row mb-4">
+        <div class="form-group col-md-4">
           <label for="textgender">Escolhe a classe</label>
-          <select id="textgender" class="input form-control" name="class" required>
+          <select id="textgender" class="form-select" name="class" required>
            <?php 
             $class_data = getData($connection, "SELECT * FROM tb_class");
             foreach($class_data as $class){?>
@@ -84,11 +84,8 @@ if (isset($_POST['btn-cadastre'])) {
         </div>
       </div>
 
-      <div class="row marg">
-        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastre"
-          id="margemBotao">Cadastrar</button>
-
-        <div class="col-md-8" id="margemBotao"></div>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-outline-primary btn-block col-md-2" name="btn-cadastre">Salvar</button>
 
         <a href="menu-groups.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>

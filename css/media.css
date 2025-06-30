@@ -191,7 +191,7 @@
 }
 
 @media(max-width: 300px) and (max-height: 600px) {
-  #tabdados {
+  #table {
     max-height: 300px;
   }
 }

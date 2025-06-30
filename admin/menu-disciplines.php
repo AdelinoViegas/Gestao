@@ -75,12 +75,12 @@ if (isset($_POST['btn-search'])) {
         <?php if (count($data) > 0) { ?>
           <tbody>
             <?php foreach ($data as $discipline_data) { ?>
-              <tr id="tr">
+              <tr>
                 <td id="editar">
                   <form action="disciplines-edit.php" method="post">
-                    <input id="editar1" type="hidden" class="btn btn-warning" value="<?= $discipline_data['id_d']; ?>"
+                    <input type="hidden" class="btn btn-warning w-100 text-white" value="<?= $discipline_data['id_d']; ?>"
                       name="discipline_id">
-                    <button id="editar1" type="submit" class="btn btn-warning">Editar</button>
+                    <button type="submit" class="btn btn-warning w-100 text-white">Editar</button>
                   </form>
                 </td>
                 <td class="w-50"><?= $discipline_data['name_d']; ?></td>

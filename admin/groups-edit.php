@@ -49,11 +49,8 @@ $data = getData($connection, "SELECT * FROM tb_groups WHERE id_g =?", [$group_id
         </div>
       </div>
 
-      <div class="row marg">
-        <button type="submit" id="inserir" class="btn btn-outline-primary btn-block col-md-2" name="btn-update"
-          id="margemBotao">Gravar</button>
-
-        <div class="col-md-8" id="margemBotao"></div>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="submit" class="btn btn-outline-primary btn-block col-md-2" name="btn-update">Salvar</button>
 
         <a href="menu-groups.php" class="btn btn-outline-secondary btn-block col-md-2">Voltar</a>
       </div>
