@@ -20,36 +20,36 @@ if (isset($_POST['btn-search'])) {
   <?php require_once "../../head2.php"; ?>
 </head>
 <body>
-  <div class="divsuperior">
-    <h1>Colégio Samiga</h1>
+    <div class="m-0" id="head-main">
+    <h1 class="text-white text-center fs-1 fw-bold m-0">Colégio Samiga</h1>
   </div>
-
-  <div class="divsuperior2">
-    <div class="divflex">
+  
+  <div id="head-second">
+    <div class="position-relative d-flex justify-content-between align-items-center">
       <div>
-        <h5>Notas-Trimestrais</h5>
+        <h5 class="fs-5 fw-bold m-0">Notas-Trimestrais</h5>
       </div>
-      <div class="d-flex">
-        <h5 class="me-2">Usuário :</h5>
+      <div class="d-flex py-1">
+        <h5 class="mb-0 me-2 fs-5 fw-bold">Usuário :</h5>
         <img class="me-1" src="../../img/person.svg" id="IMG">
-        <h5 class="me-3">Professor</h5>
+        <h5 class="mb-0 me-3 fs-5 fw-bold">Professor</h5>
       </div>
     </div>
   </div>
 
   <?php require_once "nav-professor.php"; ?>
   <?php require_once "navMob-professor.php"; ?>
-
-  <div class="fontes rounded-3" id="divm">
-    <div class="divsuperior3">
+  
+  <div class="fs-6 fw-bold rounded-3" id="container-table">
+    <div class="gap-2 py-2" id="head-third">
       <h5>Gerenciar</h5>
     </div>
 
     <form action="" method="post">
       <div class="row margB">
-        <div class="form-group col-md-4" id="margemB">
+        <div class="col-md-4">
           <label for="textdisciplina">Disciplina e Turma</label>
-          <select id="textdisciplina" class="input form-control" name="management" required>
+          <select id="textdisciplina" class="form-select" name="management" required>
             <option value="">Selecione aqui</option>
             <?php $query = getData($connection, "SELECT m.id_m, g.name_g, d.name_d FROM tb_management AS m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d JOIN tb_professors AS p ON m.professorID_m = p.id_p JOIN tb_groups AS g ON m.groupID_m = g.id_g WHERE p.id_P =?", [$professor_id]);
             foreach ($query as $data) 
@@ -58,9 +58,9 @@ if (isset($_POST['btn-search'])) {
           </select>
         </div>
 
-        <div class="form-group col-md-4" id="margemB">
+        <div class="col-md-4">
           <label for="texttrimestre">Trimestres</label>
-          <select id="texttrimestre" class="input form-control" name="quarter" required>
+          <select id="texttrimestre" class="form-select" name="quarter" required>
             <option value="">Selecione aqui</option>
             <option value="1">1ª Trimestre</option>
             <option value="2">2ª Trimestre</option>
@@ -68,9 +68,9 @@ if (isset($_POST['btn-search'])) {
           </select>
         </div>
 
-        <div class="form-group col-md-2" id="margemB">
+        <div class="col-md-2">
           <label></label>
-          <button type="submit" id="inserir" class="btn btn-success col-md-12" name="btn-search">Buscar</button>
+          <button type="submit" class="btn btn-success col-md-12" name="btn-search">Buscar</button>
         </div>
       </div>
     </form>

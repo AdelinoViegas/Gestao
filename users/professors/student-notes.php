@@ -27,22 +27,22 @@ if (isset($_POST['btn-update'])) {
   <?php require_once "../../head2.php"; ?>
 </head>
 <body>
-  <div class="divsuperior">
-    <h1>Colégio Samiga</h1>
+    <div class="m-0" id="head-main">
+    <h1 class="text-white text-center fs-1 fw-bold m-0">Colégio Samiga</h1>
   </div>
 
-  <div class="divsuperior2">
-    <div class="divflex">
-      <div>
+  <div id="head-second">
+    <div class="position-relative d-flex justify-content-between align-items-center py-1">
+      <div class="d-flex align-items-center gap-3 ms-2 fs-5">
         <?php
           $query = getData($connection, "SELECT * FROM tb_management AS m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d JOIN tb_groups AS g ON m.groupID_m = g.id_g WHERE id_m =?", [$management_id])[0];
-          echo "<h5 id='alinhar'>" . $quarter . "º Trimestre  </h5> <p id='fonte'> : " . $query['name_d'] . "</p> <h5 id='alinhar'>" . $query['name_g'] . "</h5> ";
+          echo "<h5 class='fw-bold m-0'>" . $quarter . "º Trimestre  </h5> <h5 class='fw-bold m-0'> " . $query['name_d'] . "</h5> <h5 class='fw-bold m-0'>" . $query['name_g'] . "</h5>";
         ?>
       </div>
       <div class="d-flex">
-        <h5 class="me-2">Usuário :</h5>
+        <h5 class="mb-0 me-2 fs-5 fw-bold">Usuário :</h5>
         <img class="me-1" src="../../img/person.svg" id="IMG">
-        <h5 class="me-3">Professor</h5>
+        <h5 class="mb-0 me-3 fs-5 fw-bold">Encarregado</h5>
       </div>
     </div>
   </div>
@@ -50,29 +50,29 @@ if (isset($_POST['btn-update'])) {
   <?php require_once "nav-professor.php" ?>
   <?php require_once "navMob-professor.php" ?>
 
-  <div class="rounded-3" id="divm">
-    <div class="divsuperior3">
+  <div class="fs-6 fw-bold rounded-3" id="container-table">
+    <div class="gap-2 py-2" id="head-third">
       <?php
         $query = getData($connection, "SELECT * FROM tb_management AS m JOIN tb_disciplines AS d ON m.disciplineID_m = d.id_d JOIN tb_groups AS g ON m.groupID_m = g.id_g WHERE id_m =?", [$management_id])[0];
-        echo "<h5 id='alinhar'>" . $quarter . "º Trimestre </h5> <p id='fonte'>  " . $query['name_d'] . "</p> <h5 id='alinhar'>" . $query['name_g'] . "</h5> ";
+        echo "<h5 class='fs-6 fw-bold m-0'>" . $quarter . "º Trimestre  </h5> <h5 class='fs-6 fw-bold m-0'> " . $query['name_d'] . "</h5> <h5 class='fs-6 fw-bold m-0'>" . $query['name_g'] . "</h5>";
       ?>
     </div>
 
-    <div id="divflex">
-      <button type="button" id="adicionar" class="btn btn-primary" data-bs-target="#apagar"
+    <div class="d-flex justify-content-between" id="margin">
+      <button type="button" class="btn btn-primary" data-bs-target="#apagar"
         data-bs-toggle="modal">Gravar</button>
 
       <form action="student-notes.php" method="post">
-        <div class="d-flex align-items-center" id="btn-pesquisar">
-          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button
-            type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
+        <div class="d-flex align-items-center" id="container-search">
+          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome">
+          <button id="btn-search" type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
         </div> 
       </form>
     </div>
 
-    <div class="table-responsive" id="tabdados">
-      <table class="table table-hover table-bordered" id="table">
-        <thead class="table-secondary" id="theader">
+    <div class="table-responsive" id="table">
+      <table class="table table-hover table-bordered m-0">
+        <thead class="table-secondary position-sticky top-0 left-0" id="theader">
           <tr>
             <th scope="col">Ação</th>
             <th scope="col">Nome</th>

@@ -68,19 +68,19 @@ if (isset($_POST['btn-calc'])) {
   <?php require_once "../../head2.php"; ?>
 </head>
 <body>
-  <div class="divsuperior">
-    <h1>Colégio Samiga</h1>
+  <div class="m-0" id="head-main">
+    <h1 class="text-white text-center fs-1 fw-bold m-0">Colégio Samiga</h1>
   </div>
-
-  <div class="divsuperior2">
-    <div class="divflex">
+  
+  <div id="head-second">
+    <div class="position-relative d-flex justify-content-between align-items-center">
       <div>
-        <h5>Editar dados do aluno</h5>
+        <h5 class="fs-5 fw-bold m-0">Editar dados do aluno</h5>
       </div>
-      <div class="d-flex">
-        <h5 class="me-2">Usuário :</h5>
+      <div class="d-flex py-1">
+        <h5 class="mb-0 me-2 fs-5 fw-bold">Usuário :</h5>
         <img class="me-1" src="../../img/person.svg" id="IMG">
-        <h5 class="me-3">Professor</h5>
+        <h5 class="mb-0 me-3 fs-5 fw-bold">Professor</h5>
       </div>
     </div>
   </div>
@@ -95,15 +95,15 @@ if (isset($_POST['btn-calc'])) {
   <?php require_once "nav-professor.php" ?>
   <?php require_once "navMob-professor.php" ?>
 
-  <div class="fontes rounded-3" id="divm">
-    <div class="divsuperior3">
+  <div class="fs-6 fw-bold rounded-3" id="container-table">
+    <div class="gap-2 py-2" id="head-third">
       <h5>Editar dados do aluno</h5>
     </div>
 
     <form action="" method="post">
-      <div class="table-responsive" id="tabdados">
-        <table class="table table-hover table-bordered" id="table">
-          <thead class="table-secondary" id="theader">
+    <div class="table-responsive" id="tabdados">
+      <table class="table table-hover table-bordered" id="table">
+        <thead class="table-secondary" id="theader">
             <tr>
               <th scope="col">Nome</th>
               <th scope="col">Av1</th>
