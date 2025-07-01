@@ -22,7 +22,8 @@
   }
 
   #head-third {
-    display: block;
+    display: flex !important;
+    align-items: center;
     position: relative;
     top: -20px;
     left: -20px;
@@ -75,7 +76,7 @@
     margin: 16% auto;
   }
 
-  #imagem-main {
+  #image-main {
     position: static;
     width: 100%;
     height: calc(100vh - 21.5%);
@@ -141,17 +142,6 @@
     z-index: 1;
   }
 
-  #fonte {
-    display: inline-block;
-    font-size: 18px;
-    margin: 0;
-  }
-
-  #alinhar {
-    display: inline-block;
-    font-size: 18px;
-  }
-
   #footer {
     clear: none;
     display: block;
@@ -180,12 +170,12 @@
     display: block;
   }
 
-  #btn-search {
+  #container-search {
     margin-top: 22px;
     display: block;
   }
 
-  #btn-search #btn-p {
+  #container-search #btn-search {
     margin-top: 5px;
   }
 }

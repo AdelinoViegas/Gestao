@@ -65,7 +65,6 @@ if (isset($_POST['btn-search'])) {
   if (count($list))
     array_push($list, round($sum / 3));
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -75,19 +74,19 @@ if (isset($_POST['btn-search'])) {
   <?php require_once "../../head2.php"; ?>
 </head>
 <body>
-  <div class="divsuperior">
-    <h1>Colégio Samiga</h1>
+    <div class="m-0" id="head-main">
+    <h1 class="text-white text-center fs-1 fw-bold">Colégio Samiga</h1>
   </div>
-
-  <div class="divsuperior2">
-    <div class="divflex">
+  
+  <div id="head-second">
+    <div class="position-relative d-flex justify-content-between align-items-center py-1">
       <div>
-        <h5>Resultado Final</h5>
+        <h5 class="fs-5 fw-bold m-0">Resultado Final</h5>
       </div>
       <div class="d-flex">
-        <h5 class="me-2">Usuário :</h5>
+        <h5 class="mb-0 me-2 fs-5 fw-bold">Usuário :</h5>
         <img class="me-1" src="../../img/person.svg" id="IMG">
-        <h5 class="me-3">Aluno</h5>
+        <h5 class="mb-0 me-3 fs-5 fw-bold">Aluno</h5>
       </div>
     </div>
   </div>
@@ -95,13 +94,13 @@ if (isset($_POST['btn-search'])) {
   <?php require_once "nav-student.php" ?>
   <?php require_once "navMob-student.php" ?>
 
-  <div class="rounded-3" id="divm">
-    <div class="divsuperior3">
+  <div class="fs-6 fw-bold rounded-3" id="container-table">
+    <div id="head-third">
       <h5>Resultado Final</h5>
     </div>
 
-    <div id="divflex">
-      <button type="submit" id="adicionar" class="btn btn-secondary">
+    <div class="d-flex justify-content-between" id="margin">
+      <button type="submit" class="btn btn-secondary">
         <?php
         $class_data = getData(
           $connection,
@@ -113,16 +112,16 @@ if (isset($_POST['btn-search'])) {
       </button>
 
       <form action="" method="post">
-        <div class="d-flex align-items-center" id="btn-pesquisar">
+        <div class="d-flex align-items-center" id="btn-search">
           <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button
             type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
         </div>
       </form>
     </div>
 
-    <div class="table-responsive" id="tabdados">
-      <table class="table table-hover table-bordered" id="table">
-        <thead class="table-secondary" id="theader">
+    <div class="table-responsive" id="table">
+      <table class="table table-hover table-bordered m-0">
+        <thead class="table-secondary position-sticky top-0 left-0" id="theader">
           <tr>
             <th scope="col">Disciplina</th>
             <th scope="col">Media-1ºtrimestre</th>
@@ -178,7 +177,6 @@ if (isset($_POST['btn-search'])) {
         <?php } ?>
       </table>
     </div>
-    <button type="submit" id="adicionar" class="btn btn-info my-2">Condição Final
   </div>
 
   <?php require_once "../../footer2.php"; ?>

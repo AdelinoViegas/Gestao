@@ -29,22 +29,22 @@ if (isset($_POST['btn-search'])) {
   <?php require_once "../../head2.php"; ?>
 </head>
 <body>
-  <div class="divsuperior">
-    <h1>Colégio Samiga</h1>
+  <div class="m-0" id="head-main">
+    <h1 class="text-white text-center fs-1 fw-bold">Colégio Samiga</h1>
   </div>
 
-  <div class="divsuperior2">
-    <div class="divflex">
-      <div>
+  <div id="head-second">
+    <div class="position-relative d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3 ms-2 fs-5">
         <?php
-        $student_data = getData($connection, "SELECT * FROM tb_students AS s JOIN tb_groups as g ON s.groupID_s = g.id_g WHERE id_s =?", [$student_id])[0];
-        echo "<h5 id='alinhar'>" . $student_quarter . "º Trimestre  </h5> <p id='fonte'> Turma</p> <h5 id='alinhar'>" . $student_data['name_g'] . "</h5> ";
+          $student_data = getData($connection, "SELECT * FROM tb_students AS s JOIN tb_groups as g ON s.groupID_s = g.id_g WHERE id_s =?", [$student_id])[0];
+          echo "<h5 class='fw-bold m-0'>" . $student_quarter . "º Trimestre  </h5> <p class='m-0'>Turma: <span class='fw-bold'>" . $student_data['name_g'] . "</span></p>";
         ?>
       </div>
       <div class="d-flex">
-        <h5 class="me-2">Usuário :</h5>
+        <h5 class="mb-0 me-2 fs-5 fw-bold">Usuário :</h5>
         <img class="me-1" src="../../img/person.svg" id="IMG">
-        <h5 class="me-3">Aluno</h5>
+        <h5 class="mb-0 me-3 fs-5 fw-bold">Aluno</h5>
       </div>
     </div>
   </div>
@@ -52,15 +52,15 @@ if (isset($_POST['btn-search'])) {
   <?php require_once "nav-student.php" ?>
   <?php require_once "navMob-student.php" ?>
 
-  <div class="rounded-3" id="divm">
-    <div class="divsuperior3">
+  <div class="fs-6 fw-bold rounded-3" id="container-table">
+    <div class="gap-2 py-2" id="head-third">
       <?php
-      $student_data = getData($connection, "SELECT * FROM tb_students AS s JOIN tb_groups as g ON s.groupID_s = g.id_g JOIN tb_class AS c ON s.classID_s = c.id_c WHERE id_s =?", [$student_id])[0];
-      echo "<h5 id='alinhar'>" . $student_quarter . "º Trimestre  </h5> <p id='fonte'> Turma</p> <h5 id='alinhar'>" . $student_data['name_g'] . "</h5> ";
+        $student_data = getData($connection, "SELECT * FROM tb_students AS s JOIN tb_groups as g ON s.groupID_s = g.id_g JOIN tb_class AS c ON s.classID_s = c.id_c WHERE id_s =?", [$student_id])[0];
+        echo "<h5 class='fs-6 fw-bold m-0'>" . $student_quarter . "º Trimestre  </h5> <p class='m-0'>Turma: <span class='fs-6 fw-bold text-black'>" . $student_data['name_g'] . "</span></p>";
       ?>
     </div>
 
-    <div id="divflex">
+    <div class="d-flex justify-content-between" id="margin">
       <button type="submit" id="adicionar" class="btn btn-secondary">
       <?= $student_data['name_c']; ?>
       </button>
@@ -73,9 +73,9 @@ if (isset($_POST['btn-search'])) {
       </form>
     </div>
 
-    <div class="table-responsive" id="tabdados">
-      <table class="table table-hover table-bordered" id="table">
-        <thead class="table-secondary" id="theader">
+    <div class="table-responsive" id="table">
+      <table class="table table-hover table-bordered m-0">
+        <thead class="table-secondary position-sticky top-0 left-0" id="theader">
           <tr>
             <th scope="col">Disciplina</th>
             <th scope="col">Aval1</th>
@@ -92,7 +92,6 @@ if (isset($_POST['btn-search'])) {
           <?php if (count($data) > 0) { ?>
           <tbody>
           <?php foreach ($data as $student) { ?>
-              ?>
               <tr>
                 <td><?= $student['name_d']; ?></td>
                 <td>

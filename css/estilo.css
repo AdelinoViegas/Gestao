@@ -16,16 +16,6 @@ img {
   height: 500px;
 }
 
-#fonte {
-  display: inline-block;
-  font-size: 20px;
-  margin: 0;
-}
-
- linhar {
-  display: inline-block;
-}
-
 #IMG {
   width: 20px;
   height: 20px;
@@ -207,7 +197,7 @@ body {
 }
 
 #head-third {
-  display: none;
+  display: none!important;
 }
 
 .margB {
@@ -285,7 +275,7 @@ body {
   margin: 15px 0px 24px 0px;
 }
 
-#btn-search label {
+#container-search label {
   font-weight: bold;
   font-size: 22px;
   font-family: Bahnschrift Light;
@@ -293,14 +283,13 @@ body {
   margin-right: 4px;
 }
 
-#btn-search {
+#container-search {
   display: flex;
-  /*justify-content: flex-end;*/
   align-items: center;
-  /*margin:0px 0px 10px 0px;*/
+
 }
 
-#btn-search input {
+#container-search input {
   width: 250px;
   height: 30px;
 }
