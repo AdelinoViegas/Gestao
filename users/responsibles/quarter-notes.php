@@ -22,22 +22,22 @@ if (isset($_POST['btn-search'])) {
   <?php require_once "../../head2.php"; ?>
 </head>
 <body>
-  <div class="divsuperior">
-    <h1>Colégio Samiga</h1>
+  <div class="m-0" id="head-main">
+    <h1 class="text-white text-center fs-1 fw-bold m-0">Colégio Samiga</h1>
   </div>
 
-  <div class="divsuperior2">
-    <div class="divflex">
-      <div>
+  <div id="head-second">
+    <div class="position-relative d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3 ms-2 fs-5">
         <?php
           $group_data = getData($connection, "SELECT * FROM tb_students AS s JOIN tb_groups as g ON s.groupID_s = g.id_g WHERE id_s =?", [$student_id])[0];
-          echo "<h5 id='alinhar'>" . $quarter . "º Trimestre </h5> <h5 id='alinhar'></h5><p id='fonte'>Turma:</p> <h5 id='alinhar'>" . $group_data['name_s'] . "</h5> ";
+          echo "<h5 class='fw-bold m-0'>" . $quarter . "º Trimestre </h5> <p class='m-0'>Nome: <span class='fw-bold'>" . $group_data['name_s'] . "</span></p>";
         ?>
       </div>
       <div class="d-flex">
-        <h5 class="me-2">Usuário :</h5>
+        <h5 class="mb-0 me-2 fs-5 fw-bold">Usuário :</h5>
         <img class="me-1" src="../../img/person.svg" id="IMG">
-        <h5 class="me-3">Encarregado</h5>
+        <h5 class="mb-0 me-3 fs-5 fw-bold">Encarregado</h5>
       </div>
     </div>
   </div>
@@ -45,23 +45,23 @@ if (isset($_POST['btn-search'])) {
   <?php require_once "nav-responsibles.php"; ?>
   <?php require_once "navMob-responsibles.php"; ?>
 
-  <div class="rounded-3" id="divm">
-    <div class="divsuperior3">
+  <div class="fs-6 fw-bold rounded-3" id="container-table">
+    <div class="gap-2 py-2" id="head-third">
       <?php
         $group_data = getData($connection, "SELECT * FROM tb_groups AS g JOIN tb_students as s ON g.id_g = s.groupID_s JOIN tb_class as c ON g.classID_g = c.id_c WHERE id_s =?", [$student_id])[0];
-        echo "<h5 id='alinhar'>" . $quarter . "º Trimestre </h5> <h5 id='alinhar'></h5><p id='fonte'>Turma:</p> <h5 id='alinhar'>" . $group_data['name_g'] . "</h5> ";
+          echo "<h5 class='fs-6 fw-bold m-0'>" . $quarter . "º Trimestre </h5> <p class='m-0'>Nome: <span class='fs-6 fw-bold text-black'>" . $group_data['name_s'] . "</span></p>";
       ?>
     </div>
 
-    <div id="divflex">
-      <button type="button" id="adicionar" class="btn btn-secondary"><strong id="fonte">
+    <div class="d-flex justify-content-between" id="margin">
+      <button type="button" class="btn btn-secondary"><strong id="fonte">
           <?= $group_data['name_c']; ?>
         </strong></button>
 
       <form action="" method="post">
-        <div id="btn-pesquisar">
+        <div id="container-search">
           <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa a disciplina"><button
-            id="btn-p" type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
+            id="btn-search" type="submit" class="btn btn-success" name="btn-search">Pesquisar</button>
         </div>
       </form>
     </div>

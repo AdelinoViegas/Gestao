@@ -132,6 +132,10 @@
     height: 50px;
   }
 
+  #margin-top-button{
+    margin-top: 12px;
+  }
+
   #alerta-confirmar {
     position: absolute;
     top: 90px;
