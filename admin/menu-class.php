@@ -57,9 +57,9 @@ if (isset($_POST['btn-search'])) {
       <a href="class-sign.php" type="button" id="adicionar" class="btn btn-primary">Adicionar</a>
 
       <form action="" method="post">
-        <div id="btn-search">
-          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome"><button id="btn-p"
-            type="submit" class="btn btn-secondary" name="btn-search">Pesquisar</button>
+        <div id="container-search">
+          <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome">
+          <button id="btn-search" type="submit" class="btn btn-secondary" name="btn-search">Pesquisar</button>
         </div>
       </form>
     </div>

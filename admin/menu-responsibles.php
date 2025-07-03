@@ -54,14 +54,14 @@ if (isset($_POST['btn-search'])) {
     </div>
 
     <div class="d-flex justify-content-between" id="margin">
-      <a href="responsibles-sign.php" type="button" id="adicionar" class="btn btn-primary">
+      <a href="responsibles-sign.php" type="button" class="btn btn-primary">
         Adicionar
       </a>
 
       <form action="" method="post">
-        <div id="btn-search">
+        <div id="container-search">
           <input type="text" class="form-control me-2" name="search" placeholder="Pesquisa por nome">
-          <button id="btn-p" type="submit" class="btn btn-secondary" name="btn-search">
+          <button id="btn-search" type="submit" class="btn btn-secondary" name="btn-search">
             Pesquisar
           </button>
         </div>
