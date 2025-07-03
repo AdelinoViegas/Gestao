@@ -104,9 +104,8 @@ if (isset($_POST['btn-search'])) {
                         </div>
 
                         <div class="modal-body">
-                          <div class="alert alert-danger">
-                            Deseja excluir
-                            <strong><?= $responsible_data['name_r']; ?></strong> ?
+                          <div class="alert alert-danger m-0 fw-normal">
+                            <p class="m-0">Deseja excluir <span class="fw-bold"><?= $responsible_data['name_r']; ?></span>?</p>
                           </div>
                         </div>
 

@@ -104,9 +104,8 @@ if (isset($_POST['btn-search'])) {
                         </div>
 
                         <div class="modal-body">
-                          <div class="alert alert-danger">
-                            Deseja excluir
-                            <strong><?= $professor_data['name_p']; ?></strong> ?
+                          <div class="alert alert-danger m-0 fw-normal">
+                            <p class="m-0">Deseja excluir <span class="fw-bold"><?= $professor_data['name_p']; ?></span>?</p>
                           </div>
                         </div>
 
@@ -143,7 +142,7 @@ if (isset($_POST['btn-search'])) {
       </table>  
     </div>
   </div>
-
+  
   <?php require_once "footer.php"; ?>
 </body>
 </html>
