@@ -61,8 +61,8 @@ if (isset($_POST['btn-login'])) {
   <title>login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="bootstrap5/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="css/login.css?v=2">
-  <link rel="stylesheet" type="text/css" href="css/media.css?v=5">
+  <link rel="stylesheet" type="text/css" href="css/login.css">
+  <link rel="stylesheet" type="text/css" href="css/media.css">
 </head>
 <body>
   <div class="card position-absolute top-50 start-50" id="login-form">
